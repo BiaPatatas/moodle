@@ -1,0 +1,88 @@
+
+=== PDF COUNTER DEBUG ===
+Timestamp: 2025-10-08 01:07:27
+Course ID: 2
+Filename: SI1.pdf
+Filepath: C:\xampp\htdocs\Moodles\server\moodledata/filedir/06/2c/062c0a31720e49a5a0a594d266aee51279ae2206
+File exists: YES
+File size: 730517
+Script path: C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py
+Script exists: YES
+
+Trying: python3
+Command: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/06/2c/062c0a31720e49a5a0a594d266aee51279ae2206"
+Output length: 346
+Raw output: {"Title": "Microsoft PowerPoint - 4_cifra_simetrica_hash_MAC2024.pptx", "Language declared": null, "Language detected": "pt", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+JSON decode success: YES
+JSON error: No error
+SUCCESS with python3 - Result count: 9
+Final result: SUCCESS
+=== END DEBUG ===
+
+
+=== PDF COUNTER DEBUG ===
+Timestamp: 2025-10-08 01:07:45
+Course ID: 2
+Filename: Prog1.pdf
+Filepath: C:\xampp\htdocs\Moodles\server\moodledata/filedir/a1/8a/a18a19ca355e0723d8838507f5d042d0a862421c
+File exists: YES
+File size: 430683
+Script path: C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py
+Script exists: YES
+
+Trying: python3
+Command: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/a1/8a/a18a19ca355e0723d8838507f5d042d0a862421c"
+Output length: 271
+Raw output: {"Title": "No Title Found", "Language declared": "en-GB", "Language detected": "pt", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": false, "Figures with alt text": false, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+JSON decode success: YES
+JSON error: No error
+SUCCESS with python3 - Result count: 9
+Final result: SUCCESS
+=== END DEBUG ===
+
+
+=== PDF COUNTER DEBUG ===
+Timestamp: 2025-10-08 01:19:20
+Course ID: 3
+Filename: tudo_correto.pdf
+Filepath: C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6
+File exists: YES
+File size: 83852
+Script path: C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py
+Script exists: YES
+
+Trying: python3
+Command: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6"
+Output length: 263
+Raw output: {"Title": "tudo correto", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": "Non applicable", "Table With Headers": true}
+
+JSON decode success: YES
+JSON error: No error
+SUCCESS with python3 - Result count: 9
+Final result: SUCCESS
+=== END DEBUG ===
+
+
+=== PDF COUNTER DEBUG ===
+Timestamp: 2025-10-08 01:19:22
+Course ID: 3
+Filename: misto.pdf
+Filepath: C:\xampp\htdocs\Moodles\server\moodledata/filedir/29/44/2944ce4597a6d06ed01e6f07735f21fbd299e730
+File exists: YES
+File size: 83830
+Script path: C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py
+Script exists: YES
+
+Trying: python3
+Command: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/29/44/2944ce4597a6d06ed01e6f07735f21fbd299e730"
+Output length: 258
+Raw output: {"Title": "misto", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": "Non applicable", "Table With Headers": false}
+
+JSON decode success: YES
+JSON error: No error
+SUCCESS with python3 - Result count: 9
+Final result: SUCCESS
+=== END DEBUG ===
+
