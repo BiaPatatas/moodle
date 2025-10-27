@@ -1,11 +1,11 @@
 {
-    "timestamp": "2025-10-13 20:06:45",
-    "filename": "Poster_Final.pdf",
-    "filesize": "167362",
-    "filepath": "C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf7BAF.tmp.pdf",
+    "timestamp": "2025-10-28 03:41:38",
+    "filename": "accessibility_report_2025-10-28_03-39-33.pdf",
+    "filesize": "148929",
+    "filepath": "C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf90F2.tmp.pdf",
     "file_exists": true,
     "script_path": "C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py",
     "script_exists": true,
-    "python_command": "python3 \"C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py\" \"C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf7BAF.tmp.pdf\"",
+    "python_command": "python3 \"C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py\" \"C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf90F2.tmp.pdf\"",
     "cwd": "C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax"
 }

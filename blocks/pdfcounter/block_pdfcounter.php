@@ -60,6 +60,56 @@ class block_pdfcounter extends block_base {
 
         $files = $DB->get_records_sql($sql, array('courseid' => $COURSE->id));
 
+        // === Prune plugin rows for PDFs that are not currently visible in this course ===
+        // Build an array of contenthashes for visible PDFs found above
+        $visible_hashes = [];
+        foreach ($files as $f) {
+            if (isset($f->contenthash) && substr($f->filename, -4) === '.pdf') {
+                $visible_hashes[] = $f->contenthash;
+            }
+        }
+
+        // If the plugin tables exist, remove plugin records for this course
+        // whose filehash is not in the visible list. This keeps the plugin DB
+        // in sync with the course page: hidden/removed PDFs will have their
+        // plugin entries deleted when a teacher (or admin) visits the course
+        // and the block runs.
+        try {
+            $dbman = $DB->get_manager();
+            if ($dbman->table_exists('block_pdfaccessibility_pdf_files') && $dbman->table_exists('block_pdfaccessibility_test_results')) {
+                // Get all plugin pdf ids for this course
+                $all = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $COURSE->id]);
+                $toremove = [];
+                if (!empty($all)) {
+                    if (!empty($visible_hashes)) {
+                        list($in_sql, $in_params) = $DB->get_in_or_equal($visible_hashes, SQL_PARAMS_NAMED);
+                        foreach ($all as $rec) {
+                            // If this plugin record's filehash is not among visible hashes, mark for removal
+                            if (!in_array($rec->filehash, $visible_hashes, true)) {
+                                $toremove[] = $rec->id;
+                            }
+                        }
+                    } else {
+                        // No visible PDFs on the page: remove all plugin rows for this course
+                        foreach ($all as $rec) {
+                            $toremove[] = $rec->id;
+                        }
+                    }
+                }
+
+                if (!empty($toremove)) {
+                    list($in_sql_ids, $params_ids) = $DB->get_in_or_equal($toremove, SQL_PARAMS_NAMED);
+                    // Delete associated test results
+                    $DB->delete_records_select('block_pdfaccessibility_test_results', 'fileid ' . $in_sql_ids, $params_ids);
+                    // Delete the pdf file records
+                    $DB->delete_records_select('block_pdfaccessibility_pdf_files', 'id ' . $in_sql_ids, $params_ids);
+                }
+            }
+        } catch (\dml_exception $e) {
+            // Avoid breaking the block if DB operation fails; log to php error log
+            error_log('pdfcounter prune error: ' . $e->getMessage());
+        }
+
         $pdf_issues = [];
         foreach ($files as $file) {
             if (substr($file->filename, -4) === '.pdf') {
@@ -512,7 +562,7 @@ class block_pdfcounter extends block_base {
     /**
      * This block can be added to any page.
      *
-     * @return boolean
+     * @return array
      */
     public function applicable_formats() {
         return array(

@@ -1,19 +1,19 @@
 {
-    "timestamp": "2025-10-13 20:06:50",
+    "timestamp": "2025-10-28 03:41:40",
     "json_decode_success": true,
     "json_last_error": 0,
     "json_last_error_msg": "No error",
     "result_type": "array",
     "result_count": 9,
     "result": {
-        "Title": "",
-        "Language declared": null,
-        "Language detected": "en",
+        "Title": "Accessibility Dashboard Report",
+        "Language declared": "en",
+        "Language detected": "pt",
         "Languages match": false,
         "PDF only image": "PDF with text",
         "Lists marked as Lists": "PDF not tagged",
         "Figures with alt text": "PDF not tagged",
-        "Links Valid": false,
+        "Links Valid": true,
         "Table With Headers": "PDF not tagged"
     }
 }
