@@ -223,3 +223,210 @@ Raw Output:
 
 === End Output ===
 
+=== Python Output Debug ===
+Timestamp: 2025-10-28 19:24:41
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfE775.tmp.pdf"
+Output Length: 302
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "en", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-10-28 19:25:47
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf6C86.tmp.pdf"
+Output Length: 264
+Raw Output:
+{"Title": "AA 23/24", "Language declared": "en-US", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": false, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-06 22:41:27
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf4B85.tmp.pdf"
+Output Length: 258
+Raw Output:
+{"Title": "misto", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": "Non applicable", "Table With Headers": false}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-06 22:42:01
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfDBE.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-06 23:48:31
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfB882.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-06 23:48:43
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf21DD.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-06 23:54:28
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfC06D.tmp.pdf"
+Output Length: 331
+Raw Output:
+{"Title": "Real-Time Accessibility Dashboards for Higher Education", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": false, "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 00:03:22
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf8BFE.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 00:03:35
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfC0BC.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:13:34
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf8916.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:13:47
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfBAD7.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:20:01
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf748C.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:20:17
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfB3BA.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:25:46
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfB472.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:25:57
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfE111.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:26:16
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf2D9D.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:31:58
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf6363.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:32:07
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf8A65.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:38:13
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf1E26.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 05:38:29
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf5D34.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 06:01:29
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf3654.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 06:01:40
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf9B2B.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2025-11-07 06:01:44
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfA57D.tmp.pdf"
+Output Length: 312
+Raw Output:
+{"Title": "No Title Found", "Language declared": null, "Language detected": "Non applicable", "Languages match": false, "PDF only image": "Only Images", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": "Non applicable", "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+

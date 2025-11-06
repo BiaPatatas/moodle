@@ -1,19 +1,19 @@
 {
-    "timestamp": "2025-10-28 03:41:40",
+    "timestamp": "2025-11-07 06:01:44",
     "json_decode_success": true,
     "json_last_error": 0,
     "json_last_error_msg": "No error",
     "result_type": "array",
     "result_count": 9,
     "result": {
-        "Title": "Accessibility Dashboard Report",
-        "Language declared": "en",
-        "Language detected": "pt",
+        "Title": "No Title Found",
+        "Language declared": null,
+        "Language detected": "Non applicable",
         "Languages match": false,
-        "PDF only image": "PDF with text",
+        "PDF only image": "Only Images",
         "Lists marked as Lists": "PDF not tagged",
         "Figures with alt text": "PDF not tagged",
-        "Links Valid": true,
+        "Links Valid": "Non applicable",
         "Table With Headers": "PDF not tagged"
     }
 }

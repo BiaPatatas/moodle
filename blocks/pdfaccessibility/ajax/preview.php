@@ -62,21 +62,18 @@ if (empty($filenames)) {
     exit;
 }
 
+// Novo: processar todos os PDFs e retornar todos juntos
+$pdfs = [];
+global $DB, $USER, $COURSE;
 foreach ($files as $file) {
     if ($file->get_mimetype() === 'application/pdf') {
-        // Salva conteúdo PDF temporariamente
         $filepath = save_temp_pdf($file);
-
-        // === SISTEMA DE DEBUG DETALHADO ===
         $debug_dir = __DIR__ . '/../debug/';
         if (!is_dir($debug_dir)) {
             mkdir($debug_dir, 0755, true);
         }
-        
         $script_path = __DIR__ . '/../pdf_accessibility.py';
         $python_command = "python3 " . escapeshellarg($script_path) . " " . escapeshellarg($filepath);
-        
-        // Debug 1: Comando e info do arquivo
         $debug_info = [
             'timestamp' => date('Y-m-d H:i:s'),
             'filename' => $file->get_filename(),
@@ -89,8 +86,6 @@ foreach ($files as $file) {
             'cwd' => getcwd()
         ];
         file_put_contents($debug_dir . 'debug_command.txt', json_encode($debug_info, JSON_PRETTY_PRINT));
-        
-        // Debug 2: Executa script Python e captura output bruto
         $output = shell_exec($python_command . " 2>&1");
         file_put_contents($debug_dir . 'debug_python_output.txt', 
             "=== Python Output Debug ===\n" .
@@ -99,11 +94,7 @@ foreach ($files as $file) {
             "Output Length: " . strlen($output) . "\n" .
             "Raw Output:\n" . $output . "\n" .
             "=== End Output ===\n\n", FILE_APPEND);
-
-        // Remove arquivo temporário após uso
         unlink($filepath);
-
-        // Debug 3: JSON decode e erros
         $result = json_decode($output, true);
         $json_debug = [
             'timestamp' => date('Y-m-d H:i:s'),
@@ -115,17 +106,10 @@ foreach ($files as $file) {
             'result' => $result
         ];
         file_put_contents($debug_dir . 'debug_json.txt', json_encode($json_debug, JSON_PRETTY_PRINT));
-
-
         if (!$result) {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to analyze PDF']);
-            exit;
+            continue;
         }
-
-        // --- Inserir arquivo na tabela, se necessário ---
-        global $DB, $USER, $COURSE;
         $filehash = sha1($file->get_content());
-        // Verifica se já existe no mesmo curso
         $existing = $DB->get_record('block_pdfaccessibility_pdf_files', [
             'filename' => $file->get_filename(),
             'filehash' => $filehash,
@@ -135,25 +119,18 @@ foreach ($files as $file) {
             $fileid = $existing->id;
         } else {
             $filedata = new stdClass();
-            $filedata->courseid = $courseid; // Use course ID from JavaScript
+            $filedata->courseid = $courseid;
             $filedata->userid = $USER->id;
             $filedata->filename = $file->get_filename();
             $filedata->filehash = $filehash;
             $filedata->timecreated = time();
             $fileid = $DB->insert_record('block_pdfaccessibility_pdf_files', $filedata, true);
         }
-
-        // --- Inserir resultado do teste ---
         foreach ($result as $testname => $testvalue) {
-            // Use shared config to check if test should be excluded
             if (pdf_accessibility_config::should_exclude_test($testname)) {
                 continue;
             }
-
-            // Use shared config to determine status
             $status = pdf_accessibility_config::determine_test_status($testname, $testvalue);
-
-            // Atualiza ou insere resultado
             $existing_test = $DB->get_record('block_pdfaccessibility_test_results', [
                 'fileid' => $fileid,
                 'testname' => $testname
@@ -171,16 +148,19 @@ foreach ($files as $file) {
                 $DB->insert_record('block_pdfaccessibility_test_results', $testdata);
             }
         }
-
-        // Adiciona o nome do ficheiro e configuração de testes ao JSON de resposta
-        echo json_encode([
-            'status' => 'ok',
-            'summary' => $result,
+        $pdfs[] = [
             'filename' => $file->get_filename(),
-            'testConfig' => json_decode(pdf_accessibility_config::get_js_test_config(), true)
-        ]);
-        exit;  // importante para não continuar o script
+            'summary' => $result
+        ];
     }
+}
+if (count($pdfs) > 0) {
+    echo json_encode([
+        'status' => 'ok',
+        'pdfs' => $pdfs,
+        'testConfig' => json_decode(pdf_accessibility_config::get_js_test_config(), true)
+    ]);
+    exit;
 }
 echo json_encode(['status' => 'error', 'message' => 'No PDF found']);
 exit;

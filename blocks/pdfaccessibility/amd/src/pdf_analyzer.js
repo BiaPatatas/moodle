@@ -6,7 +6,7 @@ define([], function() {
             const filemanagerList = document.querySelector('.filemanager .fp-content');
 
             if (!filemanagerList) {
-                alert('filemanager não encontrado!');
+                console.warn('filemanager não encontrado!');
                 return;
             }
 
@@ -18,22 +18,22 @@ define([], function() {
                 if (courseIdFromUrl && parseInt(courseIdFromUrl) > 0) {
                     return parseInt(courseIdFromUrl);
                 }
-                
+
                 // Try body data attributes
                 var bodyElement = document.body;
                 if (bodyElement) {
-                    var courseIdFromBody = bodyElement.getAttribute('data-courseid') || 
+                    var courseIdFromBody = bodyElement.getAttribute('data-courseid') ||
                                           bodyElement.getAttribute('data-course-id');
                     if (courseIdFromBody && parseInt(courseIdFromBody) > 0) {
                         return parseInt(courseIdFromBody);
                     }
                 }
-                
+
                 // Try Moodle config
                 if (typeof M !== 'undefined' && M.cfg && M.cfg.courseId && parseInt(M.cfg.courseId) > 0) {
                     return parseInt(M.cfg.courseId);
                 }
-                
+
                 // Fallback - try to find course ID in page elements
                 var courseLink = document.querySelector('a[href*="course/view.php?id="]');
                 if (courseLink) {
@@ -42,7 +42,7 @@ define([], function() {
                         return parseInt(match[1]);
                     }
                 }
-                
+
                 return null;
             };
 
@@ -54,76 +54,94 @@ define([], function() {
                         'Content-Type': 'application/json',
                         'X-Requested-With': 'XMLHttpRequest'
                     },
-                    body: JSON.stringify({ draftid, sesskey, courseid })
+                    body: JSON.stringify({draftid, sesskey, courseid})
                 })
                 .then(res => res.json())
                 .then(data => {
                     const div = document.getElementById('analyzer-result');
-                    if (!div) {return;}
-                    if (data.status !== 'ok' || !data.summary) {
+                    if (!div) {
+                        return null;
+                    }
+                    if (data.status !== 'ok' || !data.pdfs || !Array.isArray(data.pdfs) || data.pdfs.length === 0) {
                         div.innerHTML = `<span style="color:red">${data.message || 'Erro ao analisar PDF.'}</span>`;
-                        return;
+                        return null;
                     }
 
-                    // Tente obter o nome do PDF do local correto
-                    let filename = 'PDF';
-                    if (data.filename) {
-                        filename = data.filename;
-                    } else if (data.pdfs && data.pdfs[0] && data.pdfs[0].filename) {
-                        filename = data.pdfs[0].filename;
-                    }
-
-                    const summary = data.summary;
                     const testConfig = data.testConfig || [];
                     // Function to determine check value (matches PHP pdf_accessibility_config::determine_js_check_value)
                     const determineCheckValue = (testKey, testValue) => {
-                        if (testValue === true) return 'Pass';
-                        if (testValue === 'PDF not tagged') return 'PDF not tagged';
-                        if (testValue === 'Non applicable') return 'Non applicable';
-                        if (testValue === false) return 'Fail';
+                        if (testValue === true) {
+ return 'Pass';
+}
+                        if (testValue === 'PDF not tagged') {
+ return 'PDF not tagged';
+}
+                        if (testValue === 'Non applicable') {
+ return 'Non applicable';
+}
+                        if (testValue === false) {
+ return 'Fail';
+}
                         // Special cases
-                        if (testKey === 'Title' && testValue === 'No Title Found') return 'Fail';
-                        if (testKey === 'Title' && testValue !== 'No Title Found') return 'Pass';
-                        if (testKey === 'Languages match') return testValue ? 'Pass' : 'Fail';
-                        if (testKey === 'PDF only image') return testValue === 'PDF with text' ? 'Pass' : 'Fail';
-                        
+                        if (testKey === 'Title' && testValue === 'No Title Found') {
+ return 'Fail';
+}
+                        if (testKey === 'Title' && testValue !== 'No Title Found') {
+ return 'Pass';
+}
+                        if (testKey === 'Languages match') {
+ return testValue ? 'Pass' : 'Fail';
+}
+                        if (testKey === 'PDF only image') {
+ return testValue === 'PDF with text' ? 'Pass' : 'Fail';
+}
                         return testValue; // Return as-is for other cases
                     };
-                    
-                    // Generate checks array using shared logic
-                    const checks = testConfig.map(config => {
-                        const value = determineCheckValue(config.key, summary[config.key]);
-                        return {
-                            label: config.label,
-                            value: value,
-                            pass: value === 'Pass',
-                            raw: summary[config.key],
-                            link: config.link,
-                            linkText: "How to fix?"
-                        };
-                    });
 
-                    const passed = checks.filter(c => c.pass).length;
-                    const nonApplicable = checks.filter(c => c.value === "Non applicable").length;
-                    const pdfNotTagged = checks.filter(c => c.value === "PDF not tagged").length;
-                    const failed = checks.length - passed - nonApplicable;
-                    
-                    // Custom sort: Pass -> Fail -> PDF not tagged -> Non applicable
-                    checks.sort((a, b) => {
-                        // Define priority order
-                        const getPriority = (check) => {
-                            if (check.pass) return 1; // Pass first
-                            if (check.value === "Fail") return 2; // Fail second
-                            if (check.value === "PDF not tagged") return 3; // PDF not tagged third
-                            if (check.value === "Non applicable") return 4; // Non applicable last
-                            return 5; // Any other case
-                        };
-                        
-                        return getPriority(a) - getPriority(b);
-                    });
-
-
-                    let html = `
+                    let html = '';
+                    data.pdfs.forEach((pdf, idx) => {
+                        const filename = pdf.filename || `PDF ${idx + 1}`;
+                        const summary = pdf.summary;
+                        if (!summary) {
+ return;
+}
+                        // Generate checks array using shared logic
+                        const checks = testConfig.map(config => {
+                            const value = determineCheckValue(config.key, summary[config.key]);
+                            return {
+                                label: config.label,
+                                value: value,
+                                pass: value === 'Pass',
+                                raw: summary[config.key],
+                                link: config.link,
+                                linkText: "How to fix?"
+                            };
+                        });
+                        const passed = checks.filter(c => c.pass).length;
+                        const nonApplicable = checks.filter(c => c.value === "Non applicable").length;
+                        // Const pdfNotTagged = checks.filter(c => c.value === "PDF not tagged").length; // removido pois não é usado
+                        const failed = checks.length - passed - nonApplicable;
+                        // Custom sort: Pass -> Fail -> PDF not tagged -> Non applicable
+                        checks.sort((a, b) => {
+                            // Define priority order
+                            const getPriority = (check) => {
+                                if (check.pass) {
+ return 1;
+} // Pass first
+                                if (check.value === "Fail") {
+ return 2;
+} // Fail second
+                                if (check.value === "PDF not tagged") {
+ return 3;
+} // PDF not tagged third
+                                if (check.value === "Non applicable") {
+ return 4;
+} // Non applicable last
+                                return 5; // Any other case
+                            };
+                            return getPriority(a) - getPriority(b);
+                        });
+                        html += `
         <div style="font-family:Arial,sans-serif;max-width:320px;">
             <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; background-color: white; 
             border-radius: 8px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); color: black; margin-bottom: 10px;">
@@ -134,7 +152,6 @@ define([], function() {
                     <span style="color:black;">passed</span>
                     <span style="color:#e74c3c;font-weight:bold;margin-left:10px;">${failed}</span>
                     <span style="color:black;">failed</span>
-                    
                 </div>
             </div>
             <div>
@@ -187,10 +204,10 @@ define([], function() {
                 ${(!c.pass && c.value !== 'PDF not tagged' && c.value !== 'Non applicable') ? `
                     <button type="button"
                         aria-expanded="false"
-                        aria-controls="fail-detail-${i}"
+                        aria-controls="fail-detail-${i}-${idx}"
                         style="background:none;border:none;cursor:pointer;padding:0 6px;"
                         onclick="
-                            var d=document.getElementById('fail-detail-${i}');
+                            var d=document.getElementById('fail-detail-${i}-${idx}');
                             var a=this.querySelector('.arrow');
                             var expanded=this.getAttribute('aria-expanded')==='true';
                             d.style.display=expanded?'none':'block';
@@ -204,7 +221,7 @@ define([], function() {
             </div>
             <div style="font-size: 0.9rem; color: #282828; margin-left: 1%; margin-top: 1px;">${c.value}</div>
             ${(!c.pass && c.value !== 'PDF not tagged' && c.value !== 'Non applicable') ? `
-            <div id="fail-detail-${i}" style="display:none;margin-top:5px;font-size:0.85em;color:#a94442;">
+            <div id="fail-detail-${i}-${idx}" style="display:none;margin-top:5px;font-size:0.85em;color:#a94442;">
                 <a href="${c.link}" target="_blank" rel="noopener">${c.linkText || c.link}</a>
             </div>
         ` : ''}
@@ -214,11 +231,20 @@ define([], function() {
                         `;
                     }).join('')}
                         </div>
-                       
                     </div>
-                    </div>
-                    `;
+                </div>
+                        `;
+                    });
                     div.innerHTML = html;
+                    return true;
+                })
+                .catch(error => {
+                    const div = document.getElementById('analyzer-result');
+                    if (div) {
+                        div.innerHTML = `<span style="color:red">Erro de rede ou servidor ao analisar PDF.</span>`;
+                    }
+                    console.error('Erro ao analisar PDF:', error);
+                    return null;
                 });
             };
 

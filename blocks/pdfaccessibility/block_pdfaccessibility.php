@@ -27,22 +27,41 @@ class block_pdfaccessibility extends block_base {
         }
 
         $this->content = new stdClass();
-        
         // Check if we're in a course
         if (empty($COURSE) || $COURSE->id == SITEID) {
             $this->content->text = get_string('nocourse', 'block_pdfaccessibility');
             return $this->content;
         }
-        
-        
-        
-       
 
-    $this->content->text .= '<div id="analyzer-result" style="margin-top: 1em; color: green;"></div>';
+        // Buscar todos os PDFs do contexto correto (curso ou módulo)
+        require_once(__DIR__ . '/lib.php');
+        global $PAGE;
+        $contextid = $COURSE->id;
+        if (isset($PAGE->cm) && isset($PAGE->cm->context)) {
+            // Se estamos numa página de módulo (ex: pasta), usar o contextid do módulo
+            $contextid = $PAGE->cm->context->id;
+        }
+        $pdfs = block_pdfaccessibility_get_pdfs_from_context($contextid);
 
-        
+        if (count($pdfs) > 0) {
+            $this->content->text .= '<div id="analyzer-result" style="margin-top: 1em; color: green;">PDFs encontrados:</div>';
+            foreach ($pdfs as $file) {
+                $filename = $file->get_filename();
+                $filepath = $file->get_pathname();
+                // Aqui você pode chamar sua função de avaliação do PDF e exibir o resultado detalhado
+                $avaliacao = '';
+                if (function_exists('block_pdfaccessibility_avaliar_pdf')) {
+                    $avaliacao = block_pdfaccessibility_avaliar_pdf($filepath, $filename);
+                } else {
+                    $avaliacao = '<div style="margin-bottom:10px;"><strong>' . htmlspecialchars($filename) . '</strong><br><span style="color:gray;">(Exemplo: aqui entraria o relatório de acessibilidade deste PDF)</span></div>';
+                }
+                $this->content->text .= $avaliacao;
+            }
+        } else {
+            $this->content->text .= '<div id="analyzer-result" style="margin-top: 1em; color: red;">Nenhum PDF encontrado.</div>';
+        }
+
         $this->content->footer = '';
-        
         return $this->content;
     }
 
@@ -64,7 +83,6 @@ class block_pdfaccessibility extends block_base {
             'site' => false,
             'mod' => true,
             'my' => false,
-            'all' => true, // Allow on all pages except site and mod pages
             'admin' => true,
         );
     }
