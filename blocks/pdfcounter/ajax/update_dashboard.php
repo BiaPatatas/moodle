@@ -38,69 +38,39 @@ try {
         throw new Exception('Course not found: ' . $courseid);
     }
     
-    // Get current course PDFs
-    $sql = "SELECT f.filename, f.contenthash
-            FROM {course_modules} cm
-            JOIN {modules} m ON m.id = cm.module
-            JOIN {resource} r ON r.id = cm.instance
-            JOIN {context} ctx ON ctx.instanceid = cm.id
-            JOIN {files} f ON f.contextid = ctx.id
-            WHERE cm.course = :courseid
-            AND cm.deletioninprogress = 0
-            AND cm.visible = 1
-            AND m.name = 'resource'
-            AND f.component = 'mod_resource'
-            AND f.filearea = 'content'
-            AND f.filename != '.'";
-
-    $files = $DB->get_records_sql($sql, array('courseid' => $courseid));
+    // Buscar todos os PDFs do curso pelo courseid (usando a tabela do plugin)
+    $allpdfs = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $courseid]);
 
     $pdf_issues = [];
     $total_percent = 0;
     $total_pdfs = 0;
-
-    foreach ($files as $file) {
-        if (substr($file->filename, -4) === '.pdf') {
-            $filehash = $file->contenthash;
-
-            // Check if PDF exists in our database for this course
-            $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-                'filehash' => $filehash,
-                'courseid' => $courseid
-            ]);
-            
-            if ($pdfrecord) {
-                // Get test counts using shared config
-                $counts = pdf_accessibility_config::get_test_counts($DB, $pdfrecord->id);
-                
-                $pdf_issue = [
-                    'filename' => $file->filename,
-                    'fileid' => $pdfrecord->id,
-                    'fail_count' => $counts['fail_count'],
-                    'pass_count' => $counts['pass_count'],
-                    'nonapplicable_count' => $counts['nonapplicable_count'],
-                    'not_tagged_count' => $counts['not_tagged_count']
-                ];
-                
-                // Calculate progress for this PDF
-                $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
-                    $counts['pass_count'],
-                    $counts['fail_count'],
-                    $counts['not_tagged_count']
-                );
-                
-                if ($applicable_tests > 0) {
-                    $percent = pdf_accessibility_config::calculate_progress($pdf_issue);
-                    $total_percent += $percent;
-                    $total_pdfs++;
-                }
-                
-                $pdf_issues[] = $pdf_issue;
-            }
+    foreach ($allpdfs as $pdfrecord) {
+        $pdfid = $pdfrecord->id;
+        $counts = pdf_accessibility_config::get_test_counts($DB, $pdfid);
+        $display_name = !empty($pdfrecord->filename) ? $pdfrecord->filename : 'PDF';
+        $pdf_issue = [
+            'filename' => $pdfrecord->filename,
+            'fileid' => $pdfid,
+            'fail_count' => $counts['fail_count'],
+            'pass_count' => $counts['pass_count'],
+            'nonapplicable_count' => $counts['nonapplicable_count'],
+            'not_tagged_count' => $counts['not_tagged_count']
+        ];
+        // Calcular progresso para cada PDF
+        $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
+            $counts['pass_count'],
+            $counts['fail_count'],
+            $counts['not_tagged_count']
+        );
+        if ($applicable_tests > 0) {
+            $percent = pdf_accessibility_config::calculate_progress($counts);
+            $total_percent += $percent;
+            $total_pdfs++;
         }
+        $pdf_issues[] = $pdf_issue;
     }
 
-    // Calculate overall progress
+    // Calcular progresso geral
     $overall_progress = $total_pdfs > 0 ? round($total_percent / $total_pdfs) : 0;
     $progress_color = pdf_accessibility_config::get_progress_color($overall_progress);
 

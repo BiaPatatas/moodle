@@ -26,8 +26,43 @@ class block_pdfcounter extends block_base {
             return $this->content;
         }
 
-        $progress_value = 0;
         $current_month = date('Y-m');
+        // Buscar todos os PDFs do curso pelo courseid (usando a tabela do plugin)
+        $allpdfs = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $COURSE->id]);
+
+        // Calcular progresso geral (overall accessibility) com base em TODOS os PDFs do curso
+        $total_percent = 0;
+        $total_pdfs = 0;
+        $pdf_issues = [];
+        foreach ($allpdfs as $pdfrecord) {
+            $pdfid = $pdfrecord->id;
+            $counts = pdf_accessibility_config::get_test_counts($DB, $pdfid);
+            $display_name = !empty($pdfrecord->filename) ? $pdfrecord->filename : 'PDF';
+            $pdf_issues[] = [
+                'filename' => $pdfrecord->filename,
+                'display_name' => $display_name,
+                'fileid' => $pdfid,
+                'fail_count' => $counts['fail_count'],
+                'pass_count' => $counts['pass_count'],
+                'nonapplicable_count' => $counts['nonapplicable_count'],
+                'not_tagged_count' => $counts['not_tagged_count']
+            ];
+            // Calcular progresso para cada PDF
+            $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
+                $counts['pass_count'],
+                $counts['fail_count'],
+                $counts['not_tagged_count']
+            );
+            if ($applicable_tests > 0) {
+                $percent = pdf_accessibility_config::calculate_progress($counts);
+                $total_percent += $percent;
+                $total_pdfs++;
+            }
+        }
+        $progress_value = $total_pdfs > 0 ? round($total_percent / $total_pdfs) : 0;
+        $progress_color = pdf_accessibility_config::get_progress_color($progress_value);
+
+        // Atualiza o valor na tabela de tendências para o mês atual, se necessário
         $trend_exists = $DB->record_exists('block_pdfcounter_trends', [
             'courseid' => $COURSE->id,
             'month' => $current_month
@@ -42,195 +77,6 @@ class block_pdfcounter extends block_base {
         }
 
         $trends = $DB->get_records('block_pdfcounter_trends', ['courseid' => $COURSE->id], 'month ASC');
-
-        //-------------------------------------PDFs Issues & Progress Calculation---------------------------------------
-        $sql = "SELECT f.filename, f.contenthash, r.name as resource_name, cm.id as cmid
-            FROM {course_modules} cm
-            JOIN {modules} m ON m.id = cm.module
-            JOIN {resource} r ON r.id = cm.instance
-            JOIN {context} ctx ON ctx.instanceid = cm.id
-            JOIN {files} f ON f.contextid = ctx.id
-            WHERE cm.course = :courseid
-            AND cm.deletioninprogress = 0
-            AND cm.visible = 1
-            AND m.name = 'resource'
-            AND f.component = 'mod_resource'
-            AND f.filearea = 'content'
-            AND f.filename != '.'";
-
-        $files = $DB->get_records_sql($sql, array('courseid' => $COURSE->id));
-
-        // === Prune plugin rows for PDFs that are not currently visible in this course ===
-        // Build an array of contenthashes for visible PDFs found above
-        $visible_hashes = [];
-        foreach ($files as $f) {
-            if (isset($f->contenthash) && substr($f->filename, -4) === '.pdf') {
-                $visible_hashes[] = $f->contenthash;
-            }
-        }
-
-        // If the plugin tables exist, remove plugin records for this course
-        // whose filehash is not in the visible list. This keeps the plugin DB
-        // in sync with the course page: hidden/removed PDFs will have their
-        // plugin entries deleted when a teacher (or admin) visits the course
-        // and the block runs.
-        try {
-            $dbman = $DB->get_manager();
-            if ($dbman->table_exists('block_pdfaccessibility_pdf_files') && $dbman->table_exists('block_pdfaccessibility_test_results')) {
-                // Get all plugin pdf ids for this course
-                $all = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $COURSE->id]);
-                $toremove = [];
-                if (!empty($all)) {
-                    if (!empty($visible_hashes)) {
-                        list($in_sql, $in_params) = $DB->get_in_or_equal($visible_hashes, SQL_PARAMS_NAMED);
-                        foreach ($all as $rec) {
-                            // If this plugin record's filehash is not among visible hashes, mark for removal
-                            if (!in_array($rec->filehash, $visible_hashes, true)) {
-                                $toremove[] = $rec->id;
-                            }
-                        }
-                    } else {
-                        // No visible PDFs on the page: remove all plugin rows for this course
-                        foreach ($all as $rec) {
-                            $toremove[] = $rec->id;
-                        }
-                    }
-                }
-
-                if (!empty($toremove)) {
-                    list($in_sql_ids, $params_ids) = $DB->get_in_or_equal($toremove, SQL_PARAMS_NAMED);
-                    // Delete associated test results
-                    $DB->delete_records_select('block_pdfaccessibility_test_results', 'fileid ' . $in_sql_ids, $params_ids);
-                    // Delete the pdf file records
-                    $DB->delete_records_select('block_pdfaccessibility_pdf_files', 'id ' . $in_sql_ids, $params_ids);
-                }
-            }
-        } catch (\dml_exception $e) {
-            // Avoid breaking the block if DB operation fails; log to php error log
-            error_log('pdfcounter prune error: ' . $e->getMessage());
-        }
-
-        $pdf_issues = [];
-        foreach ($files as $file) {
-            if (substr($file->filename, -4) === '.pdf') {
-                $filehash = $file->contenthash;
-
-                $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-                    'filehash' => $filehash,
-                    'courseid' => $COURSE->id
-                ]);
-                if (!$pdfrecord) {
-                    $filepath = $CFG->dataroot . '/filedir/' . substr($filehash, 0, 2) . '/' . substr($filehash, 2, 2) . '/' . $filehash;
-                    if (!file_exists($filepath)) {
-                        error_log("PDF não encontrado: $filepath");
-                        continue;
-                    }
-
-                    // === DEBUG SYSTEM PDFCOUNTER ===
-                    $debug_dir = $CFG->dirroot . '/blocks/pdfcounter/debug/';
-                    if (!is_dir($debug_dir)) {
-                        mkdir($debug_dir, 0755, true);
-                    }
-                    $debug_log = $debug_dir . 'pdfcounter_debug.log';
-                    $timestamp = date('Y-m-d H:i:s');
-                    
-                    // Testa múltiplos comandos Python
-                    $python_commands = ['python3', 'python', 'py', 'python.exe'];
-                    $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
-                    $result = null;
-                    
-                    $debug_entry = "\n=== PDF COUNTER DEBUG ===\n";
-                    $debug_entry .= "Timestamp: $timestamp\n";
-                    $debug_entry .= "Course ID: {$COURSE->id}\n";
-                    $debug_entry .= "Filename: {$file->filename}\n";
-                    $debug_entry .= "Filepath: $filepath\n";
-                    $debug_entry .= "File exists: " . (file_exists($filepath) ? 'YES' : 'NO') . "\n";
-                    $debug_entry .= "File size: " . (file_exists($filepath) ? filesize($filepath) : 'N/A') . "\n";
-                    $debug_entry .= "Script path: $script\n";
-                    $debug_entry .= "Script exists: " . (file_exists($script) ? 'YES' : 'NO') . "\n";
-                    
-                    foreach ($python_commands as $python) {
-                        $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($filepath);
-                        $debug_entry .= "\nTrying: $python\n";
-                        $debug_entry .= "Command: $command\n";
-                        
-                        $output = shell_exec($command . ' 2>&1');
-                        $debug_entry .= "Output length: " . strlen($output) . "\n";
-                        $debug_entry .= "Raw output: " . substr($output, 0, 500) . "\n";
-                        
-                        $decoded = json_decode($output, true);
-                        $debug_entry .= "JSON decode success: " . ($decoded ? 'YES' : 'NO') . "\n";
-                        $debug_entry .= "JSON error: " . json_last_error_msg() . "\n";
-                        
-                        if ($decoded && is_array($decoded)) {
-                            $result = $decoded;
-                            $debug_entry .= "SUCCESS with $python - Result count: " . count($result) . "\n";
-                            break;
-                        }
-                    }
-                    
-                    $debug_entry .= "Final result: " . ($result ? 'SUCCESS' : 'FAILED') . "\n";
-                    $debug_entry .= "=== END DEBUG ===\n\n";
-                    
-                    file_put_contents($debug_log, $debug_entry, FILE_APPEND);
-
-                    if (!$result || !is_array($result)) {
-                        error_log("Erro ao avaliar PDF: $filepath | Check debug: $debug_log");
-                        continue;
-                    }
-
-                    $pdfrecord = new stdClass();
-                    $pdfrecord->courseid = $COURSE->id; // Remove ?? 0 to ensure proper course ID
-                    $pdfrecord->userid = $USER->id;
-                    $pdfrecord->filehash = $filehash;
-                    $pdfrecord->filename = $file->filename;
-                    $pdfrecord->timecreated = time();
-                    $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
-
-                    // Use shared config to process and store results
-                    pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
-                } else {
-                    $pdfid = $pdfrecord->id;
-                }
-
-                // Use shared config to get test counts
-                $counts = pdf_accessibility_config::get_test_counts($DB, $pdfid);
-                $display_name = !empty($file->resource_name) ? $file->resource_name : $file->filename;
-                $pdf_issues[] = [
-                    'filename' => $file->filename,
-                    'display_name' => $display_name,
-                    'fileid' => $pdfid,
-                    'fail_count' => $counts['fail_count'],
-                    'pass_count' => $counts['pass_count'],
-                    'nonapplicable_count' => $counts['nonapplicable_count'],
-                    'not_tagged_count' => $counts['not_tagged_count']
-                ];
-            }
-        }
-
-        $total_percent = 0;
-        $total_pdfs = 0;
-
-        foreach ($pdf_issues as $issue) {
-            // Use shared config to calculate applicable tests and progress
-            $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
-                $issue['pass_count'],
-                $issue['fail_count'],
-                $issue['not_tagged_count']
-            );
-            
-            // Só calcular percentagem se houver testes aplicáveis
-            if ($applicable_tests > 0) {
-                $percent = pdf_accessibility_config::calculate_progress($issue);
-                $total_percent += $percent;
-                $total_pdfs++;
-            }
-        }
-
-        $progress_value = $total_pdfs > 0 ? round($total_percent / $total_pdfs) : 0;
-
-        // Use shared config to get progress color
-        $progress_color = pdf_accessibility_config::get_progress_color($progress_value);
 
         // // Atualiza o valor na tabela de tendências para o mês atual
         // if ($trend_exists) {
@@ -565,11 +411,13 @@ class block_pdfcounter extends block_base {
      * @return array
      */
     public function applicable_formats() {
+        // Permitir o bloco em todos os tipos de páginas
         return array(
             'course-view' => true,
-            'site' => false,
-            'mod' => false,
-            'my' => false
+            'site' => true,
+            'mod' => true,
+            'my' => true,
+            'all' => true
         );
     }
 

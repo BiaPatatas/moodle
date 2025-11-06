@@ -152,3 +152,25 @@ SUCCESS with python3 - Result count: 9
 Final result: SUCCESS
 === END DEBUG ===
 
+
+=== PDF COUNTER DEBUG ===
+Timestamp: 2025-10-28 19:22:14
+Course ID: 3
+Filename: guiaoNovo.pdf
+Filepath: C:\xampp\htdocs\Moodles\server\moodledata/filedir/23/20/23207146139bbaac554f3d20f5d4edae56807e68
+File exists: YES
+File size: 3975595
+Script path: C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py
+Script exists: YES
+
+Trying: python3
+Command: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/23/20/23207146139bbaac554f3d20f5d4edae56807e68"
+Output length: 289
+Raw output: {"Title": "No Title Found", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": "Non applicable", "Links Valid": "Non applicable", "Table With Headers": "Non applicable"}
+
+JSON decode success: YES
+JSON error: No error
+SUCCESS with python3 - Result count: 9
+Final result: SUCCESS
+=== END DEBUG ===
+
