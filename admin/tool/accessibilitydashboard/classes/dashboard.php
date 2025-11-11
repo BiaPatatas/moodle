@@ -841,70 +841,36 @@ class dashboard {
             return 0;
         }
 
-        // Use a simpler approach: calculate based on current course state
-        // Get courses that match the filter
-        $courses_to_check = [];
-        
+        // Perform a single, set-based query to count problems (avoid N+1 queries)
+        $params = [];
+        $where = ["pf.courseid > 1", "c.visible = 1", "tr.result IN ('fail', 'pdf not tagged')"];
+
         if ($discipline_id) {
-            // Specific discipline
-            if ($DB->record_exists('course', ['id' => $discipline_id, 'visible' => 1])) {
-                $courses_to_check[] = $discipline_id;
-            }
+            $where[] = 'c.id = ?';
+            $params[] = $discipline_id;
         } elseif ($course_id && $department_id) {
-            // All disciplines in a specific course
-            $courses_to_check = $DB->get_fieldset_select('course', 'id', 'category = ? AND visible = 1 AND id > 1', [$course_id]);
+            // course_id is treated as a category in other methods
+            $where[] = 'c.category = ?';
+            $params[] = $course_id;
         } elseif ($course_id) {
-            // All disciplines in a course category
-            $courses_to_check = $DB->get_fieldset_select('course', 'id', 'category = ? AND visible = 1 AND id > 1', [$course_id]);
+            $where[] = 'c.category = ?';
+            $params[] = $course_id;
         } elseif ($department_id) {
-            // All disciplines in all courses of a department
-            $sql = "SELECT c.id 
-                    FROM {course} c
-                    JOIN {course_categories} cc ON cc.id = c.category
-                    LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
-                    WHERE c.visible = 1 AND c.id > 1 AND cc2.id = ?";
-            $courses_to_check = $DB->get_fieldset_sql($sql, [$department_id]);
-        } else {
-            // Global - all visible courses
-            $courses_to_check = $DB->get_fieldset_select('course', 'id', 'visible = 1 AND id > 1');
+            $where[] = 'cc2.id = ?';
+            $params[] = $department_id;
         }
 
-        if (empty($courses_to_check)) {
-            return 0;
-        }
+        $where_sql = implode(' AND ', $where);
 
-        // Count problems for these courses using current PDF accessibility data
-        $total_problems = 0;
-        foreach ($courses_to_check as $courseid) {
-            // Get current PDFs in this course (similar to pdfcounter logic)
-            $sql = "SELECT DISTINCT f.contenthash
-                    FROM {course_modules} cm
-                    JOIN {modules} m ON m.id = cm.module
-                    JOIN {resource} r ON r.id = cm.instance
-                    JOIN {context} ctx ON ctx.instanceid = cm.id
-                    JOIN {files} f ON f.contextid = ctx.id
-                    WHERE cm.course = ? AND cm.deletioninprogress = 0 AND cm.visible = 1
-                    AND m.name = 'resource' AND f.component = 'mod_resource'
-                    AND f.filearea = 'content' AND f.filename != '.'
-                    AND LOWER(f.filename) LIKE '%.pdf'";
-            
-            $current_pdfs = $DB->get_fieldset_sql($sql, [$courseid]);
-            
-            if (!empty($current_pdfs)) {
-                // Count problems for these current PDFs only
-                list($in_sql, $in_params) = $DB->get_in_or_equal($current_pdfs, SQL_PARAMS_NAMED);
-                $problems_sql = "SELECT COUNT(tr.id)
-                               FROM {block_pdfaccessibility_test_results} tr
-                               JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                               WHERE pf.courseid = :courseid
-                               AND pf.filehash $in_sql
-                               AND tr.result IN ('fail', 'pdf not tagged')";
-                
-                $params = array_merge(['courseid' => $courseid], $in_params);
-                $course_problems = $DB->count_records_sql($problems_sql, $params);
-                $total_problems += $course_problems;
-            }
-        }
+        $sql = "SELECT COUNT(tr.id) 
+                FROM {block_pdfaccessibility_test_results} tr
+                JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
+                JOIN {course} c ON c.id = pf.courseid
+                LEFT JOIN {course_categories} cc ON cc.id = c.category
+                LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
+                WHERE $where_sql";
+
+        $total_problems = (int)$DB->count_records_sql($sql, $params);
 
         return $total_problems;
     }

@@ -15,6 +15,13 @@ $PAGE->set_title('PDF Accessibility Dashboard');
 $PAGE->set_heading('PDF Accessibility Dashboard');
 $PAGE->requires->css('/admin/tool/accessibilitydashboard/index.css');
 
+// --- DEBUG LOGGING ---
+$debug_start_time = microtime(true);
+$debug_start_memory = memory_get_usage();
+// Prepare debug info array
+$debug_info = [];
+$debug_info['start_time'] = date('Y-m-d H:i:s');
+$debug_info['start_memory'] = $debug_start_memory;
 echo $OUTPUT->header();
 
 // Create dashboard instance
@@ -24,6 +31,13 @@ $dashboard = new \tool_accessibilitydashboard\dashboard();
 $department_id = optional_param('department', null, PARAM_INT);
 $course_id = optional_param('course', null, PARAM_INT);
 $discipline_id = optional_param('discipline', null, PARAM_INT);
+// Add filter info to debug
+$debug_info['filters'] = [
+     'department_id' => $department_id,
+     'course_id' => $course_id,
+     'discipline_id' => $discipline_id,
+     'page' => $page
+];
 $page = optional_param('page', 1, PARAM_INT); // Pagination parameter
 
 // Get all data (filtered or global based on parameters)
@@ -31,6 +45,11 @@ $stats = $dashboard->get_faculty_stats($department_id, $course_id, $discipline_i
 $evolution_data = $dashboard->get_accessibility_evolution($department_id, $course_id, $discipline_id);
 $total_pdfs_count = $dashboard->get_total_pdfs_count($department_id, $course_id, $discipline_id);
 $Problems_found = $dashboard->get_PDFs_problems($department_id, $course_id, $discipline_id);
+// Add stats to debug
+$debug_info['stats'] = $stats;
+$debug_info['total_pdfs_count'] = $total_pdfs_count;
+$debug_info['Problems_found'] = $Problems_found;
+$debug_info['evolution_data'] = $evolution_data;
 
 // Get filter data
 $departments = $dashboard->get_departments_for_filter();
@@ -60,6 +79,8 @@ if (!isset($_GET['department']) && !isset($_GET['course']) && !isset($_GET['disc
     $filtered_data = $dashboard->get_filtered_data($department_id, $course_id, $discipline_id);
 }
 
+// Add filtered data count to debug
+$debug_info['filtered_data_count'] = count($filtered_data);
 // Pagination logic
 $items_per_page = 10;
 $total_items = count($filtered_data);
@@ -74,6 +95,10 @@ $worst_courses = $dashboard->get_worst_courses(4, $department_id, $course_id, $d
 $common_errors = $dashboard->get_most_common_errors(4, $department_id, $course_id, $discipline_id);
 
 // Calculate evolution change (simple difference, not percentage)
+// Add best/worst/common errors to debug
+$debug_info['best_courses'] = $best_courses;
+$debug_info['worst_courses'] = $worst_courses;
+$debug_info['common_errors'] = $common_errors;
 $evolution_current_score = $evolution_data['current_score'];
 $evolution_previous_score = $evolution_data['previous_score'];
 $evolution_change = round($evolution_current_score - $evolution_previous_score, 1);
@@ -91,7 +116,46 @@ if ($overall_score < 45) {
     $score_color = '#28a745'; // Green
 }
 
+// --- TABELAS DE BASE DE DADOS ---
+$DB = $GLOBALS['DB'];
+$dbman = $DB->get_manager();
+$debug_info['tables'] = [];
+$tables = [
+    'block_pdfaccessibility_pdf_files',
+    'block_pdfaccessibility_test_results',
+    'block_pdfcounter_trends',
+    'course',
+    'course_categories'
+];
+foreach ($tables as $table) {
+    $tableinfo = [];
+    $tableinfo['exists'] = $dbman->table_exists($table) ? 'YES' : 'NO';
+    if ($tableinfo['exists'] === 'YES') {
+        $tableinfo['total_records'] = $DB->count_records($table);
+        $sample = $DB->get_records($table, null, '', '*', 0, 5);
+        $tableinfo['sample'] = [];
+        foreach ($sample as $row) {
+            $tableinfo['sample'][] = $row;
+        }
+    }
+    $debug_info['tables'][$table] = $tableinfo;
+}
+
+
+$debug_end_time = microtime(true);
+$debug_end_memory = memory_get_usage();
+$debug_info['end_time'] = date('Y-m-d H:i:s');
+$debug_info['end_memory'] = $debug_end_memory;
+$debug_info['duration_sec'] = round($debug_end_time - $debug_start_time, 4);
+$debug_info['memory_used'] = $debug_end_memory - $debug_start_memory;
+
+$debug_file = __DIR__ . '/dashboard_debug.txt';
+file_put_contents($debug_file, "==== DASHBOARD INDEX DEBUG ====" . PHP_EOL, FILE_APPEND);
+file_put_contents($debug_file, print_r($debug_info, true) . PHP_EOL, FILE_APPEND);
+error_log('DEBUG INDEX.PHP block executed');
 ?>
+
+
 
 <div class="dashboard-container">
     <div class="dashboard-main">
@@ -344,6 +408,40 @@ if ($overall_score < 45) {
                         </div>
                         
                         <!-- Worst Courses Card -->
+
+                                        
+
+                                        <?php
+                                        // --- DEBUG BLOCK: deve estar dentro das tags PHP e antes do HTML ---
+                                        $debug_end_time = microtime(true);
+                                        $debug_end_memory = memory_get_usage();
+                                        $debug_info['end_time'] = date('Y-m-d H:i:s');
+                                        $debug_info['end_memory'] = $debug_end_memory;
+                                        $debug_info['duration_sec'] = round($debug_end_time - $debug_start_time, 4);
+                                        $debug_info['memory_used'] = $debug_end_memory - $debug_start_memory;
+
+                                        $debug_file = __DIR__ . '/dashboard_debug.txt';
+                                        file_put_contents($debug_file, "==== DASHBOARD INDEX DEBUG ====" . PHP_EOL, FILE_APPEND);
+                                        file_put_contents($debug_file, print_r($debug_info, true) . PHP_EOL, FILE_APPEND);
+                                        error_log('DEBUG INDEX.PHP block executed');
+                                        echo '<!-- DEBUG BLOCK EXECUTED -->';
+
+                                        // --- DEBUG BLOCK: must be inside PHP tags ---
+                                        $debug_end_time = microtime(true);
+                                        $debug_end_memory = memory_get_usage();
+                                        $debug_info['end_time'] = date('Y-m-d H:i:s');
+                                        $debug_info['end_memory'] = $debug_end_memory;
+                                        $debug_info['duration_sec'] = round($debug_end_time - $debug_start_time, 4);
+                                        $debug_info['memory_used'] = $debug_end_memory - $debug_start_memory;
+
+                                        $debug_file = __DIR__ . '/dashboard_debug.txt';
+                                        file_put_contents($debug_file, "==== DASHBOARD INDEX DEBUG ====" . PHP_EOL, FILE_APPEND);
+                                        file_put_contents($debug_file, print_r($debug_info, true) . PHP_EOL, FILE_APPEND);
+                                        // Test: log and echo to confirm debug block is running
+                                        error_log('DEBUG INDEX.PHP block executed');
+                                        echo '<!-- DEBUG BLOCK EXECUTED -->';
+
+                                        ?>
                         <div class="stat-card-Ce stat-CoursesWorstScore">
                             <div class="card-header">
                                 <h4><i class="fas fa-exclamation-triangle"></i> Disciplines with Lower Score</h4>

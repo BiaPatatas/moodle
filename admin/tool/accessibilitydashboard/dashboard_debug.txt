@@ -1,0 +1,1965 @@
+==== DASHBOARD INDEX DEBUG ====
+Array
+(
+    [start_time] => 2025-11-11 20:03:42
+    [start_memory] => 6893448
+    [filters] => Array
+        (
+            [department_id] => 
+            [course_id] => 
+            [discipline_id] => 
+            [page] => 
+        )
+
+    [stats] => Array
+        (
+            [courses_with_pdfs] => 7
+            [total_pdfs] => 11
+            [accessibility_score] => 45
+            [recent_pdfs] => 11
+            [total_tests] => 77
+            [passed_tests] => 27
+            [failed_tests] => 50
+        )
+
+    [total_pdfs_count] => 11
+    [Problems_found] => 44
+    [evolution_data] => Array
+        (
+            [months] => Array
+                (
+                    [0] => Sep
+                    [1] => Oct
+                    [2] => Nov
+                )
+
+            [scores] => Array
+                (
+                    [0] => 43
+                    [1] => 43.9
+                    [2] => 45
+                )
+
+            [current_score] => 45
+            [previous_score] => 43.9
+        )
+
+    [filtered_data_count] => 7
+    [best_courses] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [course_name] => Cadeira engenharia
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 100.0000
+                )
+
+            [1] => stdClass Object
+                (
+                    [course_name] => Teste Tese
+                    [department] => Category 1
+                    [pdfs_count] => 1
+                    [score] => 67.0000
+                )
+
+            [2] => stdClass Object
+                (
+                    [course_name] => Acessibilidade1
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 43.0000
+                )
+
+            [3] => stdClass Object
+                (
+                    [course_name] => Métodos
+                    [department] => Física
+                    [pdfs_count] => 2
+                    [score] => 36.0000
+                )
+
+        )
+
+    [worst_courses] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [course_name] => UX
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 17.0000
+                )
+
+            [1] => stdClass Object
+                (
+                    [course_name] => acessibilidade
+                    [department] => Category 1
+                    [pdfs_count] => 4
+                    [score] => 23.0000
+                )
+
+            [2] => stdClass Object
+                (
+                    [course_name] => Programação 1-teste
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 29.0000
+                )
+
+            [3] => stdClass Object
+                (
+                    [course_name] => Métodos
+                    [department] => Física
+                    [pdfs_count] => 2
+                    [score] => 36.0000
+                )
+
+        )
+
+    [common_errors] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [error_type] => Figures with alt text
+                    [failure_count] => 10
+                    [total_tests] => 11
+                    [percentage] => 90.9
+                )
+
+            [1] => stdClass Object
+                (
+                    [error_type] => Table With Headers
+                    [failure_count] => 9
+                    [total_tests] => 11
+                    [percentage] => 81.8
+                )
+
+            [2] => stdClass Object
+                (
+                    [error_type] => Lists marked as Lists
+                    [failure_count] => 9
+                    [total_tests] => 11
+                    [percentage] => 81.8
+                )
+
+            [3] => stdClass Object
+                (
+                    [error_type] => Languages match
+                    [failure_count] => 8
+                    [total_tests] => 11
+                    [percentage] => 72.7
+                )
+
+        )
+
+    [tables] => Array
+        (
+            [block_pdfaccessibility_pdf_files] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 11
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 156
+                                    [courseid] => 7
+                                    [userid] => 2
+                                    [filename] => tudo_correto.pdf
+                                    [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+                                    [timecreated] => 1761591887
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 157
+                                    [courseid] => 8
+                                    [userid] => 2
+                                    [filename] => MEU_3.pdf
+                                    [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+                                    [timecreated] => 1761591919
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 158
+                                    [courseid] => 8
+                                    [userid] => 2
+                                    [filename] => MEU_2.pdf
+                                    [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+                                    [timecreated] => 1761591937
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 159
+                                    [courseid] => 5
+                                    [userid] => 2
+                                    [filename] => FP2 (1).pdf
+                                    [filehash] => af2a2db18a37060d2bc54ba0add2f0cb7bf5d3cb
+                                    [timecreated] => 1761591972
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 164
+                                    [courseid] => 9
+                                    [userid] => 2
+                                    [filename] => accessibility_report_2025-10-28_03-39-33.pdf
+                                    [filehash] => e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+                                    [timecreated] => 1761594100
+                                )
+
+                        )
+
+                )
+
+            [block_pdfaccessibility_test_results] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 77
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1096
+                                    [fileid] => 156
+                                    [testname] => Title
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 1097
+                                    [fileid] => 156
+                                    [testname] => Languages match
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 1098
+                                    [fileid] => 156
+                                    [testname] => PDF only image
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 1099
+                                    [fileid] => 156
+                                    [testname] => Lists marked as Lists
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 1100
+                                    [fileid] => 156
+                                    [testname] => Figures with alt text
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                        )
+
+                )
+
+            [block_pdfcounter_trends] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 16
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [courseid] => 2
+                                    [month] => 2025-08
+                                    [progress_value] => 80
+                                    [timecreated] => 1756395802
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 2
+                                    [courseid] => 2
+                                    [month] => 2025-09
+                                    [progress_value] => 43
+                                    [timecreated] => 1756754212
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [courseid] => 2
+                                    [month] => 2025-10
+                                    [progress_value] => 0
+                                    [timecreated] => 1759400759
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 6
+                                    [courseid] => 3
+                                    [month] => 2025-10
+                                    [progress_value] => 75
+                                    [timecreated] => 1759403023
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 7
+                                    [courseid] => 7
+                                    [month] => 2025-10
+                                    [progress_value] => 100
+                                    [timecreated] => 1759925641
+                                )
+
+                        )
+
+                )
+
+            [course] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 10
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [category] => 0
+                                    [sortorder] => 1
+                                    [fullname] => MyMoodleSite
+                                    [shortname] => MyMoodle
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 0
+                                    [format] => site
+                                    [showgrades] => 1
+                                    [newsitems] => 3
+                                    [startdate] => 0
+                                    [enddate] => 0
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1737990193
+                                    [timemodified] => 1737990581
+                                    [requested] => 0
+                                    [enablecompletion] => 0
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 0
+                                    [showcompletionconditions] => 
+                                    [pdfexportfont] => 
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 2
+                                    [category] => 1
+                                    [sortorder] => 10002
+                                    [fullname] => Teste Tese
+                                    [shortname] => Teste
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1741017600
+                                    [enddate] => 1772553600
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1741015600
+                                    [timemodified] => 1741015600
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 3
+                                    [category] => 1
+                                    [sortorder] => 10001
+                                    [fullname] => acessibilidade
+                                    [shortname] => ac
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1756396800
+                                    [enddate] => 1787932800
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1756382583
+                                    [timemodified] => 1756382583
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [category] => 5
+                                    [sortorder] => 30002
+                                    [fullname] => Programação 1-teste
+                                    [shortname] => prog1
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1759939200
+                                    [enddate] => 1791475200
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1759925447
+                                    [timemodified] => 1759925447
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 6
+                                    [category] => 5
+                                    [sortorder] => 30001
+                                    [fullname] => UX
+                                    [shortname] => ux
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1759939200
+                                    [enddate] => 1791475200
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1759925471
+                                    [timemodified] => 1759925471
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                        )
+
+                )
+
+            [course_categories] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 6
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [name] => Category 1
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 10000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1737990193
+                                    [depth] => 1
+                                    [path] => /1
+                                    [theme] => 
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 3
+                                    [name] => Informática
+                                    [idnumber] => 3
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 20000
+                                    [coursecount] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925142
+                                    [depth] => 1
+                                    [path] => /3
+                                    [theme] => 
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 4
+                                    [name] => Física
+                                    [idnumber] => 4
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 50000
+                                    [coursecount] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925167
+                                    [depth] => 1
+                                    [path] => /4
+                                    [theme] => 
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [name] => Tecnologias da Informação
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 3
+                                    [sortorder] => 30000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925418
+                                    [depth] => 2
+                                    [path] => /3/5
+                                    [theme] => 
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 7
+                                    [name] => Engenharia Informática
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 3
+                                    [sortorder] => 40000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925521
+                                    [depth] => 2
+                                    [path] => /3/7
+                                    [theme] => 
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [end_time] => 2025-11-11 20:03:42
+    [end_memory] => 7719136
+    [duration_sec] => 0.2223
+    [memory_used] => 825688
+)
+
+==== DASHBOARD INDEX DEBUG ====
+Array
+(
+    [start_time] => 2025-11-11 20:03:42
+    [start_memory] => 6893448
+    [filters] => Array
+        (
+            [department_id] => 
+            [course_id] => 
+            [discipline_id] => 
+            [page] => 
+        )
+
+    [stats] => Array
+        (
+            [courses_with_pdfs] => 7
+            [total_pdfs] => 11
+            [accessibility_score] => 45
+            [recent_pdfs] => 11
+            [total_tests] => 77
+            [passed_tests] => 27
+            [failed_tests] => 50
+        )
+
+    [total_pdfs_count] => 11
+    [Problems_found] => 44
+    [evolution_data] => Array
+        (
+            [months] => Array
+                (
+                    [0] => Sep
+                    [1] => Oct
+                    [2] => Nov
+                )
+
+            [scores] => Array
+                (
+                    [0] => 43
+                    [1] => 43.9
+                    [2] => 45
+                )
+
+            [current_score] => 45
+            [previous_score] => 43.9
+        )
+
+    [filtered_data_count] => 7
+    [best_courses] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [course_name] => Cadeira engenharia
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 100.0000
+                )
+
+            [1] => stdClass Object
+                (
+                    [course_name] => Teste Tese
+                    [department] => Category 1
+                    [pdfs_count] => 1
+                    [score] => 67.0000
+                )
+
+            [2] => stdClass Object
+                (
+                    [course_name] => Acessibilidade1
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 43.0000
+                )
+
+            [3] => stdClass Object
+                (
+                    [course_name] => Métodos
+                    [department] => Física
+                    [pdfs_count] => 2
+                    [score] => 36.0000
+                )
+
+        )
+
+    [worst_courses] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [course_name] => UX
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 17.0000
+                )
+
+            [1] => stdClass Object
+                (
+                    [course_name] => acessibilidade
+                    [department] => Category 1
+                    [pdfs_count] => 4
+                    [score] => 23.0000
+                )
+
+            [2] => stdClass Object
+                (
+                    [course_name] => Programação 1-teste
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 29.0000
+                )
+
+            [3] => stdClass Object
+                (
+                    [course_name] => Métodos
+                    [department] => Física
+                    [pdfs_count] => 2
+                    [score] => 36.0000
+                )
+
+        )
+
+    [common_errors] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [error_type] => Figures with alt text
+                    [failure_count] => 10
+                    [total_tests] => 11
+                    [percentage] => 90.9
+                )
+
+            [1] => stdClass Object
+                (
+                    [error_type] => Table With Headers
+                    [failure_count] => 9
+                    [total_tests] => 11
+                    [percentage] => 81.8
+                )
+
+            [2] => stdClass Object
+                (
+                    [error_type] => Lists marked as Lists
+                    [failure_count] => 9
+                    [total_tests] => 11
+                    [percentage] => 81.8
+                )
+
+            [3] => stdClass Object
+                (
+                    [error_type] => Languages match
+                    [failure_count] => 8
+                    [total_tests] => 11
+                    [percentage] => 72.7
+                )
+
+        )
+
+    [tables] => Array
+        (
+            [block_pdfaccessibility_pdf_files] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 11
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 156
+                                    [courseid] => 7
+                                    [userid] => 2
+                                    [filename] => tudo_correto.pdf
+                                    [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+                                    [timecreated] => 1761591887
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 157
+                                    [courseid] => 8
+                                    [userid] => 2
+                                    [filename] => MEU_3.pdf
+                                    [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+                                    [timecreated] => 1761591919
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 158
+                                    [courseid] => 8
+                                    [userid] => 2
+                                    [filename] => MEU_2.pdf
+                                    [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+                                    [timecreated] => 1761591937
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 159
+                                    [courseid] => 5
+                                    [userid] => 2
+                                    [filename] => FP2 (1).pdf
+                                    [filehash] => af2a2db18a37060d2bc54ba0add2f0cb7bf5d3cb
+                                    [timecreated] => 1761591972
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 164
+                                    [courseid] => 9
+                                    [userid] => 2
+                                    [filename] => accessibility_report_2025-10-28_03-39-33.pdf
+                                    [filehash] => e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+                                    [timecreated] => 1761594100
+                                )
+
+                        )
+
+                )
+
+            [block_pdfaccessibility_test_results] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 77
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1096
+                                    [fileid] => 156
+                                    [testname] => Title
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 1097
+                                    [fileid] => 156
+                                    [testname] => Languages match
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 1098
+                                    [fileid] => 156
+                                    [testname] => PDF only image
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 1099
+                                    [fileid] => 156
+                                    [testname] => Lists marked as Lists
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 1100
+                                    [fileid] => 156
+                                    [testname] => Figures with alt text
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                        )
+
+                )
+
+            [block_pdfcounter_trends] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 16
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [courseid] => 2
+                                    [month] => 2025-08
+                                    [progress_value] => 80
+                                    [timecreated] => 1756395802
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 2
+                                    [courseid] => 2
+                                    [month] => 2025-09
+                                    [progress_value] => 43
+                                    [timecreated] => 1756754212
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [courseid] => 2
+                                    [month] => 2025-10
+                                    [progress_value] => 0
+                                    [timecreated] => 1759400759
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 6
+                                    [courseid] => 3
+                                    [month] => 2025-10
+                                    [progress_value] => 75
+                                    [timecreated] => 1759403023
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 7
+                                    [courseid] => 7
+                                    [month] => 2025-10
+                                    [progress_value] => 100
+                                    [timecreated] => 1759925641
+                                )
+
+                        )
+
+                )
+
+            [course] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 10
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [category] => 0
+                                    [sortorder] => 1
+                                    [fullname] => MyMoodleSite
+                                    [shortname] => MyMoodle
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 0
+                                    [format] => site
+                                    [showgrades] => 1
+                                    [newsitems] => 3
+                                    [startdate] => 0
+                                    [enddate] => 0
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1737990193
+                                    [timemodified] => 1737990581
+                                    [requested] => 0
+                                    [enablecompletion] => 0
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 0
+                                    [showcompletionconditions] => 
+                                    [pdfexportfont] => 
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 2
+                                    [category] => 1
+                                    [sortorder] => 10002
+                                    [fullname] => Teste Tese
+                                    [shortname] => Teste
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1741017600
+                                    [enddate] => 1772553600
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1741015600
+                                    [timemodified] => 1741015600
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 3
+                                    [category] => 1
+                                    [sortorder] => 10001
+                                    [fullname] => acessibilidade
+                                    [shortname] => ac
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1756396800
+                                    [enddate] => 1787932800
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1756382583
+                                    [timemodified] => 1756382583
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [category] => 5
+                                    [sortorder] => 30002
+                                    [fullname] => Programação 1-teste
+                                    [shortname] => prog1
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1759939200
+                                    [enddate] => 1791475200
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1759925447
+                                    [timemodified] => 1759925447
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 6
+                                    [category] => 5
+                                    [sortorder] => 30001
+                                    [fullname] => UX
+                                    [shortname] => ux
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1759939200
+                                    [enddate] => 1791475200
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1759925471
+                                    [timemodified] => 1759925471
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                        )
+
+                )
+
+            [course_categories] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 6
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [name] => Category 1
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 10000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1737990193
+                                    [depth] => 1
+                                    [path] => /1
+                                    [theme] => 
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 3
+                                    [name] => Informática
+                                    [idnumber] => 3
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 20000
+                                    [coursecount] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925142
+                                    [depth] => 1
+                                    [path] => /3
+                                    [theme] => 
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 4
+                                    [name] => Física
+                                    [idnumber] => 4
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 50000
+                                    [coursecount] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925167
+                                    [depth] => 1
+                                    [path] => /4
+                                    [theme] => 
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [name] => Tecnologias da Informação
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 3
+                                    [sortorder] => 30000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925418
+                                    [depth] => 2
+                                    [path] => /3/5
+                                    [theme] => 
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 7
+                                    [name] => Engenharia Informática
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 3
+                                    [sortorder] => 40000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925521
+                                    [depth] => 2
+                                    [path] => /3/7
+                                    [theme] => 
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [end_time] => 2025-11-11 20:03:42
+    [end_memory] => 7719392
+    [duration_sec] => 0.256
+    [memory_used] => 825944
+)
+
+==== DASHBOARD INDEX DEBUG ====
+Array
+(
+    [start_time] => 2025-11-11 20:03:42
+    [start_memory] => 6893448
+    [filters] => Array
+        (
+            [department_id] => 
+            [course_id] => 
+            [discipline_id] => 
+            [page] => 
+        )
+
+    [stats] => Array
+        (
+            [courses_with_pdfs] => 7
+            [total_pdfs] => 11
+            [accessibility_score] => 45
+            [recent_pdfs] => 11
+            [total_tests] => 77
+            [passed_tests] => 27
+            [failed_tests] => 50
+        )
+
+    [total_pdfs_count] => 11
+    [Problems_found] => 44
+    [evolution_data] => Array
+        (
+            [months] => Array
+                (
+                    [0] => Sep
+                    [1] => Oct
+                    [2] => Nov
+                )
+
+            [scores] => Array
+                (
+                    [0] => 43
+                    [1] => 43.9
+                    [2] => 45
+                )
+
+            [current_score] => 45
+            [previous_score] => 43.9
+        )
+
+    [filtered_data_count] => 7
+    [best_courses] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [course_name] => Cadeira engenharia
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 100.0000
+                )
+
+            [1] => stdClass Object
+                (
+                    [course_name] => Teste Tese
+                    [department] => Category 1
+                    [pdfs_count] => 1
+                    [score] => 67.0000
+                )
+
+            [2] => stdClass Object
+                (
+                    [course_name] => Acessibilidade1
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 43.0000
+                )
+
+            [3] => stdClass Object
+                (
+                    [course_name] => Métodos
+                    [department] => Física
+                    [pdfs_count] => 2
+                    [score] => 36.0000
+                )
+
+        )
+
+    [worst_courses] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [course_name] => UX
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 17.0000
+                )
+
+            [1] => stdClass Object
+                (
+                    [course_name] => acessibilidade
+                    [department] => Category 1
+                    [pdfs_count] => 4
+                    [score] => 23.0000
+                )
+
+            [2] => stdClass Object
+                (
+                    [course_name] => Programação 1-teste
+                    [department] => Informática
+                    [pdfs_count] => 1
+                    [score] => 29.0000
+                )
+
+            [3] => stdClass Object
+                (
+                    [course_name] => Métodos
+                    [department] => Física
+                    [pdfs_count] => 2
+                    [score] => 36.0000
+                )
+
+        )
+
+    [common_errors] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [error_type] => Figures with alt text
+                    [failure_count] => 10
+                    [total_tests] => 11
+                    [percentage] => 90.9
+                )
+
+            [1] => stdClass Object
+                (
+                    [error_type] => Table With Headers
+                    [failure_count] => 9
+                    [total_tests] => 11
+                    [percentage] => 81.8
+                )
+
+            [2] => stdClass Object
+                (
+                    [error_type] => Lists marked as Lists
+                    [failure_count] => 9
+                    [total_tests] => 11
+                    [percentage] => 81.8
+                )
+
+            [3] => stdClass Object
+                (
+                    [error_type] => Languages match
+                    [failure_count] => 8
+                    [total_tests] => 11
+                    [percentage] => 72.7
+                )
+
+        )
+
+    [tables] => Array
+        (
+            [block_pdfaccessibility_pdf_files] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 11
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 156
+                                    [courseid] => 7
+                                    [userid] => 2
+                                    [filename] => tudo_correto.pdf
+                                    [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+                                    [timecreated] => 1761591887
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 157
+                                    [courseid] => 8
+                                    [userid] => 2
+                                    [filename] => MEU_3.pdf
+                                    [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+                                    [timecreated] => 1761591919
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 158
+                                    [courseid] => 8
+                                    [userid] => 2
+                                    [filename] => MEU_2.pdf
+                                    [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+                                    [timecreated] => 1761591937
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 159
+                                    [courseid] => 5
+                                    [userid] => 2
+                                    [filename] => FP2 (1).pdf
+                                    [filehash] => af2a2db18a37060d2bc54ba0add2f0cb7bf5d3cb
+                                    [timecreated] => 1761591972
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 164
+                                    [courseid] => 9
+                                    [userid] => 2
+                                    [filename] => accessibility_report_2025-10-28_03-39-33.pdf
+                                    [filehash] => e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+                                    [timecreated] => 1761594100
+                                )
+
+                        )
+
+                )
+
+            [block_pdfaccessibility_test_results] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 77
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1096
+                                    [fileid] => 156
+                                    [testname] => Title
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 1097
+                                    [fileid] => 156
+                                    [testname] => Languages match
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 1098
+                                    [fileid] => 156
+                                    [testname] => PDF only image
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 1099
+                                    [fileid] => 156
+                                    [testname] => Lists marked as Lists
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 1100
+                                    [fileid] => 156
+                                    [testname] => Figures with alt text
+                                    [result] => pass
+                                    [errorpages] => 
+                                    [timecreated] => 1761591887
+                                )
+
+                        )
+
+                )
+
+            [block_pdfcounter_trends] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 16
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [courseid] => 2
+                                    [month] => 2025-08
+                                    [progress_value] => 80
+                                    [timecreated] => 1756395802
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 2
+                                    [courseid] => 2
+                                    [month] => 2025-09
+                                    [progress_value] => 43
+                                    [timecreated] => 1756754212
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [courseid] => 2
+                                    [month] => 2025-10
+                                    [progress_value] => 0
+                                    [timecreated] => 1759400759
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 6
+                                    [courseid] => 3
+                                    [month] => 2025-10
+                                    [progress_value] => 75
+                                    [timecreated] => 1759403023
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 7
+                                    [courseid] => 7
+                                    [month] => 2025-10
+                                    [progress_value] => 100
+                                    [timecreated] => 1759925641
+                                )
+
+                        )
+
+                )
+
+            [course] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 10
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [category] => 0
+                                    [sortorder] => 1
+                                    [fullname] => MyMoodleSite
+                                    [shortname] => MyMoodle
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 0
+                                    [format] => site
+                                    [showgrades] => 1
+                                    [newsitems] => 3
+                                    [startdate] => 0
+                                    [enddate] => 0
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1737990193
+                                    [timemodified] => 1737990581
+                                    [requested] => 0
+                                    [enablecompletion] => 0
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 0
+                                    [showcompletionconditions] => 
+                                    [pdfexportfont] => 
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 2
+                                    [category] => 1
+                                    [sortorder] => 10002
+                                    [fullname] => Teste Tese
+                                    [shortname] => Teste
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1741017600
+                                    [enddate] => 1772553600
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1741015600
+                                    [timemodified] => 1741015600
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 3
+                                    [category] => 1
+                                    [sortorder] => 10001
+                                    [fullname] => acessibilidade
+                                    [shortname] => ac
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1756396800
+                                    [enddate] => 1787932800
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1756382583
+                                    [timemodified] => 1756382583
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [category] => 5
+                                    [sortorder] => 30002
+                                    [fullname] => Programação 1-teste
+                                    [shortname] => prog1
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1759939200
+                                    [enddate] => 1791475200
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1759925447
+                                    [timemodified] => 1759925447
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 6
+                                    [category] => 5
+                                    [sortorder] => 30001
+                                    [fullname] => UX
+                                    [shortname] => ux
+                                    [idnumber] => 
+                                    [summary] => 
+                                    [summaryformat] => 1
+                                    [format] => topics
+                                    [showgrades] => 1
+                                    [newsitems] => 5
+                                    [startdate] => 1759939200
+                                    [enddate] => 1791475200
+                                    [relativedatesmode] => 0
+                                    [marker] => 0
+                                    [maxbytes] => 0
+                                    [legacyfiles] => 0
+                                    [showreports] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [downloadcontent] => 
+                                    [groupmode] => 0
+                                    [groupmodeforce] => 0
+                                    [defaultgroupingid] => 0
+                                    [lang] => 
+                                    [calendartype] => 
+                                    [theme] => 
+                                    [timecreated] => 1759925471
+                                    [timemodified] => 1759925471
+                                    [requested] => 0
+                                    [enablecompletion] => 1
+                                    [completionnotify] => 0
+                                    [cacherev] => 1762862566
+                                    [originalcourseid] => 
+                                    [showactivitydates] => 1
+                                    [showcompletionconditions] => 1
+                                    [pdfexportfont] => 
+                                )
+
+                        )
+
+                )
+
+            [course_categories] => Array
+                (
+                    [exists] => YES
+                    [total_records] => 6
+                    [sample] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [id] => 1
+                                    [name] => Category 1
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 10000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1737990193
+                                    [depth] => 1
+                                    [path] => /1
+                                    [theme] => 
+                                )
+
+                            [1] => stdClass Object
+                                (
+                                    [id] => 3
+                                    [name] => Informática
+                                    [idnumber] => 3
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 20000
+                                    [coursecount] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925142
+                                    [depth] => 1
+                                    [path] => /3
+                                    [theme] => 
+                                )
+
+                            [2] => stdClass Object
+                                (
+                                    [id] => 4
+                                    [name] => Física
+                                    [idnumber] => 4
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 0
+                                    [sortorder] => 50000
+                                    [coursecount] => 0
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925167
+                                    [depth] => 1
+                                    [path] => /4
+                                    [theme] => 
+                                )
+
+                            [3] => stdClass Object
+                                (
+                                    [id] => 5
+                                    [name] => Tecnologias da Informação
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 3
+                                    [sortorder] => 30000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925418
+                                    [depth] => 2
+                                    [path] => /3/5
+                                    [theme] => 
+                                )
+
+                            [4] => stdClass Object
+                                (
+                                    [id] => 7
+                                    [name] => Engenharia Informática
+                                    [idnumber] => 
+                                    [description] => 
+                                    [descriptionformat] => 1
+                                    [parent] => 3
+                                    [sortorder] => 40000
+                                    [coursecount] => 2
+                                    [visible] => 1
+                                    [visibleold] => 1
+                                    [timemodified] => 1759925521
+                                    [depth] => 2
+                                    [path] => /3/7
+                                    [theme] => 
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [end_time] => 2025-11-11 20:03:42
+    [end_memory] => 7719392
+    [duration_sec] => 0.2575
+    [memory_used] => 825944
+)
+

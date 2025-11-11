@@ -5,7 +5,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025100653;
+$plugin->version   = 2025100662;
 $plugin->requires  = 2022112800;
 $plugin->component = 'tool_accessibilitydashboard';
 $plugin->maturity  = MATURITY_STABLE;
