@@ -47,7 +47,7 @@ class block_pdfaccessibility extends block_base {
             $this->content->text .= '<div id="analyzer-result" style="margin-top: 1em; color: green;">PDFs encontrados:</div>';
             foreach ($pdfs as $file) {
                 $filename = $file->get_filename();
-                $filepath = $file->get_pathname();
+                $filepath = $CFG->dataroot . '/filedir/' . substr($file->get_contenthash(), 0, 2) . '/' . substr($file->get_contenthash(), 2, 2) . '/' . $file->get_contenthash();
                 // Aqui você pode chamar sua função de avaliação do PDF e exibir o resultado detalhado
                 $avaliacao = '';
                 if (function_exists('block_pdfaccessibility_avaliar_pdf')) {
