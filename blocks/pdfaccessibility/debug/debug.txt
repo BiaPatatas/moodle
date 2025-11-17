@@ -1,0 +1,5 @@
+
+[2025-11-17 23:32:35] Página de upload detectada (modedit.php)
+[2025-11-17 23:32:35] Sem contexto de módulo na página de upload.
+[2025-11-17 23:32:47] Página de upload detectada (modedit.php)
+[2025-11-17 23:32:47] Sem contexto de módulo na página de upload.

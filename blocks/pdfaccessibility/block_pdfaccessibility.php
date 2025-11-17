@@ -25,13 +25,67 @@ class block_pdfaccessibility extends block_base {
     }
 
     public function get_content() {
-            global $USER;
+        global $COURSE, $DB, $CFG, $USER, $PAGE;
+        $contextid = $COURSE->id;
+        $ismodedit = (strpos($_SERVER['SCRIPT_NAME'], 'modedit.php') !== false);
+        $this->content = new stdClass();
+        if ($ismodedit) {
+            // Se já existe contexto de módulo, avalia PDFs normalmente
+            if (isset($PAGE->cm) && isset($PAGE->cm->context)) {
+                $contextid = $PAGE->cm->context->id;
+                $context_exists = $DB->record_exists('context', array('id' => $contextid));
+                if ($context_exists) {
+                    require_once(__DIR__ . '/lib.php');
+                    $pdfs = block_pdfaccessibility_get_pdfs_from_context($contextid);
+                    if (count($pdfs) > 0) {
+                        $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: green;">PDFs encontrados:</div>';
+                        foreach ($pdfs as $file) {
+                            if (!is_object($file)) continue;
+                            $filename = $file->get_filename();
+                            $filepath = $CFG->dataroot . '/filedir/' . substr($file->get_contenthash(), 0, 2) . '/' . substr($file->get_contenthash(), 2, 2) . '/' . $file->get_contenthash();
+                            $avaliacao = function_exists('block_pdfaccessibility_avaliar_pdf') ? block_pdfaccessibility_avaliar_pdf($filepath, $filename) : '<div style="margin-bottom:10px;"><strong>' . htmlspecialchars($filename) . '</strong><br><span style="color:gray;">(Exemplo: aqui entraria o relatório de acessibilidade deste PDF)</span></div>';
+                            $this->content->text .= $avaliacao;
+                        }
+                    } else {
+                        $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: red;">Nenhum PDF encontrado.</div>';
+                    }
+                    $this->content->footer = '';
+                    return $this->content;
+                }
+            }
+            // Se não existe contexto de módulo, buscar PDFs na área de rascunho do usuário
+            require_once(__DIR__ . '/lib.php');
+            
+            $pdfs = [];
+         
+            if (count($pdfs) > 0) {
+                $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: green;">PDFs em rascunho:</div>';
+                foreach ($pdfs as $file) {
+                    $filename = $file->get_filename();
+                    $filepath = $CFG->dataroot . '/filedir/' . substr($file->get_contenthash(), 0, 2) . '/' . substr($file->get_contenthash(), 2, 2) . '/' . $file->get_contenthash();
+                    $avaliacao = function_exists('block_pdfaccessibility_avaliar_pdf') ? block_pdfaccessibility_avaliar_pdf($filepath, $filename) : '<div style="margin-bottom:10px;"><strong>' . htmlspecialchars($filename) . '</strong><br><span style="color:gray;">(Exemplo: aqui entraria o relatório de acessibilidade deste PDF)</span></div>';
+                    $this->content->text .= $avaliacao;
+                }
+            } else {
+                $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: orange;">Add a PDF to be evaluated</div>';
+            }
+            $this->content->footer = '';
+            return $this->content;
+        }
+                // Verificar se o contextid existe na base de dados antes de buscar PDFs
+                $context_exists = $DB->record_exists('context', array('id' => $contextid));
+                $this->pdfaccessibility_debug_log('Contexto existe na base de dados? ' . ($context_exists ? 'SIM' : 'NÃO'));
+                if (!$context_exists) {
+                    $this->content = new stdClass();
+                    $this->content->text = '<div style="color:red;">Contexto não encontrado na base de dados. O bloco só funciona em páginas de curso ou recurso já criados.</div>';
+                    return $this->content;
+                }
+            
             $this->pdfaccessibility_debug_log('Usuário atual: ' . (isset($USER->id) ? $USER->id : 'N/A'));
         $this->pdfaccessibility_debug_log('DEBUG TESTE: método get_content chamado');
-        global $COURSE, $DB, $CFG;
+        
                
-                global $PAGE;
-                $contextid = $COURSE->id;
+                
                 if (isset($PAGE->cm) && isset($PAGE->cm->context)) {
                     $this->pdfaccessibility_debug_log('Contexto de módulo detectado: cmid=' . $PAGE->cm->id . ', contextid=' . $PAGE->cm->context->id);
                     $contextid = $PAGE->cm->context->id;
@@ -123,12 +177,13 @@ class block_pdfaccessibility extends block_base {
      * @return boolean
      */
     public function applicable_formats() {
+        // Permite o bloco em páginas de curso, módulos e edição de módulos
         return array(
             'course-view' => true,
-            'site' => false,
             'mod' => true,
-            'my' => false,
-            'admin' => true,
+            'mod-edit' => true,
+            'site' => false,
+            'my' => false
         );
     }
     
