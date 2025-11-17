@@ -27,7 +27,18 @@ class block_pdfaccessibility extends block_base {
     public function get_content() {
             global $USER;
             $this->pdfaccessibility_debug_log('Usuário atual: ' . (isset($USER->id) ? $USER->id : 'N/A'));
+        $this->pdfaccessibility_debug_log('DEBUG TESTE: método get_content chamado');
         global $COURSE, $DB, $CFG;
+               
+                global $PAGE;
+                $contextid = $COURSE->id;
+                if (isset($PAGE->cm) && isset($PAGE->cm->context)) {
+                    $this->pdfaccessibility_debug_log('Contexto de módulo detectado: cmid=' . $PAGE->cm->id . ', contextid=' . $PAGE->cm->context->id);
+                    $contextid = $PAGE->cm->context->id;
+                } else {
+                    $this->pdfaccessibility_debug_log('Usando contexto do curso: contextid=' . $contextid);
+                }
+                $this->pdfaccessibility_debug_log('DEBUG CONTEXTID: ' . $contextid);
         $this->pdfaccessibility_debug_log('Início do get_content');
         $this->pdfaccessibility_debug_log('Início do get_content');
         $this->pdfaccessibility_debug_log('COURSE id: ' . (isset($COURSE->id) ? $COURSE->id : 'N/A'));
@@ -60,6 +71,7 @@ class block_pdfaccessibility extends block_base {
         else {
     $this->pdfaccessibility_debug_log('Usando contexto do curso: contextid=' . $contextid);
 }
+        $this->pdfaccessibility_debug_log('Contextid usado para busca de PDFs: ' . $contextid);
         $pdfs = block_pdfaccessibility_get_pdfs_from_context($contextid);
 
         $this->pdfaccessibility_debug_log('PDFs encontrados: ' . count($pdfs));
