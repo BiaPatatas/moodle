@@ -1,11 +1,11 @@
 {
-    "timestamp": "2025-11-15 05:50:37",
-    "filename": "accessibility_report_2025-11-13_14-33-39.pdf",
-    "filesize": "146812",
-    "filepath": "C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf4E7A.tmp.pdf",
+    "timestamp": "2025-11-17 19:17:59",
+    "filename": "Cap12-Estruturas Lineares.pdf",
+    "filesize": "1077660",
+    "filepath": "C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf3255.tmp.pdf",
     "file_exists": true,
     "script_path": "C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py",
     "script_exists": true,
-    "python_command": "python3 \"C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py\" \"C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf4E7A.tmp.pdf\"",
+    "python_command": "python3 \"C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py\" \"C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf3255.tmp.pdf\"",
     "cwd": "C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax"
 }
