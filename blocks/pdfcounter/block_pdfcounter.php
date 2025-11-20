@@ -91,11 +91,16 @@ class block_pdfcounter extends block_base {
                     $pdfrecord->courseid = $COURSE->id;
                     $pdfrecord->userid = $USER->id;
                     $pdfrecord->filehash = $filehash;
-                    $pdfrecord->filename = $file->filename;
+                    // Remove duplo .pdf do nome
+                    $filename = $file->filename;
+                    if (substr_count($filename, '.pdf') > 1) {
+                        $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
+                    }
+                    $pdfrecord->filename = $filename;
                     $pdfrecord->timecreated = time();
                     $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
                     pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
-                    if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] PDF evaluated and stored: {$file->filename}\n");
+                    if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] PDF evaluated and stored: {$filename}\n");
                 }
             }
         }
@@ -169,6 +174,10 @@ foreach ($pagelinks as $plink) {
     // Tenta obter o arquivo local se for pluginfile.php ou @@PLUGINFILE@@
     $filehash = null;
     $filename = basename($plink['url']);
+    // Remove duplo .pdf do nome
+    if (substr_count($filename, '.pdf') > 1) {
+        $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
+    }
     $pluginfile_pattern = '/(@@PLUGINFILE@@|\/pluginfile\.php\/)/';
     if (preg_match($pluginfile_pattern, $plink['url'])) {
         // Buscar o arquivo pelo nome e contexto
@@ -234,6 +243,10 @@ foreach ($urllinks as $ulink) {
     fwrite($debuglog, "[mod_url] Evaluating link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
     $filehash = null;
     $filename = basename($ulink['url']);
+ 
+    if (substr_count($filename, '.pdf') > 1) {
+        $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
+    }
     // Tenta obter o arquivo local se for pluginfile.php
     if (strpos($ulink['url'], '/pluginfile.php/') !== false) {
         $fsql = "SELECT contenthash FROM {files} WHERE filename = :filename AND contextid = :contextid";
@@ -635,10 +648,23 @@ foreach ($urllinks as $ulink) {
                 <div style="margin-top:10px; max-height: 200px; overflow-y: auto;">';
                 
         foreach ($pdf_issues as $issue) {
-            $download_url = new moodle_url('/blocks/pdfcounter/download_report.php', [
-                'filename' => urlencode($issue['filename']),
+          
+            $filename = $issue['filename'];
+            if (substr_count($filename, '.pdf') > 1) {
+                $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
+            }
+            $params = [
+                'filename' => urlencode($filename),
                 'courseid' => $COURSE->id
-            ]);
+            ];
+            // Se for PDF externo (hash não igual ao de arquivos locais), adiciona filehash
+            if (isset($issue['fileid'])) {
+                $pdfrec = $DB->get_record('block_pdfaccessibility_pdf_files', ['id' => $issue['fileid']]);
+                if ($pdfrec && !empty($pdfrec->filehash)) {
+                    $params['filehash'] = $pdfrec->filehash;
+                }
+            }
+            $download_url = new moodle_url('/blocks/pdfcounter/download_report.php', $params);
             $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
                 $issue['pass_count'],
                 $issue['fail_count'],
@@ -654,7 +680,7 @@ foreach ($urllinks as $ulink) {
                     <div style="font-size: 0.85rem; font-weight: 500; color: #2e3032ff; margin-bottom: 4px; 
                                overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" 
                          title="' . htmlspecialchars($issue['display_name']) . '">
-                        <i class="fa-solid fa-file-pdf"></i> ' . htmlspecialchars($issue['display_name']) . '.pdf ' .'
+                        <i class="fa-solid fa-file-pdf"></i> ' . htmlspecialchars($issue['display_name']) .'
                     </div>
                     <div style="font-size: 0.8rem; color: #000000ff; margin-bottom: 6px;">
                         <strong>' . $failed_tests . ' of ' . $applicable_tests . ' tests failed</strong>

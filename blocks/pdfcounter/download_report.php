@@ -24,10 +24,33 @@ require_capability('moodle/course:view', $context);
 // Buscar o contenthash do ficheiro
 
 // Buscar o registro do PDF na tabela de acessibilidade para este curso
+
 $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
     'filename' => $filename,
     'courseid' => $courseid
 ]);
+// Se não encontrar por filename, tenta buscar por filehash (caso de PDFs externos ou nomes duplicados)
+if (!$pdfrecord) {
+    // Buscar todos os PDFs do curso com esse nome
+    $pdfs = $DB->get_records('block_pdfaccessibility_pdf_files', [
+        'filename' => $filename,
+        'courseid' => $courseid
+    ]);
+    if ($pdfs && count($pdfs) > 0) {
+        // Pega o primeiro (ou pode mostrar lista se quiser)
+        $pdfrecord = reset($pdfs);
+    }
+}
+if (!$pdfrecord) {
+    // Tenta buscar por filehash se vier como parâmetro (para links externos)
+    $filehash = optional_param('filehash', '', PARAM_RAW);
+    if (!empty($filehash)) {
+        $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
+            'filehash' => $filehash,
+            'courseid' => $courseid
+        ]);
+    }
+}
 if (!$pdfrecord) {
     throw new moodle_exception('reportnotfound', 'error', '', 'Relatório não encontrado para este curso');
 }
