@@ -22,29 +22,10 @@ $context = context_course::instance($courseid);
 require_capability('moodle/course:view', $context);
 
 // Buscar o contenthash do ficheiro
-$sql = "SELECT f.contenthash
-        FROM {course_modules} cm
-        JOIN {modules} m ON m.id = cm.module
-        JOIN {resource} r ON r.id = cm.instance
-        JOIN {context} ctx ON ctx.instanceid = cm.id
-        JOIN {files} f ON f.contextid = ctx.id
-        WHERE cm.course = :courseid
-        AND cm.deletioninprogress = 0
-        AND cm.visible = 1
-        AND m.name = 'resource'
-        AND f.component = 'mod_resource'
-        AND f.filearea = 'content'
-        AND f.filename = :filename";
-$params = ['courseid' => $courseid, 'filename' => $filename];
-$contenthash = $DB->get_field_sql($sql, $params);
-
-if (!$contenthash) {
-    throw new moodle_exception('filenotfound', 'error', '', 'PDF não encontrado');
-}
 
 // Buscar o registro do PDF na tabela de acessibilidade para este curso
 $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-    'filehash' => $contenthash,
+    'filename' => $filename,
     'courseid' => $courseid
 ]);
 if (!$pdfrecord) {
