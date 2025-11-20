@@ -24,6 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025030706;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2025030728;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2024100100;        // Requires this Moodle version.
 $plugin->component = 'block_pdfcounter'; // Full name of the plugin (used for diagnostics)
