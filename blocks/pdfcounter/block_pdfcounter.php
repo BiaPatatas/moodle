@@ -171,10 +171,9 @@ foreach ($urls as $url) {
 // Avaliar e guardar PDFs encontrados em links de páginas mod_page
 foreach ($pagelinks as $plink) {
     fwrite($debuglog, "[mod_page] Evaluating link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
-    // Tenta obter o arquivo local se for pluginfile.php ou @@PLUGINFILE@@
+    // Tenta obter o arquivo local se for pluginfile.php ou @@PLUGINFILE@@, ou baixar se for externo
     $filehash = null;
     $filename = basename($plink['url']);
-    // Remove duplo .pdf do nome
     if (substr_count($filename, '.pdf') > 1) {
         $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
     }
@@ -193,7 +192,55 @@ foreach ($pagelinks as $plink) {
             if ($debuglog !== false) fwrite($debuglog, "[mod_page] No filehash found for pluginfile link: $filename\n");
         }
     }
-    // Só avalia se não estiver na base de dados
+    // Se for link externo (http/https), faz download e avalia
+    if (!$filehash && preg_match('/^https?:\/\/.+\.pdf($|\?)/i', $plink['url'])) {
+        $tempfile = tempnam(sys_get_temp_dir(), 'pdfext_');
+        $downloaded = @file_put_contents($tempfile, @file_get_contents($plink['url']));
+        if ($downloaded && file_exists($tempfile)) {
+            $temphash = sha1_file($tempfile);
+            $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
+                'filehash' => $temphash,
+                'courseid' => $COURSE->id
+            ]);
+            if ($pdfrecord) {
+                if ($debuglog !== false) fwrite($debuglog, "[mod_page] External PDF already in DB: $filename | hash: $temphash\n");
+            } else {
+                if ($debuglog !== false) fwrite($debuglog, "[mod_page] Downloaded external PDF to $tempfile\n");
+                $python_commands = ['python3', 'python', 'py', 'python.exe'];
+                $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
+                $result = null;
+                foreach ($python_commands as $python) {
+                    $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($tempfile);
+                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] Running: $command\n");
+                    $output = shell_exec($command . ' 2>&1');
+                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] Output: $output\n");
+                    $decoded = json_decode($output, true);
+                    if ($decoded && is_array($decoded)) {
+                        $result = $decoded;
+                        break;
+                    }
+                }
+                if (!$result || !is_array($result)) {
+                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] Python analysis failed for $tempfile\n");
+                } else {
+                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] External PDF evaluated: {$plink['url']}\n");
+                    $pdfrecord = new stdClass();
+                    $pdfrecord->courseid = $COURSE->id;
+                    $pdfrecord->userid = $USER->id;
+                    $pdfrecord->filehash = $temphash;
+                    $pdfrecord->filename = $filename;
+                    $pdfrecord->timecreated = time();
+                    $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
+                    pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
+                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] External PDF saved in DB: $filename | hash: $temphash\n");
+                }
+            }
+            @unlink($tempfile);
+        } else {
+            if ($debuglog !== false) fwrite($debuglog, "[mod_page] Failed to download external PDF: {$plink['url']}\n");
+        }
+    }
+    // Só avalia se não estiver na base de dados (para arquivos locais)
     if ($filehash) {
         $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
             'filehash' => $filehash,
