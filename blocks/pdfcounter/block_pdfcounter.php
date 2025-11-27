@@ -179,17 +179,51 @@ foreach ($pagelinks as $plink) {
     }
     $pluginfile_pattern = '/(@@PLUGINFILE@@|\/pluginfile\.php\/)/';
     if (preg_match($pluginfile_pattern, $plink['url'])) {
-        // Buscar o arquivo pelo nome e contexto
+        // Buscar o arquivo pelo nome e contexto (flexível)
+        $filename_decoded = urldecode($filename);
         $fsql = "SELECT contenthash FROM {files} WHERE filename = :filename AND contextid = :contextid";
         $frec = $DB->get_record_sql($fsql, [
-            'filename' => $filename,
+            'filename' => $filename_decoded,
             'contextid' => $plink['contextid']
         ]);
         if ($frec) {
             $filehash = $frec->contenthash;
-            if ($debuglog !== false) fwrite($debuglog, "[mod_page] Found filehash for pluginfile: $filehash\n");
+            if ($debuglog !== false) fwrite($debuglog, "[mod_page] Found filehash for pluginfile (decoded): $filehash\n");
         } else {
-            if ($debuglog !== false) fwrite($debuglog, "[mod_page] No filehash found for pluginfile link: $filename\n");
+            // Busca por LIKE se não encontrar pelo nome exato
+            $fsql_like = "SELECT filename, contenthash FROM {files} WHERE filename LIKE :like AND contextid = :contextid";
+            $like = '%' . $filename_decoded . '%';
+            $frec_like = $DB->get_records_sql($fsql_like, [
+                'like' => $like,
+                'contextid' => $plink['contextid']
+            ]);
+            if ($frec_like && count($frec_like) > 0) {
+                // Pega o primeiro
+                $first = reset($frec_like);
+                $filehash = $first->contenthash;
+                if ($debuglog !== false) {
+                    fwrite($debuglog, "[mod_page] Found filehash by LIKE: $filehash (filename: {$first->filename})\n");
+                    fwrite($debuglog, "[mod_page] Available filenames in context: ");
+                    foreach ($frec_like as $opt) {
+                        fwrite($debuglog, "{$opt->filename}, ");
+                    }
+                    fwrite($debuglog, "\n");
+                }
+            } else {
+                // Loga todos os arquivos PDF disponíveis no contexto
+                $fsql_all = "SELECT filename FROM {files} WHERE filename LIKE '%.pdf' AND contextid = :contextid";
+                $frec_all = $DB->get_records_sql($fsql_all, [
+                    'contextid' => $plink['contextid']
+                ]);
+                if ($debuglog !== false) {
+                    fwrite($debuglog, "[mod_page] No filehash found for pluginfile link: $filename_decoded\n");
+                    fwrite($debuglog, "[mod_page] All PDF filenames in context: ");
+                    foreach ($frec_all as $opt) {
+                        fwrite($debuglog, "{$opt->filename}, ");
+                    }
+                    fwrite($debuglog, "\n");
+                }
+            }
         }
     }
     // Se for link externo (http/https), faz download e avalia

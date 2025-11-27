@@ -1,5 +1,1 @@
-
-==== PDFCOUNTER DEBUG START ====
-
-==== PDFCOUNTER DEBUG END ====
-
+.
