@@ -70,6 +70,14 @@ try {
         $pdf_issues[] = $pdf_issue;
     }
 
+        // LOG: Gravar array pdf_issues em ficheiro de debug
+        $debug_issues_file = $CFG->dirroot . '/blocks/pdfcounter/debug/pdf_issues_debug.log';
+        $debug_issues_entry = "\n=== PDF ISSUES DEBUG ===\n";
+        $debug_issues_entry .= "Timestamp: " . date('Y-m-d H:i:s') . "\n";
+        $debug_issues_entry .= "CourseID: " . $courseid . "\n";
+        $debug_issues_entry .= "PDF Issues: " . print_r($pdf_issues, true) . "\n";
+        file_put_contents($debug_issues_file, $debug_issues_entry, FILE_APPEND);
+
     // Calcular progresso geral
     $overall_progress = $total_pdfs > 0 ? round($total_percent / $total_pdfs) : 0;
     $progress_color = pdf_accessibility_config::get_progress_color($overall_progress);

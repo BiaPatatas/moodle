@@ -428,16 +428,32 @@ foreach ($urllinks as $ulink) {
 ';
 
         // Adiciona o HTML do topo
-        $this->content->text = $overall_html;
+        // Calcular PDFs pendentes
+        $pending_count = 0;
+        foreach ($pdf_issues as $issue) {
+            // Considera PDF pendente se não tiver nenhum teste avaliado
+            $total_tests = $issue['pass_count'] + $issue['fail_count'] + $issue['not_tagged_count'];
+            $done_tests = $issue['pass_count'] + $issue['fail_count'] + $issue['not_tagged_count'];
+            // Se não há resultados ou todos os testes estão como "not tagged", considera pendente
+            if ($total_tests > 0 && $done_tests === $issue['not_tagged_count']) {
+                $pending_count++;
+            }
+        }
+        $pending_msg = '';
+        if ($pending_count > 0) {
+            $pending_msg = '⚠️ Ainda faltam ' . $pending_count . ' PDF(s) para avaliar nesta página.';
+        }
+        $this->content->text = '<div id="pdf-pending-msg" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; border-radius:6px; padding:10px; margin-bottom:10px; font-size:0.95em;">' . $pending_msg . '</div>';
+        $this->content->text .= $overall_html;
 
         //-------------------------------------PDFs Issues---------------------------------------
-        $pdf_issues_html = '<div style="font-family:Arial,sans-serif;max-width:320px;">
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: black; margin-bottom: 10px;">
-                <span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">PDFs Issues</span><br>
-                <div style="margin-top:10px; max-height: 200px; overflow-y: auto;">';
-                
+        $pdf_issues_html = '<div style="font-family:Arial,sans-serif;max-width:320px;">';
+        $pdf_issues_html .= '<div style="background: #f8f9fa; border-radius: 8px; padding: 15px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: black; margin-bottom: 10px;">';
+        $pdf_issues_html .= '<span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">PDFs Issues</span><br>';
+        $pdf_issues_html .= '<div style="margin-top:10px; max-height: 200px; overflow-y: auto;">';
+        $pdf_issues_html .= '<table id="pdf-issues-list" style="width:100%; font-size:0.85rem; border-collapse:collapse;"><tbody>';
+        // Renderiza os issues iniciais (serão substituídos pelo JS)
         foreach ($pdf_issues as $issue) {
-          
             $filename = $issue['filename'];
             if (substr_count($filename, '.pdf') > 1) {
                 $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
@@ -446,7 +462,6 @@ foreach ($urllinks as $ulink) {
                 'filename' => urlencode($filename),
                 'courseid' => $COURSE->id
             ];
-            // Se for PDF externo (hash não igual ao de arquivos locais), adiciona filehash
             if (isset($issue['fileid'])) {
                 $pdfrec = $DB->get_record('block_pdfaccessibility_pdf_files', ['id' => $issue['fileid']]);
                 if ($pdfrec && !empty($pdfrec->filehash)) {
@@ -463,29 +478,20 @@ foreach ($urllinks as $ulink) {
                 $issue['fail_count'],
                 $issue['not_tagged_count']
             );
-            
-            $pdf_issues_html .= '
-                <div style="border-bottom: 1px solid #e9ecef; padding: 8px 0; margin-bottom: 8px; word-wrap: break-word;">
-                    <div style="font-size: 0.85rem; font-weight: 500; color: #2e3032ff; margin-bottom: 4px; 
-                               overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" 
-                         title="' . htmlspecialchars($issue['display_name']) . '">
-                        <i class="fa-solid fa-file-pdf"></i> ' . htmlspecialchars($issue['display_name']) .'
-                    </div>
-                    <div style="font-size: 0.8rem; color: #000000ff; margin-bottom: 6px;">
-                        <strong>' . $failed_tests . ' of ' . $applicable_tests . ' tests failed</strong>
-                    </div>
-                    <div style="text-align: right;">
-                        <a href="' . $download_url->out() . '" target="_blank" 
-                           style="font-size: 0.75rem; color: #0F6CBF; text-decoration: none;">
-                            <i class="fa fa-download" aria-hidden="true"></i> Download Report
-                        </a>
-                    </div>
-                </div>';
+            $pdf_issues_html .= '<tr><td colspan="2" style="padding:0;">';
+            $pdf_issues_html .= '<div class="parent" style="display:grid; grid-template-columns:50% 50%; grid-template-rows:repeat(2,1fr); grid-column-gap:0; grid-row-gap:0;">';
+            $pdf_issues_html .= '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' . htmlspecialchars($issue['display_name']) . '</div>';
+            $pdf_issues_html .= '<div class="div2" style="grid-area:1/2/2/3; align-self:start; text-align:right; font-weight:bold; font-size:1.1em;">' . $failed_tests . ' of ' . $applicable_tests . ' tests failed</div>';
+            $pdf_issues_html .= '<div class="div3" style="grid-area:2/1/3/3; text-align:right;">';
+            $pdf_issues_html .= '<a href="' . $download_url->out() . '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
+            $pdf_issues_html .= '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> Download Report';
+            $pdf_issues_html .= '</a>';
+            $pdf_issues_html .= '</div>';
+            $pdf_issues_html .= '</div>';
+            $pdf_issues_html .= '</td></tr>';
         }
-        
-        $pdf_issues_html .= '</div>
-            </div>
-        </div>';
+        $pdf_issues_html .= '</tbody></table>';
+        $pdf_issues_html .= '</div></div></div>';
 
         $this->content->text .= $pdf_issues_html;
 

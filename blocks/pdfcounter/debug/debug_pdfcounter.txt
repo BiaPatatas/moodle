@@ -3510,3 +3510,455 @@ Course ID: 3
 [cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
 ==== PDFCOUNTER DEBUG END ====
 
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 7
+[mod_resource/mod_folder] Found PDF: tudo_correto.pdf | hash: 2ae27e034b79304f73a4908e22b3cb300d4216c6
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 8
+[mod_resource/mod_folder] Found PDF: MEU_3.pdf | hash: b07778a3af8745d815b70f8f27e6c8d749c29685
+[mod_resource/mod_folder] Found PDF: MEU_2.pdf | hash: efc6090308a15be2a2034819a71f238617762fa2
+==== PDFCOUNTER DEBUG END ====
+

@@ -105,13 +105,16 @@ define(['jquery'], function($) {
                     success: function(response) {
                         if (response.done) {
                             // Todos avaliados, agora atualiza dashboard
-                            self.refreshDashboard();
-                            // Repete após intervalo
-                            setTimeout(self.evaluatePendingPdfs.bind(self), self.refreshInterval);
+                            setTimeout(function() {
+                                self.refreshDashboard();
+                                setTimeout(self.evaluatePendingPdfs.bind(self), self.refreshInterval);
+                            }, 500);
                         } else {
                             // Avaliou um, atualiza dashboard e chama próximo
-                            self.refreshDashboard();
-                            setTimeout(evalNext, 1000);
+                            setTimeout(function() {
+                                self.refreshDashboard();
+                                setTimeout(evalNext, 1000);
+                            }, 500);
                         }
                     },
                     error: function() {
@@ -144,35 +147,61 @@ define(['jquery'], function($) {
         },
 
         updateDashboardUI: function(data) {
-            // Update overall accessibility value
+                        // Atualizar mensagem de PDFs pendentes em tempo real
+                        var pendingCount = 0;
+                        if (data.pdfIssues && data.pdfIssues.length > 0) {
+                            data.pdfIssues.forEach(function(issue) {
+                                var totalTests = issue.pass_count + issue.fail_count + issue.not_tagged_count;
+                                var doneTests = issue.pass_count + issue.fail_count + issue.not_tagged_count;
+                                if (totalTests > 0 && doneTests === issue.not_tagged_count) {
+                                    pendingCount++;
+                                }
+                            });
+                        }
+                        var pendingMsg = document.getElementById('pdf-pending-msg');
+                        if (pendingMsg) {
+                            if (pendingCount > 0) {
+                                pendingMsg.innerHTML = '⚠️ Ainda faltam ' + pendingCount + ' PDF(s) para avaliar nesta página.';
+                                pendingMsg.style.display = '';
+                            } else {
+                                pendingMsg.innerHTML = '';
+                                pendingMsg.style.display = 'none';
+                            }
+                        }
+            // LOG: Enviar pdfIssues para backend debug
+            try {
+                $.ajax({
+                    url: M.cfg.wwwroot + '/blocks/pdfcounter/ajax/log_pdf_issues.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        pdfIssues: data.pdfIssues,
+                        courseid: data.courseid || (window.M && M.cfg && M.cfg.courseid ? M.cfg.courseid : null)
+                    })
+                });
+            } catch (e) {
+                // Ignore log errors
+            }
+
+            // ...existing code...
             var overallElement = $('#overall-accessibility-value');
             if (overallElement.length) {
                 overallElement.text(data.overallProgress + '%');
-                
-                // Apply color based on progress (keep black as user requested)
                 var color = '#000000ff';
                 overallElement.css('color', color);
             }
 
-            // Update progress bar (HTML5 progress element)
             var progressBar = $('.pdf-counter-progress-bar');
             if (progressBar.length) {
-                // Update the value attribute
                 progressBar.attr('value', data.overallProgress);
-                
-                // Update the CSS custom property for color
                 var progressColor = data.overallProgress >= 80 ? '#28a745' : 
                                    (data.overallProgress >= 50 ? '#ffc107' : '#dc3545');
                 progressBar.css('--progress-color', progressColor);
             }
 
-            // Update PDF issues list
             this.updatePdfIssues(data.pdfIssues);
-            
-            // Update historical trends chart
             this.updateHistoricalChart(data.overallProgress);
-            
-            // Update total count if element exists
             var totalElement = $('.total-pdfs-count');
             if (totalElement.length) {
                 totalElement.text(data.totalPdfs + ' PDFs');
@@ -189,23 +218,22 @@ define(['jquery'], function($) {
             }
 
             var html = '';
-            var self = this; // Store reference to this
+            var self = this;
             pdfIssues.forEach(function(pdf) {
                 var applicableTests = pdf.pass_count + pdf.fail_count + pdf.not_tagged_count;
                 var failedTests = pdf.fail_count + pdf.not_tagged_count;
-                
-                // Generate download URL (using course ID from the monitor)
-                var downloadUrl = M.cfg.wwwroot + '/blocks/pdfcounter/download_report.php?filename=' + 
-                                encodeURIComponent(pdf.filename) + '&courseid=' + self.courseid;
-
-                html += '<tr>';
-                html += '  <td style="align-content: flex-start;">' + pdf.filename + '</td>';
-                html += '  <td style="text-align:right; font-weight: bold; width:100%;">' + failedTests + ' of ' + applicableTests + ' tests failed</td>';
-                html += '</tr>';
-                html += '<tr>';
-                html += '  <td></td>';
-                html += '  <td style="text-align: right;"><a href="' + downloadUrl + '" target="_blank" style="margin-left:8px; font-size:0.9em;"><i class="fa fa-download" aria-hidden="true"></i> Download Report</a></td>';
-                html += '</tr>';
+                var downloadUrl = M.cfg.wwwroot + '/blocks/pdfcounter/download_report.php?filename=' + encodeURIComponent(pdf.filename) + '&courseid=' + self.courseid;
+                html += '<tr><td colspan="2" style="padding:0;">';
+                html += '<div class="parent" style="display:grid; grid-template-columns:50% 50%; grid-template-rows:repeat(2,1fr); grid-column-gap:0; grid-row-gap:0;">';
+                html += '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' + pdf.filename + '</div>';
+                html += '<div class="div2" style="grid-area:1/2/2/3; align-self:start; text-align:right; font-weight:bold; font-size:1.1em;">' + failedTests + ' of ' + applicableTests + ' tests failed</div>';
+                html += '<div class="div3" style="grid-area:2/1/3/3; text-align:right;">';
+                html += '<a href="' + downloadUrl + '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
+                html += '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> Download Report';
+                html += '</a>';
+                html += '</div>';
+                html += '</div>';
+                html += '</td></tr>';
             });
 
             issuesList.html(html);
