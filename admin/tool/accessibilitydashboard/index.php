@@ -163,7 +163,7 @@ error_log('DEBUG INDEX.PHP block executed');
             <div class="dashboard-panel">
                 <div class="panel-header">
                     <div class="Header-text">
-                        <h3>Accessibility Dashboard</h3>
+                        <h3 style="color:white;">Accessibility Dashboard</h3>
                         <p>Monitoring Accessibility of Institution</p>
                     </div>
                     <div class="Report-button">
@@ -181,9 +181,9 @@ error_log('DEBUG INDEX.PHP block executed');
                                 <form method="GET" action="<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/index.php" class="filter-form">
                                     <div class="filter-row">
                                         <div class="filter-group">
-                                            <label for="department">Department:</label>
+                                            <label for="department">Academic Degree:</label>
                                             <select id="department" name="department" onchange="updateCourses()">
-                                                <option value="">All Departments</option>
+                                                <option value="">All Academic Degrees</option>
                                                 <?php foreach ($departments as $dept): ?>
                                                     <option value="<?php echo $dept->id; ?>" <?php echo ($department_id == $dept->id) ? 'selected' : ''; ?>>
                                                         <?php echo s($dept->name); ?>
@@ -301,7 +301,7 @@ error_log('DEBUG INDEX.PHP block executed');
                                     <table class="data-table">
                                         <thead>
                                             <tr>
-                                                <th>Department</th>
+                                                <th>Academic Degree</th>
                                                 <th>Course</th>
                                                 <th>Discipline</th>
                                                 <th>PDFs</th>
@@ -396,7 +396,7 @@ error_log('DEBUG INDEX.PHP block executed');
                                         <div class="course-item">
                                             <div class="course-info">
                                                 <h5><?php echo s($course->course_name); ?></h5>
-                                                <p><?php echo s($course->department); ?> | <?php echo $course->pdfs_count; ?> PDFs</p>
+                                                <p><?php echo s($course->course); ?> | <?php echo $course->pdfs_count; ?> PDFs</p>
                                             </div>
                                             <div class="course-score <?php echo $score_class; ?>">
                                                 <?php echo number_format($course->score, 0); ?>%
@@ -466,7 +466,7 @@ error_log('DEBUG INDEX.PHP block executed');
                                         <div class="course-item">
                                             <div class="course-info">
                                                 <h5><?php echo s($course->course_name); ?></h5>
-                                                <p><?php echo s($course->department); ?> | <?php echo $course->pdfs_count; ?> PDFs</p>
+                                                <p><?php echo s($course->course); ?> | <?php echo $course->pdfs_count; ?> PDFs</p>
                                             </div>
                                             <div class="course-score <?php echo $score_class; ?>">
                                                 <?php echo number_format($course->score, 0); ?>%

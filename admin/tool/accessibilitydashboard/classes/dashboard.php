@@ -1186,19 +1186,13 @@ class dashboard {
     public function get_departments_for_filter() {
         global $DB;
 
-        $sql = "SELECT CONCAT('dept_', cc.id) as unique_id, cc.id, cc.name
+        // Novo SQL: mostra todos os departamentos (depth=1), mesmo sem PDFs
+        $sql = "SELECT cc.id, cc.name
                 FROM {course_categories} cc
-                WHERE EXISTS (
-                    SELECT 1 FROM {course_categories} cc2
-                    JOIN {course} c ON c.category = cc2.id
-                    JOIN {block_pdfaccessibility_pdf_files} pf ON pf.courseid = c.id
-                    WHERE cc2.parent = cc.id AND c.visible = 1 AND c.id > 1
-                )
-                AND cc.depth = 1
+                WHERE cc.depth = 1
                 ORDER BY cc.name ASC";
 
         $results = $DB->get_records_sql($sql);
-        
         $departments = [];
         foreach ($results as $result) {
             $departments[] = (object)[
@@ -1206,7 +1200,6 @@ class dashboard {
                 'name' => $result->name
             ];
         }
-        
         return $departments;
     }
 
@@ -1218,24 +1211,22 @@ class dashboard {
 
         $params = [];
         $where_dept = '';
-        
         if ($department_id) {
-            $where_dept = 'AND cc.parent = ?';
+            $where_dept = 'AND c.category = ?';
             $params[] = $department_id;
         }
 
-        $sql = "SELECT CONCAT('course_', cc.id) as unique_id, cc.id, cc.name
-                FROM {course_categories} cc
-                WHERE EXISTS (
-                    SELECT 1 FROM {course} c
-                    JOIN {block_pdfaccessibility_pdf_files} pf ON pf.courseid = c.id
-                    WHERE c.category = cc.id AND c.visible = 1 AND c.id > 1
-                )
-                AND cc.depth = 2 $where_dept
-                ORDER BY cc.name ASC";
+        // Buscar cursos reais que tenham PDFs analisados
+        $sql = "SELECT c.id, c.fullname as name
+                FROM {course} c
+                WHERE c.visible = 1 AND c.id > 1
+                  AND EXISTS (
+                    SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf WHERE pf.courseid = c.id
+                  )
+                  $where_dept
+                ORDER BY c.fullname ASC";
 
         $results = $DB->get_records_sql($sql, $params);
-        
         $courses = [];
         foreach ($results as $result) {
             $courses[] = (object)[
@@ -1243,7 +1234,6 @@ class dashboard {
                 'name' => $result->name
             ];
         }
-        
         return $courses;
     }
 
@@ -1318,35 +1308,35 @@ class dashboard {
             $params[] = $department_id;
         }
 
-        $sql = "SELECT 
+           $sql = "SELECT 
                     CONCAT('row_', c.id) as unique_id,
                     COALESCE(cc2.name, cc.name) as department,
-                    cc.name as course,
+                    c.fullname as course,
                     c.fullname as discipline,
                     COUNT(DISTINCT pf.id) as pdfs_count,
                     CASE 
                         WHEN COUNT(tr.id) > 0 
                         THEN ROUND((COUNT(CASE WHEN tr.result = 'pass' THEN 1 END) * 100.0) / 
-                             COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 1)
+                            COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 1)
                         ELSE 0.0 
                     END as score,
                     CASE 
                         WHEN ROUND((COUNT(CASE WHEN tr.result = 'pass' THEN 1 END) * 100.0) / 
-                             NULLIF(COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 0), 1) >= 70 
+                            NULLIF(COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 0), 1) >= 70 
                         THEN 'Good'
                         WHEN ROUND((COUNT(CASE WHEN tr.result = 'pass' THEN 1 END) * 100.0) / 
-                             NULLIF(COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 0), 1) >= 45 
+                            NULLIF(COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 0), 1) >= 45 
                         THEN 'Warning'
                         ELSE 'Critical' 
                     END as status
-                FROM {course} c
-                JOIN {course_categories} cc ON cc.id = c.category
-                LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
-                JOIN {block_pdfaccessibility_pdf_files} pf ON pf.courseid = c.id
-                LEFT JOIN {block_pdfaccessibility_test_results} tr ON tr.fileid = pf.id
-                WHERE " . implode(' AND ', $where_conditions) . "
-                GROUP BY cc.id, cc.name, c.id, c.fullname, cc2.id, cc2.name
-                ORDER BY score DESC, pdfs_count DESC";
+                 FROM {course} c
+                 JOIN {course_categories} cc ON cc.id = c.category
+                 LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
+                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.courseid = c.id
+                 LEFT JOIN {block_pdfaccessibility_test_results} tr ON tr.fileid = pf.id
+                 WHERE " . implode(' AND ', $where_conditions) . "
+                 GROUP BY cc.id, cc.name, c.id, c.fullname, cc2.id, cc2.name
+                 ORDER BY score DESC, pdfs_count DESC";
 
         $results = $DB->get_records_sql($sql, $params);
 
@@ -1552,6 +1542,7 @@ class dashboard {
         $sql = "SELECT 
                     CONCAT('best_', c.id) as unique_id,
                     c.fullname as course_name,
+                    cc.name as course,
                     COALESCE(cc2.name, cc.name) as department,
                     COUNT(DISTINCT pf.id) as pdfs_count,
                     COALESCE(AVG(t.progress_value), 0) as score
@@ -1562,7 +1553,7 @@ class dashboard {
                 LEFT JOIN {block_pdfcounter_trends} t ON t.courseid = c.id AND t.month = ?
                 WHERE $where_clause
                 GROUP BY c.id, c.fullname, cc.name, cc2.name
-                HAVING score > 0
+                HAVING score > 0 AND COUNT(DISTINCT pf.id) > 0
                 ORDER BY score DESC, pdfs_count DESC
                 LIMIT " . intval($limit);
 
@@ -1571,7 +1562,8 @@ class dashboard {
         $courses = [];
         foreach ($results as $result) {
             $courses[] = (object)[
-                'course_name' => $result->course_name,
+                'course_name' => $result->course_name, // disciplina
+                'course' => isset($result->course) ? $result->course : '', // nome do curso principal
                 'department' => $result->department,
                 'pdfs_count' => $result->pdfs_count,
                 'score' => $result->score
@@ -1616,6 +1608,7 @@ class dashboard {
         $sql = "SELECT 
                     CONCAT('worst_', c.id) as unique_id,
                     c.fullname as course_name,
+                    cc.name as course,
                     COALESCE(cc2.name, cc.name) as department,
                     COUNT(DISTINCT pf.id) as pdfs_count,
                     COALESCE(AVG(t.progress_value), 0) as score
@@ -1626,8 +1619,8 @@ class dashboard {
                 LEFT JOIN {block_pdfcounter_trends} t ON t.courseid = c.id AND t.month = ?
                 WHERE $where_clause
                 GROUP BY c.id, c.fullname, cc.name, cc2.name
-                HAVING score > 0
-                ORDER BY score ASC, pdfs_count DESC
+                HAVING score > 0 AND COUNT(DISTINCT pf.id) > 0
+                ORDER BY score ASC, pdfs_count ASC
                 LIMIT " . intval($limit);
 
         $results = $DB->get_records_sql($sql, $params);
@@ -1635,7 +1628,8 @@ class dashboard {
         $courses = [];
         foreach ($results as $result) {
             $courses[] = (object)[
-                'course_name' => $result->course_name,
+                'course_name' => $result->course_name, // disciplina
+                'course' => isset($result->course) ? $result->course : '', // nome do curso principal
                 'department' => $result->department,
                 'pdfs_count' => $result->pdfs_count,
                 'score' => $result->score

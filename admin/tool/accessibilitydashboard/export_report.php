@@ -124,14 +124,14 @@ function export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found,
      $table = '<table border="1" cellpadding="4" cellspacing="0" width="100%">'
          . '<thead><tr style="background-color:#e8eef6;font-weight:bold;">'
          . '<th scope="col" align="left">Discipline Name</th>'
-         . '<th scope="col" align="left">Department</th>'
+         . '<th scope="col" align="left">Course</th>'
          . '<th scope="col" align="center">PDFs</th>'
          . '<th scope="col" align="center">Score (%)</th>'
          . '</tr></thead><tbody>';
 
         foreach (array_slice($best_courses, 0, 5) as $course) {
             $dname = htmlspecialchars(substr($course->course_name, 0, 60));
-            $dept = htmlspecialchars(substr($course->department, 0, 40));
+            $dept = htmlspecialchars(substr($course->course, 0, 40));
             $pdfs = intval($course->pdfs_count);
             $score = number_format($course->score, 1);
             $table .= "<tr><td>{$dname}</td><td>{$dept}</td><td align=\"center\">{$pdfs}</td><td align=\"center\">{$score}</td></tr>";
@@ -151,14 +151,14 @@ function export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found,
      $table = '<table border="1" cellpadding="4" cellspacing="0" width="100%">'
          . '<thead><tr style="background-color:#e8eef6;font-weight:bold;">'
          . '<th scope="col" align="left">Discipline Name</th>'
-         . '<th scope="col" align="left">Department</th>'
+         . '<th scope="col" align="left">Course</th>'
          . '<th scope="col" align="center">PDFs</th>'
          . '<th scope="col" align="center">Score (%)</th>'
          . '</tr></thead><tbody>';
 
         foreach (array_slice($worst_courses, 0, 5) as $course) {
             $dname = htmlspecialchars(substr($course->course_name, 0, 60));
-            $dept = htmlspecialchars(substr($course->department, 0, 40));
+            $dept = htmlspecialchars(substr($course->course, 0, 40));
             $pdfs = intval($course->pdfs_count);
             $score = number_format($course->score, 1);
             $table .= "<tr><td>{$dname}</td><td>{$dept}</td><td align=\"center\">{$pdfs}</td><td align=\"center\">{$score}</td></tr>";
@@ -207,7 +207,7 @@ function export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found,
         $pdf->SetFont('freesans', '', 9);
         $table = '<table border="1" cellpadding="4" cellspacing="0" width="100%">'
                . '<thead><tr style="background-color:#e8eef6;font-weight:bold;">'
-               . '<th scope="col" align="left">Department</th>'
+               . '<th scope="col" align="left">Academic Degree</th>'
                . '<th scope="col" align="left">Course</th>'
                . '<th scope="col" align="left">Discipline</th>'
                . '<th scope="col" align="center">PDFs</th>'
