@@ -1,0 +1,1217 @@
+Ultra-early debug: script started 2025-12-05 07:59:03
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 07:59:03
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado=false
+[DEBUG] Todos registros após lookup: []
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado=false
+[DEBUG] Todos registros após lookup: []
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado=false
+[DEBUG] Todos registros após lookup: []
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado=false
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => Cap7-Recursão e Iteração.pdf
+            [filehash] => 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/12/c2/12c2e0002f5b3ed6338d64188be9c8b9723121b2
+        )
+
+    [1] => Array
+        (
+            [filename] => accessibility_report_2025-11-13_14-33-39.pdf
+            [filehash] => 8008f9461d81bac449af10b759668b3acd879654
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/80/08/8008f9461d81bac449af10b759668b3acd879654
+        )
+
+    [2] => Array
+        (
+            [filename] => Cópia de relatorio.pdf
+            [filehash] => 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/24/6b/246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+        )
+
+    [3] => Array
+        (
+            [filename] => MEU_2.pdf
+            [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/ef/c6/efc6090308a15be2a2034819a71f238617762fa2
+            [url] => @@PLUGINFILE@@/MEU_2.pdf
+        )
+
+    [4] => Array
+        (
+            [filename] => tudo_correto.pdf
+            [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [url] => @@PLUGINFILE@@/tudo_correto.pdf
+        )
+
+    [5] => Array
+        (
+            [filename] => MEU_3.pdf
+            [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685
+            [url] => @@PLUGINFILE@@/MEU_3.pdf
+        )
+
+    [6] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 7
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => Cap7-Recursão e Iteração.pdf
+    [filehash] => 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+    [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/12/c2/12c2e0002f5b3ed6338d64188be9c8b9723121b2
+)
+
+[DEBUG] Hashes in table after insert: []
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/12/c2/12c2e0002f5b3ed6338d64188be9c8b9723121b2"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","timecreated":1764892746}
+[DEBUG] insert_record result: pdfid=571, filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, filename=Cap7-Recursão e Iteração.pdf
+[DEBUG] Registros com filehash após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}}
+[DEBUG] Todos registros com filehash após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 571
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: script started 2025-12-05 07:59:07
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 07:59:07
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado=false
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado=false
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado=false
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => accessibility_report_2025-11-13_14-33-39.pdf
+            [filehash] => 8008f9461d81bac449af10b759668b3acd879654
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/80/08/8008f9461d81bac449af10b759668b3acd879654
+        )
+
+    [1] => Array
+        (
+            [filename] => Cópia de relatorio.pdf
+            [filehash] => 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/24/6b/246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+        )
+
+    [2] => Array
+        (
+            [filename] => MEU_2.pdf
+            [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/ef/c6/efc6090308a15be2a2034819a71f238617762fa2
+            [url] => @@PLUGINFILE@@/MEU_2.pdf
+        )
+
+    [3] => Array
+        (
+            [filename] => tudo_correto.pdf
+            [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [url] => @@PLUGINFILE@@/tudo_correto.pdf
+        )
+
+    [4] => Array
+        (
+            [filename] => MEU_3.pdf
+            [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685
+            [url] => @@PLUGINFILE@@/MEU_3.pdf
+        )
+
+    [5] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 6
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => accessibility_report_2025-11-13_14-33-39.pdf
+    [filehash] => 8008f9461d81bac449af10b759668b3acd879654
+    [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/80/08/8008f9461d81bac449af10b759668b3acd879654
+)
+
+[DEBUG] Hashes in table after insert: [{"filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","courseid":"3"}]
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/80/08/8008f9461d81bac449af10b759668b3acd879654"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"8008f9461d81bac449af10b759668b3acd879654","filename":"accessibility_report_2025-11-13_14-33-39.pdf","timecreated":1764892751}
+[DEBUG] insert_record result: pdfid=572, filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, filename=accessibility_report_2025-11-13_14-33-39.pdf
+[DEBUG] Registros com filehash após insert: {"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}}
+[DEBUG] Todos registros com filehash após insert: {"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 572
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: script started 2025-12-05 07:59:12
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 07:59:12
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado=false
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado=false
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => Cópia de relatorio.pdf
+            [filehash] => 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/24/6b/246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+        )
+
+    [1] => Array
+        (
+            [filename] => MEU_2.pdf
+            [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/ef/c6/efc6090308a15be2a2034819a71f238617762fa2
+            [url] => @@PLUGINFILE@@/MEU_2.pdf
+        )
+
+    [2] => Array
+        (
+            [filename] => tudo_correto.pdf
+            [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [url] => @@PLUGINFILE@@/tudo_correto.pdf
+        )
+
+    [3] => Array
+        (
+            [filename] => MEU_3.pdf
+            [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685
+            [url] => @@PLUGINFILE@@/MEU_3.pdf
+        )
+
+    [4] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 5
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => Cópia de relatorio.pdf
+    [filehash] => 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+    [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/24/6b/246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+)
+
+[DEBUG] Hashes in table after insert: [{"filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","courseid":"3"},{"filehash":"8008f9461d81bac449af10b759668b3acd879654","filename":"accessibility_report_2025-11-13_14-33-39.pdf","courseid":"3"}]
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/24/6b/246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","filename":"C\u00f3pia de relatorio.pdf","timecreated":1764892758}
+[DEBUG] insert_record result: pdfid=573, filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, filename=Cópia de relatorio.pdf
+[DEBUG] Registros com filehash após insert: {"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}}
+[DEBUG] Todos registros com filehash após insert: {"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 573
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: script started 2025-12-05 07:59:19
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 07:59:19
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado=false
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => MEU_2.pdf
+            [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/ef/c6/efc6090308a15be2a2034819a71f238617762fa2
+            [url] => @@PLUGINFILE@@/MEU_2.pdf
+        )
+
+    [1] => Array
+        (
+            [filename] => tudo_correto.pdf
+            [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [url] => @@PLUGINFILE@@/tudo_correto.pdf
+        )
+
+    [2] => Array
+        (
+            [filename] => MEU_3.pdf
+            [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685
+            [url] => @@PLUGINFILE@@/MEU_3.pdf
+        )
+
+    [3] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 4
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => MEU_2.pdf
+    [filehash] => efc6090308a15be2a2034819a71f238617762fa2
+    [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/ef/c6/efc6090308a15be2a2034819a71f238617762fa2
+    [url] => @@PLUGINFILE@@/MEU_2.pdf
+)
+
+[DEBUG] Hashes in table after insert: [{"filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","courseid":"3"},{"filehash":"8008f9461d81bac449af10b759668b3acd879654","filename":"accessibility_report_2025-11-13_14-33-39.pdf","courseid":"3"},{"filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","filename":"C\u00f3pia de relatorio.pdf","courseid":"3"}]
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/ef/c6/efc6090308a15be2a2034819a71f238617762fa2"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"efc6090308a15be2a2034819a71f238617762fa2","filename":"MEU_2.pdf","timecreated":1764892764}
+[DEBUG] insert_record result: pdfid=574, filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, filename=MEU_2.pdf
+[DEBUG] Registros com filehash após insert: {"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}}
+[DEBUG] Todos registros com filehash após insert: {"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 574
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: script started 2025-12-05 07:59:25
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 07:59:25
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado=false
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado=false
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => tudo_correto.pdf
+            [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6
+            [url] => @@PLUGINFILE@@/tudo_correto.pdf
+        )
+
+    [1] => Array
+        (
+            [filename] => MEU_3.pdf
+            [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685
+            [url] => @@PLUGINFILE@@/MEU_3.pdf
+        )
+
+    [2] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 3
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => tudo_correto.pdf
+    [filehash] => 2ae27e034b79304f73a4908e22b3cb300d4216c6
+    [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6
+    [url] => @@PLUGINFILE@@/tudo_correto.pdf
+)
+
+[DEBUG] Hashes in table after insert: [{"filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","courseid":"3"},{"filehash":"8008f9461d81bac449af10b759668b3acd879654","filename":"accessibility_report_2025-11-13_14-33-39.pdf","courseid":"3"},{"filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","filename":"C\u00f3pia de relatorio.pdf","courseid":"3"},{"filehash":"efc6090308a15be2a2034819a71f238617762fa2","filename":"MEU_2.pdf","courseid":"3"}]
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/2a/e2/2ae27e034b79304f73a4908e22b3cb300d4216c6"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","filename":"tudo_correto.pdf","timecreated":1764892768}
+[DEBUG] insert_record result: pdfid=575, filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, filename=tudo_correto.pdf
+[DEBUG] Registros com filehash após insert: {"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}}
+[DEBUG] Todos registros com filehash após insert: {"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 575
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: script started 2025-12-05 07:59:29
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 07:59:29
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado=false
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => MEU_3.pdf
+            [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+            [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685
+            [url] => @@PLUGINFILE@@/MEU_3.pdf
+        )
+
+    [1] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 2
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => MEU_3.pdf
+    [filehash] => b07778a3af8745d815b70f8f27e6c8d749c29685
+    [filepath] => C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685
+    [url] => @@PLUGINFILE@@/MEU_3.pdf
+)
+
+[DEBUG] Hashes in table after insert: [{"filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","courseid":"3"},{"filehash":"8008f9461d81bac449af10b759668b3acd879654","filename":"accessibility_report_2025-11-13_14-33-39.pdf","courseid":"3"},{"filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","filename":"C\u00f3pia de relatorio.pdf","courseid":"3"},{"filehash":"efc6090308a15be2a2034819a71f238617762fa2","filename":"MEU_2.pdf","courseid":"3"},{"filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","filename":"tudo_correto.pdf","courseid":"3"}]
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/b0/77/b07778a3af8745d815b70f8f27e6c8d749c29685"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","filename":"MEU_3.pdf","timecreated":1764892773}
+[DEBUG] insert_record result: pdfid=576, filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, filename=MEU_3.pdf
+[DEBUG] Registros com filehash após insert: {"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Todos registros com filehash após insert: {"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 576
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: script started 2025-12-05 07:59:34
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 07:59:34
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 1
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => Livros-gra%CC%81tis.pdf
+    [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+    [filepath] => 
+    [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+)
+
+[DEBUG] Hashes in table after insert: [{"filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","courseid":"3"},{"filehash":"8008f9461d81bac449af10b759668b3acd879654","filename":"accessibility_report_2025-11-13_14-33-39.pdf","courseid":"3"},{"filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","filename":"C\u00f3pia de relatorio.pdf","courseid":"3"},{"filehash":"efc6090308a15be2a2034819a71f238617762fa2","filename":"MEU_2.pdf","courseid":"3"},{"filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","filename":"tudo_correto.pdf","courseid":"3"},{"filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","filename":"MEU_3.pdf","courseid":"3"}]
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[DEBUG] EVAL: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[mod_url] Baixando PDF externo: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf para C:\xampp\htdocs\Moodles\server\moodledata/filedir/95/d2/95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/95/d2/95d24d6efa82d89dedf7c9569f8d18ff5a27b398"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","filename":"Livros-gra%CC%81tis.pdf","timecreated":1764892826}
+[DEBUG] insert_record result: pdfid=577, filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, filename=Livros-gra%CC%81tis.pdf
+[DEBUG] Registros com filehash após insert: {"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Todos registros com filehash após insert: {"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 577
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: script started 2025-12-05 08:00:28
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:28
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:31
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:31
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:34
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:34
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:37
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:37
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:40
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:40
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:43
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:43
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:46
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:46
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:49
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:49
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:52
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:52
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:55
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:00:55
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"577":{"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"577","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892826"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.
+Ultra-early debug: script started 2025-12-05 08:00:58
+Ultra-early debug: before require_once config.php
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:01:00
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+Ultra-early debug: script started 2025-12-05 08:01:00
+Ultra-early debug: before require_once config.php
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado=false
+Debug: pending array: Array
+(
+    [0] => Array
+        (
+            [filename] => Livros-gra%CC%81tis.pdf
+            [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+            [filepath] => 
+            [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+        )
+
+)
+
+Debug: pending count: 1
+Debug: antes de avaliar PDF\nDebug: PDF info: Array
+(
+    [filename] => Livros-gra%CC%81tis.pdf
+    [filehash] => 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+    [filepath] => 
+    [url] => https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+)
+
+[DEBUG] Hashes in table after insert: [{"filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","courseid":"3"},{"filehash":"8008f9461d81bac449af10b759668b3acd879654","filename":"accessibility_report_2025-11-13_14-33-39.pdf","courseid":"3"},{"filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","filename":"C\u00f3pia de relatorio.pdf","courseid":"3"},{"filehash":"efc6090308a15be2a2034819a71f238617762fa2","filename":"MEU_2.pdf","courseid":"3"},{"filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","filename":"tudo_correto.pdf","courseid":"3"},{"filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","filename":"MEU_3.pdf","courseid":"3"}]
+[DEBUG] Insert types: filehash=string, courseid=integer, userid=string, filename=string
+[DEBUG] EVAL: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[mod_url] Baixando PDF externo: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf para C:\xampp\htdocs\Moodles\server\moodledata/filedir/95/d2/95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[mod_url] Executando: "python3" "C:\xampp\htdocs\Moodles\server\moodle/blocks/pdfaccessibility/pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata/filedir/95/d2/95d24d6efa82d89dedf7c9569f8d18ff5a27b398"
+[DEBUG] Antes do insert: {"courseid":3,"userid":"2","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","filename":"Livros-gra%CC%81tis.pdf","timecreated":1764892912}
+[DEBUG] insert_record result: pdfid=578, filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, filename=Livros-gra%CC%81tis.pdf
+[DEBUG] Registros com filehash após insert: {"578":{"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}}
+[DEBUG] Todos registros após insert: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"578":{"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}}
+[DEBUG] Todos registros tabela (sem filtro): {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"578":{"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}}
+[DEBUG] Todos registros com filehash após insert: {"578":{"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}}
+Debug: result: Array
+(
+    [success] => 1
+    [pdfid] => 578
+)
+
+Debug: antes de echo json_encode resultado
+Debug: depois de echo json_encode resultado
+Ultra-early debug: after require_once config.php
+Ultra-early debug: before require_once lib.php
+Ultra-early debug: after require_once lib.php
+Ultra-early debug: before require_once pdf_accessibility_config.php
+Ultra-early debug: after require_once pdf_accessibility_config.php
+Ultra-early debug: before require_once filelib.php
+Ultra-early debug: after require_once filelib.php
+Ultra-early debug: before require_login
+Ultra-early debug: after require_login
+Ultra-early debug: globals set (DB, CFG, USER)
+==== AJAX PDF eval chamado ====2025-12-05 08:01:52
+Debug: before required_param courseid
+Debug: after required_param courseid, value: 3
+Debug: before header json
+Debug: after header json
+Debug: before context_course::instance
+Debug: after context_course::instance
+Debug: before has_capability
+Debug: passou permissão
+Debug: before buscar PDFs pendentes
+[DEBUG] Busca registro: filehash=12c2e0002f5b3ed6338d64188be9c8b9723121b2, courseid=3, resultado={"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"578":{"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}}
+[DEBUG] Busca registro: filehash=8008f9461d81bac449af10b759668b3acd879654, courseid=3, resultado={"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"578":{"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}}
+[DEBUG] Busca registro: filehash=246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0, courseid=3, resultado={"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"}
+[DEBUG] Todos registros após lookup: {"571":{"id":"571","courseid":"3","userid":"2","filename":"Cap7-Recursa\u0303o e Iterac\u0327a\u0303o.pdf","filehash":"12c2e0002f5b3ed6338d64188be9c8b9723121b2","timecreated":"1764892746"},"572":{"id":"572","courseid":"3","userid":"2","filename":"accessibility_report_2025-11-13_14-33-39.pdf","filehash":"8008f9461d81bac449af10b759668b3acd879654","timecreated":"1764892751"},"573":{"id":"573","courseid":"3","userid":"2","filename":"C\u00f3pia de relatorio.pdf","filehash":"246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0","timecreated":"1764892758"},"574":{"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"},"575":{"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"},"576":{"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"},"578":{"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}}
+[DEBUG] Busca registro (page): filehash=efc6090308a15be2a2034819a71f238617762fa2, courseid=3, resultado={"id":"574","courseid":"3","userid":"2","filename":"MEU_2.pdf","filehash":"efc6090308a15be2a2034819a71f238617762fa2","timecreated":"1764892764"}
+[DEBUG] Busca registro (page): filehash=2ae27e034b79304f73a4908e22b3cb300d4216c6, courseid=3, resultado={"id":"575","courseid":"3","userid":"2","filename":"tudo_correto.pdf","filehash":"2ae27e034b79304f73a4908e22b3cb300d4216c6","timecreated":"1764892768"}
+[DEBUG] Busca registro (page): filehash=b07778a3af8745d815b70f8f27e6c8d749c29685, courseid=3, resultado={"id":"576","courseid":"3","userid":"2","filename":"MEU_3.pdf","filehash":"b07778a3af8745d815b70f8f27e6c8d749c29685","timecreated":"1764892773"}
+[DEBUG] PENDING: url=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, normalized=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf, hash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='95d24d6efa82d89dedf7c9569f8d18ff5a27b398' AND courseid='3'
+[DEBUG] Lookup params: {"filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","courseid":3}
+[DEBUG] Lookup param types: filehash=string, courseid=integer
+[DEBUG] Busca registro (url): filehash=95d24d6efa82d89dedf7c9569f8d18ff5a27b398, courseid=3, resultado={"id":"578","courseid":"3","userid":"2","filename":"Livros-gra%CC%81tis.pdf","filehash":"95d24d6efa82d89dedf7c9569f8d18ff5a27b398","timecreated":"1764892912"}
+Debug: pending array: Array
+(
+)
+
+Debug: pending count: 0
+Debug: nenhum PDF pendente para avaliar.

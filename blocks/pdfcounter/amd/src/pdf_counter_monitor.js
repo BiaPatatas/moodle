@@ -80,38 +80,65 @@ define(['jquery'], function($) {
 
         startMonitoring: function() {
             var self = this;
-            this.intervalId = setInterval(function() {
-                self.refreshDashboard();
-            }, this.refreshInterval);
+            // Start the background evaluation loop
+            self.evaluatePendingPdfs();
         },
 
         stopMonitoring: function() {
-            if (this.intervalId) {
-                clearInterval(this.intervalId);
-                this.intervalId = null;
-            }
+            // No interval needed for background evaluation
         },
 
+        // Avalia PDFs pendentes em loop via AJAX
+        evaluatePendingPdfs: function() {
+            var self = this;
+            // Chama ajax_eval_pdf.php até não restar pendente
+            function evalNext() {
+                $.ajax({
+                    url: M.cfg.wwwroot + '/blocks/pdfcounter/ajax_eval_pdf.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded',
+                    data: $.param({
+                        courseid: self.courseid,
+                        sesskey: M.cfg.sesskey
+                    }),
+                    success: function(response) {
+                        if (response.done) {
+                            // Todos avaliados, agora atualiza dashboard
+                            self.refreshDashboard();
+                            // Repete após intervalo
+                            setTimeout(self.evaluatePendingPdfs.bind(self), self.refreshInterval);
+                        } else {
+                            // Avaliou um, atualiza dashboard e chama próximo
+                            self.refreshDashboard();
+                            setTimeout(evalNext, 1000);
+                        }
+                    },
+                    error: function() {
+                        // Em caso de erro, tenta novamente depois
+                        setTimeout(evalNext, self.refreshInterval);
+                    }
+                });
+            }
+            evalNext();
+        },
+
+        // Atualiza dashboard (só leitura)
         refreshDashboard: function() {
             var self = this;
-            
-            // Make AJAX call to refresh dashboard data
             $.ajax({
                 url: M.cfg.wwwroot + '/blocks/pdfcounter/ajax/update_dashboard.php',
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    courseid: this.courseid,
+                    courseid: self.courseid,
                     sesskey: M.cfg.sesskey
                 }),
                 success: function(response) {
                     if (response.status === 'ok') {
                         self.updateDashboardUI(response);
                     }
-                },
-                error: function(xhr, status, error) {
-                    // Silent fail for production
                 }
             });
         },

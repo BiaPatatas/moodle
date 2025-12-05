@@ -54,54 +54,17 @@ class block_pdfcounter extends block_base {
             AND f.filename != '.'";
         $files = $DB->get_records_sql($sql, array('courseid' => $COURSE->id));
 
-        // Avaliar e guardar PDFs visíveis que ainda não estão na base de dados
+        // Apenas listar PDFs e status, nunca avaliar ou processar aqui
         foreach ($files as $file) {
             if (substr($file->filename, -4) === '.pdf') {
                 if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
+                // Buscar status na base de dados
                 $filehash = $file->contenthash;
                 $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
                     'filehash' => $filehash,
                     'courseid' => $COURSE->id
                 ]);
-                if (!$pdfrecord) {
-                    $filepath = $CFG->dataroot . '/filedir/' . substr($filehash, 0, 2) . '/' . substr($filehash, 2, 2) . '/' . $filehash;
-                    if (!file_exists($filepath)) {
-                        if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] File not found: $filepath\n");
-                        continue;
-                    }
-                    $python_commands = ['python3', 'python', 'py', 'python.exe'];
-                    $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
-                    $result = null;
-                    foreach ($python_commands as $python) {
-                        $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($filepath);
-                        if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] Running: $command\n");
-                        $output = shell_exec($command . ' 2>&1');
-                        if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] Output: $output\n");
-                        $decoded = json_decode($output, true);
-                        if ($decoded && is_array($decoded)) {
-                            $result = $decoded;
-                            break;
-                        }
-                    }
-                    if (!$result || !is_array($result)) {
-                        if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] Python analysis failed for $filepath\n");
-                        continue;
-                    }
-                    $pdfrecord = new stdClass();
-                    $pdfrecord->courseid = $COURSE->id;
-                    $pdfrecord->userid = $USER->id;
-                    $pdfrecord->filehash = $filehash;
-                    // Remove duplo .pdf do nome
-                    $filename = $file->filename;
-                    if (substr_count($filename, '.pdf') > 1) {
-                        $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
-                    }
-                    $pdfrecord->filename = $filename;
-                    $pdfrecord->timecreated = time();
-                    $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
-                    pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
-                    if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] PDF evaluated and stored: {$filename}\n");
-                }
+                // Exibir status, mas nunca processar ou avaliar aqui
             }
         }
 
@@ -168,271 +131,16 @@ foreach ($urls as $url) {
     }
 }
 
-// Avaliar e guardar PDFs encontrados em links de páginas mod_page
+// Apenas listar links encontrados em mod_page, nunca avaliar ou processar aqui
 foreach ($pagelinks as $plink) {
-    fwrite($debuglog, "[mod_page] Evaluating link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
-    // Tenta obter o arquivo local se for pluginfile.php ou @@PLUGINFILE@@, ou baixar se for externo
-    $filehash = null;
-    $filename = basename($plink['url']);
-    if (substr_count($filename, '.pdf') > 1) {
-        $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
-    }
-    $pluginfile_pattern = '/(@@PLUGINFILE@@|\/pluginfile\.php\/)/';
-    if (preg_match($pluginfile_pattern, $plink['url'])) {
-        // Buscar o arquivo pelo nome e contexto (flexível)
-        $filename_decoded = urldecode($filename);
-        $fsql = "SELECT contenthash FROM {files} WHERE filename = :filename AND contextid = :contextid";
-        $frec = $DB->get_record_sql($fsql, [
-            'filename' => $filename_decoded,
-            'contextid' => $plink['contextid']
-        ]);
-        if ($frec) {
-            $filehash = $frec->contenthash;
-            if ($debuglog !== false) fwrite($debuglog, "[mod_page] Found filehash for pluginfile (decoded): $filehash\n");
-        } else {
-            // Busca por LIKE se não encontrar pelo nome exato
-            $fsql_like = "SELECT filename, contenthash FROM {files} WHERE filename LIKE :like AND contextid = :contextid";
-            $like = '%' . $filename_decoded . '%';
-            $frec_like = $DB->get_records_sql($fsql_like, [
-                'like' => $like,
-                'contextid' => $plink['contextid']
-            ]);
-            if ($frec_like && count($frec_like) > 0) {
-                // Pega o primeiro
-                $first = reset($frec_like);
-                $filehash = $first->contenthash;
-                if ($debuglog !== false) {
-                    fwrite($debuglog, "[mod_page] Found filehash by LIKE: $filehash (filename: {$first->filename})\n");
-                    fwrite($debuglog, "[mod_page] Available filenames in context: ");
-                    foreach ($frec_like as $opt) {
-                        fwrite($debuglog, "{$opt->filename}, ");
-                    }
-                    fwrite($debuglog, "\n");
-                }
-            } else {
-                // Loga todos os arquivos PDF disponíveis no contexto
-                $fsql_all = "SELECT filename FROM {files} WHERE filename LIKE '%.pdf' AND contextid = :contextid";
-                $frec_all = $DB->get_records_sql($fsql_all, [
-                    'contextid' => $plink['contextid']
-                ]);
-                if ($debuglog !== false) {
-                    fwrite($debuglog, "[mod_page] No filehash found for pluginfile link: $filename_decoded\n");
-                    fwrite($debuglog, "[mod_page] All PDF filenames in context: ");
-                    foreach ($frec_all as $opt) {
-                        fwrite($debuglog, "{$opt->filename}, ");
-                    }
-                    fwrite($debuglog, "\n");
-                }
-            }
-        }
-    }
-    // Se for link externo (http/https), faz download e avalia
-    if (!$filehash && preg_match('/^https?:\/\/.+\.pdf($|\?)/i', $plink['url'])) {
-        $tempfile = tempnam(sys_get_temp_dir(), 'pdfext_');
-        $downloaded = @file_put_contents($tempfile, @file_get_contents($plink['url']));
-        if ($downloaded && file_exists($tempfile)) {
-            $temphash = sha1_file($tempfile);
-            $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-                'filehash' => $temphash,
-                'courseid' => $COURSE->id
-            ]);
-            if ($pdfrecord) {
-                if ($debuglog !== false) fwrite($debuglog, "[mod_page] External PDF already in DB: $filename | hash: $temphash\n");
-            } else {
-                if ($debuglog !== false) fwrite($debuglog, "[mod_page] Downloaded external PDF to $tempfile\n");
-                $python_commands = ['python3', 'python', 'py', 'python.exe'];
-                $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
-                $result = null;
-                foreach ($python_commands as $python) {
-                    $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($tempfile);
-                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] Running: $command\n");
-                    $output = shell_exec($command . ' 2>&1');
-                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] Output: $output\n");
-                    $decoded = json_decode($output, true);
-                    if ($decoded && is_array($decoded)) {
-                        $result = $decoded;
-                        break;
-                    }
-                }
-                if (!$result || !is_array($result)) {
-                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] Python analysis failed for $tempfile\n");
-                } else {
-                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] External PDF evaluated: {$plink['url']}\n");
-                    $pdfrecord = new stdClass();
-                    $pdfrecord->courseid = $COURSE->id;
-                    $pdfrecord->userid = $USER->id;
-                    $pdfrecord->filehash = $temphash;
-                    $pdfrecord->filename = $filename;
-                    $pdfrecord->timecreated = time();
-                    $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
-                    pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
-                    if ($debuglog !== false) fwrite($debuglog, "[mod_page] External PDF saved in DB: $filename | hash: $temphash\n");
-                }
-            }
-            @unlink($tempfile);
-        } else {
-            if ($debuglog !== false) fwrite($debuglog, "[mod_page] Failed to download external PDF: {$plink['url']}\n");
-        }
-    }
-    // Só avalia se não estiver na base de dados (para arquivos locais)
-    if ($filehash) {
-        $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-            'filehash' => $filehash,
-            'courseid' => $COURSE->id
-        ]);
-        if ($pdfrecord) {
-            if ($debuglog !== false) fwrite($debuglog, "[mod_page] PDF already in DB: $filename | hash: $filehash\n");
-        } else {
-            $filepath = $CFG->dataroot . '/filedir/' . substr($filehash, 0, 2) . '/' . substr($filehash, 2, 2) . '/' . $filehash;
-            if (!file_exists($filepath)) {
-                if ($debuglog !== false) fwrite($debuglog, "[mod_page] File not found: $filepath\n");
-                continue;
-            }
-            $python_commands = ['python3', 'python', 'py', 'python.exe'];
-            $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
-            $result = null;
-            foreach ($python_commands as $python) {
-                $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($filepath);
-                if ($debuglog !== false) fwrite($debuglog, "[mod_page] Running: $command\n");
-                $output = shell_exec($command . ' 2>&1');
-                if ($debuglog !== false) fwrite($debuglog, "[mod_page] Output: $output\n");
-                $decoded = json_decode($output, true);
-                if ($decoded && is_array($decoded)) {
-                    $result = $decoded;
-                    break;
-                }
-            }
-            if (!$result || !is_array($result)) {
-                if ($debuglog !== false) fwrite($debuglog, "[mod_page] Python analysis failed for $filepath\n");
-                continue;
-            }
-            $pdfrecord = new stdClass();
-            $pdfrecord->courseid = $COURSE->id;
-            $pdfrecord->userid = $USER->id;
-            $pdfrecord->filehash = $filehash;
-            $pdfrecord->filename = $filename;
-            $pdfrecord->timecreated = time();
-            $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
-            pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
-            if ($debuglog !== false) fwrite($debuglog, "[mod_page] PDF evaluated and stored: $filename\n");
-        }
-    }
+    fwrite($debuglog, "[mod_page] Found link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
+    // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
-// Avaliar e guardar PDFs encontrados em links de mod_url
+// Apenas listar links encontrados em mod_url, nunca avaliar ou processar aqui
 foreach ($urllinks as $ulink) {
-    fwrite($debuglog, "[mod_url] Evaluating link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
-    $filehash = null;
-    $filename = basename($ulink['url']);
- 
-    if (substr_count($filename, '.pdf') > 1) {
-        $filename = preg_replace('/(\.pdf)+$/', '.pdf', $filename);
-    }
-    // Tenta obter o arquivo local se for pluginfile.php
-    if (strpos($ulink['url'], '/pluginfile.php/') !== false) {
-        $fsql = "SELECT contenthash FROM {files} WHERE filename = :filename AND contextid = :contextid";
-        $frec = $DB->get_record_sql($fsql, [
-            'filename' => $filename,
-            'contextid' => $ulink['contextid']
-        ]);
-        if ($frec) {
-            $filehash = $frec->contenthash;
-            fwrite($debuglog, "[mod_url] Found filehash for pluginfile.php: $filehash\n");
-        } else {
-            fwrite($debuglog, "[mod_url] No filehash found for pluginfile.php link: $filename\n");
-        }
-    }
-    // Se for link externo, faz download temporário e avalia
-    if (!$filehash && preg_match('/^https?:\/\/.+\.pdf($|\?)/i', $ulink['url'])) {
-        $temphash = null;
-        // Verifica se já existe na base pelo hash do arquivo remoto
-        $tempfile = tempnam(sys_get_temp_dir(), 'pdfext_');
-        $downloaded = @file_put_contents($tempfile, @file_get_contents($ulink['url']));
-        if ($downloaded && file_exists($tempfile)) {
-            $temphash = sha1_file($tempfile);
-            $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-                'filehash' => $temphash,
-                'courseid' => $COURSE->id
-            ]);
-            if ($pdfrecord) {
-                fwrite($debuglog, "[mod_url] External PDF already in DB: $filename | hash: $temphash\n");
-            } else {
-                fwrite($debuglog, "[mod_url] Downloaded external PDF to $tempfile\n");
-                $python_commands = ['python3', 'python', 'py', 'python.exe'];
-                $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
-                $result = null;
-                foreach ($python_commands as $python) {
-                    $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($tempfile);
-                    fwrite($debuglog, "[mod_url] Running: $command\n");
-                    $output = shell_exec($command . ' 2>&1');
-                    fwrite($debuglog, "[mod_url] Output: $output\n");
-                    $decoded = json_decode($output, true);
-                    if ($decoded && is_array($decoded)) {
-                        $result = $decoded;
-                        break;
-                    }
-                }
-                if (!$result || !is_array($result)) {
-                    fwrite($debuglog, "[mod_url] Python analysis failed for $tempfile\n");
-                } else {
-                    fwrite($debuglog, "[mod_url] External PDF evaluated: {$ulink['url']}\n");
-                    // Salva resultado no banco de dados
-                    $pdfrecord = new stdClass();
-                    $pdfrecord->courseid = $COURSE->id;
-                    $pdfrecord->userid = $USER->id;
-                    $pdfrecord->filehash = $temphash;
-                    $pdfrecord->filename = $filename;
-                    $pdfrecord->timecreated = time();
-                    $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
-                    pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
-                    fwrite($debuglog, "[mod_url] External PDF saved in DB: $filename | hash: $temphash\n");
-                }
-            }
-            @unlink($tempfile);
-        } else {
-            fwrite($debuglog, "[mod_url] Failed to download external PDF: {$ulink['url']}\n");
-        }
-    }
-    if ($filehash) {
-        $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-            'filehash' => $filehash,
-            'courseid' => $COURSE->id
-        ]);
-        if (!$pdfrecord) {
-            $filepath = $CFG->dataroot . '/filedir/' . substr($filehash, 0, 2) . '/' . substr($filehash, 2, 2) . '/' . $filehash;
-            if (!file_exists($filepath)) {
-                fwrite($debuglog, "[mod_url] File not found: $filepath\n");
-                continue;
-            }
-            $python_commands = ['python3', 'python', 'py', 'python.exe'];
-            $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
-            $result = null;
-            foreach ($python_commands as $python) {
-                $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($filepath);
-                fwrite($debuglog, "[mod_url] Running: $command\n");
-                $output = shell_exec($command . ' 2>&1');
-                fwrite($debuglog, "[mod_url] Output: $output\n");
-                $decoded = json_decode($output, true);
-                if ($decoded && is_array($decoded)) {
-                    $result = $decoded;
-                    break;
-                }
-            }
-            if (!$result || !is_array($result)) {
-                fwrite($debuglog, "[mod_url] Python analysis failed for $filepath\n");
-                continue;
-            }
-            $pdfrecord = new stdClass();
-            $pdfrecord->courseid = $COURSE->id;
-            $pdfrecord->userid = $USER->id;
-            $pdfrecord->filehash = $filehash;
-            $pdfrecord->filename = $filename;
-            $pdfrecord->timecreated = time();
-            $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
-            pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
-            fwrite($debuglog, "[mod_url] PDF evaluated and stored: $filename\n");
-        }
-    }
+    fwrite($debuglog, "[mod_url] Found link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
+    // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
         // Remover PDFs da base de dados que não estão mais visíveis (inclui PDFs em pastas)
