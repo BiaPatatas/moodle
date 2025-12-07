@@ -54,7 +54,18 @@ $debug_info['evolution_data'] = $evolution_data;
 // Get filter data
 $departments = $dashboard->get_departments_for_filter();
 $courses = $dashboard->get_courses_for_filter($department_id);
-$disciplines = $dashboard->get_disciplines_for_filter($course_id);
+$all_academic_degrees = ($department_id === null || $department_id === '' || !isset($department_id));
+$all_courses = ($course_id === null || $course_id === '' || !isset($course_id));
+if ($all_academic_degrees) {
+    $courses = $dashboard->get_courses_for_filter(null);
+    $disciplines = $dashboard->get_disciplines_for_filter(null, null);
+} elseif ($all_courses) {
+    $courses = $dashboard->get_courses_for_filter($department_id);
+    $disciplines = $dashboard->get_disciplines_for_filter(null, $department_id);
+} else {
+    $courses = $dashboard->get_courses_for_filter($department_id);
+    $disciplines = $dashboard->get_disciplines_for_filter($course_id, null);
+}
 
 // Get filtered data - show all data by default and when filters are applied
 $filtered_data = [];
@@ -566,7 +577,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         displayColors: false,
                         callbacks: {
                             title: function(context) {
-                                return context[0].label + ' ' + <?php echo date('Y'); ?>;
+                                // Agora o label já é 'Mar 2026', então basta retornar
+                                return context[0].label;
                             },
                             label: function(context) {
                                 return 'Accessibility: ' + context.parsed.y.toFixed(1) + '%';
@@ -608,40 +620,78 @@ function updateCourses() {
     const courseSelect = document.getElementById('course');
     const disciplineSelect = document.getElementById('discipline');
     const departmentId = departmentSelect.value;
-    
+
     // Clear current course and discipline options
     courseSelect.innerHTML = '<option value="">All Courses</option>';
     disciplineSelect.innerHTML = '<option value="">All Disciplines</option>';
-    
-    if (departmentId) {
-        // Fetch courses for selected department
-        fetch('<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_courses_new.php?department=' + departmentId)
-            .then(response => response.json())
-            .then(courses => {
-                courses.forEach(course => {
-                    const option = document.createElement('option');
-                    option.value = course.id;
-                    option.textContent = course.name;
-                    courseSelect.appendChild(option);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching courses:', error);
-            });
+
+    let urlCourses;
+    let urlDisciplines;
+    if (!departmentId) {
+        // All Academic Degrees: fetch all courses and all disciplines
+        urlCourses = '<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_courses_new.php?all=1';
+        urlDisciplines = '<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_disciplines.php?all=1';
+    } else {
+        // Fetch courses and disciplines for selected department
+        urlCourses = '<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_courses_new.php?department=' + departmentId;
+        urlDisciplines = '<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_disciplines.php?department=' + departmentId;
     }
+
+    // Fetch courses
+    fetch(urlCourses)
+        .then(response => response.json())
+        .then(courses => {
+            courses.forEach(course => {
+                const option = document.createElement('option');
+                option.value = course.id;
+                option.textContent = course.name;
+                courseSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching courses:', error);
+        });
+
+    // Fetch disciplines
+    fetch(urlDisciplines)
+        .then(response => response.json())
+        .then(disciplines => {
+            disciplines.forEach(discipline => {
+                const option = document.createElement('option');
+                option.value = discipline.id;
+                option.textContent = discipline.name;
+                disciplineSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching disciplines:', error);
+        });
 }
 
 function updateDisciplines() {
+    const departmentSelect = document.getElementById('department');
     const courseSelect = document.getElementById('course');
     const disciplineSelect = document.getElementById('discipline');
+    const departmentId = departmentSelect.value;
     const courseId = courseSelect.value;
-    
+
     // Clear current discipline options
     disciplineSelect.innerHTML = '<option value="">All Disciplines</option>';
-    
-    if (courseId) {
+
+    let urlDisciplines;
+    if (!courseId && departmentId) {
+        // All Courses selected, but department selected: show all disciplines for department
+        urlDisciplines = '<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_disciplines.php?department=' + departmentId;
+    } else if (!courseId && !departmentId) {
+        // All Academic Degrees and All Courses: show all disciplines
+        urlDisciplines = '<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_disciplines.php?all=1';
+    } else if (courseId) {
         // Fetch disciplines for selected course
-        fetch('<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_disciplines.php?course=' + courseId)
+        urlDisciplines = '<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/ajax_disciplines.php?course=' + courseId;
+    }
+
+    if (urlDisciplines) {
+        fetch(urlDisciplines)
             .then(response => response.json())
             .then(disciplines => {
                 disciplines.forEach(discipline => {

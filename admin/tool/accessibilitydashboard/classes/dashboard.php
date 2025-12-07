@@ -897,16 +897,9 @@ class dashboard {
     private function get_evolution_from_trends_table($department_id = null, $course_id = null, $discipline_id = null) {
         global $DB;
 
-        // Calculate academic year start (September)
-        $current_year = date('Y');
-        $current_month = date('n'); // 1-12
-        
-        // If we're before September, use previous year's September
-        if ($current_month < 9) {
-            $academic_start = strtotime("September 1, " . ($current_year - 1));
-        } else {
-            $academic_start = strtotime("September 1, $current_year");
-        }
+        // Forçar período de setembro/2025 até agosto/2026
+        $academic_start = strtotime("September 1, 2025");
+        $academic_end = strtotime("August 31, 2026");
 
         // Build SQL query based on filter type
         if ($discipline_id) {
@@ -976,33 +969,12 @@ class dashboard {
         $months = [];
         $scores = [];
 
-        // Generate months from September to current month
-        $start_date = $academic_start;
-        $current_time = time();
-        $temp_date = $start_date;
-        
-        while ($temp_date <= $current_time) {
-            $month_key = date('Y-m', $temp_date);
-            $month_label = date('M', $temp_date);
-            
+        // Só mostrar meses que têm dados reais
+        foreach ($results as $result) {
+            // Usar apenas o campo 'month' para montar o label
+            $month_label = date('M Y', strtotime($result->month . '-01'));
             $months[] = $month_label;
-            
-            // Check if we have data for this month
-            $found = false;
-            foreach ($results as $result) {
-                if ($result->month === $month_key) {
-                    $scores[] = round($result->avg_score, 1);
-                    $found = true;
-                    break;
-                }
-            }
-            
-            // If no data for this month, use previous month's score or 0
-            if (!$found) {
-                $scores[] = count($scores) > 0 ? end($scores) : 0;
-            }
-            
-            $temp_date = strtotime('+1 month', $temp_date);
+            $scores[] = round($result->avg_score, 1);
         }
 
         return [
@@ -1026,8 +998,9 @@ class dashboard {
             return $this->get_dummy_evolution_data($department_id, $course_id, $discipline_id);
         }
 
-        // Get data for last 12 months from PDF creation dates
-        $twelve_months_ago = time() - (12 * 30 * 24 * 60 * 60);
+        // Forçar período de setembro/2025 até agosto/2026
+        $academic_start = strtotime("September 1, 2025");
+        $academic_end = strtotime("August 31, 2026");
         
         // Build SQL query based on filter type
         if ($discipline_id) {
@@ -1044,7 +1017,7 @@ class dashboard {
                     WHERE pf.courseid > 1 AND c.visible = 1 AND pf.timecreated > ? AND c.id = ?
                     GROUP BY YEAR(FROM_UNIXTIME(pf.timecreated)), MONTH(FROM_UNIXTIME(pf.timecreated))
                     ORDER BY year ASC, month_num ASC";
-            $results = $DB->get_records_sql($sql, [$twelve_months_ago, $discipline_id]);
+            $results = $DB->get_records_sql($sql, [$academic_start, $discipline_id]);
             
         } elseif ($course_id) {
             $sql = "SELECT 
@@ -1060,7 +1033,7 @@ class dashboard {
                     WHERE pf.courseid > 1 AND c.visible = 1 AND pf.timecreated > ? AND c.category = ?
                     GROUP BY YEAR(FROM_UNIXTIME(pf.timecreated)), MONTH(FROM_UNIXTIME(pf.timecreated))
                     ORDER BY year ASC, month_num ASC";
-            $results = $DB->get_records_sql($sql, [$twelve_months_ago, $course_id]);
+            $results = $DB->get_records_sql($sql, [$academic_start, $course_id]);
             
         } elseif ($department_id) {
             $sql = "SELECT 
@@ -1078,7 +1051,7 @@ class dashboard {
                     WHERE pf.courseid > 1 AND c.visible = 1 AND pf.timecreated > ? AND cc2.id = ?
                     GROUP BY YEAR(FROM_UNIXTIME(pf.timecreated)), MONTH(FROM_UNIXTIME(pf.timecreated))
                     ORDER BY year ASC, month_num ASC";
-            $results = $DB->get_records_sql($sql, [$twelve_months_ago, $department_id]);
+            $results = $DB->get_records_sql($sql, [$academic_start, $department_id]);
             
         } else {
             // Global - no filters
@@ -1095,38 +1068,18 @@ class dashboard {
                     WHERE pf.courseid > 1 AND c.visible = 1 AND pf.timecreated > ?
                     GROUP BY YEAR(FROM_UNIXTIME(pf.timecreated)), MONTH(FROM_UNIXTIME(pf.timecreated))
                     ORDER BY year ASC, month_num ASC";
-            $results = $DB->get_records_sql($sql, [$twelve_months_ago]);
+            $results = $DB->get_records_sql($sql, [$academic_start]);
         }
 
         // Fill in missing months and format for chart
         $months = [];
         $scores = [];
-        $start_time = $twelve_months_ago;
-        $current_time = time();
-        $temp_time = $start_time;
-
-        while ($temp_time <= $current_time) {
-            $month_key = date('Y-m', $temp_time);
-            $month_label = date('M', $temp_time);
-            
+        // Só mostrar meses que têm dados reais
+        foreach ($results as $result) {
+            // Usar apenas o campo 'month' para montar o label
+            $month_label = date('M Y', strtotime($result->month . '-01'));
             $months[] = $month_label;
-            
-            // Check if we have data for this month
-            $found = false;
-            foreach ($results as $result) {
-                if ($result->month === $month_key) {
-                    $scores[] = (float)$result->avg_score;
-                    $found = true;
-                    break;
-                }
-            }
-            
-            // If no data for this month, use previous month's score or 0
-            if (!$found) {
-                $scores[] = count($scores) > 0 ? end($scores) : 0;
-            }
-            
-            $temp_time = strtotime('+1 month', $temp_time);
+            $scores[] = (float)$result->avg_score;
         }
 
         return [
@@ -1208,25 +1161,21 @@ class dashboard {
      */
     public function get_courses_for_filter($department_id = null) {
         global $DB;
-
-        $params = [];
-        $where_dept = '';
         if ($department_id) {
-            $where_dept = 'AND c.category = ?';
-            $params[] = $department_id;
+            // Mostrar apenas os courses (subcategorias) do departamento selecionado
+            $sql = "SELECT cc.id, cc.name
+                    FROM {course_categories} cc
+                    WHERE cc.parent = ? AND cc.depth = 2
+                    ORDER BY cc.name ASC";
+            $results = $DB->get_records_sql($sql, [$department_id]);
+        } else {
+            // Mostrar todos os courses (subcategorias de nível 2)
+            $sql = "SELECT cc.id, cc.name
+                    FROM {course_categories} cc
+                    WHERE cc.depth = 2
+                    ORDER BY cc.name ASC";
+            $results = $DB->get_records_sql($sql);
         }
-
-        // Buscar cursos reais que tenham PDFs analisados
-        $sql = "SELECT c.id, c.fullname as name
-                FROM {course} c
-                WHERE c.visible = 1 AND c.id > 1
-                  AND EXISTS (
-                    SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf WHERE pf.courseid = c.id
-                  )
-                  $where_dept
-                ORDER BY c.fullname ASC";
-
-        $results = $DB->get_records_sql($sql, $params);
         $courses = [];
         foreach ($results as $result) {
             $courses[] = (object)[
@@ -1240,28 +1189,45 @@ class dashboard {
     /**
      * Get disciplines (actual courses) within a course category
      */
-    public function get_disciplines_for_filter($course_id = null) {
+    public function get_disciplines_for_filter($course_id = null, $department_id = null) {
         global $DB;
 
-        $params = [];
-        $where_course = '';
-        
         if ($course_id) {
-            $where_course = 'AND c.category = ?';
-            $params[] = $course_id;
+            // Mostrar apenas disciplinas (cursos reais) da categoria selecionada
+            $sql = "SELECT CONCAT('disc_', c.id) as unique_id, c.id, c.fullname as name, c.category
+                    FROM {course} c
+                    WHERE EXISTS (
+                        SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf 
+                        WHERE pf.courseid = c.id
+                    )
+                    AND c.visible = 1 AND c.id > 1 AND c.category = ?
+                    ORDER BY c.fullname ASC";
+            $results = $DB->get_records_sql($sql, [$course_id]);
+        } else if ($department_id) {
+            // Mostrar todas as disciplinas dos courses desse departamento
+            $sql = "SELECT CONCAT('disc_', c.id) as unique_id, c.id, c.fullname as name, c.category
+                    FROM {course} c
+                    JOIN {course_categories} cc ON cc.id = c.category
+                    WHERE EXISTS (
+                        SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf 
+                        WHERE pf.courseid = c.id
+                    )
+                    AND c.visible = 1 AND c.id > 1 AND cc.parent = ?
+                    ORDER BY c.fullname ASC";
+            $results = $DB->get_records_sql($sql, [$department_id]);
+        } else {
+            // Mostrar todas as disciplinas (cursos reais)
+            $sql = "SELECT CONCAT('disc_', c.id) as unique_id, c.id, c.fullname as name, c.category
+                    FROM {course} c
+                    WHERE EXISTS (
+                        SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf 
+                        WHERE pf.courseid = c.id
+                    )
+                    AND c.visible = 1 AND c.id > 1
+                    ORDER BY c.fullname ASC";
+            $results = $DB->get_records_sql($sql);
         }
 
-        $sql = "SELECT CONCAT('disc_', c.id) as unique_id, c.id, c.fullname as name, c.category
-                FROM {course} c
-                WHERE EXISTS (
-                    SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf 
-                    WHERE pf.courseid = c.id
-                )
-                AND c.visible = 1 AND c.id > 1 $where_course
-                ORDER BY c.fullname ASC";
-
-        $results = $DB->get_records_sql($sql, $params);
-        
         $disciplines = [];
         foreach ($results as $result) {
             $disciplines[] = (object)[
@@ -1270,7 +1236,6 @@ class dashboard {
                 'category' => $result->category
             ];
         }
-        
         return $disciplines;
     }
 

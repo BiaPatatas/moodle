@@ -6,14 +6,17 @@ $context = context_system::instance();
 require_capability('moodle/site:config', $context);
 
 $department_id = optional_param('department', null, PARAM_INT);
+$all = optional_param('all', null, PARAM_INT);
 
-if (!$department_id) {
+$dashboard = new \tool_accessibilitydashboard\dashboard();
+if ($department_id) {
+    $courses = $dashboard->get_courses_for_filter($department_id);
+} elseif ($all) {
+    $courses = $dashboard->get_courses_for_filter(null);
+} else {
     echo json_encode([]);
     exit;
 }
-
-$dashboard = new \tool_accessibilitydashboard\dashboard();
-$courses = $dashboard->get_courses_for_filter($department_id);
 
 $result = [];
 foreach ($courses as $course) {
