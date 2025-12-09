@@ -893,12 +893,14 @@
 .pagination-info {
     color: #6c757d;
     font-size: 14px;
+    margin-left: 2%;
 }
 
 .pagination-controls {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-right: 2%;
 }
 
 .pagination-btn {

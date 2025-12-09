@@ -478,11 +478,11 @@ foreach ($urllinks as $ulink) {
                 $issue['fail_count'],
                 $issue['not_tagged_count']
             );
-            $pdf_issues_html .= '<tr><td colspan="2" style="padding:0;">';
-            $pdf_issues_html .= '<div class="parent" style="display:grid; grid-template-columns:50% 50%; grid-template-rows:repeat(2,1fr); grid-column-gap:0; grid-row-gap:0;">';
+            $pdf_issues_html .= '<tr><td colspan="1" style="padding:0;">';
+            $pdf_issues_html .= '<div class="parent" style="display:grid; grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); grid-column-gap:0; grid-row-gap:0;">';
             $pdf_issues_html .= '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' . htmlspecialchars($issue['display_name']) . '</div>';
-            $pdf_issues_html .= '<div class="div2" style="grid-area:1/2/2/3; align-self:start; text-align:right; font-weight:bold; font-size:1.1em;">' . $failed_tests . ' of ' . $applicable_tests . ' tests failed</div>';
-            $pdf_issues_html .= '<div class="div3" style="grid-area:2/1/3/3; text-align:right;">';
+            $pdf_issues_html .= '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' . $failed_tests . ' of ' . $applicable_tests . ' tests failed</div>';
+            $pdf_issues_html .= '<div class="div3" style="grid-area:3/1/4/2; text-align:right;">';
             $pdf_issues_html .= '<a href="' . $download_url->out() . '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
             $pdf_issues_html .= '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> Download Report';
             $pdf_issues_html .= '</a>';

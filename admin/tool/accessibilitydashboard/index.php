@@ -341,11 +341,11 @@ error_log('DEBUG INDEX.PHP block executed');
                                 
                                 <!-- Pagination Controls -->
                                 <?php if ($total_pages > 1): ?>
-                                    <div class="pagination-container">
+                                    <div class="pagination-container" style="margin-left: 2%;">
                                         <div class="pagination-info">
                                             Showing <?php echo (($page - 1) * $items_per_page + 1); ?> - <?php echo min($page * $items_per_page, $total_items); ?> of <?php echo $total_items; ?> results
                                         </div>
-                                        <div class="pagination-controls">
+                                        <div class="pagination-controls" style="margin-right: 2%;">
                                             <?php
                                             // Build base URL for pagination links
                                             $base_url = $CFG->wwwroot . '/admin/tool/accessibilityDashboard/index.php?';

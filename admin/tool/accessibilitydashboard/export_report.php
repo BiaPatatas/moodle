@@ -81,7 +81,7 @@ function export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found,
     
     // Data e hora (meta informação legível)
     $pdf->SetFont('freesans', '', 10);
-    $pdf->Cell(0, 5, 'Generated on: ' . date('Y-m-d H:i:s'), 0, 1, 'C');
+    $pdf->Cell(0, 5, 'Generated on: ' . date('Y-m-d'), 0, 1, 'C');
     $pdf->Ln(6);
     
     // Filtros aplicados

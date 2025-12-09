@@ -3962,3 +3962,458 @@ Course ID: 8
 [mod_resource/mod_folder] Found PDF: MEU_2.pdf | hash: efc6090308a15be2a2034819a71f238617762fa2
 ==== PDFCOUNTER DEBUG END ====
 
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 5
+[mod_resource/mod_folder] Found PDF: FP2 (1).pdf | hash: af2a2db18a37060d2bc54ba0add2f0cb7bf5d3cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 2
+[mod_page] Checking page cmid=144, contextid=211
+[mod_url] Checking url cmid=145, contextid=212, externalurl=https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf
+[mod_url] Found PDF link: https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf
+[mod_url] Found link: https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf | contextid=212 | cmid=145
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: Estrutura do Relatório do Projeto.pdf | hash: 377b55b5d7f08965c805498b4d00e720d762dd41
+[mod_resource/mod_folder] Found PDF: Estudo_Orientado_Beatriz_Patatas (8).pdf | hash: 0e113db7a6a2bbc47442c237d9493c625db594c7
+[mod_resource/mod_folder] Found PDF: Poster_Beatriz_Patatas.pdf | hash: 2d45114aaa6b01ce23ad60df6dd24933afe966b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 7
+[mod_resource/mod_folder] Found PDF: tudo_correto.pdf | hash: 2ae27e034b79304f73a4908e22b3cb300d4216c6
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 7
+[mod_resource/mod_folder] Found PDF: tudo_correto.pdf | hash: 2ae27e034b79304f73a4908e22b3cb300d4216c6
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 7
+[mod_resource/mod_folder] Found PDF: Poster_Beatriz_Patatas.pdf | hash: 2d45114aaa6b01ce23ad60df6dd24933afe966b2
+[mod_resource/mod_folder] Found PDF: Poster_Final.pdf | hash: 7ae975a59a8663fd2a02ee126d92dad9cf7ef330
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 7ddc94ae999ac59247be2b40bde91582a77025ee
+[mod_resource/mod_folder] Found PDF: PDFcompleto.pdf | hash: 659ce62ab1c4625dbe0586380b41953c62a47ebb
+[mod_resource/mod_folder] Found PDF: tudo_correto.pdf | hash: 2ae27e034b79304f73a4908e22b3cb300d4216c6
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 8
+[mod_resource/mod_folder] Found PDF: MEU_3.pdf | hash: b07778a3af8745d815b70f8f27e6c8d749c29685
+[mod_resource/mod_folder] Found PDF: MEU_2.pdf | hash: efc6090308a15be2a2034819a71f238617762fa2
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 8
+[mod_resource/mod_folder] Found PDF: linguagem_declarada.pdf | hash: 4a8c829899362b3e20232d094d4ee2b48b4a2b15
+[mod_resource/mod_folder] Found PDF: Sem_texto.pdf | hash: d4776a20ab441b869890bc9234167b006ee24c1d
+[mod_resource/mod_folder] Found PDF: texto_ingles.pdf | hash: edaf54ea0a56ecfe98d4f9a8d985dc220fed68fe
+[mod_resource/mod_folder] Found PDF: Corretamente_marcada.pdf | hash: 90bfc3a500a8c73142d4ba2bc783b3e6beea9e73
+[mod_resource/mod_folder] Found PDF: Incorretamente_marcada.pdf | hash: 837f27022b0320fe6dc872fb978cc7a841287556
+[mod_resource/mod_folder] Found PDF: Mistas.pdf | hash: 86080a512531dcc1e5ee93f19d222e8c11d0deae
+[mod_resource/mod_folder] Found PDF: Sem.pdf | hash: f7bf220f697437338bdf9eb6a3c2cf64a6e9b25a
+[mod_resource/mod_folder] Found PDF: com_cabeçalho.pdf | hash: 7a9f203e554b44f99babe93ef20ec73bb111a2c1
+[mod_resource/mod_folder] Found PDF: sem_cabeçalho.pdf | hash: e6ee8303286f8ce9344893f67f8ce42b97d1283e
+[mod_resource/mod_folder] Found PDF: com_titulo.pdf | hash: 9c8d279ea8b58289b4bade71624d91e7e5862c2c
+[mod_resource/mod_folder] Found PDF: sem_titulo.pdf | hash: a80ed2499497117f06bdc5659b8357764456a5d6
+[mod_resource/mod_folder] Found PDF: MEU_3.pdf | hash: b07778a3af8745d815b70f8f27e6c8d749c29685
+[mod_resource/mod_folder] Found PDF: MEU_2.pdf | hash: efc6090308a15be2a2034819a71f238617762fa2
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: Estrutura do Relatório do Projeto.pdf | hash: 377b55b5d7f08965c805498b4d00e720d762dd41
+[mod_resource/mod_folder] Found PDF: Estudo_Orientado_Beatriz_Patatas (8).pdf | hash: 0e113db7a6a2bbc47442c237d9493c625db594c7
+[mod_resource/mod_folder] Found PDF: Poster_Beatriz_Patatas.pdf | hash: 2d45114aaa6b01ce23ad60df6dd24933afe966b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+[cleanup] Removing PDF from DB: Livros-gra%CC%81tis.pdf | hash: 95d24d6efa82d89dedf7c9569f8d18ff5a27b398
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 2
+[mod_page] Checking page cmid=144, contextid=211
+[mod_url] Checking url cmid=145, contextid=212, externalurl=https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf
+[mod_url] Found PDF link: https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf
+[mod_url] Found link: https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf | contextid=212 | cmid=145
+[cleanup] Removing PDF from DB: artigo-EVR2021-modelo-WORD-1.pdf | hash: 6daa2681ebed112894b9b0571d4695adc844e647
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 8
+[mod_resource/mod_folder] Found PDF: linguagem_declarada.pdf | hash: 4a8c829899362b3e20232d094d4ee2b48b4a2b15
+[mod_resource/mod_folder] Found PDF: Sem_texto.pdf | hash: d4776a20ab441b869890bc9234167b006ee24c1d
+[mod_resource/mod_folder] Found PDF: texto_ingles.pdf | hash: edaf54ea0a56ecfe98d4f9a8d985dc220fed68fe
+[mod_resource/mod_folder] Found PDF: Corretamente_marcada.pdf | hash: 90bfc3a500a8c73142d4ba2bc783b3e6beea9e73
+[mod_resource/mod_folder] Found PDF: Incorretamente_marcada.pdf | hash: 837f27022b0320fe6dc872fb978cc7a841287556
+[mod_resource/mod_folder] Found PDF: Mistas.pdf | hash: 86080a512531dcc1e5ee93f19d222e8c11d0deae
+[mod_resource/mod_folder] Found PDF: Sem.pdf | hash: f7bf220f697437338bdf9eb6a3c2cf64a6e9b25a
+[mod_resource/mod_folder] Found PDF: com_cabeçalho.pdf | hash: 7a9f203e554b44f99babe93ef20ec73bb111a2c1
+[mod_resource/mod_folder] Found PDF: sem_cabeçalho.pdf | hash: e6ee8303286f8ce9344893f67f8ce42b97d1283e
+[mod_resource/mod_folder] Found PDF: com_titulo.pdf | hash: 9c8d279ea8b58289b4bade71624d91e7e5862c2c
+[mod_resource/mod_folder] Found PDF: sem_titulo.pdf | hash: a80ed2499497117f06bdc5659b8357764456a5d6
+[mod_resource/mod_folder] Found PDF: MEU_3.pdf | hash: b07778a3af8745d815b70f8f27e6c8d749c29685
+[mod_resource/mod_folder] Found PDF: MEU_2.pdf | hash: efc6090308a15be2a2034819a71f238617762fa2
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 5
+[mod_resource/mod_folder] Found PDF: FP2 (1).pdf | hash: af2a2db18a37060d2bc54ba0add2f0cb7bf5d3cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 7
+[mod_resource/mod_folder] Found PDF: Poster_Beatriz_Patatas.pdf | hash: 2d45114aaa6b01ce23ad60df6dd24933afe966b2
+[mod_resource/mod_folder] Found PDF: Poster_Final.pdf | hash: 7ae975a59a8663fd2a02ee126d92dad9cf7ef330
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 7ddc94ae999ac59247be2b40bde91582a77025ee
+[mod_resource/mod_folder] Found PDF: PDFcompleto.pdf | hash: 659ce62ab1c4625dbe0586380b41953c62a47ebb
+[mod_resource/mod_folder] Found PDF: tudo_correto.pdf | hash: 2ae27e034b79304f73a4908e22b3cb300d4216c6
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 9
+[mod_resource/mod_folder] Found PDF: Estrutura do Relatório do Projeto.pdf | hash: 377b55b5d7f08965c805498b4d00e720d762dd41
+[mod_resource/mod_folder] Found PDF: Estudo_Orientado_Beatriz_Patatas (8).pdf | hash: 0e113db7a6a2bbc47442c237d9493c625db594c7
+[mod_resource/mod_folder] Found PDF: Poster_Beatriz_Patatas.pdf | hash: 2d45114aaa6b01ce23ad60df6dd24933afe966b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-10-28_03-39-33.pdf | hash: e14e3ffdcaf8a5ec5fd3b186e4fb28d8c4bdc359
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 2
+[mod_page] Checking page cmid=144, contextid=211
+[mod_url] Checking url cmid=145, contextid=212, externalurl=https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf
+[mod_url] Found PDF link: https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf
+[mod_url] Found link: https://eventos.abcm.org.br/evr2021/content/uploads/2020/11/artigo-EVR2021-modelo-WORD-1.pdf | contextid=212 | cmid=145
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 8
+[mod_resource/mod_folder] Found PDF: linguagem_declarada.pdf | hash: 4a8c829899362b3e20232d094d4ee2b48b4a2b15
+[mod_resource/mod_folder] Found PDF: Sem_texto.pdf | hash: d4776a20ab441b869890bc9234167b006ee24c1d
+[mod_resource/mod_folder] Found PDF: texto_ingles.pdf | hash: edaf54ea0a56ecfe98d4f9a8d985dc220fed68fe
+[mod_resource/mod_folder] Found PDF: Corretamente_marcada.pdf | hash: 90bfc3a500a8c73142d4ba2bc783b3e6beea9e73
+[mod_resource/mod_folder] Found PDF: Incorretamente_marcada.pdf | hash: 837f27022b0320fe6dc872fb978cc7a841287556
+[mod_resource/mod_folder] Found PDF: Mistas.pdf | hash: 86080a512531dcc1e5ee93f19d222e8c11d0deae
+[mod_resource/mod_folder] Found PDF: Sem.pdf | hash: f7bf220f697437338bdf9eb6a3c2cf64a6e9b25a
+[mod_resource/mod_folder] Found PDF: com_cabeçalho.pdf | hash: 7a9f203e554b44f99babe93ef20ec73bb111a2c1
+[mod_resource/mod_folder] Found PDF: sem_cabeçalho.pdf | hash: e6ee8303286f8ce9344893f67f8ce42b97d1283e
+[mod_resource/mod_folder] Found PDF: com_titulo.pdf | hash: 9c8d279ea8b58289b4bade71624d91e7e5862c2c
+[mod_resource/mod_folder] Found PDF: sem_titulo.pdf | hash: a80ed2499497117f06bdc5659b8357764456a5d6
+[mod_resource/mod_folder] Found PDF: MEU_3.pdf | hash: b07778a3af8745d815b70f8f27e6c8d749c29685
+[mod_resource/mod_folder] Found PDF: MEU_2.pdf | hash: efc6090308a15be2a2034819a71f238617762fa2
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 5
+[mod_resource/mod_folder] Found PDF: FP2 (1).pdf | hash: af2a2db18a37060d2bc54ba0add2f0cb7bf5d3cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 7
+[mod_resource/mod_folder] Found PDF: Poster_Beatriz_Patatas.pdf | hash: 2d45114aaa6b01ce23ad60df6dd24933afe966b2
+[mod_resource/mod_folder] Found PDF: Poster_Final.pdf | hash: 7ae975a59a8663fd2a02ee126d92dad9cf7ef330
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 7ddc94ae999ac59247be2b40bde91582a77025ee
+[mod_resource/mod_folder] Found PDF: PDFcompleto.pdf | hash: 659ce62ab1c4625dbe0586380b41953c62a47ebb
+[mod_resource/mod_folder] Found PDF: tudo_correto.pdf | hash: 2ae27e034b79304f73a4908e22b3cb300d4216c6
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 15
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 13
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 14
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 12
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 15
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 15
+[mod_resource/mod_folder] Found PDF: sem_titulo.pdf | hash: a80ed2499497117f06bdc5659b8357764456a5d6
+[mod_resource/mod_folder] Found PDF: com_titulo.pdf | hash: 9c8d279ea8b58289b4bade71624d91e7e5862c2c
+[mod_resource/mod_folder] Found PDF: misto.pdf | hash: 2944ce4597a6d06ed01e6f07735f21fbd299e730
+[mod_resource/mod_folder] Found PDF: tudo_correto.pdf | hash: 2ae27e034b79304f73a4908e22b3cb300d4216c6
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 13
+[mod_resource/mod_folder] Found PDF: Project.pdf | hash: cd800ded9c8335a190ea852521a63982e7b954bb
+[mod_resource/mod_folder] Found PDF: Schedule.pdf | hash: 9bac2b6a3b6f7af8913b3c876b4d7195a57e0959
+[mod_resource/mod_folder] Found PDF: Evaluation.pdf | hash: e09bb41d2783c1df36c3cf9164dbd0a8273f5937
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 14
+[mod_resource/mod_folder] Found PDF: UX2324 06 ux-design pt1.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+[mod_resource/mod_folder] Found PDF: UX2324 01 presentation.pdf | hash: f42c1b5ba68bf13b47fa5729e1263c6e4e1a4428
+[mod_resource/mod_folder] Found PDF: UX2324 04 ux-evaluation pt2.pdf | hash: 5cb3073e9dff4488d5d95fe4a748b21f04322278
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 12
+[mod_resource/mod_folder] Found PDF: UX2324 02 ux_evaluation pt2.pdf | hash: 6cab45d10c58211884e2c8e0b891482159e87465
+[mod_resource/mod_folder] Found PDF: UX2324 06 ux-design pt1.pdf | hash: 250cce6ec5c92df9bc9b072dfcb032addbc6fcbf
+[mod_resource/mod_folder] Found PDF: UX2324 04 ux_research.pdf | hash: 39f2fc0d107c02aa886572bbc324691d4b91433f
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+

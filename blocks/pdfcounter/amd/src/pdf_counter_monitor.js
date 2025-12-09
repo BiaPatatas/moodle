@@ -223,11 +223,11 @@ define(['jquery'], function($) {
                 var applicableTests = pdf.pass_count + pdf.fail_count + pdf.not_tagged_count;
                 var failedTests = pdf.fail_count + pdf.not_tagged_count;
                 var downloadUrl = M.cfg.wwwroot + '/blocks/pdfcounter/download_report.php?filename=' + encodeURIComponent(pdf.filename) + '&courseid=' + self.courseid;
-                html += '<tr><td colspan="2" style="padding:0;">';
-                html += '<div class="parent" style="display:grid; grid-template-columns:50% 50%; grid-template-rows:repeat(2,1fr); grid-column-gap:0; grid-row-gap:0;">';
+                html += '<tr><td colspan="1" style="padding:0;">';
+                html += '<div class="parent" style="display:grid; grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); grid-column-gap:0; grid-row-gap:0;">';
                 html += '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' + pdf.filename + '</div>';
-                html += '<div class="div2" style="grid-area:1/2/2/3; align-self:start; text-align:right; font-weight:bold; font-size:1.1em;">' + failedTests + ' of ' + applicableTests + ' tests failed</div>';
-                html += '<div class="div3" style="grid-area:2/1/3/3; text-align:right;">';
+                html += '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' + failedTests + ' of ' + applicableTests + ' tests failed</div>';
+                html += '<div class="div3" style="grid-area:3/1/4/2; text-align:right;">';
                 html += '<a href="' + downloadUrl + '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
                 html += '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> Download Report';
                 html += '</a>';

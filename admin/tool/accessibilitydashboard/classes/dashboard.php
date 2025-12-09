@@ -970,8 +970,13 @@ class dashboard {
         $scores = [];
 
         // Só mostrar meses que têm dados reais
+        // Ordenar os resultados por mês/ano
+        $ordered = [];
         foreach ($results as $result) {
-            // Usar apenas o campo 'month' para montar o label
+            $ordered[$result->month] = $result;
+        }
+        ksort($ordered); // ordena por chave (YYYY-MM)
+        foreach ($ordered as $result) {
             $month_label = date('M Y', strtotime($result->month . '-01'));
             $months[] = $month_label;
             $scores[] = round($result->avg_score, 1);
@@ -1075,8 +1080,13 @@ class dashboard {
         $months = [];
         $scores = [];
         // Só mostrar meses que têm dados reais
+        // Ordenar os resultados por mês/ano
+        $ordered = [];
         foreach ($results as $result) {
-            // Usar apenas o campo 'month' para montar o label
+            $ordered[$result->month] = $result;
+        }
+        ksort($ordered); // ordena por chave (YYYY-MM)
+        foreach ($ordered as $result) {
             $month_label = date('M Y', strtotime($result->month . '-01'));
             $months[] = $month_label;
             $scores[] = (float)$result->avg_score;
