@@ -4417,3 +4417,304 @@ Course ID: 6
 [mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
 ==== PDFCOUNTER DEBUG END ====
 
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 6
+[mod_resource/mod_folder] Found PDF: UX2324 06.pdf | hash: ffa271c19507ed6d11b532fa1b5e9bd198a828da
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+[cleanup] Removing PDF from DB: Aula1.pdf | hash: f7502e2039f11cb06f794b61e8841e27ecc10409
+[cleanup] Removing PDF from DB: Aula1.pdf | hash: 50c6c8788fd558c14bb5cdc6ebefb7360c97ea7a
+[cleanup] Removing PDF from DB: Aula1.pdf | hash: 64f093653f89abefe92286f1d04a8137960706a4
+[cleanup] Removing PDF from DB: Aula1.pdf | hash: 03d7b69bb82014f5ce4e90443be4277f6837651c
+[cleanup] Removing PDF from DB: Aula1.pdf | hash: 77f836bc0b75291b02ffa8d92d9057ae81a0abaa
+[cleanup] Removing PDF from DB: Aula1.pdf | hash: fbc6b34a473317c4df9030eb481e1ee8974b155a
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+

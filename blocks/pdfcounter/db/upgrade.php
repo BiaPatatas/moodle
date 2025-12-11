@@ -16,9 +16,29 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_block_pdfcounter_upgrade($oldversion) {
+
     global $DB;
 
     $dbman = $DB->get_manager();
+        if ($oldversion < 2025121001) {
+            // Define table block_pdfcounter_qualweb_jobs to be created.
+            $table = new xmldb_table('block_pdfcounter_qualweb_jobs');
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+            $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('status', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, null);
+            $table->add_field('monitoring_id', XMLDB_TYPE_CHAR, '64', null, null, null, null);
+            $table->add_field('result_json', XMLDB_TYPE_TEXT, null, null, null, null, null);
+            $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+            $table->add_index('courseuser_idx', XMLDB_INDEX_NOTUNIQUE, ['courseid', 'userid']);
+            if (!$dbman->table_exists($table)) {
+                $dbman->create_table($table);
+            }
+            upgrade_block_savepoint(true, 2025121001, 'pdfcounter');
+        }
+    
 
     if ($oldversion < 2025030678) {
         // Define table block_pdfcounter_qualweb to be created.

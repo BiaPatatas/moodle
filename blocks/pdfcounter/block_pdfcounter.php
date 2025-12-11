@@ -57,7 +57,9 @@ class block_pdfcounter extends block_base {
         // Apenas listar PDFs e status, nunca avaliar ou processar aqui
         foreach ($files as $file) {
             if (substr($file->filename, -4) === '.pdf') {
-                if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
+                if ($debuglog && is_resource($debuglog)) {
+                    fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
+                }
                 // Buscar status na base de dados
                 $filehash = $file->contenthash;
                 $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
@@ -81,11 +83,15 @@ $sqlpages = "SELECT cm.id as cmid, p.content, ctx.id as contextid
 $pages = $DB->get_records_sql($sqlpages, array('courseid' => $COURSE->id));
 $pagelinks = [];
 foreach ($pages as $page) {
-    fwrite($debuglog, "[mod_page] Checking page cmid={$page->cmid}, contextid={$page->contextid}\n");
+    if ($debuglog && is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_page] Checking page cmid={$page->cmid}, contextid={$page->contextid}\n");
+    }
     // Extrair links <a href="...pdf"> do conteúdo da página
     if (preg_match_all('/<a[^>]+href=\"([^\"]+\.pdf)\"[^>]*>/i', $page->content, $matches)) {
         foreach ($matches[1] as $pdfurl) {
-            fwrite($debuglog, "[mod_page] Found PDF link: $pdfurl\n");
+            if ($debuglog && is_resource($debuglog)) {
+                fwrite($debuglog, "[mod_page] Found PDF link: $pdfurl\n");
+            }
             $pagelinks[] = [
                 'url' => $pdfurl,
                 'contextid' => $page->contextid,
@@ -96,7 +102,9 @@ foreach ($pages as $page) {
     // Também extrai links pluginfile.php que terminam em .pdf
     if (preg_match_all('/<a[^>]+href=\"([^\"]*pluginfile\.php[^\"]+\.pdf)\"[^>]*>/i', $page->content, $matches2)) {
         foreach ($matches2[1] as $pdfurl) {
-            fwrite($debuglog, "[mod_page] Found pluginfile.php PDF link: $pdfurl\n");
+            if ($debuglog && is_resource($debuglog)) {
+                fwrite($debuglog, "[mod_page] Found pluginfile.php PDF link: $pdfurl\n");
+            }
             $pagelinks[] = [
                 'url' => $pdfurl,
                 'contextid' => $page->contextid,
@@ -119,10 +127,14 @@ $sqlurls = "SELECT cm.id as cmid, u.externalurl, ctx.id as contextid
 $urls = $DB->get_records_sql($sqlurls, array('courseid' => $COURSE->id));
 $urllinks = [];
 foreach ($urls as $url) {
-    fwrite($debuglog, "[mod_url] Checking url cmid={$url->cmid}, contextid={$url->contextid}, externalurl={$url->externalurl}\n");
+    if ($debuglog && is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_url] Checking url cmid={$url->cmid}, contextid={$url->contextid}, externalurl={$url->externalurl}\n");
+    }
     // Só considera links que terminam em .pdf
     if (preg_match('/\.pdf($|\?)/i', $url->externalurl)) {
-        fwrite($debuglog, "[mod_url] Found PDF link: {$url->externalurl}\n");
+        if ($debuglog && is_resource($debuglog)) {
+            fwrite($debuglog, "[mod_url] Found PDF link: {$url->externalurl}\n");
+        }
         $urllinks[] = [
             'url' => $url->externalurl,
             'contextid' => $url->contextid,
@@ -133,13 +145,17 @@ foreach ($urls as $url) {
 
 // Apenas listar links encontrados em mod_page, nunca avaliar ou processar aqui
 foreach ($pagelinks as $plink) {
-    fwrite($debuglog, "[mod_page] Found link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
+    if ($debuglog && is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_page] Found link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
+    }
     // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
 // Apenas listar links encontrados em mod_url, nunca avaliar ou processar aqui
 foreach ($urllinks as $ulink) {
-    fwrite($debuglog, "[mod_url] Found link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
+    if ($debuglog && is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_url] Found link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
+    }
     // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
@@ -191,15 +207,19 @@ foreach ($urllinks as $ulink) {
         }
         foreach ($dbpdfs as $dbpdf) {
             if (!in_array($dbpdf->filehash, $visible_hashes)) {
-                if ($debuglog !== false) fwrite($debuglog, "[cleanup] Removing PDF from DB: {$dbpdf->filename} | hash: {$dbpdf->filehash}\n");
+                if ($debuglog && is_resource($debuglog)) {
+                    fwrite($debuglog, "[cleanup] Removing PDF from DB: {$dbpdf->filename} | hash: {$dbpdf->filehash}\n");
+                }
                 $DB->delete_records('block_pdfaccessibility_test_results', ['fileid' => $dbpdf->id]);
                 $DB->delete_records('block_pdfaccessibility_pdf_files', ['id' => $dbpdf->id]);
             }
         }
         // DEBUG: Close debug log file
         if ($debuglog !== false) {
-            fwrite($debuglog, "==== PDFCOUNTER DEBUG END ====\n\n");
-            fclose($debuglog);
+            if (is_resource($debuglog)) {
+                fwrite($debuglog, "==== PDFCOUNTER DEBUG END ====\n\n");
+                fclose($debuglog);
+            }
         }
 
         if ($this->content !== null) {
@@ -446,6 +466,13 @@ foreach ($urllinks as $ulink) {
         $this->content->text = '<div id="pdf-pending-msg" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; border-radius:6px; padding:10px; margin-bottom:10px; font-size:0.95em;">' . $pending_msg . '</div>';
         $this->content->text .= $overall_html;
 
+        // // ================= QualWeb Async AJAX Integration =====================
+        $this->content->text .= '<div id="qualweb-result-async"></div>';
+        global $PAGE;
+        $PAGE->requires->js_call_amd('block_pdfcounter/qualweb_async', 'init', [$COURSE->id]);
+
+        //teste
+
         //-------------------------------------PDFs Issues---------------------------------------
         $pdf_issues_html = '<div style="font-family:Arial,sans-serif;max-width:320px;">';
         $pdf_issues_html .= '<div style="background: #f8f9fa; border-radius: 8px; padding: 15px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: black; margin-bottom: 10px;">';
@@ -612,12 +639,7 @@ foreach ($urllinks as $ulink) {
         return $pdfcount;
     }
 
-    /**
-     * This block can be added to any page.
-     *
-     * @return array
-     */
-    public function applicable_formats() {
+ public function applicable_formats() {
         // Permitir o bloco em todos os tipos de páginas
         return array(
             'course-view' => true,
@@ -626,23 +648,5 @@ foreach ($urllinks as $ulink) {
             'my' => true,
             'all' => true
         );
-    }
-
-    /**
-     * Allow multiple instances of this block.
-     *
-     * @return boolean
-     */
-    public function instance_allow_multiple() {
-        return false;
-    }
-
-    /**
-     * Block has configuration.
-     *
-     * @return boolean
-     */
-    public function has_config() {
-        return false;
     }
 }
