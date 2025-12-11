@@ -468,10 +468,23 @@ foreach ($urllinks as $ulink) {
 
         // // ================= QualWeb Async AJAX Integration =====================
         $this->content->text .= '<div id="qualweb-result-async"></div>';
+        // Botão de download dos resultados QualWeb
+        $monitoring_id = null;
+        $job = $DB->get_record('block_pdfcounter_qualweb_jobs', [
+            'courseid' => $COURSE->id,
+            'userid' => $USER->id
+        ]);
+        if ($job && !empty($job->monitoring_id)) {
+            $monitoring_id = $job->monitoring_id;
+        }
+        if ($monitoring_id) {
+            $download_url = new moodle_url('/blocks/pdfcounter/download_qualweb_results.php', ['monitoring_id' => $monitoring_id]);
+            $this->content->text .= '<div style="margin-bottom:10px;"><a href="' . $download_url->out() . '" target="_blank" style="background:#1976d2;color:#fff;padding:8px 14px;border-radius:5px;text-decoration:none;font-size:0.95em;display:inline-block;"><i class="fa fa-download" style="margin-right:5px;"></i>Download QualWeb Results (CSV)</a></div>';
+        }
         global $PAGE;
         $PAGE->requires->js_call_amd('block_pdfcounter/qualweb_async', 'init', [$COURSE->id]);
 
-        //teste
+
 
         //-------------------------------------PDFs Issues---------------------------------------
         $pdf_issues_html = '<div style="font-family:Arial,sans-serif;max-width:320px;">';

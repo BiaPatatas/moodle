@@ -4718,3 +4718,623 @@ Course ID: 17
 [mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
 ==== PDFCOUNTER DEBUG END ====
 
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 3
+[mod_resource/mod_folder] Found PDF: Cap7-Recursão e Iteração.pdf | hash: 12c2e0002f5b3ed6338d64188be9c8b9723121b2
+[mod_resource/mod_folder] Found PDF: accessibility_report_2025-11-13_14-33-39.pdf | hash: 8008f9461d81bac449af10b759668b3acd879654
+[mod_resource/mod_folder] Found PDF: Cópia de relatorio.pdf | hash: 246b5afdd98eb6b81f8c491eb4d8898bdcd2fff0
+[mod_page] Checking page cmid=137, contextid=201
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_2.pdf
+[mod_page] Checking page cmid=140, contextid=206
+[mod_page] Found PDF link: @@PLUGINFILE@@/tudo_correto.pdf
+[mod_page] Checking page cmid=141, contextid=207
+[mod_page] Found PDF link: @@PLUGINFILE@@/MEU_3.pdf
+[mod_url] Checking url cmid=138, contextid=203, externalurl=https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_url] Found PDF link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf
+[mod_page] Found link: @@PLUGINFILE@@/MEU_2.pdf | contextid=201 | cmid=137
+[mod_page] Found link: @@PLUGINFILE@@/tudo_correto.pdf | contextid=206 | cmid=140
+[mod_page] Found link: @@PLUGINFILE@@/MEU_3.pdf | contextid=207 | cmid=141
+[mod_url] Found link: https://www.unifucamp.edu.br/wp-content/uploads/2020/09/Livros-gra%CC%81tis.pdf | contextid=203 | cmid=138
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 16
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+
+
+==== PDFCOUNTER DEBUG START ====
+Course ID: 17
+[mod_resource/mod_folder] Found PDF: recibo_verde_fcul.pdf | hash: d9ab1d06d1752037953b51b4831784a7c47bdfd3
+[mod_resource/mod_folder] Found PDF: Orçamento_Prest de serviços.pdf | hash: 9ff81d33ff4e15dd5bd9b1b27c12c5641b12c2d3
+[mod_resource/mod_folder] Found PDF: ficha entidade nacional.pdf | hash: 39e58caa74c3d5501c54a59e3ce58f232ec8f6cb
+==== PDFCOUNTER DEBUG END ====
+

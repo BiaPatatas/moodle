@@ -13,7 +13,7 @@ export const init = (courseid) => {
         Ajax.call([
             {
                 methodname: 'block_pdfcounter_qualweb_eval',
-                args: { courseid: courseid, action: 'status' }
+                args: { courseid: courseid, action: 'status', module_type: 'resource' }
             }
         ])[0].then(data => {
             if (data.status === 'completed') {
@@ -37,7 +37,7 @@ export const init = (courseid) => {
                 Ajax.call([
                     {
                         methodname: 'block_pdfcounter_qualweb_eval',
-                        args: { courseid: courseid }
+                        args: { courseid: courseid, module_type: 'resource' }
                     }
                 ])[0].then(() => setTimeout(pollStatus, 3000));
             }

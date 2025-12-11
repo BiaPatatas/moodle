@@ -11,19 +11,33 @@ use external_api;
 use context_course;
 use moodle_exception;
 
+
 class qualweb_eval extends external_api {
     public static function eval_parameters() {
         return new external_function_parameters([
             'courseid' => new external_value(PARAM_INT, 'Course ID'),
-            'action' => new external_value(PARAM_ALPHA, 'Action', VALUE_DEFAULT, 'start')
+            'action' => new external_value(PARAM_ALPHA, 'Action', VALUE_DEFAULT, 'start'),
+            'module_type' => new external_value(PARAM_ALPHA, 'Module type', VALUE_DEFAULT, 'resource')
         ]);
     }
 
-    public static function eval($courseid, $action = 'start') {
+    public static function eval($courseid, $action = 'start', $module_type = 'resource') {
         global $DB, $CFG, $USER;
+                    // DEBUG: Open debug log file for QualWeb
+                    $debuglogfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdfcounter_qualweb.txt';
+                    $debuglog = @fopen($debuglogfile, 'a');
+                    if ($debuglog !== false) {
+                        fwrite($debuglog, "\n==== QUALWEB EVAL DEBUG START ====".date('Y-m-d H:i:s')."\n");
+                        fwrite($debuglog, "Course ID: {$courseid}\n");
+                        fwrite($debuglog, "Action: {$action}\n");
+                        fwrite($debuglog, "Module type: {$module_type}\n");
+                    }
         require_once($CFG->dirroot . '/blocks/pdfcounter/qualweb_job_model.php');
         $context = context_course::instance($courseid);
         self::validate_context($context);
+        if (empty($module_type) || $module_type === 'undefined') {
+        $module_type = 'resource';
+    }
         if (!is_enrolled($context, $USER)) {
             throw new moodle_exception('not_enrolled', 'block_pdfcounter');
         }
@@ -55,7 +69,9 @@ class qualweb_eval extends external_api {
         // QualWeb workflow (igual ao AJAX antigo)
         $api_base = 'http://localhost:8081/api';
         $website_name = 'Moodle Course ' . $courseid;
-        $urls = [ $CFG->wwwroot . '/course/view.php?id=' . $courseid ];
+        // $urls = [ $CFG->wwwroot . '/course/view.php?id=' . $courseid ];
+        $qualweb_host = 'host.docker.internal'; // ou o IP do host
+        $urls = [ 'http://' . $qualweb_host . '/course/view.php?id=' . $courseid ];
         $sqlpages = "SELECT cm.id as cmid FROM {course_modules} cm JOIN {modules} m ON m.id = cm.module JOIN {page} p ON (m.name = 'page' AND p.id = cm.instance) WHERE cm.course = :courseid AND cm.deletioninprogress = 0 AND cm.visible = 1 AND m.name = 'page'";
         $pages = $DB->get_records_sql($sqlpages, array('courseid' => $courseid));
         foreach ($pages as $page) {
@@ -193,6 +209,7 @@ class qualweb_eval extends external_api {
         $job->status = 'error';
         $job->timemodified = time();
         $DB->update_record('block_pdfcounter_qualweb_jobs', $job);
+        error_log('QualWeb ERROR: ' . json_encode($result ?? null));
         return ['status' => 'error'];
     }
 
