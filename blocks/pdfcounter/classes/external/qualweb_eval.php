@@ -70,7 +70,7 @@ class qualweb_eval extends external_api {
         $api_base = 'http://localhost:8081/api';
         $website_name = 'Moodle Course ' . $courseid;
         // $urls = [ $CFG->wwwroot . '/course/view.php?id=' . $courseid ];
-        $qualweb_host = 'host.docker.internal'; // ou o IP do host
+        $qualweb_host = 'localhost'; // ou o IP do host
         $urls = [ 'http://' . $qualweb_host . '/course/view.php?id=' . $courseid ];
         $sqlpages = "SELECT cm.id as cmid FROM {course_modules} cm JOIN {modules} m ON m.id = cm.module JOIN {page} p ON (m.name = 'page' AND p.id = cm.instance) WHERE cm.course = :courseid AND cm.deletioninprogress = 0 AND cm.visible = 1 AND m.name = 'page'";
         $pages = $DB->get_records_sql($sqlpages, array('courseid' => $courseid));
