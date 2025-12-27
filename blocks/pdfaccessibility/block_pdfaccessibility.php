@@ -143,17 +143,50 @@ class block_pdfaccessibility extends block_base {
                 if (!file_exists($filepath)) {
                     $this->pdfaccessibility_debug_log('Arquivo físico não existe: ' . $filepath);
                 }
-                // Aqui você pode chamar sua função de avaliação do PDF e exibir o resultado detalhado
-                $avaliacao = '';
-                if (function_exists('block_pdfaccessibility_avaliar_pdf')) {
-                    $avaliacao = block_pdfaccessibility_avaliar_pdf($filepath, $filename);
-                    $this->pdfaccessibility_debug_log('Resultado da avaliação: ' . print_r($avaliacao, true));
-                    $this->pdfaccessibility_debug_log('Avaliação realizada para: ' . $filename);
-                } else {
-                    $avaliacao = '<div style="margin-bottom:10px;"><strong>' . htmlspecialchars($filename) . '</strong><br><span style="color:gray;">(Exemplo: aqui entraria o relatório de acessibilidade deste PDF)</span></div>';
-                    $this->pdfaccessibility_debug_log('Função de avaliação não encontrada para: ' . $filename);
+                // Renderização manual do relatório de acessibilidade
+                $this->content->text .= '<div style="margin-bottom:10px;">';
+                $this->content->text .= '<strong>' . htmlspecialchars($filename) . '</strong>';
+                // Buscar resultados dos testes
+                $pdfid = null;
+                if (isset($file->id)) {
+                    $pdfid = $file->id;
+                } else if (isset($file->fileid)) {
+                    $pdfid = $file->fileid;
                 }
-                $this->content->text .= $avaliacao;
+                if ($pdfid) {
+                    $testresults = $DB->get_records('block_pdfaccessibility_test_results', ['fileid' => $pdfid]);
+                    if ($testresults) {
+                        $this->content->text .= '<div style="margin-top:6px;">';
+                        foreach (pdf_accessibility_config::TEST_CONFIG as $testkey => $testcfg) {
+                            $label = $testcfg['label'];
+                            $icon = pdf_accessibility_config::get_info_icon_html($testkey);
+                            // Procura resultado do teste
+                            $found = false;
+                            foreach ($testresults as $test) {
+                                if ($test->testname === $testkey) {
+                                    $found = true;
+                                    $status = $test->result;
+                                    $color = ($status === 'pass') ? '#eafaf1' : (($status === 'fail') ? '#fff4f4' : '#fffbe6');
+                                    $iconhtml = $icon;
+                                    $this->content->text .= '<div style="display:flex;align-items:flex-start;margin-top:8px;margin-bottom:10px; background:' . $color . '; border-radius:6px;padding:6px 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);opacity:1;">';
+                                    $this->content->text .= '<div style="font-weight:bold; font-size: 0.925rem; color: #1e1e1e;">' . $label . ' ' . $iconhtml . '</div>';
+                                    $this->content->text .= '<div style="margin-left:10px;">' . ucfirst($status) . '</div>';
+                                    $this->content->text .= '</div>';
+                                    break;
+                                }
+                            }
+                            if (!$found) {
+                                // Se não encontrou resultado, mostra como não avaliado
+                                $this->content->text .= '<div style="display:flex;align-items:flex-start;margin-top:8px;margin-bottom:10px; background:#f8f9fa; border-radius:6px;padding:6px 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);opacity:1;">';
+                                $this->content->text .= '<div style="font-weight:bold; font-size: 0.925rem; color: #1e1e1e;">' . $label . ' ' . $icon . '</div>';
+                                $this->content->text .= '<div style="margin-left:10px;">Not evaluated</div>';
+                                $this->content->text .= '</div>';
+                            }
+                        }
+                        $this->content->text .= '</div>';
+                    }
+                }
+                $this->content->text .= '</div>';
             }
         } else {
             $this->pdfaccessibility_debug_log('Nenhum PDF encontrado no contexto.');

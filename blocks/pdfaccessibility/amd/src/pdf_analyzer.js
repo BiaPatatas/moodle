@@ -175,6 +175,13 @@ define([], function() {
                         let color = c.pass ? '#27ae60' : '#e74c3c';
                         let opacity = 1;
                         let extra = '';
+                        // Info icon and description
+                        let infoId = `desc_${c.label.replace(/\s+/g, '_')}_${i}_${idx}`;
+                        let infoIcon = `<span class=\"pdf-info-icon\" style=\"cursor:pointer; color:#1976d2; margin-left:6px;\" data-info-id=\"${infoId}\"><i class='fa fa-info-circle'></i></span>`;
+                        let infoDesc = '';
+                        if (testConfig[i] && testConfig[i].description) {
+                            infoDesc = `<div id=\"${infoId}\" class=\"pdf-info-desc\" style=\"display:none; background:#f8f9fa; border:1px solid #e3e3e3; border-radius:6px; margin:6px 0 8px 0; padding:8px; font-size:0.92em; color:#333;\">${testConfig[i].description}</div>`;
+                        }
                         if (c.value === 'Non applicable') {
                             bg = '#f3f3f3';
                             color = '#000000ff';
@@ -200,7 +207,7 @@ define([], function() {
         </span>
         <div style="flex:1;">
             <div style="display:flex;align-items:center;justify-content:space-between;">
-                <div style="font-weight:bold; font-size: 0.925rem; color: #1e1e1e;">${c.label}</div>
+                <div style="font-weight:bold; font-size: 0.925rem; color: #1e1e1e;">${c.label} ${infoIcon}</div>
                 ${(!c.pass && c.value !== 'PDF not tagged' && c.value !== 'Non applicable') ? `
                     <button type="button"
                         aria-expanded="false"
@@ -220,6 +227,7 @@ define([], function() {
                 ` : ''}
             </div>
             <div style="font-size: 0.9rem; color: #282828; margin-left: 1%; margin-top: 1px;">${c.value}</div>
+            ${infoDesc}
             ${(!c.pass && c.value !== 'PDF not tagged' && c.value !== 'Non applicable') ? `
             <div id="fail-detail-${i}-${idx}" style="display:none;margin-top:5px;font-size:0.85em;color:#a94442;">
                 <a href="${c.link}" target="_blank" rel="noopener">${c.linkText || c.link}</a>
@@ -236,6 +244,21 @@ define([], function() {
                         `;
                     });
                     div.innerHTML = html;
+                                        // Event delegation para info icons (garante funcionamento mesmo após re-render)
+                                        div.querySelectorAll('.pdf-info-icon').forEach(function(icon) {
+                                            icon.addEventListener('click', function(e) {
+                                                e.stopPropagation();
+                                                const id = this.getAttribute('data-info-id');
+                                                if (id) {
+                                                    const desc = document.getElementById(id);
+                                                    if (desc) {
+                                                        desc.style.display = (desc.style.display === 'block') ? 'none' : 'block';
+                                                    }
+                                                }
+                                            });
+                                            // Remove inline onclick se existir (por segurança)
+                                            icon.removeAttribute('onclick');
+                                        });
                     return true;
                 })
                 .catch(error => {

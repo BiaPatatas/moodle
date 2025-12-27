@@ -226,6 +226,16 @@ foreach ($urllinks as $ulink) {
             $pdfid = $pdfrecord->id;
             $counts = pdf_accessibility_config::get_test_counts($DB, $pdfid);
             $display_name = !empty($pdfrecord->filename) ? $pdfrecord->filename : 'PDF';
+            $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
+                $counts['pass_count'],
+                $counts['fail_count'],
+                $counts['not_tagged_count']
+            );
+            $failed_tests = pdf_accessibility_config::calculate_failed_tests(
+                $counts['fail_count'],
+                $counts['not_tagged_count']
+            );
+            $fail_ratio = ($applicable_tests > 0) ? ($failed_tests / $applicable_tests) : 0;
             $pdf_issues[] = [
                 'filename' => $pdfrecord->filename,
                 'display_name' => $display_name,
@@ -233,20 +243,30 @@ foreach ($urllinks as $ulink) {
                 'fail_count' => $counts['fail_count'],
                 'pass_count' => $counts['pass_count'],
                 'nonapplicable_count' => $counts['nonapplicable_count'],
-                'not_tagged_count' => $counts['not_tagged_count']
+                'not_tagged_count' => $counts['not_tagged_count'],
+                'failed_tests' => $failed_tests,
+                'applicable_tests' => $applicable_tests,
+                'fail_ratio' => $fail_ratio
             ];
-            // Calcular progresso para cada PDF
-            $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
-                $counts['pass_count'],
-                $counts['fail_count'],
-                $counts['not_tagged_count']
-            );
             if ($applicable_tests > 0) {
                 $percent = pdf_accessibility_config::calculate_progress($counts);
                 $total_percent += $percent;
                 $total_pdfs++;
             }
         }
+        // Ordena do menos acessível para o mais acessível
+        usort($pdf_issues, function($a, $b) {
+            // Ordena do maior para o menor ratio de falhas, com precisão decimal
+            if (abs($b['fail_ratio'] - $a['fail_ratio']) < 0.00001) {
+                // Se empatar, ordena pelo total de testes aplicáveis (mais testes primeiro)
+                if (($b['applicable_tests'] ?? 0) === ($a['applicable_tests'] ?? 0)) {
+                    // Se ainda empatar, ordena pelo número absoluto de falhas
+                    return $b['failed_tests'] <=> $a['failed_tests'];
+                }
+                return ($b['applicable_tests'] ?? 0) <=> ($a['applicable_tests'] ?? 0);
+            }
+            return ($b['fail_ratio'] < $a['fail_ratio']) ? -1 : 1;
+        });
         $progress_value = $total_pdfs > 0 ? round($total_percent / $total_pdfs) : 0;
         $progress_color = pdf_accessibility_config::get_progress_color($progress_value);
 
@@ -449,7 +469,7 @@ foreach ($urllinks as $ulink) {
         //-------------------------------------PDFs Issues---------------------------------------
         $pdf_issues_html = '<div style="font-family:Arial,sans-serif;max-width:320px;">';
         $pdf_issues_html .= '<div style="background: #f8f9fa; border-radius: 8px; padding: 15px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: black; margin-bottom: 10px;">';
-        $pdf_issues_html .= '<span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">PDFs Issues</span><br>';
+        $pdf_issues_html .= '<span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">PDF Accessibility Results</span><br>';
         $pdf_issues_html .= '<div style="margin-top:10px; max-height: 200px; overflow-y: auto;">';
         $pdf_issues_html .= '<table id="pdf-issues-list" style="width:100%; font-size:0.85rem; border-collapse:collapse;"><tbody>';
         // Renderiza os issues iniciais (serão substituídos pelo JS)

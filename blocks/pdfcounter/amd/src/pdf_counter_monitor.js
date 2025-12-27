@@ -217,6 +217,20 @@ define(['jquery'], function($) {
                 return;
             }
 
+            // Ordena os PDFs do maior para o menor ratio de falhas
+            pdfIssues.sort(function(a, b) {
+                var applicableA = (a.pass_count || 0) + (a.fail_count || 0) + (a.not_tagged_count || 0);
+                var applicableB = (b.pass_count || 0) + (b.fail_count || 0) + (b.not_tagged_count || 0);
+                var failedA = (a.fail_count || 0) + (a.not_tagged_count || 0);
+                var failedB = (b.fail_count || 0) + (b.not_tagged_count || 0);
+                var ratioA = applicableA > 0 ? failedA / applicableA : 0;
+                var ratioB = applicableB > 0 ? failedB / applicableB : 0;
+                if (ratioB === ratioA) {
+                    return failedB - failedA;
+                }
+                return ratioB - ratioA;
+            });
+
             var html = '';
             var self = this;
             pdfIssues.forEach(function(pdf) {

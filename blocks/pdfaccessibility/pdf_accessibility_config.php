@@ -16,6 +16,7 @@ class pdf_accessibility_config {
     
     /**
      * Test configuration mapping - centralizes all test information
+     * (Inclui label, link, description, linkText)
      */
     const TEST_CONFIG = [
         'Title' => [
@@ -61,6 +62,20 @@ class pdf_accessibility_config {
             'linkText' => 'How to fix?'
         ]
     ];
+
+    /**
+     * Gera HTML do info icon + descrição expansível para um teste
+     * @param string $testkey
+     * @return string
+     */
+    public static function get_info_icon_html($testkey) {
+        if (!isset(self::TEST_CONFIG[$testkey])) return '';
+        $desc = htmlspecialchars(self::TEST_CONFIG[$testkey]['description']);
+        $id = 'desc_' . md5($testkey . uniqid());
+        $icon = '<span class="pdf-info-icon" style="cursor:pointer; color:#1976d2; margin-left:6px;" onclick="var d=document.getElementById(\''.$id.'\'); if(d.style.display==\'none\'){d.style.display=\'block\';}else{d.style.display=\'none\';}"><i class="fa fa-info-circle"></i></span>';
+        $descdiv = '<div id="'.$id.'" class="pdf-info-desc" style="display:none; background:#f8f9fa; border:1px solid #e3e3e3; border-radius:6px; margin:6px 0 8px 0; padding:8px; font-size:0.92em; color:#333;">'.$desc.'</div>';
+        return $icon . $descdiv;
+    }
     
     /**
      * Determine the status of a test based on its name and value
