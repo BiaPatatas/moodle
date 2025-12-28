@@ -105,18 +105,24 @@ define([], function() {
                         if (!summary) {
  return;
 }
-                        // Generate checks array using shared logic
-                        const checks = testConfig.map(config => {
-                            const value = determineCheckValue(config.key, summary[config.key]);
-                            return {
-                                label: config.label,
-                                value: value,
-                                pass: value === 'Pass',
-                                raw: summary[config.key],
-                                link: config.link,
-                                linkText: "How to fix?"
-                            };
-                        });
+                        // Garante alinhamento correto entre key, label, descrição e valor, e oculta testes indesejados
+                        const excludedKeys = ['Language declared', 'Language detected'];
+                        const checks = Object.keys(summary)
+                            .filter(key => !excludedKeys.includes(key))
+                            .map((key) => {
+                                const config = testConfig.find(cfg => cfg.key === key) || {};
+                                const value = determineCheckValue(key, summary[key]);
+                                return {
+                                    key: key,
+                                    label: config.label || key,
+                                    value: value,
+                                    pass: value === 'Pass',
+                                    raw: summary[key],
+                                    link: config.link || '',
+                                    linkText: config.linkText || 'How to fix?',
+                                    description: config.description || ''
+                                };
+                            });
                         const passed = checks.filter(c => c.pass).length;
                         const nonApplicable = checks.filter(c => c.value === "Non applicable").length;
                         // Const pdfNotTagged = checks.filter(c => c.value === "PDF not tagged").length; // removido pois não é usado
@@ -176,11 +182,11 @@ define([], function() {
                         let opacity = 1;
                         let extra = '';
                         // Info icon and description
-                        let infoId = `desc_${c.label.replace(/\s+/g, '_')}_${i}_${idx}`;
-                        let infoIcon = `<span class=\"pdf-info-icon\" style=\"cursor:pointer; color:#1976d2; margin-left:6px;\" data-info-id=\"${infoId}\"><i class='fa fa-info-circle'></i></span>`;
+                        let infoId = `desc_${c.key.replace(/\s+/g, '_')}_${i}_${idx}`;
+                        let infoIcon = `<span class=\"pdf-info-icon\" style=\"cursor:pointer; color:#1976d2; margin-left:6px;\" data-info-id=\"${infoId}\"><i class='fa fa-info-circle' style="color: #252525ff;"></i></span>`;
                         let infoDesc = '';
-                        if (testConfig[i] && testConfig[i].description) {
-                            infoDesc = `<div id=\"${infoId}\" class=\"pdf-info-desc\" style=\"display:none; background:#f8f9fa; border:1px solid #e3e3e3; border-radius:6px; margin:6px 0 8px 0; padding:8px; font-size:0.92em; color:#333;\">${testConfig[i].description}</div>`;
+                        if (c.description) {
+                            infoDesc = `<div id=\"${infoId}\" class=\"pdf-info-desc\" style=\"display:none; background:#f8f9fa; border:1px solid #e3e3e3; border-radius:6px; margin:6px 0 8px 0; padding:8px; font-size:0.92em; color:#333;\">${c.description}</div>`;
                         }
                         if (c.value === 'Non applicable') {
                             bg = '#f3f3f3';
@@ -247,12 +253,15 @@ define([], function() {
                                         // Event delegation para info icons (garante funcionamento mesmo após re-render)
                                         div.querySelectorAll('.pdf-info-icon').forEach(function(icon) {
                                             icon.addEventListener('click', function(e) {
+                                                console.log('Info icon clicked', this, this.getAttribute('data-info-id'));
                                                 e.stopPropagation();
                                                 const id = this.getAttribute('data-info-id');
                                                 if (id) {
                                                     const desc = document.getElementById(id);
                                                     if (desc) {
                                                         desc.style.display = (desc.style.display === 'block') ? 'none' : 'block';
+                                                    } else {
+                                                        console.warn('Descrição não encontrada para', id);
                                                     }
                                                 }
                                             });

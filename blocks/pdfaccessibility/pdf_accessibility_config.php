@@ -22,43 +22,43 @@ class pdf_accessibility_config {
         'Title' => [
             'label' => 'Document Title Check',
             'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF18',
-            'description' => 'The document title is displayed in the title bar.',
+            'description' => 'Checks if the PDF has a real title set in its properties.',
             'linkText' => 'How to fix?'
         ],
         'Languages match' => [
             'label' => 'Language Consistency Check', 
             'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF16',
-            'description' => 'The primary language defined in the document must match the language used in the content.',
+            'description' => 'Ensures the document\'s language setting matches the actual content.',
             'linkText' => 'How to fix?'
         ],
         'PDF only image' => [
             'label' => 'OCR Application Check',
             'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF7',
-            'description' => 'Content must be provided as real text rather than images, using authoring tools or OCR when necessary.',
+            'description' => 'Checks if the PDF is just a scanned image of text.',
             'linkText' => 'How to fix?'
         ],
         'Links Valid' => [
             'label' => 'Link Validity Check',
             'link' => 'https://www.w3.org/TR/WCAG20-TECHS/pdf#PDF11',
-            'description' => 'All hyperlinks must be valid and functional for users.',
+            'description' => 'Verifies that all hyperlinks are functional and correctly tagged.',
             'linkText' => 'How to fix?'
         ],
         'Figures with alt text' => [
             'label' => 'Image Alt Text Check',
             'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF1',
-            'description' => 'All figures and images must include alternative text that conveys their purpose or information.',
+            'description' => 'Checks if images have "Alternative Text" descriptions.',
             'linkText' => 'How to fix?'
         ],
         'Lists marked as Lists' => [
             'label' => 'List Tagging Check',
             'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF21',
-            'description' => 'Lists must be correctly tagged to preserve structure and allow assistive technologies to interpret them properly.',
+            'description' => 'Ensures that visual lists are correctly tagged in the code.',
             'linkText' => 'How to fix?'
         ],
         'Table With Headers' => [
             'label' => 'Table Header Check',
             'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF6',
-            'description' => 'Tables must include properly defined headers to identify rows and columns for assistive technologies.',
+            'description' => 'Verifies that data tables have defined headers.',
             'linkText' => 'How to fix?'
         ]
     ];
@@ -259,7 +259,8 @@ class pdf_accessibility_config {
             $config[] = [
                 'key' => $key,
                 'label' => $test['label'],
-                'link' => $test['link']
+                'link' => $test['link'],
+                'description' => isset($test['description']) ? $test['description'] : ''
             ];
         }
         return json_encode($config);
