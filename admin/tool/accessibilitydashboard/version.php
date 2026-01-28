@@ -1,11 +1,11 @@
 <?php
 /**
- * PDF Accessibility Admin Tool - Version file
+ * PDF Accessibility Admin Tool 
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025100698;
+$plugin->version   = 2025100700;
 $plugin->requires  = 2022112800;
 $plugin->component = 'tool_accessibilitydashboard';
 $plugin->maturity  = MATURITY_STABLE;

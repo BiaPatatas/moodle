@@ -5,15 +5,44 @@ use tool_accessibilitydashboard\dashboard;
  * PDF Accessibility Dashboard - Simple Version
  */
 
+
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
+require_login();
 admin_externalpage_setup('tool_accessibilitydashboard');
 
 $PAGE->set_url('/admin/tool/accessibilitydashboard/index.php');
 $PAGE->set_title('PDF Accessibility Dashboard');
 $PAGE->set_heading('PDF Accessibility Dashboard');
 $PAGE->requires->css('/admin/tool/accessibilitydashboard/index.css');
+
+// --- ROLE LOGIC ---
+$isadmin = is_siteadmin();
+$systemcontext = context_system::instance();
+$usercourses = enrol_get_users_courses($USER->id, true, 'id,category');
+$managercourse = null;
+$managercategory = null;
+$is_manager = false;
+if (!$isadmin) {
+    foreach ($usercourses as $c) {
+        $coursecontext = context_course::instance($c->id);
+        if (has_capability('moodle/course:update', $coursecontext, $USER->id) && has_capability('moodle/site:config', $systemcontext) == false) {
+            $managercourse = $c->id;
+            $managercategory = $c->category;
+            $is_manager = true;
+            break;
+        }
+    }
+}
+
+// Se não for admin nem manager, bloquear acesso
+if (!$isadmin && !$is_manager) {
+    echo $OUTPUT->header();
+    echo '<div class="alert alert-danger" style="margin:2em;">Acesso restrito: apenas administradores ou managers de curso podem ver este dashboard.</div>';
+    echo $OUTPUT->footer();
+    exit;
+}
 
 // --- DEBUG LOGGING ---
 $debug_start_time = microtime(true);
@@ -28,9 +57,15 @@ echo $OUTPUT->header();
 $dashboard = new \tool_accessibilitydashboard\dashboard();
 
 // Get filter parameters
-$department_id = optional_param('department', null, PARAM_INT);
-$course_id = optional_param('course', null, PARAM_INT);
-$discipline_id = optional_param('discipline', null, PARAM_INT);
+if ($isadmin) {
+    $department_id = optional_param('department', null, PARAM_INT);
+    $course_id = optional_param('course', null, PARAM_INT);
+    $discipline_id = optional_param('discipline', null, PARAM_INT);
+} else if ($is_manager && $managercourse && $managercategory) {
+    $department_id = $managercategory;
+    $course_id = $managercourse;
+    $discipline_id = optional_param('discipline', null, PARAM_INT);
+}
 // Add filter info to debug
 $debug_info['filters'] = [
      'department_id' => $department_id,
@@ -193,7 +228,7 @@ error_log('DEBUG INDEX.PHP block executed');
                                     <div class="filter-row">
                                         <div class="filter-group">
                                             <label for="department">Academic Degree:</label>
-                                            <select id="department" name="department" onchange="updateCourses()">
+                                            <select id="department" name="department" onchange="updateCourses()" <?php if (!$isadmin && $managercategory) echo 'disabled'; ?>>
                                                 <option value="">All Academic Degrees</option>
                                                 <?php foreach ($departments as $dept): ?>
                                                     <option value="<?php echo $dept->id; ?>" <?php echo ($department_id == $dept->id) ? 'selected' : ''; ?>>
@@ -201,10 +236,13 @@ error_log('DEBUG INDEX.PHP block executed');
                                                     </option>
                                                 <?php endforeach; ?>
                                             </select>
+                                            <?php if (!$isadmin && $managercategory): ?>
+                                                <input type="hidden" name="department" value="<?php echo $managercategory; ?>" />
+                                            <?php endif; ?>
                                         </div>
                                         <div class="filter-group">
                                             <label for="course">Course:</label>
-                                            <select id="course" name="course" onchange="updateDisciplines()">
+                                            <select id="course" name="course" onchange="updateDisciplines()" <?php if (!$isadmin && $managercourse) echo 'disabled'; ?>>
                                                 <option value="">All Courses</option>
                                                 <?php foreach ($courses as $course): ?>
                                                     <option value="<?php echo $course->id; ?>" <?php echo ($course_id == $course->id) ? 'selected' : ''; ?>>
@@ -212,6 +250,9 @@ error_log('DEBUG INDEX.PHP block executed');
                                                     </option>
                                                 <?php endforeach; ?>
                                             </select>
+                                            <?php if (!$isadmin && $managercourse): ?>
+                                                <input type="hidden" name="course" value="<?php echo $managercourse; ?>" />
+                                            <?php endif; ?>
                                         </div>
                                         <div class="filter-group">
                                             <label for="discipline">Discipline:</label>
