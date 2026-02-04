@@ -1,11 +1,11 @@
 {
-    "timestamp": "2025-12-29 02:02:54",
-    "filename": "Curriculo_Beatriz_Patatas.pdf",
-    "filesize": "100583",
-    "filepath": "C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf3DB0.tmp.pdf",
+    "timestamp": "2026-02-05 02:50:15",
+    "filename": "Guide to Producing Accessible Documents.pdf",
+    "filesize": "2053766",
+    "filepath": "C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf8BE9.tmp.pdf",
     "file_exists": true,
     "script_path": "C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py",
     "script_exists": true,
-    "python_command": "python3 \"C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py\" \"C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf3DB0.tmp.pdf\"",
+    "python_command": "python3 \"C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax\/..\/pdf_accessibility.py\" \"C:\\xampp\\htdocs\\Moodles\\server\\moodledata\\temp\\pdf8BE9.tmp.pdf\"",
     "cwd": "C:\\xampp\\htdocs\\Moodles\\server\\moodle\\blocks\\pdfaccessibility\\ajax"
 }

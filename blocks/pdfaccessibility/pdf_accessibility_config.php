@@ -21,43 +21,43 @@ class pdf_accessibility_config {
     const TEST_CONFIG = [
         'Title' => [
             'label' => 'Document Title Check',
-            'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF18',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.xdsz0ysx738j',
             'description' => 'Checks if the PDF has a real title set in its properties.',
             'linkText' => 'How to fix?'
         ],
         'Languages match' => [
             'label' => 'Language Consistency Check', 
-            'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF16',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.d9ynqih0xdej',
             'description' => 'Ensures the document\'s language setting matches the actual content.',
             'linkText' => 'How to fix?'
         ],
         'PDF only image' => [
             'label' => 'OCR Application Check',
-            'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF7',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.c077nfc3meb3',
             'description' => 'Checks if the PDF is just a scanned image of text.',
             'linkText' => 'How to fix?'
         ],
         'Links Valid' => [
             'label' => 'Link Validity Check',
-            'link' => 'https://www.w3.org/TR/WCAG20-TECHS/pdf#PDF11',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.o9p8yrk0s0ni',
             'description' => 'Verifies that all hyperlinks are functional and correctly tagged.',
             'linkText' => 'How to fix?'
         ],
         'Figures with alt text' => [
             'label' => 'Image Alt Text Check',
-            'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF1',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.9alufce1hsoc',
             'description' => 'Checks if images have "Alternative Text" descriptions.',
             'linkText' => 'How to fix?'
         ],
         'Lists marked as Lists' => [
             'label' => 'List Tagging Check',
-            'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF21',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.6jc5gvwrm9z',
             'description' => 'Ensures that visual lists are correctly tagged in the code.',
             'linkText' => 'How to fix?'
         ],
         'Table With Headers' => [
             'label' => 'Table Header Check',
-            'link' => 'https://www.w3.org/WAI/WCAG22/Techniques/pdf/PDF6',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.ik2uvandglez',
             'description' => 'Verifies that data tables have defined headers.',
             'linkText' => 'How to fix?'
         ]

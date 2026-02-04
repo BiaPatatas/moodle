@@ -1,19 +1,19 @@
 {
-    "timestamp": "2025-12-29 02:02:59",
+    "timestamp": "2026-02-05 02:50:23",
     "json_decode_success": true,
     "json_last_error": 0,
     "json_last_error_msg": "No error",
     "result_type": "array",
     "result_count": 9,
     "result": {
-        "Title": "",
-        "Language declared": null,
+        "Title": "Guide to Producing Accessible Documents",
+        "Language declared": "pt_PT",
         "Language detected": "en",
         "Languages match": false,
         "PDF only image": "PDF with text",
-        "Lists marked as Lists": "PDF not tagged",
-        "Figures with alt text": "PDF not tagged",
+        "Lists marked as Lists": "Non applicable",
+        "Figures with alt text": false,
         "Links Valid": true,
-        "Table With Headers": "PDF not tagged"
+        "Table With Headers": "Non applicable"
     }
 }
