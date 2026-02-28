@@ -12,8 +12,11 @@ require_sesskey();
 
 file_put_contents(__DIR__.'/debug.txt', 'chegou aqui');
 
+// Ensure errors are logged but not sent to the AJAX response, so we always
+// return valid JSON to the frontend instead of HTML error pages.
+// (Production Moodle normally has display_errors = 0 in php.ini; we keep that.)
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
 

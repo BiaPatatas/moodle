@@ -12,56 +12,138 @@ class pdf_accessibility_config {
     /**
      * Test names that should be excluded from processing
      */
-    const EXCLUDED_TESTS = ['Language declared', 'Language detected', 'Passed', 'Failed'];
+    const EXCLUDED_TESTS = [
+        'Language declared',
+        'Language detected',
+        // Campos agregados/sintéticos do relatório Python
+        'Passed',
+        'Failed',
+        'Non applicable',
+        // Campos de detalhe usados apenas para informação de links
+        'Links Error Pages',
+        'Links Error Detail',
+    ];
     
     /**
-     * Test configuration mapping - centralizes all test information
-     * (Inclui label, link, description, linkText)
+     * Test configuration mapping - centralizes all test information.
+     *
+     * The human-readable texts (label, description, "How to fix?") are
+     * provided via Moodle language strings so they can be translated.
+     * This config only stores a stable key and the help link.
      */
     const TEST_CONFIG = [
         'Title' => [
-            'label' => 'Document Title Check',
-            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.xdsz0ysx738j',
-            'description' => 'Checks if the PDF has a real title set in its properties.',
-            'linkText' => 'How to fix?'
+            'key' => 'title',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.xdsz0ysx738j'
         ],
         'Languages match' => [
-            'label' => 'Language Consistency Check', 
-            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.d9ynqih0xdej',
-            'description' => 'Ensures the document\'s language setting matches the actual content.',
-            'linkText' => 'How to fix?'
+            'key' => 'languagesmatch',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.d9ynqih0xdej'
         ],
+        // Nome antigo do teste de OCR (para compatibilidade com resultados antigos)
         'PDF only image' => [
-            'label' => 'OCR Application Check',
-            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.c077nfc3meb3',
-            'description' => 'Checks if the PDF is just a scanned image of text.',
-            'linkText' => 'How to fix?'
+            'key' => 'pdfonlyimage',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.c077nfc3meb3'
+        ],
+        // Novo nome do teste de OCR (Python atual devolve "PDF OCR status")
+        // Reutiliza as mesmas strings de idioma/ajuda de "pdfonlyimage".
+        'PDF OCR status' => [
+            'key' => 'pdfonlyimage',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.c077nfc3meb3'
         ],
         'Links Valid' => [
-            'label' => 'Link Validity Check',
-            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.o9p8yrk0s0ni',
-            'description' => 'Verifies that all hyperlinks are functional and correctly tagged.',
-            'linkText' => 'How to fix?'
+            'key' => 'linksvalid',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.o9p8yrk0s0ni'
         ],
         'Figures with alt text' => [
-            'label' => 'Image Alt Text Check',
-            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.9alufce1hsoc',
-            'description' => 'Checks if images have "Alternative Text" descriptions.',
-            'linkText' => 'How to fix?'
+            'key' => 'figuresalt',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.9alufce1hsoc'
         ],
         'Lists marked as Lists' => [
-            'label' => 'List Tagging Check',
-            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.6jc5gvwrm9z',
-            'description' => 'Ensures that visual lists are correctly tagged in the code.',
-            'linkText' => 'How to fix?'
+            'key' => 'lists',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.6jc5gvwrm9z'
         ],
         'Table With Headers' => [
-            'label' => 'Table Header Check',
-            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.ik2uvandglez',
-            'description' => 'Verifies that data tables have defined headers.',
-            'linkText' => 'How to fix?'
+            'key' => 'tableheaders',
+            'link' => 'https://docs.google.com/document/d/1I3O_K_A7Uja_Zkm1x16pzUT8wCXbO_UjSMdz0kVMLQw/edit?tab=t.0#heading=h.ik2uvandglez'
         ]
     ];
+
+    /**
+     * Get the base key used for language strings for a given test.
+     *
+     * @param string $testkey Raw test name coming from the Python script.
+     * @return string|null Base key (e.g. 'title') or null if not defined.
+     */
+    protected static function get_test_base_key($testkey) {
+        if (!isset(self::TEST_CONFIG[$testkey]['key'])) {
+            return null;
+        }
+        return self::TEST_CONFIG[$testkey]['key'];
+    }
+
+    /**
+     * Get the localized label for a test.
+     *
+     * @param string $testkey
+     * @return string
+     */
+    public static function get_test_label($testkey) {
+        $base = self::get_test_base_key($testkey);
+        if ($base === null) {
+            return $testkey;
+        }
+        return get_string('test_' . $base . '_label', 'block_pdfaccessibility');
+    }
+
+    /**
+     * Get the localized description for a test (used in info icon and JS).
+     *
+     * @param string $testkey
+     * @return string
+     */
+    public static function get_test_description($testkey) {
+        $base = self::get_test_base_key($testkey);
+        if ($base === null) {
+            return '';
+        }
+        return get_string('test_' . $base . '_desc', 'block_pdfaccessibility');
+    }
+
+    /**
+     * Get the localized "How to fix?" text used for all tests.
+     *
+     * @return string
+     */
+    public static function get_test_link_text() {
+        return get_string('test_howtofix', 'block_pdfaccessibility');
+    }
+
+    /**
+     * Get the help link URL for a given test.
+     *
+     * The default comes from TEST_CONFIG['link'], but if a language
+     * string "test_{$base}_link" exists it overrides that value so
+     * each site/language can point to its own Moodle resource.
+     *
+     * @param string $testkey Raw test name from Python.
+     * @return string URL to open when clicking "How to fix?".
+     */
+    public static function get_test_link($testkey) {
+        $base = self::get_test_base_key($testkey);
+        // Fallback to config link if no base key.
+        if ($base === null) {
+            return isset(self::TEST_CONFIG[$testkey]['link']) ? self::TEST_CONFIG[$testkey]['link'] : '';
+        }
+
+        $identifier = 'test_' . $base . '_link';
+        $stringmanager = get_string_manager();
+        if ($stringmanager->string_exists($identifier, 'block_pdfaccessibility')) {
+            return get_string($identifier, 'block_pdfaccessibility');
+        }
+
+        return isset(self::TEST_CONFIG[$testkey]['link']) ? self::TEST_CONFIG[$testkey]['link'] : '';
+    }
 
     /**
      * Gera HTML do info icon + descrição expansível para um teste
@@ -70,7 +152,9 @@ class pdf_accessibility_config {
      */
     public static function get_info_icon_html($testkey) {
         if (!isset(self::TEST_CONFIG[$testkey])) return '';
-        $desc = htmlspecialchars(self::TEST_CONFIG[$testkey]['description']);
+        $description = self::get_test_description($testkey);
+        if ($description === '') return '';
+        $desc = htmlspecialchars($description);
         $id = 'desc_' . md5($testkey . uniqid());
         $icon = '<span class="pdf-info-icon" style="cursor:pointer; color:#1976d2; margin-left:6px;" onclick="var d=document.getElementById(\''.$id.'\'); if(d.style.display==\'none\'){d.style.display=\'block\';}else{d.style.display=\'none\';}"><i class="fa fa-info-circle"></i></span>';
         $descdiv = '<div id="'.$id.'" class="pdf-info-desc" style="display:none; background:#f8f9fa; border:1px solid #e3e3e3; border-radius:6px; margin:6px 0 8px 0; padding:8px; font-size:0.92em; color:#333;">'.$desc.'</div>';
@@ -85,15 +169,31 @@ class pdf_accessibility_config {
      * @return string One of: 'pass', 'fail', 'non applicable', 'pdf not tagged'
      */
     public static function determine_test_status($testname, $testvalue) {
+        // Tratamento específico para o teste de OCR
+        if ($testname === 'PDF OCR status') {
+            if ($testvalue === 'Only Images') {
+                // Documento apenas com imagens/fotografias – teste não aplicável
+                return 'non applicable';
+            }
+            if ($testvalue === 'Scanned PDF without OCR') {
+                // Documento digitalizado sem OCR – falha
+                return 'fail';
+            }
+            if ($testvalue === 'PDF with text') {
+                // PDF com camada de texto/OCR – sucesso
+                return 'pass';
+            }
+        }
+
         // Handle special string values first
         if ($testvalue === 'Non applicable') {
             return 'non applicable';
         }
-        
+
         if ($testvalue === 'PDF not tagged') {
             return 'pdf not tagged';
         }
-        
+
         // Special case for Title test
         if ($testname === 'Title' && $testvalue === 'No Title Found') {
             return 'fail';
@@ -256,11 +356,17 @@ class pdf_accessibility_config {
     public static function get_js_test_config() {
         $config = [];
         foreach (self::TEST_CONFIG as $key => $test) {
+            $label = self::get_test_label($key);
+            $description = self::get_test_description($key);
+            $linktext = self::get_test_link_text();
+            $link = self::get_test_link($key);
+
             $config[] = [
                 'key' => $key,
-                'label' => $test['label'],
-                'link' => $test['link'],
-                'description' => isset($test['description']) ? $test['description'] : ''
+                'label' => $label,
+                'link' => $link,
+                'description' => $description,
+                'linkText' => $linktext
             ];
         }
         return json_encode($config);
@@ -283,7 +389,11 @@ class pdf_accessibility_config {
         if ($testkey === 'Title' && $testvalue === 'No Title Found') return 'Fail';
         if ($testkey === 'Title' && $testvalue !== 'No Title Found') return 'Pass';
         if ($testkey === 'Languages match') return $testvalue ? 'Pass' : 'Fail';
-        if ($testkey === 'PDF only image') return $testvalue === 'PDF with text' ? 'Pass' : 'Fail';
+        if ($testkey === 'PDF OCR status') {
+            if ($testvalue === 'PDF with text') return 'Pass';
+            if ($testvalue === 'Scanned PDF without OCR') return 'Fail';
+            if ($testvalue === 'Only Images') return 'Non applicable';
+        }
         
         return $testvalue; // Return as-is for other cases
     }

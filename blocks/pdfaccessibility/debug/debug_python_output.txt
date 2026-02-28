@@ -565,3 +565,336 @@ Raw Output:
 
 === End Output ===
 
+=== Python Output Debug ===
+Timestamp: 2026-02-05 03:05:47
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfA5EB.tmp.pdf"
+Output Length: 295
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "pt_PT", "Language detected": "en", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-05 03:20:44
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf541F.tmp.pdf"
+Output Length: 290
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-05 17:06:50
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf9389.tmp.pdf"
+Output Length: 274
+Raw Output:
+{"Title": "Plano nutricional", "Language declared": "pt_PT", "Language detected": "pt", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": false, "Figures with alt text": "Non applicable", "Links Valid": true, "Table With Headers": false}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-12 23:11:06
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfFC8B.tmp.pdf"
+Output Length: 295
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "pt_PT", "Language detected": "en", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-17 01:49:09
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfEA6B.tmp.pdf"
+Output Length: 295
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "pt_PT", "Language detected": "en", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-17 01:57:10
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf7014.tmp.pdf"
+Output Length: 295
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "pt_PT", "Language detected": "en", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-17 02:16:39
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf464A.tmp.pdf"
+Output Length: 295
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "pt_PT", "Language detected": "en", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-17 02:17:45
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf4C81.tmp.pdf"
+Output Length: 295
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "pt_PT", "Language detected": "en", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": false, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-18 18:27:30
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf479C.tmp.pdf"
+Output Length: 276
+Raw Output:
+{"Title": "Table Headers", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": "Non applicable", "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-18 18:37:54
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf1245.tmp.pdf"
+Output Length: 280
+Raw Output:
+{"Title": "Language Settings", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": "Non applicable", "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-18 19:10:26
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfC1C9.tmp.pdf"
+Output Length: 290
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:13:36
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf1234.tmp.pdf"
+Output Length: 314
+Raw Output:
+{"Title": "Guia para a Produ\u00e7\u00e3o de Documentos Acess\u00edveis", "Language declared": "pt_PT", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:14:07
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfC71F.tmp.pdf"
+Output Length: 317
+Raw Output:
+{"Title": "Caso de estudo + Gui\u00e3o Entrevistas", "Language declared": "pt_PT", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": "Non applicable", "Links Valid": "Non applicable", "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:14:17
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfEDC4.tmp.pdf"
+Output Length: 317
+Raw Output:
+{"Title": "Caso de estudo + Gui\u00e3o Entrevistas", "Language declared": "pt_PT", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": "Non applicable", "Links Valid": "Non applicable", "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:14:19
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfF324.tmp.pdf"
+Output Length: 282
+Raw Output:
+{"Title": "Ticket", "Language declared": null, "Language detected": "it", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": true, "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:16:10
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfA5E6.tmp.pdf"
+Output Length: 282
+Raw Output:
+{"Title": "Ticket", "Language declared": null, "Language detected": "it", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": true, "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:36:43
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf72AA.tmp.pdf"
+Output Length: 314
+Raw Output:
+{"Title": "Guia para a Produ\u00e7\u00e3o de Documentos Acess\u00edveis", "Language declared": "pt_PT", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:36:48
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf8961.tmp.pdf"
+Output Length: 314
+Raw Output:
+{"Title": "Guia para a Produ\u00e7\u00e3o de Documentos Acess\u00edveis", "Language declared": "pt_PT", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:36:50
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf91DE.tmp.pdf"
+Output Length: 290
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:36:59
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfB507.tmp.pdf"
+Output Length: 314
+Raw Output:
+{"Title": "Guia para a Produ\u00e7\u00e3o de Documentos Acess\u00edveis", "Language declared": "pt_PT", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:37:15
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfF415.tmp.pdf"
+Output Length: 290
+Raw Output:
+{"Title": "Guide to Producing Accessible Documents", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:41:53
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf2A57.tmp.pdf"
+Output Length: 261
+Raw Output:
+{"Title": "Hyperlinks", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": true, "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 07:42:16
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf8828.tmp.pdf"
+Output Length: 306
+Raw Output:
+{"Title": "Accessibility Dashboard Report", "Language declared": "en", "Language detected": "pt", "Languages match": false, "PDF only image": "PDF with text", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": true, "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-20 18:19:20
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfDF0C.tmp.pdf"
+Output Length: 331
+Raw Output:
+{"Title": "Real-Time Accessibility Dashboards for Higher Education", "Language declared": "en", "Language detected": "en", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": "PDF not tagged", "Figures with alt text": "PDF not tagged", "Links Valid": false, "Table With Headers": "PDF not tagged"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-02-28 05:35:55
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfA579.tmp.pdf"
+Output Length: 278
+Raw Output:
+{"Title": "No Title Found", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF only image": "PDF with text", "Lists marked as Lists": false, "Figures with alt text": true, "Links Valid": "Non applicable", "Table With Headers": "Non applicable"}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 03:42:55
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf2082.tmp.pdf"
+Output Length: 438
+Raw Output:
+{"Title": "No Title Found", "Language declared": "pt", "Language detected": "Non applicable", "Languages match": false, "PDF OCR status": "Scanned PDF without OCR", "Lists marked as Lists": "Non applicable", "Figures with alt text": true, "Links Valid": "Non applicable", "Links Error Pages": "Non applicable", "Links Error Detail": "Non applicable", "Table With Headers": "Non applicable", "Passed": 1, "Failed": 3, "Non applicable": 3}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 03:49:18
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf5475.tmp.pdf"
+Output Length: 438
+Raw Output:
+{"Title": "No Title Found", "Language declared": "pt", "Language detected": "Non applicable", "Languages match": false, "PDF OCR status": "Scanned PDF without OCR", "Lists marked as Lists": "Non applicable", "Figures with alt text": true, "Links Valid": "Non applicable", "Links Error Pages": "Non applicable", "Links Error Detail": "Non applicable", "Table With Headers": "Non applicable", "Passed": 1, "Failed": 3, "Non applicable": 3}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 04:04:51
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf8F10.tmp.pdf"
+Output Length: 438
+Raw Output:
+{"Title": "No Title Found", "Language declared": "pt", "Language detected": "Non applicable", "Languages match": false, "PDF OCR status": "Scanned PDF without OCR", "Lists marked as Lists": "Non applicable", "Figures with alt text": true, "Links Valid": "Non applicable", "Links Error Pages": "Non applicable", "Links Error Detail": "Non applicable", "Table With Headers": "Non applicable", "Passed": 1, "Failed": 3, "Non applicable": 3}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 04:17:50
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf7665.tmp.pdf"
+Output Length: 438
+Raw Output:
+{"Title": "No Title Found", "Language declared": "pt", "Language detected": "Non applicable", "Languages match": false, "PDF OCR status": "Scanned PDF without OCR", "Lists marked as Lists": "Non applicable", "Figures with alt text": true, "Links Valid": "Non applicable", "Links Error Pages": "Non applicable", "Links Error Detail": "Non applicable", "Table With Headers": "Non applicable", "Passed": 1, "Failed": 3, "Non applicable": 3}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 04:19:24
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf3B0E.tmp.pdf"
+Output Length: 521
+Raw Output:
+{"Title": "No Title Found", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 3, "Failed": 2, "Non applicable": 1}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 04:25:02
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf73AC.tmp.pdf"
+Output Length: 567
+Raw Output:
+{"Title": "Guia para a produ\u00e7\u00e3o de documentos acess\u00edveis", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 4, "Failed": 1, "Non applicable": 1}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 04:46:41
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf3A7C.tmp.pdf"
+Output Length: 521
+Raw Output:
+{"Title": "No Title Found", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 3, "Failed": 2, "Non applicable": 1}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 04:49:03
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf7432.tmp.pdf"
+Output Length: 567
+Raw Output:
+{"Title": "Guia para a produ\u00e7\u00e3o de documentos acess\u00edveis", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 4, "Failed": 1, "Non applicable": 1}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 04:50:24
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf96CB.tmp.pdf"
+Output Length: 567
+Raw Output:
+{"Title": "Guia para a produ\u00e7\u00e3o de documentos acess\u00edveis", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 4, "Failed": 1, "Non applicable": 1}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 05:03:18
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf795C.tmp.pdf"
+Output Length: 567
+Raw Output:
+{"Title": "Guia para a produ\u00e7\u00e3o de documentos acess\u00edveis", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 4, "Failed": 1, "Non applicable": 1}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 05:04:56
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdf156.tmp.pdf"
+Output Length: 567
+Raw Output:
+{"Title": "Guia para a produ\u00e7\u00e3o de documentos acess\u00edveis", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 4, "Failed": 1, "Non applicable": 1}
+
+=== End Output ===
+
+=== Python Output Debug ===
+Timestamp: 2026-03-01 05:12:23
+Command: python3 "C:\xampp\htdocs\Moodles\server\moodle\blocks\pdfaccessibility\ajax/../pdf_accessibility.py" "C:\xampp\htdocs\Moodles\server\moodledata\temp\pdfCE2F.tmp.pdf"
+Output Length: 567
+Raw Output:
+{"Title": "Guia para a produ\u00e7\u00e3o de documentos acess\u00edveis", "Language declared": "pt", "Language detected": "pt", "Languages match": true, "PDF OCR status": "PDF with text", "Lists marked as Lists": true, "Figures with alt text": true, "Links Valid": false, "Links Error Pages": [15], "Links Error Detail": [{"page": 15, "type": "external", "url": "https://digital.gov/2014/06/30/508-accessible-videos-how-to-make-audio-descriptions/", "error": "HTTP status 404"}], "Table With Headers": "Non applicable", "Passed": 4, "Failed": 1, "Non applicable": 1}
+
+=== End Output ===
+

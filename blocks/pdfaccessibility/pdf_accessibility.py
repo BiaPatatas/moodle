@@ -7,6 +7,13 @@ import pikepdf
 from pdfixsdk.Pdfix import *
 import requests
 
+try:
+    import pytesseract
+    from PIL import Image
+    OCR_AVAILABLE = True
+except ImportError:
+    OCR_AVAILABLE = False
+
 import sys
 import json
 
@@ -147,7 +154,10 @@ def detect_language_from_text(path):
 def normalize_lang(tag):
     if not tag:
         return None
-    return tag.lower().split('-')[0]
+    # Normaliza tags como "pt", "pt-PT" ou "pt_PT" para apenas o código de língua
+    # Ex.: "pt_PT" -> "pt", "en-US" -> "en"
+    cleaned = tag.lower().replace('_', '-')
+    return cleaned.split('-')[0]
 
 
 def compare_languages(pdf_path):
@@ -162,84 +172,124 @@ def compare_languages(pdf_path):
 #----------------------------------------------------------------------------------------------
 
 def pdf_only_image(pdf_path):
-    """Checks if the PDF contains only images without text."""
+    """Classifica o tipo de conteúdo em termos de OCR (técnica PDF7).
+
+    Retorna:
+      - "PDF with text" → existe camada de texto extraível em pelo menos
+        uma página (PDF nativo ou já passou por OCR).
+      - "Scanned PDF without OCR" → não existe texto extraível, mas o OCR
+        detecta uma quantidade significativa de texto nas imagens
+        (documento digitalizado sem camada de texto).
+      - "Only Images" → não há texto extraível e o OCR não encontra texto
+        suficiente; tipicamente imagens/fotografias, não um documento
+        digitalizado de texto.
+    """
+
+    # Primeiro, procurar texto embutido (camada de texto/OCR existente)
     with fitz.open(pdf_path) as pdf:
-        only_images = "Only Images"
+        has_embedded_text = False
         for page in pdf:
-            text = page.get_text()
-            if text.strip():  # If there is any text, it is not just images
-                only_images = "PDF with text"
+            text = page.get_text().strip()
+            if text:
+                has_embedded_text = True
                 break
-    return only_images
+
+    if has_embedded_text:
+        return "PDF with text"
+
+    # Se não há texto embutido, usar OCR apenas para distinguir
+    # documento digitalizado de imagem/fotografia.
+    if not OCR_AVAILABLE:
+        # Sem OCR não conseguimos distinguir; considerar apenas imagens.
+        return "Only Images"
+
+    ocr_char_count = 0
+    try:
+        with fitz.open(pdf_path) as pdf:
+            for page in pdf:
+                pix = page.get_pixmap()
+                mode = "RGBA" if pix.alpha else "RGB"
+                img = Image.frombytes(mode, [pix.width, pix.height], pix.samples)
+                ocr_text = pytesseract.image_to_string(img)
+                # Contar apenas caracteres alfanuméricos para reduzir ruído
+                cleaned = "".join(ch for ch in ocr_text if ch.isalnum())
+                ocr_char_count += len(cleaned)
+    except Exception:
+        # Se OCR falhar por completo, comportar-se como apenas imagens
+        return "Only Images"
+
+    # Limite heurístico: se o OCR encontra texto suficiente, assumimos
+    # que é um documento digitalizado de texto sem camada de texto.
+    # Reduzido para 30 caracteres para apanhar páginas com pouco texto.
+    if ocr_char_count >= 30:
+        return "Scanned PDF without OCR"
+
+    return "Only Images"
 
 
 def lists_not_marked_as_lists(pdf_path):
-    """ Identifica listas não marcadas corretamente."""
+    """Identifica listas não marcadas corretamente.
+
+    Retorna apenas um resultado global:
+      - True / False / "PDF not tagged" / "Non applicable"
+    """
     doc, structTree = getStructTree(pdf_path)
     if not doc or not structTree:
         return "PDF not tagged"
-    
-    list_pattern = re.compile(r'^(\d+\.|[a-zA-Z]\.|[-*•])\s')
+
+    list_pattern = re.compile(r'^(\d+\.|[a-zA-Z]\. |[-*•])\s')
     visual_list_items = []
     structured_list_count = 0
-    
+
     # Contar todos os itens de lista visuais no texto
     with fitz.open(pdf_path) as fitz_doc:
         for page in fitz_doc:
             text_dict = page.get_text("dict")
             for block in text_dict.get("blocks", []):
                 for line in block.get("lines", []):
-                    # Concatenar todos os spans da linha para verificar
                     line_text = ""
                     for span in line.get("spans", []):
                         text = span.get("text", "").strip()
                         if text:
                             line_text += text + " "
-                    
-                    # Verificar se a linha inteira corresponde ao padrão de lista
+
                     line_text = line_text.strip()
                     if list_pattern.match(line_text):
                         visual_list_items.append(line_text)
                         continue
-                    
-                    # Também verificar se algum span individual é apenas um marcador
+
                     for span in line.get("spans", []):
                         text = span.get("text", "").strip()
                         if text in ["•", "▪", "▫", "◦", "‣", "⁃", "➢", "→"] or re.match(r'^\d+\.$', text) or re.match(r'^[a-zA-Z]\.$', text):
-                            # Reconstituir o item de lista completo
                             full_item = ""
                             for s in line.get("spans", []):
                                 full_item += s.get("text", "").strip() + " "
                             visual_list_items.append(full_item.strip())
                             break
-    
+
     # Contar elementos de lista estruturados no PDF
     def recursiveBrowse(parent: PdsStructElement):
         nonlocal structured_list_count
         elem_type = parent.GetType(True)
-        
-        # Contar itens de lista estruturados
+
         if elem_type in ["LI", "ListItem"]:
             structured_list_count += 1
-        
+
         for i in range(parent.GetNumChildren()):
             if parent.GetChildType(i) == kPdsStructChildElement:
                 child = structTree.GetStructElementFromObject(parent.GetChildObject(i))
                 if child:
                     recursiveBrowse(child)
-    
+
     root_elem = structTree.GetStructElementFromObject(structTree.GetObject())
     if root_elem:
         recursiveBrowse(root_elem)
-    
+
     doc.Close()
-    
-    # Se não há listas visuais, retorna "Non applicable"
+
     if not visual_list_items:
         return "Non applicable"
-    
-    # Para considerar correto, o número de itens estruturados deve ser igual ou maior
-    # que o número de itens visuais (algumas listas podem ter estrutura adicional)
+
     return structured_list_count >= len(visual_list_items)
 
 def allFiguresHaveAltText(pdf_path: str):
@@ -294,7 +344,8 @@ def get_links_info(pdf_path):
 
             # Links externos (HTTP, HTTPS, FTP, mailto, etc.)
             if uri and (uri.startswith(("http://", "https://", "ftp://", "mailto:", "tel:"))):
-                external_links.append(uri)
+                # Guardar também o número da página (0-based aqui)
+                external_links.append((page_num, uri))
             # Links internos
             elif kind == 1 or (dest_page is not None and uri == ""):  # internal link
                 if dest_page is not None and 0 <= dest_page < total_pages:
@@ -304,7 +355,7 @@ def get_links_info(pdf_path):
             # Links com URIs não reconhecidos (podem ser válidos mas não HTTP)
             elif uri and not uri.startswith(("http://", "https://", "ftp://", "mailto:", "tel:")):
                 # Estes podem ser links válidos com outros protocolos ou caminhos de arquivo
-                external_links.append(uri)
+                external_links.append((page_num, uri))
             # Links verdadeiramente inválidos
             else:
                 if not uri and dest_page is None:
@@ -317,14 +368,28 @@ def get_links_info(pdf_path):
 
 
 def check_external_links(links):
-    results = []
+    """Verifica links externos.
 
-    for link in links:
+    links: lista de tuplos (page_num, uri) com page_num 0-based.
+    Retorna:
+      - lista de resultados booleanos (True/False) por link
+      - lista de links quebrados [(page_num, uri, motivo), ...]
+    """
+    results = []
+    broken_links = []
+
+    for page_num, link in links:
         try:
             # Apenas verificar links HTTP/HTTPS
             if link.startswith(("http://", "https://")):
-                response = requests.head(link, allow_redirects=True, timeout=5)
-                results.append(response.status_code == 200)
+                # Usar GET em vez de HEAD porque muitos servidores
+                # não suportam bem HEAD mas funcionam no browser.
+                response = requests.get(link, allow_redirects=True, timeout=10)
+                # Considerar válido qualquer código 2xx ou 3xx
+                is_ok = 200 <= response.status_code < 400
+                results.append(is_ok)
+                if not is_ok:
+                    broken_links.append((page_num, link, f"HTTP status {response.status_code}"))
             # Para outros tipos de links (mailto, tel, ftp, etc.), assumir como válidos
             # pois não podemos verificá-los facilmente
             elif link.startswith(("mailto:", "tel:", "ftp://")):
@@ -332,10 +397,11 @@ def check_external_links(links):
             # Para links de arquivo ou outros protocolos, assumir como válidos
             else:
                 results.append(True)
-        except Exception:
+        except Exception as e:
             results.append(False)
+            broken_links.append((page_num, link, str(e)))
 
-    return results
+    return results, broken_links
 
 #----------------------------------------------------------------
 def check_headers(pdf_path: str) -> bool:
@@ -405,10 +471,12 @@ def check_pdf_accessibility(pdf_path):
         "Language declared": None,
         "Language detected": None,
         "Languages match": False,
-        "PDF only image": False,
+        "PDF OCR status": False,
         "Lists marked as Lists": False,
         "Figures with alt text": False,
-        "Links Valid": None, 
+        "Links Valid": None,
+        "Links Error Pages": None,
+        "Links Error Detail": None,
         "Table With Headers" : False,
     }
 
@@ -428,12 +496,12 @@ def check_pdf_accessibility(pdf_path):
 
 
     # Check if the PDF is image-only
-    accessibility_report["PDF only image"] = pdf_only_image(pdf_path)
+    accessibility_report["PDF OCR status"] = pdf_only_image(pdf_path)
 
     #Check if there is alt text in figures
     accessibility_report["Figures with alt text"] = allFiguresHaveAltText(pdf_path)
 
-    #Lists
+    #Lists (apenas resultado global)
     accessibility_report["Lists marked as Lists"] = lists_not_marked_as_lists(pdf_path)
 
     #Links
@@ -442,8 +510,10 @@ def check_pdf_accessibility(pdf_path):
     # Se não há nenhum tipo de link, retorna None
     if not external and not internal and not fake:
         accessibility_report["Links Valid"] = "Non applicable"
+        accessibility_report["Links Error Pages"] = "Non applicable"
+        accessibility_report["Links Error Detail"] = "Non applicable"
     else:
-        checked_links = check_external_links(external)
+        checked_links, broken_links = check_external_links(external)
 
         # Verificar se existe algum link válido
         all_external_valid = all(checked_links) if checked_links else True
@@ -452,6 +522,32 @@ def check_pdf_accessibility(pdf_path):
         link_valid = all_external_valid and no_fake_links
 
         accessibility_report["Links Valid"] = link_valid
+
+        # Determinar em que páginas existem erros de links (1-based para o utilizador)
+        error_pages = set()
+        error_details = []
+        # Links internos/fake (ex.: para página inexistente)
+        for page_num, reason in fake:
+            page_display = page_num + 1
+            error_pages.add(page_display)
+            error_details.append({
+                "page": page_display,
+                "type": "internal",
+                "info": reason,
+            })
+        # Links externos quebrados
+        for page_num, uri, msg in broken_links:
+            page_display = page_num + 1
+            error_pages.add(page_display)
+            error_details.append({
+                "page": page_display,
+                "type": "external",
+                "url": uri,
+                "error": msg,
+            })
+
+        accessibility_report["Links Error Pages"] = sorted(error_pages) if error_pages else []
+        accessibility_report["Links Error Detail"] = error_details
 
     # Verificar Headers de tabela
     accessibility_report["Table With Headers"] = check_headers(pdf_path)
@@ -476,21 +572,38 @@ if __name__ == "__main__":
 
     for key, value in report.items():
         # Pular verificações que são apenas informativas
-        if key in ["Language declared", "Language detected"]:
+        if key in [
+            "Language declared",
+            "Language detected",
+            "Links Error Pages",
+            "Links Error Detail",
+        ]:
             continue
             
         # Tratar "PDF not tagged" como falha
         if value == "PDF not tagged":
             failed += 1
+        # Tratar casos "Non applicable"
         elif value == "Non applicable":
             ne += 1
-        elif value in [False, None, "No Title Found", 0, "Only Images"]:
+        # Tratamento específico para o teste de OCR em PDFs digitalizados (técnica PDF7)
+        elif key == "PDF OCR status":
+            # Documento de imagens onde o OCR não encontra texto suficiente:
+            # considerar que o teste não se aplica (por ex., apenas fotografia).
+            if value == "Only Images":
+                ne += 1
+            # Documento digitalizado de texto sem camada de texto/OCR:
+            # falha do PDF7.
+            elif value == "Scanned PDF without OCR":
+                failed += 1
+            # "PDF with text" é tratado como sucesso (não entra aqui).
+        elif value in [False, None, "No Title Found", 0]:
             failed += 1
         else:
             passed += 1
 
-    # report["Passed"] = passed
-    # report["Failed"] = failed
-    # report["Non applicable"] = ne
+    report["Passed"] = passed
+    report["Failed"] = failed
+    report["Non applicable"] = ne
 
     print(json.dumps(report))

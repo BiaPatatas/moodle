@@ -38,7 +38,7 @@ class block_pdfaccessibility extends block_base {
                     require_once(__DIR__ . '/lib.php');
                     $pdfs = block_pdfaccessibility_get_pdfs_from_context($contextid);
                     if (count($pdfs) > 0) {
-                        $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: green;">PDFs encontrados:</div>';
+                        $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: green;">' . get_string('pdfs_found', 'block_pdfaccessibility') . '</div>';
                         foreach ($pdfs as $file) {
                             if (!is_object($file)) continue;
                             $filename = $file->get_filename();
@@ -47,7 +47,7 @@ class block_pdfaccessibility extends block_base {
                             $this->content->text .= $avaliacao;
                         }
                     } else {
-                        $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: red;">Nenhum PDF encontrado.</div>';
+                        $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: red;">' . get_string('no_pdfs_found', 'block_pdfaccessibility') . '</div>';
                     }
                     $this->content->footer = '';
                     return $this->content;
@@ -59,7 +59,7 @@ class block_pdfaccessibility extends block_base {
             $pdfs = [];
          
             if (count($pdfs) > 0) {
-                $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: green;">PDFs em rascunho:</div>';
+                $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: green;">' . get_string('pdfs_in_draft', 'block_pdfaccessibility') . '</div>';
                 foreach ($pdfs as $file) {
                     $filename = $file->get_filename();
                     $filepath = $CFG->dataroot . '/filedir/' . substr($file->get_contenthash(), 0, 2) . '/' . substr($file->get_contenthash(), 2, 2) . '/' . $file->get_contenthash();
@@ -67,7 +67,7 @@ class block_pdfaccessibility extends block_base {
                     $this->content->text .= $avaliacao;
                 }
             } else {
-                $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: orange;">Add a PDF to be evaluated</div>';
+                $this->content->text = '<div id="analyzer-result" style="margin-top: 1em; color: orange;">' . get_string('add_pdf_to_evaluate', 'block_pdfaccessibility') . '</div>';
             }
             $this->content->footer = '';
             return $this->content;
@@ -77,7 +77,7 @@ class block_pdfaccessibility extends block_base {
                 $this->pdfaccessibility_debug_log('Contexto existe na base de dados? ' . ($context_exists ? 'SIM' : 'NÃO'));
                 if (!$context_exists) {
                     $this->content = new stdClass();
-                    $this->content->text = '<div style="color:red;">Contexto não encontrado na base de dados. O bloco só funciona em páginas de curso ou recurso já criados.</div>';
+                    $this->content->text = '<div style="color:red;">' . get_string('context_not_found', 'block_pdfaccessibility') . '</div>';
                     return $this->content;
                 }
             
@@ -176,10 +176,10 @@ class block_pdfaccessibility extends block_base {
                                 }
                             }
                             if (!$found) {
-                                // Se não encontrou resultado, mostra como não avaliado
+                            
                                 $this->content->text .= '<div style="display:flex;align-items:flex-start;margin-top:8px;margin-bottom:10px; background:#f8f9fa; border-radius:6px;padding:6px 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);opacity:1;">';
                                 $this->content->text .= '<div style="font-weight:bold; font-size: 0.925rem; color: #1e1e1e;">' . $label . ' ' . $icon . '</div>';
-                                $this->content->text .= '<div style="margin-left:10px;">Not evaluated</div>';
+                                $this->content->text .= '<div style="margin-left:10px;">' . get_string('not_evaluated', 'block_pdfaccessibility') . '</div>';
                                 $this->content->text .= '</div>';
                             }
                         }
