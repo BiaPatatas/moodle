@@ -66,15 +66,27 @@ $html .= '<h2>Accessibility Report PDF</h2>';
 $html .= '<p><strong>File:</strong> ' . htmlspecialchars($filename) . '</p>';
 $html .= '<table><thead><tr><th>Test</th><th>Result</th><th>Description</th><th>How to fix?</th></tr></thead><tbody>';
 
-// Carrega a configuração centralizada
+// Carrega a configuração centralizada (labels/descrições/links)
 require_once($CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility_config.php');
-$checks_info = pdf_accessibility_config::TEST_CONFIG;
 
 foreach ($testresults as $test) {
-    if (in_array($test->testname, ['Language declared', 'Language detected', 'Passed', 'Failed'])) continue;
-    $label = isset($checks_info[$test->testname]['label']) ? $checks_info[$test->testname]['label'] : $test->testname;
-    $link = isset($checks_info[$test->testname]['link']) ? $checks_info[$test->testname]['link'] : '';
-    $desc = isset($checks_info[$test->testname]['description']) ? $checks_info[$test->testname]['description'] : '';
+    // Ignorar testes apenas informativos/agregados ou de detalhe
+    if (in_array($test->testname, [
+        'Language declared',
+        'Language detected',
+        'Passed',
+        'Failed',
+        'Non applicable',
+        'Links Error Pages',
+        'Links Error Detail',
+    ])) {
+        continue;
+    }
+
+    $label = pdf_accessibility_config::get_test_label($test->testname);
+    $desc  = pdf_accessibility_config::get_test_description($test->testname);
+    $link  = pdf_accessibility_config::get_test_link($test->testname);
+    $linktext = pdf_accessibility_config::get_test_link_text();
     
     // Determinar o status com base no resultado real
     if ($test->result === 'pass') {
@@ -89,7 +101,11 @@ foreach ($testresults as $test) {
         $status = '<span style="color:purple;">' . htmlspecialchars($test->result) . '</span>';
     }
     
-    $html .= '<tr><td>' . htmlspecialchars($label) . '</td><td>'  . $status . '</td><td>'  . $desc . '</td><td><a href="' . htmlspecialchars($link) . '" target="_blank">' . htmlspecialchars($link) . '</a></td></tr>';
+    $html .= '<tr><td>' . htmlspecialchars($label) . '</td><td>'  . $status . '</td><td>'  . htmlspecialchars($desc) . '</td><td>';
+    if (!empty($link)) {
+        $html .= '<a href="' . htmlspecialchars($link) . '" target="_blank">' . htmlspecialchars($linktext) . '</a>';
+    }
+    $html .= '</td></tr>';
 }
 
 $html .= '</tbody></table>';

@@ -2,6 +2,7 @@
 define('AJAX_SCRIPT', true);
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility_config.php');
+require_once($CFG->dirroot . '/blocks/pdfcounter/lib.php');
 
 // === DEBUG SYSTEM UPDATE DASHBOARD ===
 $debug_dir = $CFG->dirroot . '/blocks/pdfcounter/debug/';
@@ -41,6 +42,10 @@ try {
     // Buscar todos os PDFs do curso pelo courseid (usando a tabela do plugin)
     $allpdfs = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $courseid]);
 
+    // Calcular quantos PDFs ainda faltam avaliar (pendentes na fila)
+    $pendingpdfs = block_pdfcounter_get_pending_pdfs($courseid);
+    $pending_count = is_array($pendingpdfs) ? count($pendingpdfs) : 0;
+
     $pdf_issues = [];
     $total_percent = 0;
     $total_pdfs = 0;
@@ -62,6 +67,7 @@ try {
             $counts['fail_count'],
             $counts['not_tagged_count']
         );
+
         if ($applicable_tests > 0) {
             $percent = pdf_accessibility_config::calculate_progress($counts);
             $total_percent += $percent;
@@ -109,7 +115,8 @@ try {
         'overallProgress' => $overall_progress,
         'progressColor' => $progress_color,
         'pdfIssues' => $pdf_issues,
-        'totalPdfs' => $total_pdfs
+        'totalPdfs' => $total_pdfs,
+        'pendingCount' => $pending_count
     ]);
 
 } catch (Exception $e) {

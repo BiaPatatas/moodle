@@ -23,7 +23,7 @@ class block_pdfcounter extends block_base {
             @chmod($debuglogfile, 0666);
             $debuglog = @fopen($debuglogfile, 'a');
         }
-        if ($debuglog !== false) {
+        if (is_resource($debuglog)) {
             fwrite($debuglog, "\n==== PDFCOUNTER DEBUG START ====\n");
             fwrite($debuglog, "Course ID: {$COURSE->id}\n");
         } else {
@@ -57,7 +57,7 @@ class block_pdfcounter extends block_base {
         // Apenas listar PDFs e status, nunca avaliar ou processar aqui
         foreach ($files as $file) {
             if (substr($file->filename, -4) === '.pdf') {
-                if ($debuglog !== false) fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
+                if (is_resource($debuglog)) fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
                 // Buscar status na base de dados
                 $filehash = $file->contenthash;
                 $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
@@ -81,11 +81,15 @@ $sqlpages = "SELECT cm.id as cmid, p.content, ctx.id as contextid
 $pages = $DB->get_records_sql($sqlpages, array('courseid' => $COURSE->id));
 $pagelinks = [];
 foreach ($pages as $page) {
-    fwrite($debuglog, "[mod_page] Checking page cmid={$page->cmid}, contextid={$page->contextid}\n");
+    if (is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_page] Checking page cmid={$page->cmid}, contextid={$page->contextid}\n");
+    }
     // Extrair links <a href="...pdf"> do conteúdo da página
     if (preg_match_all('/<a[^>]+href=\"([^\"]+\.pdf)\"[^>]*>/i', $page->content, $matches)) {
         foreach ($matches[1] as $pdfurl) {
-            fwrite($debuglog, "[mod_page] Found PDF link: $pdfurl\n");
+            if (is_resource($debuglog)) {
+                fwrite($debuglog, "[mod_page] Found PDF link: $pdfurl\n");
+            }
             $pagelinks[] = [
                 'url' => $pdfurl,
                 'contextid' => $page->contextid,
@@ -96,7 +100,9 @@ foreach ($pages as $page) {
     // Também extrai links pluginfile.php que terminam em .pdf
     if (preg_match_all('/<a[^>]+href=\"([^\"]*pluginfile\.php[^\"]+\.pdf)\"[^>]*>/i', $page->content, $matches2)) {
         foreach ($matches2[1] as $pdfurl) {
-            fwrite($debuglog, "[mod_page] Found pluginfile.php PDF link: $pdfurl\n");
+            if (is_resource($debuglog)) {
+                fwrite($debuglog, "[mod_page] Found pluginfile.php PDF link: $pdfurl\n");
+            }
             $pagelinks[] = [
                 'url' => $pdfurl,
                 'contextid' => $page->contextid,
@@ -119,10 +125,14 @@ $sqlurls = "SELECT cm.id as cmid, u.externalurl, ctx.id as contextid
 $urls = $DB->get_records_sql($sqlurls, array('courseid' => $COURSE->id));
 $urllinks = [];
 foreach ($urls as $url) {
-    fwrite($debuglog, "[mod_url] Checking url cmid={$url->cmid}, contextid={$url->contextid}, externalurl={$url->externalurl}\n");
+    if (is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_url] Checking url cmid={$url->cmid}, contextid={$url->contextid}, externalurl={$url->externalurl}\n");
+    }
     // Só considera links que terminam em .pdf
     if (preg_match('/\.pdf($|\?)/i', $url->externalurl)) {
-        fwrite($debuglog, "[mod_url] Found PDF link: {$url->externalurl}\n");
+        if (is_resource($debuglog)) {
+            fwrite($debuglog, "[mod_url] Found PDF link: {$url->externalurl}\n");
+        }
         $urllinks[] = [
             'url' => $url->externalurl,
             'contextid' => $url->contextid,
@@ -133,13 +143,17 @@ foreach ($urls as $url) {
 
 // Apenas listar links encontrados em mod_page, nunca avaliar ou processar aqui
 foreach ($pagelinks as $plink) {
-    fwrite($debuglog, "[mod_page] Found link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
+    if (is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_page] Found link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
+    }
     // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
 // Apenas listar links encontrados em mod_url, nunca avaliar ou processar aqui
 foreach ($urllinks as $ulink) {
-    fwrite($debuglog, "[mod_url] Found link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
+    if (is_resource($debuglog)) {
+        fwrite($debuglog, "[mod_url] Found link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
+    }
     // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
@@ -165,6 +179,12 @@ foreach ($urllinks as $ulink) {
                     $visible_hashes[] = $frec->contenthash;
                 }
             }
+            // Para links externos diretos para PDFs em páginas (mod_page),
+            // usa-se o mesmo hash baseado no URL que é usado para gravação
+            // em block_pdfcounter_get_pending_pdfs() (sha1 do URL completo).
+            if (preg_match('/^https?:\/\/.+\.pdf($|\?)/i', $plink['url'])) {
+                $visible_hashes[] = sha1($plink['url']);
+            }
         }
         foreach ($urllinks as $ulink) {
             $filename = basename($ulink['url']);
@@ -178,26 +198,24 @@ foreach ($urllinks as $ulink) {
                     $visible_hashes[] = $frec->contenthash;
                 }
             }
-            // Se for link externo, adiciona o hash do arquivo baixado
+            // Se for link externo (mod_url para PDF na web), usa-se o
+            // mesmo hash normalizado pelo URL que é usado em
+            // block_pdfcounter_get_pending_pdfs() e
+            // block_pdfcounter_evaluate_pdf(): sha1 da URL base até .pdf.
             if (preg_match('/^https?:\/\/.+\.pdf($|\?)/i', $ulink['url'])) {
-                $tempfile = tempnam(sys_get_temp_dir(), 'pdfext_');
-                $downloaded = @file_put_contents($tempfile, @file_get_contents($ulink['url']));
-                if ($downloaded && file_exists($tempfile)) {
-                    $temphash = sha1_file($tempfile);
-                    $visible_hashes[] = $temphash;
-                    @unlink($tempfile);
-                }
+                $urlbase = preg_replace('/(\.pdf)(\?.*)?$/i', '.pdf', $ulink['url']);
+                $visible_hashes[] = sha1($urlbase);
             }
         }
         foreach ($dbpdfs as $dbpdf) {
             if (!in_array($dbpdf->filehash, $visible_hashes)) {
-                if ($debuglog !== false) fwrite($debuglog, "[cleanup] Removing PDF from DB: {$dbpdf->filename} | hash: {$dbpdf->filehash}\n");
+                if (is_resource($debuglog)) fwrite($debuglog, "[cleanup] Removing PDF from DB: {$dbpdf->filename} | hash: {$dbpdf->filehash}\n");
                 $DB->delete_records('block_pdfaccessibility_test_results', ['fileid' => $dbpdf->id]);
                 $DB->delete_records('block_pdfaccessibility_pdf_files', ['id' => $dbpdf->id]);
             }
         }
         // DEBUG: Close debug log file
-        if ($debuglog !== false) {
+        if (is_resource($debuglog)) {
             fwrite($debuglog, "==== PDFCOUNTER DEBUG END ====\n\n");
             fclose($debuglog);
         }
@@ -302,26 +320,26 @@ foreach ($urllinks as $ulink) {
         }
         </style>
          <div style="font-family:Arial,sans-serif;max-width:320px; ">
-        <a href="#" class="learn-more-link" style="color: #0F6CBF; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 10px;">
-            <i class="fa fa-info-circle" aria-hidden="true"></i> Read More
+        <a href="#" class="learn-more-link" data-open-label="'.get_string('learnmore','block_pdfcounter').'" data-close-label="'.get_string('learnmore_close','block_pdfcounter').'" style="color: #0F6CBF; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+            <i class="fa fa-info-circle" aria-hidden="true"></i> '.get_string('learnmore','block_pdfcounter').'
         </a>
         <div class="learn-more-content" style="display:none; background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
-            <p style="margin: 0 0 12px 0; font-size: 0.85rem; line-height: 1.4;">The Accessibility Dashboard offers an overview of course accessibility, tracks progress, and highlights PDF accessibility issues, with detailed reports for each file.</p>
+            <p style="margin: 0 0 12px 0; font-size: 0.85rem; line-height: 1.4;">'.get_string('learnmore_intro','block_pdfcounter').'</p>
             <div style="margin-top: 10px;">
-                <p style="margin: 8px 0 4px 0; font-size: 0.8rem; font-weight: bold;">Resources:</p>
+                <p style="margin: 8px 0 4px 0; font-size: 0.8rem; font-weight: bold;">'.get_string('learnmore_resources','block_pdfcounter').'</p>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.8rem;">
                     <li style="margin: 4px 0;">
                         <a href="/blocks/pdfcounter/docs/guia_doc_acessivel_fcul.pdf" target="_blank" 
                            style="color: #0F6CBF; text-decoration: underline;"
-                           title="Open FCUL Accessibility Guide">
-                            <i class="fa fa-external-link" style="font-size: 0.7rem;"></i> FCUL Accessibility Guide
+                           title="'.get_string('learnmore_fcul_guide_title','block_pdfcounter').'">
+                            <i class="fa fa-external-link" style="font-size: 0.7rem;"></i> '.get_string('learnmore_fcul_guide','block_pdfcounter').'
                         </a>
                     </li>
                     <li style="margin: 4px 0;">
                         <a href="https://www.w3.org/WAI/WCAG22/Techniques/#pdf" target="_blank" 
                            style="color: #0F6CBF; text-decoration: underline;"
-                           title="WCAG 2.2 PDF Techniques">
-                            <i class="fa fa-external-link" style="font-size: 0.7rem;"></i> Accessible PDF Best Practices - WCAG 2.2
+                           title="'.get_string('learnmore_wcag_title','block_pdfcounter').'">
+                            <i class="fa fa-external-link" style="font-size: 0.7rem;"></i> '.get_string('learnmore_wcag','block_pdfcounter').' 
                         </a>
                     </li>
                 </ul>
@@ -333,14 +351,16 @@ foreach ($urllinks as $ulink) {
                 const learnMoreContent = document.querySelector(".learn-more-content");
                 
                 if (learnMoreLink && learnMoreContent) {
+                    const openLabel = learnMoreLink.getAttribute("data-open-label") || "'.get_string('learnmore','block_pdfcounter').'";
+                    const closeLabel = learnMoreLink.getAttribute("data-close-label") || "'.get_string('learnmore_close','block_pdfcounter').'";
                     learnMoreLink.addEventListener("click", function(e) {
                         e.preventDefault();
                         if (learnMoreContent.style.display === "none" || learnMoreContent.style.display === "") {
                             learnMoreContent.style.display = "block";
-                            this.innerHTML = "<i class=\\"fa fa-times\\" aria-hidden=\\"true\\"></i> Close";
+                            this.innerHTML = "<i class=\"fa fa-times\" aria-hidden=\"true\"></i> " + closeLabel;
                         } else {
                             learnMoreContent.style.display = "none";
-                            this.innerHTML = "<i class=\\"fa fa-info-circle\\" aria-hidden=\\"true\\"></i> Read More";
+                            this.innerHTML = "<i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> " + openLabel;
                         }
                     });
                 }
@@ -358,7 +378,7 @@ foreach ($urllinks as $ulink) {
                           
                     <bold style="   font-size: 0.90rem;
                                     font-weight: bold;
-                                    margin-bottom: 2px;">Overall Accessibility</bold><br>
+                                    margin-bottom: 2px;">'.get_string('overall','block_pdfcounter').'</bold><br>
                     <div style="margin-top:10px; display: flex;justify-content: center; align-items: center;">
                         <span id="overall-accessibility-value" class="overall-value" style="font-size:20px;">' . $progress_value . '%</span>
                         <progress class="progress pdf-counter-progress-bar" value="' . $progress_value . '" max="100" style="--progress-color: ' . $progress_color . ';     margin-left: 8%;"></progress>
@@ -461,7 +481,11 @@ foreach ($urllinks as $ulink) {
         }
         $pending_msg = '';
         if ($pending_count > 0) {
-            $pending_msg = '⚠️ Ainda faltam ' . $pending_count . ' PDF(s) para avaliar nesta página.';
+            // Deixar claro que é a ferramenta que está a analisar
+            $pending_msg = '⚠️ ' . get_string('pendingmsg_analyzing', 'block_pdfcounter', $pending_count);
+        } else {
+            // Mensagem inicial enquanto o estado real é carregado via AJAX
+            $pending_msg = get_string('pendingmsg_loading', 'block_pdfcounter');
         }
         $this->content->text = '<div id="pdf-pending-msg" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; border-radius:6px; padding:10px; margin-bottom:10px; font-size:0.95em;">' . $pending_msg . '</div>';
         $this->content->text .= $overall_html;
@@ -469,7 +493,7 @@ foreach ($urllinks as $ulink) {
         //-------------------------------------PDFs Issues---------------------------------------
         $pdf_issues_html = '<div style="font-family:Arial,sans-serif;max-width:320px;">';
         $pdf_issues_html .= '<div style="background: #f8f9fa; border-radius: 8px; padding: 15px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: black; margin-bottom: 10px;">';
-        $pdf_issues_html .= '<span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">PDF Accessibility Results</span><br>';
+        $pdf_issues_html .= '<span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">' . get_string('results_title', 'block_pdfcounter') . '</span><br>';
         $pdf_issues_html .= '<div style="margin-top:10px; max-height: 200px; overflow-y: auto;">';
         $pdf_issues_html .= '<table id="pdf-issues-list" style="width:100%; font-size:0.85rem; border-collapse:collapse;"><tbody>';
         // Renderiza os issues iniciais (serão substituídos pelo JS)
@@ -501,13 +525,15 @@ foreach ($urllinks as $ulink) {
             $pdf_issues_html .= '<tr><td colspan="1" style="padding:0;">';
             $pdf_issues_html .= '<div class="parent" style="display:grid; grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); grid-column-gap:0; grid-row-gap:0;">';
             $pdf_issues_html .= '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' . htmlspecialchars($issue['display_name']) . '</div>';
-            $pdf_issues_html .= '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' . $failed_tests . ' of ' . $applicable_tests . ' tests failed</div>';
-            $pdf_issues_html .= '<div class="div3" style="grid-area:3/1/4/2; text-align:right;">';
+            $failinfo = (object) ['failed' => $failed_tests, 'total' => $applicable_tests];
+            $pdf_issues_html .= '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' . get_string('tests_failed', 'block_pdfcounter', $failinfo) . '</div>';
+            $pdf_issues_html .= '<div class="div3" style="grid-area:3/1/4/2; text-align:left;">';
             $pdf_issues_html .= '<a href="' . $download_url->out() . '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
-            $pdf_issues_html .= '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> Download Report';
+            $pdf_issues_html .= '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> ' . get_string('download_report', 'block_pdfcounter');
             $pdf_issues_html .= '</a>';
             $pdf_issues_html .= '</div>';
             $pdf_issues_html .= '</div>';
+            $pdf_issues_html .= '<hr>';
             $pdf_issues_html .= '</td></tr>';
         }
         $pdf_issues_html .= '</tbody></table>';
@@ -533,7 +559,7 @@ foreach ($urllinks as $ulink) {
                         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
                         color: black;
                         margin-bottom: 10px;">
-                <span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">Historical Trends</span><br>
+                <span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">'.get_string('historical_trends','block_pdfcounter').'</span><br>
                 <div style="margin-top:10px">
                     <canvas id="progressChart" width="200" height="150"></canvas>
                 </div>
@@ -550,7 +576,7 @@ foreach ($urllinks as $ulink) {
                 data: {
                     labels: meses,
                     datasets: [{
-                        label: "Progress (%)",
+                        label: "'.get_string('progress_chart_label','block_pdfcounter').'",
                         data: progressValues,
                         borderColor: "blue",
                         backgroundColor: "rgba(0,0,255,0.1)",

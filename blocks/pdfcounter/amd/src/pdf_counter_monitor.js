@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'core/str'], function($, Str) {
     var PdfCounterMonitor = {
         courseid: null,
         refreshInterval: 3000, // 3 seconds for faster updates
@@ -104,10 +104,9 @@ define(['jquery'], function($) {
                     }),
                     success: function(response) {
                         if (response.done) {
-                            // Todos avaliados, agora atualiza dashboard
+                            // Todos avaliados, atualiza dashboard uma vez e pára o loop
                             setTimeout(function() {
                                 self.refreshDashboard();
-                                setTimeout(self.evaluatePendingPdfs.bind(self), self.refreshInterval);
                             }, 500);
                         } else {
                             // Avaliou um, atualiza dashboard e chama próximo
@@ -147,27 +146,41 @@ define(['jquery'], function($) {
         },
 
         updateDashboardUI: function(data) {
-                        // Atualizar mensagem de PDFs pendentes em tempo real
-                        var pendingCount = 0;
-                        if (data.pdfIssues && data.pdfIssues.length > 0) {
-                            data.pdfIssues.forEach(function(issue) {
-                                var totalTests = issue.pass_count + issue.fail_count + issue.not_tagged_count;
-                                var doneTests = issue.pass_count + issue.fail_count + issue.not_tagged_count;
-                                if (totalTests > 0 && doneTests === issue.not_tagged_count) {
-                                    pendingCount++;
-                                }
-                            });
-                        }
-                        var pendingMsg = document.getElementById('pdf-pending-msg');
-                        if (pendingMsg) {
-                            if (pendingCount > 0) {
-                                pendingMsg.innerHTML = '⚠️ Ainda faltam ' + pendingCount + ' PDF(s) para avaliar nesta página.';
-                                pendingMsg.style.display = '';
-                            } else {
-                                pendingMsg.innerHTML = '';
-                                pendingMsg.style.display = 'none';
-                            }
-                        }
+            // Atualizar mensagem de PDFs pendentes em tempo real
+            var pendingCount = 0;
+
+            // Se o backend já enviar o número de PDFs pendentes, usar esse valor
+            if (typeof data.pendingCount !== 'undefined' && data.pendingCount !== null) {
+                pendingCount = data.pendingCount;
+            } else if (data.pdfIssues && data.pdfIssues.length > 0) {
+                // Fallback: calcular no frontend a partir dos resultados
+                data.pdfIssues.forEach(function(issue) {
+                    var totalTests = issue.pass_count + issue.fail_count + issue.not_tagged_count;
+                    var doneTests = issue.pass_count + issue.fail_count + issue.not_tagged_count;
+                    if (totalTests > 0 && doneTests === issue.not_tagged_count) {
+                        pendingCount++;
+                    }
+                });
+            }
+
+            var pendingMsg = document.getElementById('pdf-pending-msg');
+            if (pendingMsg) {
+                if (pendingCount > 0) {
+                    // Obter string localizada a partir do language pack
+                    Str.get_string('pendingmsg_analyzing', 'block_pdfcounter', pendingCount)
+                        .then(function(msg) {
+                            pendingMsg.innerHTML = '⚠️ ' + msg;
+                            pendingMsg.style.display = '';
+                        })
+                        .catch(function() {
+                            pendingMsg.innerHTML = '⚠️ ' + pendingCount + ' PDF(s)';
+                            pendingMsg.style.display = '';
+                        });
+                } else {
+                    pendingMsg.innerHTML = '';
+                    pendingMsg.style.display = 'none';
+                }
+            }
             // LOG: Enviar pdfIssues para backend debug
             try {
                 $.ajax({
@@ -204,7 +217,14 @@ define(['jquery'], function($) {
             this.updateHistoricalChart(data.overallProgress);
             var totalElement = $('.total-pdfs-count');
             if (totalElement.length) {
-                totalElement.text(data.totalPdfs + ' PDFs');
+                Str.get_string('totalpdfs', 'block_pdfcounter', data.totalPdfs)
+                    .then(function(msg) {
+                        totalElement.text(msg);
+                    })
+                    .catch(function() {
+                        // Fallback: mostra só o número se não conseguir ir buscar a string
+                        totalElement.text(data.totalPdfs);
+                    });
             }
         },
 
@@ -213,7 +233,14 @@ define(['jquery'], function($) {
             if (!issuesList.length) return;
 
             if (!pdfIssues || pdfIssues.length === 0) {
-                issuesList.html('<tr><td colspan="2" style="text-align: center; color: #28a745; font-style: italic; padding: 15px;">No PDF accessibility issues found.</td></tr>');
+                // Mensagem sem issues pode ser localizada via core/str
+                Str.get_string('noissues', 'block_pdfcounter')
+                    .then(function(msg) {
+                        issuesList.html('<tr><td colspan="2" style="text-align: center; color: #28a745; font-style: italic; padding: 15px;">' + msg + '</td></tr>');
+                    })
+                    .catch(function() {
+                        issuesList.html('<tr><td colspan="2" style="text-align: center; color: #28a745; font-style: italic; padding: 15px;">No PDF accessibility issues found.</td></tr>');
+                    });
                 return;
             }
 
@@ -231,26 +258,60 @@ define(['jquery'], function($) {
                 return ratioB - ratioA;
             });
 
-            var html = '';
             var self = this;
-            pdfIssues.forEach(function(pdf) {
-                var applicableTests = pdf.pass_count + pdf.fail_count + pdf.not_tagged_count;
-                var failedTests = pdf.fail_count + pdf.not_tagged_count;
-                var downloadUrl = M.cfg.wwwroot + '/blocks/pdfcounter/download_report.php?filename=' + encodeURIComponent(pdf.filename) + '&courseid=' + self.courseid;
-                html += '<tr><td colspan="1" style="padding:0;">';
-                html += '<div class="parent" style="display:grid; grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); grid-column-gap:0; grid-row-gap:0;">';
-                html += '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' + pdf.filename + '</div>';
-                html += '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' + failedTests + ' of ' + applicableTests + ' tests failed</div>';
-                html += '<div class="div3" style="grid-area:3/1/4/2; text-align:right;">';
-                html += '<a href="' + downloadUrl + '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
-                html += '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> Download Report';
-                html += '</a>';
-                html += '</div>';
-                html += '</div>';
-                html += '</td></tr>';
-            });
+            var rowPromises = pdfIssues.map(function(pdf) {
+                    var applicableTests = pdf.pass_count + pdf.fail_count + pdf.not_tagged_count;
+                    var failedTests = pdf.fail_count + pdf.not_tagged_count;
+                    var downloadUrl = M.cfg.wwwroot + '/blocks/pdfcounter/download_report.php?filename=' + encodeURIComponent(pdf.filename) + '&courseid=' + self.courseid;
 
-            issuesList.html(html);
+                    var failInfo = {
+                        failed: failedTests,
+                        total: applicableTests
+                    };
+
+                    return Promise.all([
+                        Str.get_string('tests_failed', 'block_pdfcounter', failInfo),
+                        Str.get_string('download_report', 'block_pdfcounter')
+                    ]).then(function(strings) {
+                        var testsFailedStr = strings[0];
+                        var downloadLabel = strings[1];
+
+                        var rowHtml = '';
+                        rowHtml += '<tr><td colspan="1" style="padding:0;">';
+                        rowHtml += '<div class="parent" style="display:grid; grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); grid-column-gap:0; grid-row-gap:0;">';
+                        rowHtml += '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' + pdf.filename + '</div>';
+                        rowHtml += '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' + testsFailedStr + '</div>';
+                        rowHtml += '<div class="div3" style="grid-area:3/1/4/2; text-align:left;">';
+                        rowHtml += '<a href="' + downloadUrl + '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
+                        rowHtml += '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> ' + downloadLabel;
+                        rowHtml += '</a>';
+                        rowHtml += '</div>';
+                        rowHtml += '</div>';
+                        rowHtml += '<hr>';
+                        rowHtml += '</td></tr>';
+                        return rowHtml;
+                    }).catch(function() {
+                        // Fallback para inglês caso haja erro a obter strings
+                        var fallback = '';
+                        fallback += '<tr><td colspan="1" style="padding:0;">';
+                        fallback += '<div class="parent" style="display:grid; grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); grid-column-gap:0; grid-row-gap:0;">';
+                        fallback += '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' + pdf.filename + '</div>';
+                        fallback += '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' + failedTests + ' of ' + applicableTests + ' tests failed</div>';
+                        fallback += '<div class="div3" style="grid-area:3/1/4/2; text-align:left;">';
+                        fallback += '<a href="' + downloadUrl + '" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:0.95em; display:inline-flex; align-items:center; gap:4px;">';
+                        fallback += '<i class="fa fa-download" aria-hidden="true" style="color:#1976d2;"></i> Download Report';
+                        fallback += '</a>';
+                        fallback += '</div>';
+                        fallback += '</div>';
+                        fallback += '<hr>';
+                        fallback += '</td></tr>';
+                        return fallback;
+                    });
+                });
+
+            Promise.all(rowPromises).then(function(rowsHtml) {
+                issuesList.html(rowsHtml.join(''));
+            });
         },
 
         updateHistoricalChart: function(currentProgress) {

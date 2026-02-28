@@ -27,4 +27,22 @@ $string['pluginname'] = 'Accessibility Dashboard';
 $string['pdfresources'] = 'Number of PDF files';
 $string['nocourse'] = 'No course available to display PDF count.';
 
-$string['overall'] = "Overall Accessibility";
+$string['overall'] = 'Overall Accessibility';
+$string['pendingmsg_analyzing'] = 'This tool is still analyzing {$a} PDF(s) on this page.';
+$string['pendingmsg_loading'] = 'This tool is currently analyzing the accessibility of this course\'s PDFs…';
+$string['results_title'] = 'PDF Accessibility Results';
+$string['noissues'] = 'No PDF accessibility issues found.';
+$string['tests_failed'] = '{$a->failed} of {$a->total} tests failed';
+$string['download_report'] = 'Download Report';
+$string['historical_trends'] = 'Historical Trends';
+
+$string['learnmore'] = 'Read More';
+$string['learnmore_close'] = 'Close';
+$string['learnmore_intro'] = 'The Accessibility Dashboard offers an overview of course accessibility, tracks progress, and highlights PDF accessibility issues, with detailed reports for each file.';
+$string['learnmore_resources'] = 'Resources:';
+$string['learnmore_fcul_guide'] = 'FCUL Accessibility Guide';
+$string['learnmore_fcul_guide_title'] = 'Open FCUL Accessibility Guide';
+$string['learnmore_wcag'] = 'Accessible PDF Best Practices - WCAG 2.2';
+$string['learnmore_wcag_title'] = 'WCAG 2.2 PDF Techniques';
+$string['progress_chart_label'] = 'Progress (%)';
+$string['totalpdfs'] = '{$a} PDFs';
