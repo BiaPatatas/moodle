@@ -13,8 +13,8 @@ require_login();
 admin_externalpage_setup('tool_accessibilitydashboard');
 
 $PAGE->set_url('/admin/tool/accessibilitydashboard/index.php');
-$PAGE->set_title('PDF Accessibility Dashboard');
-$PAGE->set_heading('PDF Accessibility Dashboard');
+$PAGE->set_title(get_string('dashboard_title', 'tool_accessibilitydashboard'));
+$PAGE->set_heading(get_string('dashboard_title', 'tool_accessibilitydashboard'));
 $PAGE->requires->css('/admin/tool/accessibilitydashboard/index.css');
 
 // --- ROLE LOGIC ---
@@ -39,7 +39,8 @@ if (!$isadmin) {
 // Se não for admin nem manager, bloquear acesso
 if (!$isadmin && !$is_manager) {
     echo $OUTPUT->header();
-    echo '<div class="alert alert-danger" style="margin:2em;">Acesso restrito: apenas administradores ou managers de curso podem ver este dashboard.</div>';
+    echo '<div class="alert alert-danger" style="margin:2em;">' .
+        get_string('access_restricted', 'tool_accessibilitydashboard') . '</div>';
     echo $OUTPUT->footer();
     exit;
 }
@@ -209,12 +210,12 @@ error_log('DEBUG INDEX.PHP block executed');
             <div class="dashboard-panel">
                 <div class="panel-header">
                     <div class="Header-text">
-                        <h3 style="color:white;">Accessibility Dashboard</h3>
-                        <p>Monitoring Accessibility of Institution</p>
+                        <h3 style="color:white;"><?php echo get_string('dashboard_title', 'tool_accessibilitydashboard'); ?></h3>
+                        <p><?php echo get_string('dashboard_subtitle', 'tool_accessibilitydashboard'); ?></p>
                     </div>
                     <div class="Report-button">
                         <button class="button" id="exportButton" onclick="exportReportPDF()">
-                            <i class="fas fa-file-pdf" aria-hidden="true"></i>Export PDF Report
+                            <i class="fas fa-file-pdf" aria-hidden="true"></i><?php echo get_string('export_pdf_report', 'tool_accessibilitydashboard'); ?>
                         </button>
                     </div>
                     
@@ -223,13 +224,13 @@ error_log('DEBUG INDEX.PHP block executed');
                 <div class="panel-body"><div class="Filters-section">
                         <div class="Filters-panel">
                             <div class="Filters-content">
-                                <h4><i class="fas fa-filter"></i> Filters</h4>
+                                <h4><i class="fas fa-filter"></i> <?php echo get_string('filters', 'tool_accessibilitydashboard'); ?></h4>
                                 <form method="GET" action="<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/index.php" class="filter-form">
                                     <div class="filter-row">
                                         <div class="filter-group">
-                                            <label for="department">Academic Degree:</label>
+                                            <label for="department"><?php echo get_string('filter_academic_degree', 'tool_accessibilitydashboard'); ?></label>
                                             <select id="department" name="department" onchange="updateCourses()" <?php if (!$isadmin && $managercategory) echo 'disabled'; ?>>
-                                                <option value="">All Academic Degrees</option>
+                                                <option value=""><?php echo get_string('all_academic_degrees', 'tool_accessibilitydashboard'); ?></option>
                                                 <?php foreach ($departments as $dept): ?>
                                                     <option value="<?php echo $dept->id; ?>" <?php echo ($department_id == $dept->id) ? 'selected' : ''; ?>>
                                                         <?php echo s($dept->name); ?>
@@ -241,9 +242,9 @@ error_log('DEBUG INDEX.PHP block executed');
                                             <?php endif; ?>
                                         </div>
                                         <div class="filter-group">
-                                            <label for="course">Course:</label>
+                                            <label for="course"><?php echo get_string('filter_course', 'tool_accessibilitydashboard'); ?></label>
                                             <select id="course" name="course" onchange="updateDisciplines()" <?php if (!$isadmin && $managercourse) echo 'disabled'; ?>>
-                                                <option value="">All Courses</option>
+                                                <option value=""><?php echo get_string('all_courses', 'tool_accessibilitydashboard'); ?></option>
                                                 <?php foreach ($courses as $course): ?>
                                                     <option value="<?php echo $course->id; ?>" <?php echo ($course_id == $course->id) ? 'selected' : ''; ?>>
                                                         <?php echo s($course->name); ?>
@@ -255,9 +256,9 @@ error_log('DEBUG INDEX.PHP block executed');
                                             <?php endif; ?>
                                         </div>
                                         <div class="filter-group">
-                                            <label for="discipline">Discipline:</label>
+                                            <label for="discipline"><?php echo get_string('filter_discipline', 'tool_accessibilitydashboard'); ?></label>
                                             <select id="discipline" name="discipline">
-                                                <option value="">All Disciplines</option>
+                                                <option value=""><?php echo get_string('all_disciplines', 'tool_accessibilitydashboard'); ?></option>
                                                 <?php foreach ($disciplines as $discipline): ?>
                                                     <option value="<?php echo $discipline->id; ?>" <?php echo ($discipline_id == $discipline->id) ? 'selected' : ''; ?>>
                                                         <?php echo s($discipline->name); ?>
@@ -266,8 +267,8 @@ error_log('DEBUG INDEX.PHP block executed');
                                             </select>
                                         </div>
                                         <div class="filter-actions">
-                                            <button type="submit" class="btn btn-primary">Apply Filters</button>
-                                            <a href="<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/index.php" class="btn btn-secondary">Clear Filters</a>
+                                            <button type="submit" class="btn btn-primary"><?php echo get_string('apply_filters', 'tool_accessibilitydashboard'); ?></button>
+                                            <a href="<?php echo $CFG->wwwroot; ?>/admin/tool/accessibilitydashboard/index.php" class="btn btn-secondary"><?php echo get_string('clear_filters', 'tool_accessibilitydashboard'); ?></a>
                                         </div>
                                     </div>
                                 </form>
@@ -277,7 +278,7 @@ error_log('DEBUG INDEX.PHP block executed');
                     <div class="stats-grid">
                         <div class="stat-card stat-coursesWithPdfs">
                             <h2 class="stat-number"><?php echo $stats['courses_with_pdfs']; ?></h2>
-                            <p class="stat-label">Courses with PDFs</p>
+                            <p class="stat-label"><?php echo get_string('courses_with_pdfs', 'tool_accessibilitydashboard'); ?></p>
                             <div class="stat-icon">
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
@@ -285,7 +286,7 @@ error_log('DEBUG INDEX.PHP block executed');
                         
                         <div class="stat-card stat-total-Pdfs">
                             <h2 class="stat-number"><?php echo $total_pdfs_count; ?></h2>
-                            <p class="stat-label">Total PDFs</p>
+                            <p class="stat-label"><?php echo get_string('total_pdfs', 'tool_accessibilitydashboard'); ?></p>
                             <div class="stat-icon">
                                 <i class="fas fa-file-pdf"></i>
                             </div>
@@ -293,7 +294,7 @@ error_log('DEBUG INDEX.PHP block executed');
 
                         <div class="stat-card stat-warning">
                             <h2 class="stat-number"><?php echo $Problems_found; ?></h2>
-                            <p class="stat-label">Problems Found</p>
+                            <p class="stat-label"><?php echo get_string('stat_problems_found', 'tool_accessibilitydashboard'); ?></p>
                             <div class="stat-icon">
                                 <i class="fas fa-exclamation-triangle"></i>
                             </div>
@@ -301,7 +302,7 @@ error_log('DEBUG INDEX.PHP block executed');
 
                         <div class="stat-card stat-overall">
                             <h2 class="stat-number" style="color: <?php echo $score_color; ?>;"><?php echo round($overall_score, 1); ?>%</h2>
-                            <p class="stat-label">Overall Score</p>
+                            <p class="stat-label"><?php echo get_string('stat_overall_score', 'tool_accessibilitydashboard'); ?></p>
                             <div class="stat-icon" style="background: linear-gradient(135deg, <?php echo $score_color; ?>, <?php echo $score_color; ?>99);">
                                 <i class="fas fa-chart-line"></i>
                             </div>
@@ -314,13 +315,13 @@ error_log('DEBUG INDEX.PHP block executed');
                         <div class="Evolution-panel">
                             <div class="Evolution-content">
                                 <div class="evolution-header">
-                                    <h4><i class="fas fa-chart-line"></i> Accessibility Evolution</h4>
+                                    <h4><i class="fas fa-chart-line"></i> <?php echo get_string('evolution_title', 'tool_accessibilitydashboard'); ?></h4>
                                     <div class="evolution-stats">
                                         <span class="evolution-year"><?php echo date('Y'); ?></span>
                                         <div class="evolution-change <?php echo $evolution_positive ? 'positive' : 'negative'; ?>">
                                             <i class="fas fa-<?php echo $evolution_positive ? 'arrow-up' : 'arrow-down'; ?>"></i>
                                             <?php echo abs($evolution_change); ?>%
-                                            <span class="evolution-change-label">since last month</span>
+                                            <span class="evolution-change-label"><?php echo get_string('evolution_since_last_month', 'tool_accessibilitydashboard'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -335,30 +336,30 @@ error_log('DEBUG INDEX.PHP block executed');
                     <!-- Data Table Section -->
                     <div class="data-table-section">
                         <div class="table-container">
-                            <h4><i class="fas fa-table"></i> Academic Data 
+                            <h4><i class="fas fa-table"></i> <?php echo get_string('datatable_title', 'tool_accessibilitydashboard'); ?>
                             
                             </h4>
                             <?php if (!$show_all_data && !$department_id && !$course_id && !$discipline_id): ?>
                                 <div class="no-data">
                                     <i class="fas fa-filter"></i>
-                                    <p>Please select filters to view course data.</p>
+                                    <p><?php echo get_string('datatable_select_filters', 'tool_accessibilitydashboard'); ?></p>
                                 </div>
                             <?php elseif (empty($filtered_data)): ?>
                                 <div class="no-data">
                                     <i class="fas fa-info-circle"></i>
-                                    <p>No data found for the selected filters.</p>
+                                    <p><?php echo get_string('datatable_no_data', 'tool_accessibilitydashboard'); ?></p>
                                 </div>
                             <?php else: ?>
                                 <div class="table-responsive">
                                     <table class="data-table">
                                         <thead>
                                             <tr>
-                                                <th>Academic Degree</th>
-                                                <th>Course</th>
-                                                <th>Discipline</th>
-                                                <th>PDFs</th>
-                                                <th>Score</th>
-                                                <th>Status</th>
+                                                <th><?php echo get_string('column_academic_degree', 'tool_accessibilitydashboard'); ?></th>
+                                                <th><?php echo get_string('column_course', 'tool_accessibilitydashboard'); ?></th>
+                                                <th><?php echo get_string('column_discipline', 'tool_accessibilitydashboard'); ?></th>
+                                                <th><?php echo get_string('column_pdfs', 'tool_accessibilitydashboard'); ?></th>
+                                                <th><?php echo get_string('column_score', 'tool_accessibilitydashboard'); ?></th>
+                                                <th><?php echo get_string('column_status', 'tool_accessibilitydashboard'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -384,7 +385,13 @@ error_log('DEBUG INDEX.PHP block executed');
                                 <?php if ($total_pages > 1): ?>
                                     <div class="pagination-container" style="margin-left: 2%;">
                                         <div class="pagination-info">
-                                            Showing <?php echo (($page - 1) * $items_per_page + 1); ?> - <?php echo min($page * $items_per_page, $total_items); ?> of <?php echo $total_items; ?> results
+                                            <?php $a = (object)[
+                                                'from' => (($page - 1) * $items_per_page + 1),
+                                                'to' => min($page * $items_per_page, $total_items),
+                                                'total' => $total_items
+                                            ];
+                                            echo get_string('pagination_showing', 'tool_accessibilitydashboard', $a);
+                                            ?>
                                         </div>
                                         <div class="pagination-controls" style="margin-right: 2%;">
                                             <?php
@@ -400,17 +407,19 @@ error_log('DEBUG INDEX.PHP block executed');
                                             
                                             <?php if ($page > 1): ?>
                                                 <a href="<?php echo $base_url; ?>page=<?php echo ($page - 1); ?>" class="pagination-btn">
-                                                    <i class="fas fa-chevron-left"></i> Previous
+                                                    <i class="fas fa-chevron-left"></i> <?php echo get_string('pagination_previous', 'tool_accessibilitydashboard'); ?>
                                                 </a>
                                             <?php endif; ?>
                                             
                                             <span class="pagination-current">
-                                                Page <?php echo $page; ?> of <?php echo $total_pages; ?>
+                                                <?php $b = (object)['page' => $page, 'totalpages' => $total_pages];
+                                                    echo get_string('pagination_page_of', 'tool_accessibilitydashboard', $b);
+                                                ?>
                                             </span>
                                             
                                             <?php if ($page < $total_pages): ?>
                                                 <a href="<?php echo $base_url; ?>page=<?php echo ($page + 1); ?>" class="pagination-btn">
-                                                    Next <i class="fas fa-chevron-right"></i>
+                                                    <?php echo get_string('pagination_next', 'tool_accessibilitydashboard'); ?> <i class="fas fa-chevron-right"></i>
                                                 </a>
                                             <?php endif; ?>
                                         </div>
@@ -426,12 +435,12 @@ error_log('DEBUG INDEX.PHP block executed');
                         <!-- Best Courses Card -->
                         <div class="stat-card-Ce stat-coursesWithBestScore">
                             <div class="card-header">
-                                <h4><i class="fas fa-trophy"></i> Disciplines with Higher Score</h4>
+                                <h4><i class="fas fa-trophy"></i> <?php echo get_string('best_disciplines_title', 'tool_accessibilitydashboard'); ?></h4>
                             </div>
                             <div class="card-content">
                                 <?php if (empty($best_courses)): ?>
                                     <div class="no-data-small">
-                                        <p>No courses with accessibility scores found.</p>
+                                        <p><?php echo get_string('best_courses_none', 'tool_accessibilitydashboard'); ?></p>
                                     </div>
                                 <?php else: ?>
                                     <?php foreach ($best_courses as $course): ?>
@@ -496,12 +505,12 @@ error_log('DEBUG INDEX.PHP block executed');
                                         ?>
                         <div class="stat-card-Ce stat-CoursesWorstScore">
                             <div class="card-header">
-                                <h4><i class="fas fa-exclamation-triangle"></i> Disciplines with Lower Score</h4>
+                                <h4><i class="fas fa-exclamation-triangle"></i> <?php echo get_string('worst_disciplines_title', 'tool_accessibilitydashboard'); ?></h4>
                             </div>
                             <div class="card-content">
                                 <?php if (empty($worst_courses)): ?>
                                     <div class="no-data-small">
-                                        <p>No courses with poor accessibility scores found.</p>
+                                        <p><?php echo get_string('worst_courses_none', 'tool_accessibilitydashboard'); ?></p>
                                     </div>
                                 <?php else: ?>
                                     <?php foreach ($worst_courses as $course): ?>
@@ -532,12 +541,12 @@ error_log('DEBUG INDEX.PHP block executed');
                         <!-- Most Failed Tests Card -->
                         <div class="stat-card-Ce stat-FailedTests">
                             <div class="card-header">
-                                <h4><i class="fas fa-exclamation-triangle"></i> Most Failed Tests</h4>
+                                <h4><i class="fas fa-exclamation-triangle"></i> <?php echo get_string('most_failed_tests_title', 'tool_accessibilitydashboard'); ?></h4>
                             </div>
                             <div class="card-content">
                                 <?php if (empty($common_errors)): ?>
                                     <div class="no-data-small">
-                                        <p>No failed tests found.</p>
+                                        <p><?php echo get_string('no_failed_tests', 'tool_accessibilitydashboard'); ?></p>
                                     </div>
                                 <?php else: ?>
                                     <?php foreach ($common_errors as $error): ?>
@@ -554,7 +563,14 @@ error_log('DEBUG INDEX.PHP block executed');
                                         <div class="error-item">
                                             <div class="error-info">
                                                 <h5><?php echo s($error->error_type); ?></h5>
-                                                <p><?php echo $error->failure_count; ?> of <?php echo $error->total_tests; ?> PDFs failed</p>
+                                                <p>
+                                                    <?php $counters = (object)[
+                                                        'failed' => $error->failure_count,
+                                                        'total' => $error->total_tests
+                                                    ];
+                                                    echo get_string('failed_pdfs_of_total', 'tool_accessibilitydashboard', $counters);
+                                                    ?>
+                                                </p>
                                             </div>
                                             <div class="error-percentage <?php echo $error_class; ?>">
                                                 <?php echo number_format($error->percentage, 0); ?>%
@@ -583,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 labels: <?php echo json_encode($evolution_data['months']); ?>,
                 datasets: [{
-                    label: 'Accessibility Score (%)',
+                    label: '<?php echo get_string('chart_accessibility_score', 'tool_accessibilitydashboard'); ?>',
                     data: <?php echo json_encode($evolution_data['scores']); ?>,
                     borderColor: '#007bff',
                     backgroundColor: 'rgba(0, 123, 255, 0.1)',
@@ -622,7 +638,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 return context[0].label;
                             },
                             label: function(context) {
-                                return 'Accessibility: ' + context.parsed.y.toFixed(1) + '%';
+                                return '<?php echo get_string('tooltip_accessibility_prefix', 'tool_accessibilitydashboard'); ?> ' + context.parsed.y.toFixed(1) + '%';
                             }
                         }
                     }
@@ -856,7 +872,7 @@ function exportReportPDF() {
     // Show loading indicator
     const exportButton = document.getElementById('exportButton');
     const originalText = exportButton.innerHTML;
-    exportButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+    exportButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <?php echo get_string('export_generating', 'tool_accessibilitydashboard'); ?>';
     exportButton.disabled = true;
     
     // Create a temporary link and trigger download
