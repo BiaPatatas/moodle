@@ -14,22 +14,20 @@ class block_pdfcounter extends block_base {
     public function get_content() {
         global $COURSE, $DB, $CFG, $USER;
 
-        // DEBUG: Open debug log file (create if not exists, check write permissions)
-        $debuglogfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdfcounter.txt';
-        $debuglog = @fopen($debuglogfile, 'a');
-        if ($debuglog === false) {
-            // Fallback: try to create the file
-            @touch($debuglogfile);
-            @chmod($debuglogfile, 0666);
-            $debuglog = @fopen($debuglogfile, 'a');
-        }
-        if (is_resource($debuglog)) {
-            fwrite($debuglog, "\n==== PDFCOUNTER DEBUG START ====\n");
-            fwrite($debuglog, "Course ID: {$COURSE->id}\n");
-        } else {
-            // Fallback: log to syslog if file cannot be opened
-            error_log("PDFCOUNTER: Não foi possível abrir debug_pdfcounter.txt para escrita em $debuglogfile");
-        }
+        // DEBUG file logging disabled for production installation.
+        // $debuglogfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdfcounter.txt';
+        // $debuglog = @fopen($debuglogfile, 'a');
+        // if ($debuglog === false) {
+        //     @touch($debuglogfile);
+        //     @chmod($debuglogfile, 0666);
+        //     $debuglog = @fopen($debuglogfile, 'a');
+        // }
+        // if (is_resource($debuglog)) {
+        //     fwrite($debuglog, "\n==== PDFCOUNTER DEBUG START ====\n");
+        //     fwrite($debuglog, "Course ID: {$COURSE->id}\n");
+        // } else {
+        //     error_log("PDFCOUNTER: Não foi possível abrir debug_pdfcounter.txt para escrita em $debuglogfile");
+        // }
 
         // Buscar todos os PDFs visíveis no curso (mod_resource e mod_folder)
         $sql = "SELECT f.filename, f.contenthash, cm.id as cmid,
@@ -57,7 +55,7 @@ class block_pdfcounter extends block_base {
         // Apenas listar PDFs e status, nunca avaliar ou processar aqui
         foreach ($files as $file) {
             if (substr($file->filename, -4) === '.pdf') {
-                if (is_resource($debuglog)) fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
+                // if (is_resource($debuglog)) fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
                 // Buscar status na base de dados
                 $filehash = $file->contenthash;
                 $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
@@ -81,15 +79,15 @@ $sqlpages = "SELECT cm.id as cmid, p.content, ctx.id as contextid
 $pages = $DB->get_records_sql($sqlpages, array('courseid' => $COURSE->id));
 $pagelinks = [];
 foreach ($pages as $page) {
-    if (is_resource($debuglog)) {
-        fwrite($debuglog, "[mod_page] Checking page cmid={$page->cmid}, contextid={$page->contextid}\n");
-    }
+    // if (is_resource($debuglog)) {
+    //     fwrite($debuglog, "[mod_page] Checking page cmid={$page->cmid}, contextid={$page->contextid}\n");
+    // }
     // Extrair links <a href="...pdf"> do conteúdo da página
     if (preg_match_all('/<a[^>]+href=\"([^\"]+\.pdf)\"[^>]*>/i', $page->content, $matches)) {
         foreach ($matches[1] as $pdfurl) {
-            if (is_resource($debuglog)) {
-                fwrite($debuglog, "[mod_page] Found PDF link: $pdfurl\n");
-            }
+            // if (is_resource($debuglog)) {
+            //     fwrite($debuglog, "[mod_page] Found PDF link: $pdfurl\n");
+            // }
             $pagelinks[] = [
                 'url' => $pdfurl,
                 'contextid' => $page->contextid,
@@ -100,9 +98,9 @@ foreach ($pages as $page) {
     // Também extrai links pluginfile.php que terminam em .pdf
     if (preg_match_all('/<a[^>]+href=\"([^\"]*pluginfile\.php[^\"]+\.pdf)\"[^>]*>/i', $page->content, $matches2)) {
         foreach ($matches2[1] as $pdfurl) {
-            if (is_resource($debuglog)) {
-                fwrite($debuglog, "[mod_page] Found pluginfile.php PDF link: $pdfurl\n");
-            }
+            // if (is_resource($debuglog)) {
+            //     fwrite($debuglog, "[mod_page] Found pluginfile.php PDF link: $pdfurl\n");
+            // }
             $pagelinks[] = [
                 'url' => $pdfurl,
                 'contextid' => $page->contextid,
@@ -125,14 +123,14 @@ $sqlurls = "SELECT cm.id as cmid, u.externalurl, ctx.id as contextid
 $urls = $DB->get_records_sql($sqlurls, array('courseid' => $COURSE->id));
 $urllinks = [];
 foreach ($urls as $url) {
-    if (is_resource($debuglog)) {
-        fwrite($debuglog, "[mod_url] Checking url cmid={$url->cmid}, contextid={$url->contextid}, externalurl={$url->externalurl}\n");
-    }
+    // if (is_resource($debuglog)) {
+    //     fwrite($debuglog, "[mod_url] Checking url cmid={$url->cmid}, contextid={$url->contextid}, externalurl={$url->externalurl}\n");
+    // }
     // Só considera links que terminam em .pdf
     if (preg_match('/\.pdf($|\?)/i', $url->externalurl)) {
-        if (is_resource($debuglog)) {
-            fwrite($debuglog, "[mod_url] Found PDF link: {$url->externalurl}\n");
-        }
+        // if (is_resource($debuglog)) {
+        //     fwrite($debuglog, "[mod_url] Found PDF link: {$url->externalurl}\n");
+        // }
         $urllinks[] = [
             'url' => $url->externalurl,
             'contextid' => $url->contextid,
@@ -143,17 +141,17 @@ foreach ($urls as $url) {
 
 // Apenas listar links encontrados em mod_page, nunca avaliar ou processar aqui
 foreach ($pagelinks as $plink) {
-    if (is_resource($debuglog)) {
-        fwrite($debuglog, "[mod_page] Found link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
-    }
+    // if (is_resource($debuglog)) {
+    //     fwrite($debuglog, "[mod_page] Found link: {$plink['url']} | contextid={$plink['contextid']} | cmid={$plink['cmid']}\n");
+    // }
     // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
 // Apenas listar links encontrados em mod_url, nunca avaliar ou processar aqui
 foreach ($urllinks as $ulink) {
-    if (is_resource($debuglog)) {
-        fwrite($debuglog, "[mod_url] Found link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
-    }
+    // if (is_resource($debuglog)) {
+    //     fwrite($debuglog, "[mod_url] Found link: {$ulink['url']} | contextid={$ulink['contextid']} | cmid={$ulink['cmid']}\n");
+    // }
     // Exibir na interface, mas nunca baixar, avaliar ou gravar nada em PHP
 }
 
@@ -209,16 +207,16 @@ foreach ($urllinks as $ulink) {
         }
         foreach ($dbpdfs as $dbpdf) {
             if (!in_array($dbpdf->filehash, $visible_hashes)) {
-                if (is_resource($debuglog)) fwrite($debuglog, "[cleanup] Removing PDF from DB: {$dbpdf->filename} | hash: {$dbpdf->filehash}\n");
+                // if (is_resource($debuglog)) fwrite($debuglog, "[cleanup] Removing PDF from DB: {$dbpdf->filename} | hash: {$dbpdf->filehash}\n");
                 $DB->delete_records('block_pdfaccessibility_test_results', ['fileid' => $dbpdf->id]);
                 $DB->delete_records('block_pdfaccessibility_pdf_files', ['id' => $dbpdf->id]);
             }
         }
-        // DEBUG: Close debug log file
-        if (is_resource($debuglog)) {
-            fwrite($debuglog, "==== PDFCOUNTER DEBUG END ====\n\n");
-            fclose($debuglog);
-        }
+        // DEBUG file logging disabled for production.
+        // if (is_resource($debuglog)) {
+        //     fwrite($debuglog, "==== PDFCOUNTER DEBUG END ====\n\n");
+        //     fclose($debuglog);
+        // }
 
         if ($this->content !== null) {
             return $this->content;

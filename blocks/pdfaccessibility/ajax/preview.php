@@ -10,7 +10,8 @@ if (!isset($input['sesskey'])) {
 $_POST['sesskey'] = $input['sesskey']; // Para o require_sesskey() funcionar
 require_sesskey();
 
-file_put_contents(__DIR__.'/debug.txt', 'chegou aqui');
+// Debug write to local file disabled for production.
+// file_put_contents(__DIR__.'/debug.txt', 'chegou aqui');
 
 // Ensure errors are logged but not sent to the AJAX response, so we always
 // return valid JSON to the frontend instead of HTML error pages.
@@ -61,7 +62,7 @@ foreach ($files as $file) {
 }
 if (empty($filenames)) {
     echo json_encode(['status' => 'error', 'message' => 'No files found in draft area for this draftid', 'draftid' => $draftid]);
-    error_log("esta vazio");
+    // error_log("esta vazio");
     exit;
 }
 
@@ -72,43 +73,17 @@ foreach ($files as $file) {
     if ($file->get_mimetype() === 'application/pdf') {
         $filepath = save_temp_pdf($file);
         $debug_dir = __DIR__ . '/../debug/';
-        if (!is_dir($debug_dir)) {
-            mkdir($debug_dir, 0755, true);
-        }
+        // Debug directory creation and debug file writes disabled for production.
+        // if (!is_dir($debug_dir)) {
+        //     mkdir($debug_dir, 0755, true);
+        // }
         $script_path = __DIR__ . '/../pdf_accessibility.py';
         $python_command = "python3 " . escapeshellarg($script_path) . " " . escapeshellarg($filepath);
-        $debug_info = [
-            'timestamp' => date('Y-m-d H:i:s'),
-            'filename' => $file->get_filename(),
-            'filesize' => $file->get_filesize(),
-            'filepath' => $filepath,
-            'file_exists' => file_exists($filepath),
-            'script_path' => $script_path,
-            'script_exists' => file_exists($script_path),
-            'python_command' => $python_command,
-            'cwd' => getcwd()
-        ];
-        file_put_contents($debug_dir . 'debug_command.txt', json_encode($debug_info, JSON_PRETTY_PRINT));
+        // $debug_info = [...]; // omitted: no debug file write in production.
         $output = shell_exec($python_command . " 2>&1");
-        file_put_contents($debug_dir . 'debug_python_output.txt', 
-            "=== Python Output Debug ===\n" .
-            "Timestamp: " . date('Y-m-d H:i:s') . "\n" .
-            "Command: " . $python_command . "\n" .
-            "Output Length: " . strlen($output) . "\n" .
-            "Raw Output:\n" . $output . "\n" .
-            "=== End Output ===\n\n", FILE_APPEND);
         unlink($filepath);
         $result = json_decode($output, true);
-        $json_debug = [
-            'timestamp' => date('Y-m-d H:i:s'),
-            'json_decode_success' => $result !== null,
-            'json_last_error' => json_last_error(),
-            'json_last_error_msg' => json_last_error_msg(),
-            'result_type' => gettype($result),
-            'result_count' => is_array($result) ? count($result) : 'N/A',
-            'result' => $result
-        ];
-        file_put_contents($debug_dir . 'debug_json.txt', json_encode($json_debug, JSON_PRETTY_PRINT));
+        // JSON debug information logging disabled for production.
         if (!$result) {
             continue;
         }

@@ -196,10 +196,11 @@ $debug_info['end_memory'] = $debug_end_memory;
 $debug_info['duration_sec'] = round($debug_end_time - $debug_start_time, 4);
 $debug_info['memory_used'] = $debug_end_memory - $debug_start_memory;
 
-$debug_file = __DIR__ . '/dashboard_debug.txt';
-file_put_contents($debug_file, "==== DASHBOARD INDEX DEBUG ====" . PHP_EOL, FILE_APPEND);
-file_put_contents($debug_file, print_r($debug_info, true) . PHP_EOL, FILE_APPEND);
-error_log('DEBUG INDEX.PHP block executed');
+// Debug logging disabled for production: keep metrics only in memory.
+// $debug_file = __DIR__ . '/dashboard_debug.txt';
+// file_put_contents($debug_file, "==== DASHBOARD INDEX DEBUG ====" . PHP_EOL, FILE_APPEND);
+// file_put_contents($debug_file, print_r($debug_info, true) . PHP_EOL, FILE_APPEND);
+// error_log('DEBUG INDEX.PHP block executed');
 ?>
 
 
@@ -473,35 +474,8 @@ error_log('DEBUG INDEX.PHP block executed');
                                         
 
                                         <?php
-                                        // --- DEBUG BLOCK: deve estar dentro das tags PHP e antes do HTML ---
-                                        $debug_end_time = microtime(true);
-                                        $debug_end_memory = memory_get_usage();
-                                        $debug_info['end_time'] = date('Y-m-d H:i:s');
-                                        $debug_info['end_memory'] = $debug_end_memory;
-                                        $debug_info['duration_sec'] = round($debug_end_time - $debug_start_time, 4);
-                                        $debug_info['memory_used'] = $debug_end_memory - $debug_start_memory;
-
-                                        $debug_file = __DIR__ . '/dashboard_debug.txt';
-                                        file_put_contents($debug_file, "==== DASHBOARD INDEX DEBUG ====" . PHP_EOL, FILE_APPEND);
-                                        file_put_contents($debug_file, print_r($debug_info, true) . PHP_EOL, FILE_APPEND);
-                                        error_log('DEBUG INDEX.PHP block executed');
-                                        echo '<!-- DEBUG BLOCK EXECUTED -->';
-
-                                        // --- DEBUG BLOCK: must be inside PHP tags ---
-                                        $debug_end_time = microtime(true);
-                                        $debug_end_memory = memory_get_usage();
-                                        $debug_info['end_time'] = date('Y-m-d H:i:s');
-                                        $debug_info['end_memory'] = $debug_end_memory;
-                                        $debug_info['duration_sec'] = round($debug_end_time - $debug_start_time, 4);
-                                        $debug_info['memory_used'] = $debug_end_memory - $debug_start_memory;
-
-                                        $debug_file = __DIR__ . '/dashboard_debug.txt';
-                                        file_put_contents($debug_file, "==== DASHBOARD INDEX DEBUG ====" . PHP_EOL, FILE_APPEND);
-                                        file_put_contents($debug_file, print_r($debug_info, true) . PHP_EOL, FILE_APPEND);
-                                        // Test: log and echo to confirm debug block is running
-                                        error_log('DEBUG INDEX.PHP block executed');
-                                        echo '<!-- DEBUG BLOCK EXECUTED -->';
-
+                                        // Debug block removed for production to avoid file logging on every page load.
+                                        // Metrics (time/memory) are still computed earlier if needed for future use.
                                         ?>
                         <div class="stat-card-Ce stat-CoursesWorstScore">
                             <div class="card-header">

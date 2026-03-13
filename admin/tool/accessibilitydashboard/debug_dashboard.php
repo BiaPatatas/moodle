@@ -76,14 +76,9 @@ $log .= "\nEnd time: $end\nEnd memory: $end_mem\n";
 $log .= "Total duration: " . round($end - $start, 3) . "s\n";
 $log .= "Peak memory usage: " . memory_get_peak_usage() . "\n";
 
-
-// --- TESTES DE DIAGNÓSTICO ---
-error_log('DEBUG DASHBOARD.PHP block executado');
-echo '<!-- DEBUG DASHBOARD.PHP EXECUTADO -->';
-// Teste de escrita simples
-$testfile = __DIR__ . '/test_dashboard_write.txt';
-file_put_contents($testfile, 'test: ' . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
-
-// Escrever debug normal
-file_put_contents($debugfile, $log, LOCK_EX);
-echo "Debug info written to dashboard_debug.txt";
+// Diagnostic file/error logging disabled for production.
+// error_log('DEBUG DASHBOARD.PHP block executado');
+// $testfile = __DIR__ . '/test_dashboard_write.txt';
+// file_put_contents($testfile, 'test: ' . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+// file_put_contents($debugfile, $log, LOCK_EX);
+echo "Debug info generation disabled in production.";

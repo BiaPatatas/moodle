@@ -8,9 +8,10 @@ defined('MOODLE_INTERNAL') || die();
 class block_pdfaccessibility extends block_base {
     // Função auxiliar para logar mensagens de debug
     private function pdfaccessibility_debug_log($msg) {
-        $logfile = __DIR__ . '/debug/debug.txt';
-        $timestamp = date('Y-m-d H:i:s');
-        file_put_contents($logfile, "[$timestamp] $msg\n", FILE_APPEND);
+        // Debug file logging disabled for production.
+        // $logfile = __DIR__ . '/debug/debug.txt';
+        // $timestamp = date('Y-m-d H:i:s');
+        // file_put_contents($logfile, "[$timestamp] $msg\n", FILE_APPEND);
     }
 
 

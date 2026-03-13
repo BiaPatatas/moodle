@@ -29,13 +29,7 @@ function block_pdfcounter_get_pending_pdfs($courseid) {
                 'filehash' => $filehash,
                 'courseid' => $courseid
             ]);
-            // Debug: mostrar resultado da busca
-            $debugfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdf_ajax.txt';
-            $msg = "[DEBUG] Busca registro: filehash=$filehash, courseid=$courseid, resultado=" . json_encode($pdfrecord) . "\n";
-            file_put_contents($debugfile, $msg, FILE_APPEND);
-            // Dump all records for this course after lookup
-            $allpdfs = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $courseid]);
-            file_put_contents($debugfile, "[DEBUG] Todos registros após lookup: " . json_encode($allpdfs) . "\n", FILE_APPEND);
+            // Debug logging disabled for production (previously wrote lookup info to debug_pdf_ajax.txt).
             if (!$pdfrecord) {
                 $pending[] = [
                     'filename' => $file->filename,
@@ -83,10 +77,7 @@ function block_pdfcounter_get_pending_pdfs($courseid) {
                     'filehash' => $filehash,
                     'courseid' => $courseid
                 ]);
-                // Debug: mostrar resultado da busca
-                $debugfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdf_ajax.txt';
-                $msg = "[DEBUG] Busca registro (page): filehash=$filehash, courseid=$courseid, resultado=" . json_encode($pdfrecord) . "\n";
-                file_put_contents($debugfile, $msg, FILE_APPEND);
+                // Debug logging disabled for production (page link lookups).
                 if (!$pdfrecord && $filehash) {
                     $pending[] = [
                         'filename' => $filename,
@@ -115,21 +106,14 @@ function block_pdfcounter_get_pending_pdfs($courseid) {
             $urlbase = preg_replace('/(\.pdf)(\?.*)?$/i', '.pdf', $url->externalurl);
             $filename = basename($urlbase);
             $filehash = sha1($urlbase);
-            $debugfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdf_ajax.txt';
-            file_put_contents($debugfile, "[DEBUG] PENDING: url=" . $url->externalurl . ", normalized=" . $urlbase . ", hash=" . $filehash . "\n", FILE_APPEND);
-            // Debug: log SQL, params, and types
+            // Debug logging disabled for pending external URLs in production.
             $params = [
                 'filehash' => (string)$filehash,
                 'courseid' => $courseid
             ];
-            $debugfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdf_ajax.txt';
-            $msg = "[DEBUG] Lookup SQL: SELECT * FROM block_pdfaccessibility_pdf_files WHERE filehash='" . $filehash . "' AND courseid='" . $courseid . "'\n";
-            $msg .= "[DEBUG] Lookup params: " . json_encode($params) . "\n";
-            $msg .= "[DEBUG] Lookup param types: filehash=" . gettype($filehash) . ", courseid=" . gettype($courseid) . "\n";
-            file_put_contents($debugfile, $msg, FILE_APPEND);
+            // Debug SQL/param logging removed for production.
             $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', $params);
-            $msg = "[DEBUG] Busca registro (url): filehash=$filehash, courseid=$courseid, resultado=" . json_encode($pdfrecord) . "\n";
-            file_put_contents($debugfile, $msg, FILE_APPEND);
+            // Debug logging of URL lookup result disabled for production.
             if (!$pdfrecord) {
                 $pending[] = [
                     'filename' => $filename,
@@ -146,17 +130,7 @@ function block_pdfcounter_get_pending_pdfs($courseid) {
 function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
         // Log all filehash and filename values for every record in the table after insert
     global $DB, $CFG;
-    $debugfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdf_ajax.txt';
-        $allpdfs_nofilter = $DB->get_records('block_pdfaccessibility_pdf_files');
-        $hashes = [];
-        foreach ($allpdfs_nofilter as $rec) {
-            $hashes[] = ['filehash' => $rec->filehash, 'filename' => $rec->filename, 'courseid' => $rec->courseid];
-        }
-        file_put_contents($debugfile, "[DEBUG] Hashes in table after insert: " . json_encode($hashes) . "\n", FILE_APPEND);
-    
-    // Log types of values being inserted
-    $msg = "[DEBUG] Insert types: filehash=" . gettype($pdfinfo['filehash']) . ", courseid=" . gettype($courseid) . ", userid=" . gettype($userid) . ", filename=" . gettype($pdfinfo['filename']) . "\n";
-    file_put_contents($debugfile, $msg, FILE_APPEND);
+    // Extensive debug logging removed for production; keep core evaluation logic only.
     $localpath = $pdfinfo['filepath'];
     $is_external = isset($pdfinfo['url']) && preg_match('/^https?:\/+/', $pdfinfo['url']);
     $tempfile = null;
@@ -168,8 +142,7 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
             $normalized_url = substr($normalized_url, 0, $pos);
         }
         $hash = sha1($normalized_url);
-        $debugfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdf_ajax.txt';
-        file_put_contents($debugfile, "[DEBUG] EVAL: url=" . $pdfinfo['url'] . ", normalized=" . $normalized_url . ", hash=" . $hash . "\n", FILE_APPEND);
+        // Debug logging of URL normalization disabled for production.
         $subdir1 = substr($hash, 0, 2);
         $subdir2 = substr($hash, 2, 2);
         $targetdir = $CFG->dataroot . '/filedir/' . $subdir1 . '/' . $subdir2;
@@ -177,10 +150,10 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
             mkdir($targetdir, 0777, true);
         }
         $targetfile = $targetdir . '/' . $hash;
-        file_put_contents($debugfile, "[mod_url] Baixando PDF externo: " . $pdfinfo['url'] . " para $targetfile\n", FILE_APPEND);
+        // Debug logging of external download disabled for production.
         $pdfdata = @file_get_contents($pdfinfo['url']);
         if ($pdfdata === false) {
-            file_put_contents($debugfile, "[mod_url] Falha ao baixar PDF externo: " . $pdfinfo['url'] . "\n", FILE_APPEND);
+            // Debug logging of external download failure disabled for production.
             return ['error' => 'Falha ao baixar PDF externo'];
         }
         file_put_contents($targetfile, $pdfdata);
@@ -189,7 +162,7 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
         $pdfinfo['filehash'] = $hash;
     }
     if (!$localpath || !file_exists($localpath)) {
-        file_put_contents($debugfile, "[mod_url] Arquivo não encontrado: $localpath\n", FILE_APPEND);
+        // Debug logging of missing local file disabled for production.
         return ['error' => 'Arquivo não encontrado'];
     }
     $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
@@ -197,7 +170,6 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
     $result = null;
     foreach ($python_commands as $python) {
         $command = escapeshellarg($python) . ' ' . escapeshellarg($script) . ' ' . escapeshellarg($localpath);
-        file_put_contents($debugfile, "[mod_url] Executando: $command\n", FILE_APPEND);
         $output = shell_exec($command . ' 2>&1');
         $decoded = json_decode($output, true);
         if ($decoded && is_array($decoded)) {
@@ -207,7 +179,7 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
     }
     // Não apaga o arquivo temporário para evitar reavaliação repetida
     if (!$result || !is_array($result)) {
-        file_put_contents($debugfile, "[mod_url] Falha na análise Python\n", FILE_APPEND);
+        // Debug logging of Python analysis failure disabled for production.
         return ['error' => 'Falha na análise Python'];
     }
     $pdfrecord = new stdClass();
@@ -216,26 +188,9 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
     $pdfrecord->filehash = $pdfinfo['filehash'];
     $pdfrecord->filename = $pdfinfo['filename'];
     $pdfrecord->timecreated = time();
-    // Debug: log objeto antes do insert
-    $debugfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdf_ajax.txt';
-    $msg = "[DEBUG] Antes do insert: " . json_encode($pdfrecord) . "\n";
-    file_put_contents($debugfile, $msg, FILE_APPEND);
+    // Debug logging of insert payload disabled for production.
     $pdfid = $DB->insert_record('block_pdfaccessibility_pdf_files', $pdfrecord, true);
-    // Debug: log result of insert
-    $msg = "[DEBUG] insert_record result: pdfid=$pdfid, filehash={$pdfinfo['filehash']}, courseid={$courseid}, filename={$pdfinfo['filename']}\n";
-    file_put_contents($debugfile, $msg, FILE_APPEND);
-    // Log all records with this filehash after insert
-    $allpdfs_filehash = $DB->get_records('block_pdfaccessibility_pdf_files', ['filehash' => $pdfinfo['filehash']]);
-    file_put_contents($debugfile, "[DEBUG] Registros com filehash após insert: " . json_encode($allpdfs_filehash) . "\n", FILE_APPEND);
-    // Dump all records for this course
-    $allpdfs = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $courseid]);
-    file_put_contents($debugfile, "[DEBUG] Todos registros após insert: " . json_encode($allpdfs) . "\n", FILE_APPEND);
-    // Log all records in the table (no filter)
-    $allpdfs_nofilter = $DB->get_records('block_pdfaccessibility_pdf_files');
-    file_put_contents($debugfile, "[DEBUG] Todos registros tabela (sem filtro): " . json_encode($allpdfs_nofilter) . "\n", FILE_APPEND);
-    // Log all records with this filehash after insert
-    $allpdfs_filehash = $DB->get_records('block_pdfaccessibility_pdf_files', ['filehash' => $pdfinfo['filehash']]);
-    file_put_contents($debugfile, "[DEBUG] Todos registros com filehash após insert: " . json_encode($allpdfs_filehash) . "\n", FILE_APPEND);
+    // All post-insert debug dumps disabled for production.
     pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
     return ['success' => true, 'pdfid' => $pdfid];
 }
