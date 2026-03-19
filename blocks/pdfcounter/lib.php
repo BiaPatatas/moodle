@@ -3,6 +3,42 @@
 
 define('BLOCK_PDFCOUNTER_MAX_PER_CALL', 1); // Só avalia 1 por chamada AJAX
 
+/**
+ * Regista um erro do bloco pdfcounter em ficheiro de log.
+ *
+ * Só é escrito quando chamado explicitamente em casos de erro.
+ * Os ficheiros são gravados em $CFG->dataroot . '/pdfcounter_logs/'.
+ *
+ * @param string $message Mensagem principal do erro.
+ * @param array|null $data Dados adicionais (serão codificados em JSON).
+ */
+function block_pdfcounter_log_error(string $message, ?array $data = null): void {
+    global $CFG, $USER;
+
+    try {
+        $logdir = $CFG->dataroot . '/pdfcounter_logs';
+        if (!is_dir($logdir)) {
+            @mkdir($logdir, $CFG->directorypermissions ?? 0777, true);
+        }
+
+        $logfile = $logdir . '/error-' . date('Ymd') . '.log';
+        $parts = [];
+        $parts[] = date('Y-m-d H:i:s');
+        if (!empty($USER) && !empty($USER->id)) {
+            $parts[] = 'user=' . $USER->id;
+        }
+        $parts[] = $message;
+        if (!empty($data)) {
+            $parts[] = 'data=' . json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        }
+
+        $line = implode(' | ', $parts) . PHP_EOL;
+        @file_put_contents($logfile, $line, FILE_APPEND);
+    } catch (Throwable $e) {
+        // Nunca deixar o logging provocar novos erros na execução principal.
+    }
+}
+
 function block_pdfcounter_get_pending_pdfs($courseid) {
     global $DB, $CFG;
     $pending = [];
@@ -154,6 +190,11 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
         $pdfdata = @file_get_contents($pdfinfo['url']);
         if ($pdfdata === false) {
             // Debug logging of external download failure disabled for production.
+            block_pdfcounter_log_error('Falha ao baixar PDF externo', [
+                'url' => $pdfinfo['url'] ?? null,
+                'courseid' => $courseid,
+                'userid' => $userid,
+            ]);
             return ['error' => 'Falha ao baixar PDF externo'];
         }
         file_put_contents($targetfile, $pdfdata);
@@ -163,6 +204,12 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
     }
     if (!$localpath || !file_exists($localpath)) {
         // Debug logging of missing local file disabled for production.
+        block_pdfcounter_log_error('Arquivo PDF não encontrado para avaliação', [
+            'localpath' => $localpath,
+            'courseid' => $courseid,
+            'userid' => $userid,
+            'filehash' => $pdfinfo['filehash'] ?? null,
+        ]);
         return ['error' => 'Arquivo não encontrado'];
     }
     $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
@@ -180,6 +227,13 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
     // Não apaga o arquivo temporário para evitar reavaliação repetida
     if (!$result || !is_array($result)) {
         // Debug logging of Python analysis failure disabled for production.
+        block_pdfcounter_log_error('Falha na análise Python do PDF', [
+            'localpath' => $localpath,
+            'courseid' => $courseid,
+            'userid' => $userid,
+            'filehash' => $pdfinfo['filehash'] ?? null,
+            'rawoutput' => isset($output) ? (string)$output : null,
+        ]);
         return ['error' => 'Falha na análise Python'];
     }
     $pdfrecord = new stdClass();
@@ -194,3 +248,84 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
     pdf_accessibility_config::process_and_store_results($DB, $result, $pdfid);
     return ['success' => true, 'pdfid' => $pdfid];
 }
+
+/**
+ * Fetch overall accessibility information from QualWeb for the configured monitoring registry.
+ *
+ * This uses the REST API exposed by the QualWeb container. Configuration is
+ * provided via the block's admin settings:
+ * - qualweb_api_baseurl
+ * - qualweb_apikey
+ * - qualweb_monitoring_id
+ *
+ * The function returns a small associative array ready to be sent to JS or
+ * rendered in the block, or null if QualWeb is not configured or not reachable.
+ *
+ * @return array|null
+ */
+function block_pdfcounter_get_qualweb_summary() {
+    global $CFG;
+
+    $monitoringid = get_config('block_pdfcounter', 'qualweb_monitoring_id');
+    if (empty($monitoringid)) {
+        return null;
+    }
+
+    $baseurl = get_config('block_pdfcounter', 'qualweb_api_baseurl');
+    if (empty($baseurl)) {
+        $baseurl = 'http://localhost:8081/api';
+    }
+    $baseurl = rtrim($baseurl, '/');
+
+    require_once($CFG->libdir . '/filelib.php');
+
+    $curl = new curl();
+    $headers = ['Accept: application/json'];
+    $apikey = get_config('block_pdfcounter', 'qualweb_apikey');
+    if (!empty($apikey)) {
+        $headers[] = 'X-API-Key: ' . $apikey;
+    }
+    $options = [
+        'CURLOPT_HTTPHEADER' => $headers,
+        'CURLOPT_TIMEOUT' => 10,
+    ];
+
+    $score = null;
+    $issues = null;
+
+    try {
+        $response = $curl->get($baseurl . '/monitoring/' . urlencode($monitoringid) . '/score', [], $options);
+        $data = json_decode($response, true);
+        if (is_array($data) && array_key_exists('score', $data)) {
+            $score = (float)$data['score'];
+        }
+    } catch (Exception $e) {
+        // Falha ao obter score; retorna null para evitar quebrar o bloco.
+        return null;
+    }
+
+    try {
+        $response2 = $curl->get($baseurl . '/monitoring/' . urlencode($monitoringid) . '/issues-stats', [], $options);
+        $data2 = json_decode($response2, true);
+        if (is_array($data2)) {
+            $issues = [
+                'passed' => isset($data2['passed']) ? (int)$data2['passed'] : 0,
+                'warnings' => isset($data2['warnings']) ? (int)$data2['warnings'] : 0,
+                'failed' => isset($data2['failed']) ? (int)$data2['failed'] : 0,
+                'inapplicable' => isset($data2['inapplicable']) ? (int)$data2['inapplicable'] : 0,
+            ];
+        }
+    } catch (Exception $e) {
+        // Em caso de falha, mantém apenas o score.
+    }
+
+    if ($score === null && $issues === null) {
+        return null;
+    }
+
+    return [
+        'score' => $score,
+        'issues' => $issues,
+    ];
+}
+

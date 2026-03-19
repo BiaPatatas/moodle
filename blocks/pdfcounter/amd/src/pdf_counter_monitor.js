@@ -213,6 +213,32 @@ define(['jquery', 'core/str'], function($, Str) {
                 progressBar.css('--progress-color', progressColor);
             }
 
+            // Atualizar secção QualWeb se existir.
+            if (data.qualweb) {
+                var scoreElement = $('#qualweb-score-value');
+                if (scoreElement.length && typeof data.qualweb.score !== 'undefined' && data.qualweb.score !== null) {
+                    var scoreValue = parseFloat(data.qualweb.score);
+                    if (!isNaN(scoreValue)) {
+                        scoreElement.text(scoreValue.toFixed(1) + '%');
+                    }
+                }
+
+                var issuesSummaryElement = $('#qualweb-issues-summary');
+                if (issuesSummaryElement.length && data.qualweb.issues) {
+                    var issues = data.qualweb.issues;
+                    Str.get_string('qualweb_issues_summary', 'block_pdfcounter', issues)
+                        .then(function(msg) {
+                            issuesSummaryElement.text(msg);
+                        })
+                        .catch(function() {
+                            var text = 'Passed ' + (issues.passed || 0) +
+                                       ', Warnings ' + (issues.warnings || 0) +
+                                       ', Failed ' + (issues.failed || 0);
+                            issuesSummaryElement.text(text);
+                        });
+                }
+            }
+
             this.updatePdfIssues(data.pdfIssues);
             this.updateHistoricalChart(data.overallProgress);
             var totalElement = $('.total-pdfs-count');

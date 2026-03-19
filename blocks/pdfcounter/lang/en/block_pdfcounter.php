@@ -46,3 +46,16 @@ $string['learnmore_wcag'] = 'Accessible PDF Best Practices - WCAG 2.2';
 $string['learnmore_wcag_title'] = 'WCAG 2.2 PDF Techniques';
 $string['progress_chart_label'] = 'Progress (%)';
 $string['totalpdfs'] = '{$a} PDFs';
+
+// QualWeb integration.
+$string['qualweb_title'] = 'Website accessibility (QualWeb)';
+$string['qualweb_issues_summary'] = 'Passed {$a->passed}, Warnings {$a->warnings}, Failed {$a->failed}';
+
+// Settings.
+$string['settings_qualweb_header'] = 'QualWeb integration';
+$string['settings_qualweb_api_baseurl'] = 'QualWeb API base URL';
+$string['settings_qualweb_api_baseurl_desc'] = 'Base URL of the QualWeb Accessibility Monitoring REST API (e.g. http://localhost:8081/api).';
+$string['settings_qualweb_apikey'] = 'QualWeb API key';
+$string['settings_qualweb_apikey_desc'] = 'Optional API key to send in the X-API-Key header when calling the QualWeb API.';
+$string['settings_qualweb_monitoring_id'] = 'Monitoring registry ID';
+$string['settings_qualweb_monitoring_id_desc'] = 'ID of the monitoring registry in QualWeb whose overall score and issue statistics should be displayed in the block.';

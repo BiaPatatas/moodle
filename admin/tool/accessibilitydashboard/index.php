@@ -8,6 +8,7 @@ use tool_accessibilitydashboard\dashboard;
 
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
+require_once($CFG->dirroot . '/admin/tool/accessibilityDashboard/lib.php');
 
 require_login();
 admin_externalpage_setup('tool_accessibilitydashboard');

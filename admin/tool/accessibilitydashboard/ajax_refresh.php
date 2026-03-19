@@ -2,6 +2,7 @@
 define('AJAX_SCRIPT', true);
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/admin/tool/accessibilityDashboard/classes/dashboard.php');
+require_once($CFG->dirroot . '/admin/tool/accessibilityDashboard/lib.php');
 
 // Verify session and require login
 require_login();
@@ -37,6 +38,14 @@ try {
     ]);
 
 } catch (Exception $e) {
+    if (function_exists('tool_accessibilitydashboard_log_error')) {
+        tool_accessibilitydashboard_log_error('ajax_refresh.php: exception', [
+            'department_id' => $department_id ?? null,
+            'course_id' => $course_id ?? null,
+            'discipline_id' => $discipline_id ?? null,
+            'exception' => $e->getMessage(),
+        ]);
+    }
     echo json_encode([
         'status' => 'error',
         'message' => $e->getMessage()

@@ -7,6 +7,42 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Regista um erro relacionado com acessibilidade de PDFs em ficheiro de log.
+ *
+ * Só é chamado explicitamente em situações de erro; se tudo correr bem, não
+ * escreve nada. Os logs são gravados em $CFG->dataroot . '/pdfaccessibility_logs/'.
+ *
+ * @param string $message Mensagem principal do erro.
+ * @param array|null $data Dados adicionais (guardados em JSON).
+ */
+function pdf_accessibility_log_error(string $message, ?array $data = null): void {
+    global $CFG, $USER;
+
+    try {
+        $logdir = $CFG->dataroot . '/pdfaccessibility_logs';
+        if (!is_dir($logdir)) {
+            @mkdir($logdir, $CFG->directorypermissions ?? 0777, true);
+        }
+
+        $logfile = $logdir . '/error-' . date('Ymd') . '.log';
+        $parts = [];
+        $parts[] = date('Y-m-d H:i:s');
+        if (!empty($USER) && !empty($USER->id)) {
+            $parts[] = 'user=' . $USER->id;
+        }
+        $parts[] = $message;
+        if (!empty($data)) {
+            $parts[] = 'data=' . json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        }
+
+        $line = implode(' | ', $parts) . PHP_EOL;
+        @file_put_contents($logfile, $line, FILE_APPEND);
+    } catch (Throwable $e) {
+        // Nunca deixar o logging provocar erros adicionais.
+    }
+}
+
 class pdf_accessibility_config {
     
     /**

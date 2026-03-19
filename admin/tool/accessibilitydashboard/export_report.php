@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir . '/pdflib.php');
 require_once($CFG->libdir . '/adminlib.php');
+require_once($CFG->dirroot . '/admin/tool/accessibilityDashboard/lib.php');
 
 use tool_accessibilitydashboard\dashboard;
 
@@ -10,27 +11,40 @@ use tool_accessibilitydashboard\dashboard;
 require_login();
 admin_externalpage_setup('tool_accessibilitydashboard');
 
-// Obter parâmetros de filtro
-$department_id = optional_param('department', null, PARAM_INT);
-$course_id = optional_param('course', null, PARAM_INT);
-$discipline_id = optional_param('discipline', null, PARAM_INT);
+try {
+    // Obter parâmetros de filtro
+    $department_id = optional_param('department', null, PARAM_INT);
+    $course_id = optional_param('course', null, PARAM_INT);
+    $discipline_id = optional_param('discipline', null, PARAM_INT);
 
-// Criar instância do dashboard
-$dashboard = new \tool_accessibilitydashboard\dashboard();
+    // Criar instância do dashboard
+    $dashboard = new \tool_accessibilitydashboard\dashboard();
 
-// Obter dados
-$stats = $dashboard->get_faculty_stats($department_id, $course_id, $discipline_id);
-$evolution_data = $dashboard->get_accessibility_evolution($department_id, $course_id, $discipline_id);
-$total_pdfs_count = $dashboard->get_total_pdfs_count($department_id, $course_id, $discipline_id);
-$problems_found = $dashboard->get_PDFs_problems($department_id, $course_id, $discipline_id);
-$filtered_data = $dashboard->get_filtered_data($department_id, $course_id, $discipline_id);
-$best_courses = $dashboard->get_best_courses(10, $department_id, $course_id, $discipline_id);
-$worst_courses = $dashboard->get_worst_courses(10, $department_id, $course_id, $discipline_id);
-$common_errors = $dashboard->get_most_common_errors(10, $department_id, $course_id, $discipline_id);
+    // Obter dados
+    $stats = $dashboard->get_faculty_stats($department_id, $course_id, $discipline_id);
+    $evolution_data = $dashboard->get_accessibility_evolution($department_id, $course_id, $discipline_id);
+    $total_pdfs_count = $dashboard->get_total_pdfs_count($department_id, $course_id, $discipline_id);
+    $problems_found = $dashboard->get_PDFs_problems($department_id, $course_id, $discipline_id);
+    $filtered_data = $dashboard->get_filtered_data($department_id, $course_id, $discipline_id);
+    $best_courses = $dashboard->get_best_courses(10, $department_id, $course_id, $discipline_id);
+    $worst_courses = $dashboard->get_worst_courses(10, $department_id, $course_id, $discipline_id);
+    $common_errors = $dashboard->get_most_common_errors(10, $department_id, $course_id, $discipline_id);
 
-// Exportar como PDF
-export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found, $filtered_data, 
-           $best_courses, $worst_courses, $common_errors, $department_id, $course_id, $discipline_id);
+    // Exportar como PDF
+    export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found, $filtered_data,
+               $best_courses, $worst_courses, $common_errors, $department_id, $course_id, $discipline_id);
+} catch (Exception $e) {
+    if (function_exists('tool_accessibilitydashboard_log_error')) {
+        tool_accessibilitydashboard_log_error('export_report.php: exception before PDF output', [
+            'department_id' => $department_id ?? null,
+            'course_id' => $course_id ?? null,
+            'discipline_id' => $discipline_id ?? null,
+            'exception' => $e->getMessage(),
+        ]);
+    }
+    // Em caso de erro antes do output do PDF, mostramos um erro simples.
+    print_error('errorcreatingpdf', 'tool_accessibilitydashboard', '', $e->getMessage());
+}
 
 function export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found, $filtered_data, 
                     $best_courses, $worst_courses, $common_errors, $department_id, $course_id, $discipline_id) {

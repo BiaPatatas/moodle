@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+require_once($CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility_config.php');
+
 class block_pdfaccessibility extends block_base {
     // Função auxiliar para logar mensagens de debug
     private function pdfaccessibility_debug_log($msg) {
@@ -77,6 +80,13 @@ class block_pdfaccessibility extends block_base {
                 $context_exists = $DB->record_exists('context', array('id' => $contextid));
                 $this->pdfaccessibility_debug_log('Contexto existe na base de dados? ' . ($context_exists ? 'SIM' : 'NÃO'));
                 if (!$context_exists) {
+                    if (function_exists('pdf_accessibility_log_error')) {
+                        pdf_accessibility_log_error('block_pdfaccessibility: context not found (modedit branch)', [
+                            'contextid' => $contextid,
+                            'courseid' => isset($COURSE->id) ? $COURSE->id : null,
+                            'script' => $_SERVER['SCRIPT_NAME'] ?? null,
+                        ]);
+                    }
                     $this->content = new stdClass();
                     $this->content->text = '<div style="color:red;">' . get_string('context_not_found', 'block_pdfaccessibility') . '</div>';
                     return $this->content;
@@ -143,6 +153,13 @@ class block_pdfaccessibility extends block_base {
                 $this->pdfaccessibility_debug_log('Arquivo físico: ' . $filepath);
                 if (!file_exists($filepath)) {
                     $this->pdfaccessibility_debug_log('Arquivo físico não existe: ' . $filepath);
+                    if (function_exists('pdf_accessibility_log_error')) {
+                        pdf_accessibility_log_error('block_pdfaccessibility: physical file missing', [
+                            'filepath' => $filepath,
+                            'filename' => $filename,
+                            'courseid' => isset($COURSE->id) ? $COURSE->id : null,
+                        ]);
+                    }
                 }
                 // Renderização manual do relatório de acessibilidade
                 $this->content->text .= '<div style="margin-bottom:10px;">';

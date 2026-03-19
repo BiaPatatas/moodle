@@ -109,6 +109,9 @@ try {
         $DB->insert_record('block_pdfcounter_trends', $trend);
     }
 
+    // Buscar resumo de acessibilidade do QualWeb (se configurado).
+    $qualwebsummary = block_pdfcounter_get_qualweb_summary();
+
     // Return updated data
     echo json_encode([
         'status' => 'ok',
@@ -116,10 +119,18 @@ try {
         'progressColor' => $progress_color,
         'pdfIssues' => $pdf_issues,
         'totalPdfs' => $total_pdfs,
-        'pendingCount' => $pending_count
+        'pendingCount' => $pending_count,
+        'qualweb' => $qualwebsummary
     ]);
 
 } catch (Exception $e) {
+    if (function_exists('block_pdfcounter_log_error')) {
+        block_pdfcounter_log_error('Exceção em update_dashboard.php', [
+            'courseid' => $courseid ?? null,
+            'userid' => $USER->id ?? null,
+            'exception' => $e->getMessage(),
+        ]);
+    }
     echo json_encode([
         'status' => 'error',
         'message' => $e->getMessage()

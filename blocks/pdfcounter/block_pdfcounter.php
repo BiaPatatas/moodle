@@ -2,6 +2,7 @@
 require_once(__DIR__ . '/../../config.php'); // Loads Moodle core and classes
 require_once($CFG->dirroot . '/lib/weblib.php'); // Required for moodle_url class
 require_once($CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility_config.php'); // PDF accessibility shared config
+require_once($CFG->dirroot . '/blocks/pdfcounter/lib.php'); // Local helper functions (including QualWeb integration)
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -488,6 +489,40 @@ foreach ($urllinks as $ulink) {
         $this->content->text = '<div id="pdf-pending-msg" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; border-radius:6px; padding:10px; margin-bottom:10px; font-size:0.95em;">' . $pending_msg . '</div>';
         $this->content->text .= $overall_html;
 
+        // Secção QualWeb (se configurada).
+        $qualwebsummary = block_pdfcounter_get_qualweb_summary();
+        if ($qualwebsummary) {
+            $scorevalue = ($qualwebsummary['score'] !== null) ? round($qualwebsummary['score'], 1) : '--';
+            $issues = isset($qualwebsummary['issues']) && is_array($qualwebsummary['issues']) ? $qualwebsummary['issues'] : [];
+            $issuesobj = (object) [
+                'passed' => $issues['passed'] ?? 0,
+                'warnings' => $issues['warnings'] ?? 0,
+                'failed' => $issues['failed'] ?? 0,
+            ];
+
+            $qualweb_html = '
+        <div style="font-family:Arial,sans-serif;max-width:320px;">
+            <div style="background: #f8f9fa;
+                        border-radius: 8px;
+                        padding: 15px;
+                        background-color: white;
+                        border-radius: 8px;
+                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                        color: black;
+                        margin-bottom: 10px;">
+                <span style="font-size: 0.90rem; font-weight: bold; margin-bottom: 2px;">'.get_string('qualweb_title','block_pdfcounter').'</span><br>
+                <div style="margin-top:10px; display:flex; justify-content:center; align-items:center;">
+                    <span id="qualweb-score-value" style="font-size:20px;">'.$scorevalue.'%</span>
+                </div>
+                <div id="qualweb-issues-summary" style="margin-top:8px; font-size:0.85rem; text-align:center;">'.
+                    get_string('qualweb_issues_summary','block_pdfcounter', $issuesobj).
+                '</div>
+            </div>
+        </div>';
+
+            $this->content->text .= $qualweb_html;
+        }
+
         //-------------------------------------PDFs Issues---------------------------------------
         $pdf_issues_html = '<div style="font-family:Arial,sans-serif;max-width:320px;">';
         $pdf_issues_html .= '<div style="background: #f8f9fa; border-radius: 8px; padding: 15px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: black; margin-bottom: 10px;">';
@@ -687,6 +722,6 @@ foreach ($urllinks as $ulink) {
      * @return boolean
      */
     public function has_config() {
-        return false;
+        return true;
     }
 }

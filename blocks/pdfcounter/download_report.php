@@ -2,17 +2,26 @@
 // download_report.php - Gera e faz download do relatório HTML de acessibilidade de um PDF
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/moodlelib.php');
+require_once($CFG->dirroot . '/blocks/pdfcounter/lib.php');
 
 $filename = required_param('filename', PARAM_RAW);
 $courseid = required_param('courseid', PARAM_INT);
 
 // Validate course ID
 if ($courseid <= 0) {
+    block_pdfcounter_log_error('download_report.php: courseid inválido', [
+        'courseid' => $courseid,
+        'filename' => $filename,
+    ]);
     throw new moodle_exception('invalidcourseid', 'error', '', 'Invalid course ID');
 }
 
 // Check if course exists
 if (!$DB->record_exists('course', array('id' => $courseid))) {
+    block_pdfcounter_log_error('download_report.php: curso não encontrado', [
+        'courseid' => $courseid,
+        'filename' => $filename,
+    ]);
     throw new moodle_exception('coursenotfound', 'error', '', 'Course not found');
 }
 
@@ -52,6 +61,11 @@ if (!$pdfrecord) {
     }
 }
 if (!$pdfrecord) {
+    block_pdfcounter_log_error('download_report.php: relatório não encontrado', [
+        'courseid' => $courseid,
+        'filename' => $filename,
+        'filehash_param' => $filehash ?? null,
+    ]);
     throw new moodle_exception('reportnotfound', 'error', '', 'Relatório não encontrado para este curso');
 }
 
