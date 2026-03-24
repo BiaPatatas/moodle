@@ -1,9 +1,13 @@
 <?php
 require_once(__DIR__ . '/../../../config.php');
-require_once(__DIR__ . '/../pdf_accessibility_config.php'); // PDF accessibility shared config
+require_once(__DIR__ . '/../pdf_accessibility_config.php'); // PDF accessibility shared config & logger
 require_login();
-$input = json_decode(file_get_contents("php://input"), true);
+$rawinput = file_get_contents("php://input");
+$input = json_decode($rawinput, true);
 if (!isset($input['sesskey'])) {
+    pdf_accessibility_log_error('preview.php: sesskey missing', [
+        'rawinput' => $rawinput ?? null,
+    ], 'preview.log');
     echo json_encode(['status' => 'error', 'message' => 'Sesskey missing']);
     exit;
 }
@@ -29,116 +33,138 @@ function save_temp_pdf($file) {
     file_put_contents($tempfile, $file->get_content());
     return $tempfile;
 }
-
-
-$input = json_decode(file_get_contents("php://input"), true);
+$input = $input ?? json_decode($rawinput, true);
 $draftid = $input['draftid'] ?? null;
 $courseid = $input['courseid'] ?? null;
 
 if (!$draftid || !is_numeric($draftid)) {
+    pdf_accessibility_log_error('preview.php: invalid draft ID', [
+        'draftid' => $draftid,
+        'courseid' => $courseid,
+    ], 'preview.log');
     echo json_encode(['status' => 'error', 'message' => 'Invalid draft ID']);
     exit;
 }
 
 if (!$courseid || !is_numeric($courseid) || $courseid <= 0) {
+    pdf_accessibility_log_error('preview.php: invalid course ID', [
+        'draftid' => $draftid,
+        'courseid' => $courseid,
+    ], 'preview.log');
     echo json_encode(['status' => 'error', 'message' => 'Invalid course ID: ' . $courseid]);
     exit;
 }
 
-$fs = get_file_storage();
-$files = $fs->get_area_files(
-    context_user::instance($USER->id)->id,
-    'user',
-    'draft',
-    $draftid,
-    'itemid, filepath, filename',
-    false
-);
+try {
+    $fs = get_file_storage();
+    $files = $fs->get_area_files(
+        context_user::instance($USER->id)->id,
+        'user',
+        'draft',
+        $draftid,
+        'itemid, filepath, filename',
+        false
+    );
 
-// Debug: log found files
-$filenames = [];
-foreach ($files as $file) {
-    $filenames[] = $file->get_filename() . ' (' . $file->get_mimetype() . ')';
-}
-if (empty($filenames)) {
-    echo json_encode(['status' => 'error', 'message' => 'No files found in draft area for this draftid', 'draftid' => $draftid]);
-    // error_log("esta vazio");
-    exit;
-}
+    // Debug: log found files
+    $filenames = [];
+    foreach ($files as $file) {
+        $filenames[] = $file->get_filename() . ' (' . $file->get_mimetype() . ')';
+    }
+    if (empty($filenames)) {
+        pdf_accessibility_log_error('preview.php: no files in draft area', [
+            'draftid' => $draftid,
+            'courseid' => $courseid,
+        ], 'preview.log');
+        echo json_encode(['status' => 'error', 'message' => 'No files found in draft area for this draftid', 'draftid' => $draftid]);
+        exit;
+    }
 
-// Novo: processar todos os PDFs e retornar todos juntos
-$pdfs = [];
-global $DB, $USER, $COURSE;
-foreach ($files as $file) {
-    if ($file->get_mimetype() === 'application/pdf') {
-        $filepath = save_temp_pdf($file);
-        $debug_dir = __DIR__ . '/../debug/';
-        // Debug directory creation and debug file writes disabled for production.
-        // if (!is_dir($debug_dir)) {
-        //     mkdir($debug_dir, 0755, true);
-        // }
-        $script_path = __DIR__ . '/../pdf_accessibility.py';
-        $python_command = "python3 " . escapeshellarg($script_path) . " " . escapeshellarg($filepath);
-        // $debug_info = [...]; // omitted: no debug file write in production.
-        $output = shell_exec($python_command . " 2>&1");
-        unlink($filepath);
-        $result = json_decode($output, true);
-        // JSON debug information logging disabled for production.
-        if (!$result) {
-            continue;
-        }
-        $filehash = sha1($file->get_content());
-        $existing = $DB->get_record('block_pdfaccessibility_pdf_files', [
-            'filename' => $file->get_filename(),
-            'filehash' => $filehash,
-            'courseid' => $courseid
-        ]);
-        if ($existing) {
-            $fileid = $existing->id;
-        } else {
-            $filedata = new stdClass();
-            $filedata->courseid = $courseid;
-            $filedata->userid = $USER->id;
-            $filedata->filename = $file->get_filename();
-            $filedata->filehash = $filehash;
-            $filedata->timecreated = time();
-            $fileid = $DB->insert_record('block_pdfaccessibility_pdf_files', $filedata, true);
-        }
-        foreach ($result as $testname => $testvalue) {
-            if (pdf_accessibility_config::should_exclude_test($testname)) {
+    // Novo: processar todos os PDFs e retornar todos juntos
+    $pdfs = [];
+    global $DB, $USER, $COURSE;
+    foreach ($files as $file) {
+        if ($file->get_mimetype() === 'application/pdf') {
+            $filepath = save_temp_pdf($file);
+            $script_path = __DIR__ . '/../pdf_accessibility.py';
+            $python_command = "python3 " . escapeshellarg($script_path) . " " . escapeshellarg($filepath);
+            $output = shell_exec($python_command . " 2>&1");
+            unlink($filepath);
+            $result = json_decode($output, true);
+            if (!$result) {
+                pdf_accessibility_log_error('preview.php: Python analysis returned invalid JSON', [
+                    'filename' => $file->get_filename(),
+                    'courseid' => $courseid,
+                    'draftid' => $draftid,
+                    'command' => $python_command,
+                    'output' => $output,
+                ], 'preview.log');
                 continue;
             }
-            $status = pdf_accessibility_config::determine_test_status($testname, $testvalue);
-            $existing_test = $DB->get_record('block_pdfaccessibility_test_results', [
-                'fileid' => $fileid,
-                'testname' => $testname
+            $filehash = sha1($file->get_content());
+            $existing = $DB->get_record('block_pdfaccessibility_pdf_files', [
+                'filename' => $file->get_filename(),
+                'filehash' => $filehash,
+                'courseid' => $courseid
             ]);
-            $testdata = new stdClass();
-            $testdata->fileid = $fileid;
-            $testdata->testname = $testname;
-            $testdata->result = $status;
-            $testdata->errorpages = '';
-            $testdata->timecreated = time();
-            if ($existing_test) {
-                $testdata->id = $existing_test->id;
-                $DB->update_record('block_pdfaccessibility_test_results', $testdata);
+            if ($existing) {
+                $fileid = $existing->id;
             } else {
-                $DB->insert_record('block_pdfaccessibility_test_results', $testdata);
+                $filedata = new stdClass();
+                $filedata->courseid = $courseid;
+                $filedata->userid = $USER->id;
+                $filedata->filename = $file->get_filename();
+                $filedata->filehash = $filehash;
+                $filedata->timecreated = time();
+                $fileid = $DB->insert_record('block_pdfaccessibility_pdf_files', $filedata, true);
             }
+            foreach ($result as $testname => $testvalue) {
+                if (pdf_accessibility_config::should_exclude_test($testname)) {
+                    continue;
+                }
+                $status = pdf_accessibility_config::determine_test_status($testname, $testvalue);
+                $existing_test = $DB->get_record('block_pdfaccessibility_test_results', [
+                    'fileid' => $fileid,
+                    'testname' => $testname
+                ]);
+                $testdata = new stdClass();
+                $testdata->fileid = $fileid;
+                $testdata->testname = $testname;
+                $testdata->result = $status;
+                $testdata->errorpages = '';
+                $testdata->timecreated = time();
+                if ($existing_test) {
+                    $testdata->id = $existing_test->id;
+                    $DB->update_record('block_pdfaccessibility_test_results', $testdata);
+                } else {
+                    $DB->insert_record('block_pdfaccessibility_test_results', $testdata);
+                }
+            }
+            $pdfs[] = [
+                'filename' => $file->get_filename(),
+                'summary' => $result
+            ];
         }
-        $pdfs[] = [
-            'filename' => $file->get_filename(),
-            'summary' => $result
-        ];
     }
-}
-if (count($pdfs) > 0) {
-    echo json_encode([
-        'status' => 'ok',
-        'pdfs' => $pdfs,
-        'testConfig' => json_decode(pdf_accessibility_config::get_js_test_config(), true)
-    ]);
+    if (count($pdfs) > 0) {
+        echo json_encode([
+            'status' => 'ok',
+            'pdfs' => $pdfs,
+            'testConfig' => json_decode(pdf_accessibility_config::get_js_test_config(), true)
+        ]);
+        exit;
+    }
+    // Quando não há nenhum PDF analisado com sucesso, apenas devolvemos o erro
+    // para o frontend, sem registar no debug (para evitar ruído quando o
+    // utilizador carrega apenas ficheiros não-PDF como docx/imagens).
+    echo json_encode(['status' => 'error', 'message' => 'No PDF found']);
+    exit;
+} catch (Throwable $e) {
+    pdf_accessibility_log_error('preview.php: unexpected exception', [
+        'draftid' => $draftid ?? null,
+        'courseid' => $courseid ?? null,
+        'exception' => $e->getMessage(),
+    ], 'preview.log');
+    echo json_encode(['status' => 'error', 'message' => 'Unexpected error in preview']);
     exit;
 }
-echo json_encode(['status' => 'error', 'message' => 'No PDF found']);
-exit;

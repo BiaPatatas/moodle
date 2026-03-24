@@ -398,3 +398,36 @@ class pdf_accessibility_config {
         return $testvalue; // Return as-is for other cases
     }
 }
+
+/**
+ * Regista mensagens de erro/debug do PDF Accessibility em ficheiros dentro
+ * de blocks/pdfaccessibility/debug. Usado pelos vários pontos de logging
+ * (preview.php, block_pdfaccessibility, etc.).
+ *
+ * @param string $message Mensagem principal de log.
+ * @param array $data Dados adicionais serializados em JSON.
+ * @param string $filename Nome do ficheiro de log dentro da pasta debug.
+ */
+function pdf_accessibility_log_error(string $message, array $data = [], string $filename = 'pdfaccessibility_debug.log'): void {
+    global $CFG;
+
+    if (empty($CFG) || empty($CFG->dirroot)) {
+        // Fallback para não falhar em contextos sem $CFG apropriado.
+        error_log('PdfAccessibility DEBUG (fallback) - ' . $message . ' ' . json_encode($data));
+        return;
+    }
+
+    $debugdir = $CFG->dirroot . '/blocks/pdfaccessibility/debug';
+    if (!is_dir($debugdir)) {
+        @mkdir($debugdir, 0775, true);
+    }
+
+    $logfile = $debugdir . '/' . $filename;
+    $entry = '[' . date('Y-m-d H:i:s') . "] " . $message;
+    if (!empty($data)) {
+        $entry .= ' ' . json_encode($data);
+    }
+    $entry .= PHP_EOL;
+
+    @file_put_contents($logfile, $entry, FILE_APPEND);
+}

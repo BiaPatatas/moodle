@@ -3,6 +3,69 @@
 
 define('BLOCK_PDFCOUNTER_MAX_PER_CALL', 1); // Só avalia 1 por chamada AJAX
 
+/**
+ * Regista mensagens de debug do PdfCounter em ficheiros dentro de blocks/pdfcounter/debug.
+ *
+ * @param string $message Mensagem principal de log.
+ * @param array $data Dados adicionais a serializar em JSON.
+ * @param string $filename Nome do ficheiro de log dentro da pasta debug.
+ */
+function block_pdfcounter_debug_log(string $message, array $data = [], string $filename = 'pdfcounter_debug.log'): void {
+    global $CFG;
+
+    if (empty($CFG) || empty($CFG->dirroot)) {
+        // Se por algum motivo $CFG não estiver disponível, faz fallback para error_log.
+        error_log('PdfCounter DEBUG (fallback) - ' . $message . ' ' . json_encode($data));
+        return;
+    }
+
+    $debugdir = $CFG->dirroot . '/blocks/pdfcounter/debug';
+    if (!is_dir($debugdir)) {
+        @mkdir($debugdir, 0775, true);
+    }
+
+    $logfile = $debugdir . '/' . $filename;
+    $entry = '[' . date('Y-m-d H:i:s') . "] " . $message;
+    if (!empty($data)) {
+        $entry .= ' ' . json_encode($data);
+    }
+    $entry .= PHP_EOL;
+
+    @file_put_contents($logfile, $entry, FILE_APPEND);
+}
+
+/**
+ * Igual a block_pdfcounter_debug_log, mas garante que só é registado uma vez
+ * por identificador lógico (por exemplo, por combinação url/curso/utilizador).
+ *
+ * @param string $id Identificador único lógico para o evento (será usado num ficheiro .flag).
+ * @param string $message Mensagem principal de log.
+ * @param array $data Dados adicionais a serializar em JSON.
+ * @param string $filename Nome do ficheiro de log dentro da pasta debug.
+ */
+function block_pdfcounter_debug_log_once(string $id, string $message, array $data = [], string $filename = 'pdfcounter_debug.log'): void {
+    global $CFG;
+
+    if (empty($CFG) || empty($CFG->dirroot)) {
+        // Fallback para não falhar em contextos estranhos.
+        block_pdfcounter_debug_log($message, $data, $filename);
+        return;
+    }
+
+    $debugdir = $CFG->dirroot . '/blocks/pdfcounter/debug';
+    if (!is_dir($debugdir)) {
+        @mkdir($debugdir, 0775, true);
+    }
+
+    $marker = $debugdir . '/.once_' . $id . '.flag';
+    if (file_exists($marker)) {
+        return; // Já foi registado anteriormente.
+    }
+
+    @file_put_contents($marker, '1');
+    block_pdfcounter_debug_log($message, $data, $filename);
+}
+
 function block_pdfcounter_get_pending_pdfs($courseid) {
     global $DB, $CFG;
     $pending = [];
@@ -150,10 +213,15 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
             mkdir($targetdir, 0777, true);
         }
         $targetfile = $targetdir . '/' . $hash;
-        // Debug logging of external download disabled for production.
+        // Debug logging de download externo (apenas uma vez por url/curso/utilizador).
         $pdfdata = @file_get_contents($pdfinfo['url']);
         if ($pdfdata === false) {
-            // Debug logging of external download failure disabled for production.
+            $onceid = sha1('external_fail|' . $pdfinfo['url'] . '|' . $courseid . '|' . $userid);
+            block_pdfcounter_debug_log_once($onceid, 'Falha ao baixar PDF externo', [
+                'url' => $pdfinfo['url'],
+                'courseid' => $courseid,
+                'userid' => $userid,
+            ], 'pdfcounter_debug.log');
             return ['error' => 'Falha ao baixar PDF externo'];
         }
         file_put_contents($targetfile, $pdfdata);
@@ -162,8 +230,13 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
         $pdfinfo['filehash'] = $hash;
     }
     if (!$localpath || !file_exists($localpath)) {
-        // Debug logging of missing local file disabled for production.
-        return ['error' => 'Arquivo não encontrado'];
+        block_pdfcounter_debug_log('Arquivo PDF não encontrado para avaliação', [
+            'localpath' => $localpath,
+            'courseid' => $courseid,
+            'userid' => $userid,
+            'filehash' => $pdfinfo['filehash'] ?? null,
+        ], 'pdfcounter_debug.log');
+        return ['error' => 'Arquivo PDF não encontrado para avaliação'];
     }
     $script = $CFG->dirroot . '/blocks/pdfaccessibility/pdf_accessibility.py';
     $python_commands = ['python3', 'python', 'py', 'python.exe'];
@@ -179,8 +252,15 @@ function block_pdfcounter_evaluate_pdf($pdfinfo, $courseid, $userid) {
     }
     // Não apaga o arquivo temporário para evitar reavaliação repetida
     if (!$result || !is_array($result)) {
-        // Debug logging of Python analysis failure disabled for production.
-        return ['error' => 'Falha na análise Python'];
+        $onceid = sha1('python_fail|' . $localpath . '|' . $courseid . '|' . $userid . '|' . ($pdfinfo['filehash'] ?? ''));
+        block_pdfcounter_debug_log_once($onceid, 'Falha na análise Python do PDF', [
+            'localpath' => $localpath,
+            'courseid' => $courseid,
+            'userid' => $userid,
+            'filehash' => $pdfinfo['filehash'] ?? null,
+            'rawoutput' => isset($output) ? $output : null,
+        ], 'pdfcounter_debug.log');
+        return ['error' => 'Falha na análise Python do PDF'];
     }
     $pdfrecord = new stdClass();
     $pdfrecord->courseid = $courseid;

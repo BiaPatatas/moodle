@@ -6,13 +6,6 @@ error_reporting(E_ALL);
 defined('MOODLE_INTERNAL') || die();
 
 class block_pdfaccessibility extends block_base {
-    // Função auxiliar para logar mensagens de debug
-    private function pdfaccessibility_debug_log($msg) {
-        // Debug file logging disabled for production.
-        // $logfile = __DIR__ . '/debug/debug.txt';
-        // $timestamp = date('Y-m-d H:i:s');
-        // file_put_contents($logfile, "[$timestamp] $msg\n", FILE_APPEND);
-    }
 
 
     public function init() {
@@ -53,6 +46,14 @@ class block_pdfaccessibility extends block_base {
                     $this->content->footer = '';
                     return $this->content;
                 }
+                // Contexto não encontrado no ramo modedit.
+                if (!$context_exists) {
+                    pdf_accessibility_log_error('block_pdfaccessibility: context not found (modedit branch)', [
+                        'contextid' => $contextid,
+                        'courseid' => $COURSE->id ?? null,
+                        'script' => $_SERVER['SCRIPT_NAME'] ?? null,
+                    ], 'block_pdfaccessibility.log');
+                }
             }
             // Se não existe contexto de módulo, buscar PDFs na área de rascunho do usuário
             require_once(__DIR__ . '/lib.php');
@@ -73,40 +74,19 @@ class block_pdfaccessibility extends block_base {
             $this->content->footer = '';
             return $this->content;
         }
-                // Verificar se o contextid existe na base de dados antes de buscar PDFs
-                $context_exists = $DB->record_exists('context', array('id' => $contextid));
-                $this->pdfaccessibility_debug_log('Contexto existe na base de dados? ' . ($context_exists ? 'SIM' : 'NÃO'));
-                if (!$context_exists) {
-                    $this->content = new stdClass();
-                    $this->content->text = '<div style="color:red;">' . get_string('context_not_found', 'block_pdfaccessibility') . '</div>';
-                    return $this->content;
-                }
-            
-            $this->pdfaccessibility_debug_log('Usuário atual: ' . (isset($USER->id) ? $USER->id : 'N/A'));
-        $this->pdfaccessibility_debug_log('DEBUG TESTE: método get_content chamado');
-        
-               
-                
-                if (isset($PAGE->cm) && isset($PAGE->cm->context)) {
-                    $this->pdfaccessibility_debug_log('Contexto de módulo detectado: cmid=' . $PAGE->cm->id . ', contextid=' . $PAGE->cm->context->id);
-                    $contextid = $PAGE->cm->context->id;
-                } else {
-                    $this->pdfaccessibility_debug_log('Usando contexto do curso: contextid=' . $contextid);
-                }
-                $this->pdfaccessibility_debug_log('DEBUG CONTEXTID: ' . $contextid);
-        $this->pdfaccessibility_debug_log('Início do get_content');
-        $this->pdfaccessibility_debug_log('Início do get_content');
-        $this->pdfaccessibility_debug_log('COURSE id: ' . (isset($COURSE->id) ? $COURSE->id : 'N/A'));
-        $this->pdfaccessibility_debug_log('CFG dataroot: ' . (isset($CFG->dataroot) ? $CFG->dataroot : 'N/A'));
-        $this->pdfaccessibility_debug_log('Verificando contexto: ' . (isset($PAGE) ? 'PAGE OK' : 'PAGE N/A'));
-
-
-        if ($this->content !== null) {
+        // Verificar se o contextid existe na base de dados antes de buscar PDFs
+        $context_exists = $DB->record_exists('context', array('id' => $contextid));
+        if (!$context_exists) {
+            pdf_accessibility_log_error('block_pdfaccessibility: context not found (course view)', [
+                'contextid' => $contextid,
+                'courseid' => $COURSE->id ?? null,
+                'script' => $_SERVER['SCRIPT_NAME'] ?? null,
+            ], 'block_pdfaccessibility.log');
+            $this->content = new stdClass();
+            $this->content->text = '<div style="color:red;">' . get_string('context_not_found', 'block_pdfaccessibility') . '</div>';
             return $this->content;
         }
 
-        // Logar início do processamento
-        $this->pdfaccessibility_debug_log('Iniciando processamento do bloco PDFAccessibility');
         $this->content = new stdClass();
         // Check if we're in a course
         if (empty($COURSE) || $COURSE->id == SITEID) {
@@ -119,30 +99,26 @@ class block_pdfaccessibility extends block_base {
         global $PAGE;
         $contextid = $COURSE->id;
         if (isset($PAGE->cm) && isset($PAGE->cm->context)) {
-            $this->pdfaccessibility_debug_log('Contexto de módulo detectado: cmid=' . $PAGE->cm->id . ', contextid=' . $PAGE->cm->context->id);
             // Se estamos numa página de módulo (ex: pasta), usar o contextid do módulo
             $contextid = $PAGE->cm->context->id;
         }
-        else {
-    $this->pdfaccessibility_debug_log('Usando contexto do curso: contextid=' . $contextid);
-}
-        $this->pdfaccessibility_debug_log('Contextid usado para busca de PDFs: ' . $contextid);
+        
         $pdfs = block_pdfaccessibility_get_pdfs_from_context($contextid);
 
-        $this->pdfaccessibility_debug_log('PDFs encontrados: ' . count($pdfs));
         if (count($pdfs) > 0) {
             $this->content->text .= '<div id="analyzer-result" style="margin-top: 1em; color: green;">PDFs encontrados:</div>';
             foreach ($pdfs as $file) {
                 if (!is_object($file)) {
-                    $this->pdfaccessibility_debug_log('Arquivo não é objeto: ' . print_r($file, true));
                     continue;
                 }
-                $this->pdfaccessibility_debug_log('Processando arquivo: ' . $file->get_filename());
                 $filename = $file->get_filename();
                 $filepath = $CFG->dataroot . '/filedir/' . substr($file->get_contenthash(), 0, 2) . '/' . substr($file->get_contenthash(), 2, 2) . '/' . $file->get_contenthash();
-                $this->pdfaccessibility_debug_log('Arquivo físico: ' . $filepath);
                 if (!file_exists($filepath)) {
-                    $this->pdfaccessibility_debug_log('Arquivo físico não existe: ' . $filepath);
+                    pdf_accessibility_log_error('block_pdfaccessibility: physical file missing', [
+                        'filepath' => $filepath,
+                        'filename' => $filename,
+                        'courseid' => $COURSE->id ?? null,
+                    ], 'block_pdfaccessibility.log');
                 }
                 // Renderização manual do relatório de acessibilidade
                 $this->content->text .= '<div style="margin-bottom:10px;">';

@@ -38,6 +38,9 @@ try {
     // file_put_contents($debugfile, "Debug: after required_param courseid, value: $courseid\n", FILE_APPEND);
 } catch (Exception $e) {
     // file_put_contents($debugfile, "Debug: exception in required_param: " . $e->getMessage() . "\n", FILE_APPEND);
+    block_pdfcounter_debug_log('Exceção ao ler courseid em ajax_eval_pdf', [
+        'exception' => $e->getMessage(),
+    ], 'ajax_eval_pdf.log');
     echo json_encode(['error' => 'exception', 'message' => $e->getMessage()]);
     exit;
 }
@@ -54,6 +57,11 @@ $context = context_course::instance($courseid);
 // file_put_contents($debugfile, "Debug: before has_capability\n", FILE_APPEND);
 if (!has_capability('moodle/course:update', $context)) {
     // file_put_contents($debugfile, "Debug: sem permissão moodle/course:update\n", FILE_APPEND);
+    $userid = isset($USER->id) ? $USER->id : null;
+    block_pdfcounter_debug_log('Acesso negado em ajax_eval_pdf', [
+        'courseid' => $courseid,
+        'userid' => $userid,
+    ], 'ajax_eval_pdf.log');
     echo json_encode(['error' => 'no_permission']);
     exit;
 }
@@ -89,6 +97,12 @@ try {
     exit;
 } catch (Exception $e) {
     // file_put_contents($debugfile, 'Debug: exception: ' . $e->getMessage() . "\n", FILE_APPEND);
+    $userid = isset($USER->id) ? $USER->id : null;
+    block_pdfcounter_debug_log('Exceção em ajax_eval_pdf', [
+        'courseid' => $courseid,
+        'userid' => $userid,
+        'exception' => $e->getMessage(),
+    ], 'ajax_eval_pdf.log');
     echo json_encode(['error' => 'exception', 'message' => $e->getMessage()]);
     exit;
 }

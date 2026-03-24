@@ -120,6 +120,14 @@ try {
     ]);
 
 } catch (Exception $e) {
+    global $USER;
+    $safe_courseid = isset($courseid) ? $courseid : null;
+    $userid = isset($USER->id) ? $USER->id : null;
+    block_pdfcounter_debug_log('Exceção em update_dashboard.php', [
+        'courseid' => $safe_courseid,
+        'userid' => $userid,
+        'exception' => $e->getMessage(),
+    ], 'update_dashboard.log');
     echo json_encode([
         'status' => 'error',
         'message' => $e->getMessage()
