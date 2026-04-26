@@ -42,6 +42,38 @@ try {
     // Buscar todos os PDFs do curso pelo courseid (usando a tabela do plugin)
     $allpdfs = $DB->get_records('block_pdfaccessibility_pdf_files', ['courseid' => $courseid]);
 
+    // Construir mapa de nomes "amigáveis" (título do recurso) por hash de ficheiro,
+    // tal como no próprio bloco, para que o dashboard mostre o mesmo nome.
+    $displaynames = [];
+    $sql = "SELECT f.filename, f.contenthash,
+                CASE 
+                    WHEN m.name = 'resource' THEN r.name
+                    WHEN m.name = 'folder' THEN fo.name
+                    ELSE ''
+                END as resource_name
+            FROM {course_modules} cm
+            JOIN {modules} m ON m.id = cm.module
+            LEFT JOIN {resource} r ON (m.name = 'resource' AND r.id = cm.instance)
+            LEFT JOIN {folder} fo ON (m.name = 'folder' AND fo.id = cm.instance)
+            JOIN {context} ctx ON ctx.instanceid = cm.id
+            JOIN {files} f ON f.contextid = ctx.id
+            WHERE cm.course = :courseid
+            AND cm.deletioninprogress = 0
+            AND cm.visible = 1
+            AND m.name IN ('resource', 'folder')
+            AND f.component IN ('mod_resource', 'mod_folder')
+            AND f.filearea = 'content'
+            AND f.filename != '.'";
+    $files = $DB->get_records_sql($sql, ['courseid' => $courseid]);
+    foreach ($files as $file) {
+        if (substr($file->filename, -4) === '.pdf') {
+            $resourcename = isset($file->resource_name) ? trim($file->resource_name) : '';
+            if ($resourcename !== '') {
+                $displaynames[$file->contenthash] = $resourcename;
+            }
+        }
+    }
+
     // Calcular quantos PDFs ainda faltam avaliar (pendentes na fila)
     $pendingpdfs = block_pdfcounter_get_pending_pdfs($courseid);
     $pending_count = is_array($pendingpdfs) ? count($pendingpdfs) : 0;
@@ -52,9 +84,14 @@ try {
     foreach ($allpdfs as $pdfrecord) {
         $pdfid = $pdfrecord->id;
         $counts = pdf_accessibility_config::get_test_counts($DB, $pdfid);
-        $display_name = !empty($pdfrecord->filename) ? $pdfrecord->filename : 'PDF';
+        if (!empty($pdfrecord->filehash) && isset($displaynames[$pdfrecord->filehash])) {
+            $display_name = $displaynames[$pdfrecord->filehash];
+        } else {
+            $display_name = !empty($pdfrecord->filename) ? $pdfrecord->filename : 'PDF';
+        }
         $pdf_issue = [
             'filename' => $pdfrecord->filename,
+            'display_name' => $display_name,
             'fileid' => $pdfid,
             'fail_count' => $counts['fail_count'],
             'pass_count' => $counts['pass_count'],

@@ -46,10 +46,10 @@ $string['test_tableheaders_desc'] = 'Verifica se as tabelas de dados têm cabeç
 
 $string['test_howtofix'] = 'Como corrigir?';
 
-$string['test_title_link'] = 'https://moodle-qua.ciencias.ulisboa.pt/mod/resource/view.php?id=256918';
-$string['test_languagesmatch_link'] = 'https://moodle-qua.ciencias.ulisboa.pt/mod/resource/view.php?id=256918';
-$string['test_pdfonlyimage_link'] = 'https://moodle-qua.ciencias.ulisboa.pt/mod/resource/view.php?id=256918';
-$string['test_linksvalid_link'] = 'https://moodle-qua.ciencias.ulisboa.pt/mod/resource/view.php?id=256918';
-$string['test_figuresalt_link'] = 'https://moodle-qua.ciencias.ulisboa.pt/mod/resource/view.php?id=256918';
-$string['test_lists_link'] = 'https://moodle-qua.ciencias.ulisboa.pt/mod/resource/view.php?id=256918';
-$string['test_tableheaders_link'] = 'https://moodle-qua.ciencias.ulisboa.pt/mod/resource/view.php?id=256918';
+$string['test_title_url'] = 'https://moodle.ciencias.ulisboa.pt/mod/resource/view.php?id=321689';
+$string['test_languagesmatch_url'] = 'https://moodle.ciencias.ulisboa.pt/mod/resource/view.php?id=321689';
+$string['test_pdfonlyimage_url'] = 'https://moodle.ciencias.ulisboa.pt/mod/resource/view.php?id=321689';
+$string['test_linksvalid_url'] = 'https://moodle.ciencias.ulisboa.pt/mod/resource/view.php?id=321689';
+$string['test_figuresalt_url'] = 'https://moodle.ciencias.ulisboa.pt/mod/resource/view.php?id=321689';
+$string['test_lists_url'] = 'https://moodle.ciencias.ulisboa.pt/mod/resource/view.php?id=321689';
+$string['test_tableheaders_url'] = 'https://moodle.ciencias.ulisboa.pt/mod/resource/view.php?id=321689';

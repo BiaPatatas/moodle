@@ -44,5 +44,7 @@ $string['learnmore_fcul_guide'] = 'FCUL Accessibility Guide';
 $string['learnmore_fcul_guide_title'] = 'Open FCUL Accessibility Guide';
 $string['learnmore_wcag'] = 'Accessible PDF Best Practices - WCAG 2.2';
 $string['learnmore_wcag_title'] = 'WCAG 2.2 PDF Techniques';
+$string['learnmore_moodle_info'] = 'Moodle Page with More Information';
+$string['learnmore_moodle_info_title'] = 'Moodle Page with More Information';
 $string['progress_chart_label'] = 'Progress (%)';
 $string['totalpdfs'] = '{$a} PDFs';

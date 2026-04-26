@@ -123,7 +123,7 @@ class pdf_accessibility_config {
      * Get the help link URL for a given test.
      *
      * The default comes from TEST_CONFIG['link'], but if a language
-     * string "test_{$base}_link" exists it overrides that value so
+     * string "test_{$base}_url" exists it overrides that value so
      * each site/language can point to its own Moodle resource.
      *
      * @param string $testkey Raw test name from Python.
@@ -136,7 +136,7 @@ class pdf_accessibility_config {
             return isset(self::TEST_CONFIG[$testkey]['link']) ? self::TEST_CONFIG[$testkey]['link'] : '';
         }
 
-        $identifier = 'test_' . $base . '_link';
+        $identifier = 'test_' . $base . '_url';
         $stringmanager = get_string_manager();
         if ($stringmanager->string_exists($identifier, 'block_pdfaccessibility')) {
             return get_string($identifier, 'block_pdfaccessibility');
@@ -417,17 +417,44 @@ function pdf_accessibility_log_error(string $message, array $data = [], string $
         return;
     }
 
-    $debugdir = $CFG->dirroot . '/blocks/pdfaccessibility/debug';
-    if (!is_dir($debugdir)) {
-        @mkdir($debugdir, 0775, true);
+    // In many production setups, Moodle code folders are read-only.
+    // Try plugin debug folder first, then writable runtime folders.
+    $candidatedirs = [
+        $CFG->dirroot . '/blocks/pdfaccessibility/debug',
+        (!empty($CFG->dataroot) ? $CFG->dataroot . '/temp/block_pdfaccessibility/debug' : null),
+        sys_get_temp_dir() . '/block_pdfaccessibility_debug',
+    ];
+
+    $debugdir = null;
+    foreach ($candidatedirs as $dir) {
+        if (empty($dir)) {
+            continue;
+        }
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0775, true);
+        }
+        if (is_dir($dir) && is_writable($dir)) {
+            $debugdir = $dir;
+            break;
+        }
     }
 
-    $logfile = $debugdir . '/' . $filename;
+    if ($debugdir === null) {
+        error_log('PdfAccessibility DEBUG (no writable log dir) - ' . $message . ' ' . json_encode($data));
+        return;
+    }
+
+    // Prevent path traversal in custom filenames.
+    $safefilename = basename($filename);
+    $logfile = $debugdir . '/' . $safefilename;
     $entry = '[' . date('Y-m-d H:i:s') . "] " . $message;
     if (!empty($data)) {
         $entry .= ' ' . json_encode($data);
     }
     $entry .= PHP_EOL;
 
-    @file_put_contents($logfile, $entry, FILE_APPEND);
+    $written = @file_put_contents($logfile, $entry, FILE_APPEND);
+    if ($written === false) {
+        error_log('PdfAccessibility DEBUG (file_put_contents failed) - ' . $message . ' ' . json_encode($data));
+    }
 }

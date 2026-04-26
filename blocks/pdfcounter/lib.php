@@ -4,6 +4,39 @@
 define('BLOCK_PDFCOUNTER_MAX_PER_CALL', 1); // Só avalia 1 por chamada AJAX
 
 /**
+ * Resolve a writable debug directory for PdfCounter logs.
+ *
+ * @return string|null Writable directory path or null if none is available.
+ */
+function block_pdfcounter_get_writable_debug_dir() {
+    global $CFG;
+
+    if (empty($CFG)) {
+        return null;
+    }
+
+    $candidatedirs = [
+        (!empty($CFG->dirroot) ? $CFG->dirroot . '/blocks/pdfcounter/debug' : null),
+        (!empty($CFG->dataroot) ? $CFG->dataroot . '/temp/block_pdfcounter/debug' : null),
+        sys_get_temp_dir() . '/block_pdfcounter_debug',
+    ];
+
+    foreach ($candidatedirs as $dir) {
+        if (empty($dir)) {
+            continue;
+        }
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0775, true);
+        }
+        if (is_dir($dir) && is_writable($dir)) {
+            return $dir;
+        }
+    }
+
+    return null;
+}
+
+/**
  * Regista mensagens de debug do PdfCounter em ficheiros dentro de blocks/pdfcounter/debug.
  *
  * @param string $message Mensagem principal de log.
@@ -11,27 +44,30 @@ define('BLOCK_PDFCOUNTER_MAX_PER_CALL', 1); // Só avalia 1 por chamada AJAX
  * @param string $filename Nome do ficheiro de log dentro da pasta debug.
  */
 function block_pdfcounter_debug_log(string $message, array $data = [], string $filename = 'pdfcounter_debug.log'): void {
-    global $CFG;
-
-    if (empty($CFG) || empty($CFG->dirroot)) {
+    if (empty($GLOBALS['CFG'])) {
         // Se por algum motivo $CFG não estiver disponível, faz fallback para error_log.
         error_log('PdfCounter DEBUG (fallback) - ' . $message . ' ' . json_encode($data));
         return;
     }
 
-    $debugdir = $CFG->dirroot . '/blocks/pdfcounter/debug';
-    if (!is_dir($debugdir)) {
-        @mkdir($debugdir, 0775, true);
+    $debugdir = block_pdfcounter_get_writable_debug_dir();
+    if ($debugdir === null) {
+        error_log('PdfCounter DEBUG (no writable log dir) - ' . $message . ' ' . json_encode($data));
+        return;
     }
 
-    $logfile = $debugdir . '/' . $filename;
+    $safefilename = basename($filename);
+    $logfile = $debugdir . '/' . $safefilename;
     $entry = '[' . date('Y-m-d H:i:s') . "] " . $message;
     if (!empty($data)) {
         $entry .= ' ' . json_encode($data);
     }
     $entry .= PHP_EOL;
 
-    @file_put_contents($logfile, $entry, FILE_APPEND);
+    $written = @file_put_contents($logfile, $entry, FILE_APPEND);
+    if ($written === false) {
+        error_log('PdfCounter DEBUG (file_put_contents failed) - ' . $message . ' ' . json_encode($data));
+    }
 }
 
 /**
@@ -44,20 +80,20 @@ function block_pdfcounter_debug_log(string $message, array $data = [], string $f
  * @param string $filename Nome do ficheiro de log dentro da pasta debug.
  */
 function block_pdfcounter_debug_log_once(string $id, string $message, array $data = [], string $filename = 'pdfcounter_debug.log'): void {
-    global $CFG;
-
-    if (empty($CFG) || empty($CFG->dirroot)) {
+    if (empty($GLOBALS['CFG'])) {
         // Fallback para não falhar em contextos estranhos.
         block_pdfcounter_debug_log($message, $data, $filename);
         return;
     }
 
-    $debugdir = $CFG->dirroot . '/blocks/pdfcounter/debug';
-    if (!is_dir($debugdir)) {
-        @mkdir($debugdir, 0775, true);
+    $debugdir = block_pdfcounter_get_writable_debug_dir();
+    if ($debugdir === null) {
+        block_pdfcounter_debug_log($message, $data, $filename);
+        return;
     }
 
-    $marker = $debugdir . '/.once_' . $id . '.flag';
+    $safeid = preg_replace('/[^a-zA-Z0-9_-]/', '_', $id);
+    $marker = $debugdir . '/.once_' . $safeid . '.flag';
     if (file_exists($marker)) {
         return; // Já foi registado anteriormente.
     }

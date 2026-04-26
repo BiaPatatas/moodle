@@ -23,5 +23,7 @@ $string['learnmore_fcul_guide'] = 'Guia de Acessibilidade da FCUL';
 $string['learnmore_fcul_guide_title'] = 'Abrir Guia de Acessibilidade da FCUL';
 $string['learnmore_wcag'] = 'Boas práticas para PDFs acessíveis - WCAG 2.2';
 $string['learnmore_wcag_title'] = 'Técnicas de PDF para WCAG 2.2';
+$string['learnmore_moodle_info'] = 'Página Moodle com Mais Informações';
+$string['learnmore_moodle_info_title'] = 'Página Moodle com Mais Informações';
 $string['progress_chart_label'] = 'Progresso (%)';
 $string['totalpdfs'] = '{$a} PDFs';

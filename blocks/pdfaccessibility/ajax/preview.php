@@ -33,6 +33,81 @@ function save_temp_pdf($file) {
     file_put_contents($tempfile, $file->get_content());
     return $tempfile;
 }
+
+function is_shell_exec_available() {
+    if (!function_exists('shell_exec')) {
+        return false;
+    }
+
+    $disabled = ini_get('disable_functions');
+    if (empty($disabled)) {
+        return true;
+    }
+
+    $list = array_map('trim', explode(',', strtolower($disabled)));
+    return !in_array('shell_exec', $list, true);
+}
+
+function is_pdf_candidate($file) {
+    $mimetype = (string)$file->get_mimetype();
+    if ($mimetype === 'application/pdf') {
+        return true;
+    }
+    return (strtolower(pathinfo((string)$file->get_filename(), PATHINFO_EXTENSION)) === 'pdf');
+}
+
+function analyze_pdf_with_python($scriptpath, $filepath) {
+    if (!is_shell_exec_available()) {
+        return [
+            'ok' => false,
+            'error' => 'PHP shell_exec is disabled on this server'
+        ];
+    }
+
+    $iswindows = (DIRECTORY_SEPARATOR === '\\');
+    $interpreters = $iswindows ? ['py -3', 'python', 'py'] : ['python3', 'python'];
+    $attempts = [];
+
+    foreach ($interpreters as $interpreter) {
+        $command = $interpreter . ' ' . escapeshellarg($scriptpath) . ' ' . escapeshellarg($filepath);
+        $output = shell_exec($command . ' 2>&1');
+        $trimmed = trim((string)$output);
+        $decoded = json_decode($trimmed, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+            return [
+                'ok' => true,
+                'result' => $decoded,
+                'command' => $command
+            ];
+        }
+
+        $attempts[] = [
+            'command' => $command,
+            'output' => $trimmed
+        ];
+    }
+
+    $errordetail = '';
+    foreach ($attempts as $attempt) {
+        if (!empty($attempt['output'])) {
+            $errordetail = substr($attempt['output'], 0, 240);
+            break;
+        }
+    }
+
+    $errormessage = 'Python analyzer failed or returned invalid JSON';
+    if ($errordetail !== '') {
+        $errormessage .= ' - ' . $errordetail;
+    }
+
+    return [
+        'ok' => false,
+        'error' => $errormessage,
+        'attempts' => $attempts
+    ];
+}
+
 $input = $input ?? json_decode($rawinput, true);
 $draftid = $input['draftid'] ?? null;
 $courseid = $input['courseid'] ?? null;
@@ -82,25 +157,28 @@ try {
 
     // Novo: processar todos os PDFs e retornar todos juntos
     $pdfs = [];
+    $analysiserrors = [];
     global $DB, $USER, $COURSE;
     foreach ($files as $file) {
-        if ($file->get_mimetype() === 'application/pdf') {
+        if (is_pdf_candidate($file)) {
             $filepath = save_temp_pdf($file);
             $script_path = __DIR__ . '/../pdf_accessibility.py';
-            $python_command = "python3 " . escapeshellarg($script_path) . " " . escapeshellarg($filepath);
-            $output = shell_exec($python_command . " 2>&1");
-            unlink($filepath);
-            $result = json_decode($output, true);
-            if (!$result) {
+            $analysis = analyze_pdf_with_python($script_path, $filepath);
+            @unlink($filepath);
+
+            if (!$analysis['ok']) {
+                $analysiserrors[] = $file->get_filename() . ': ' . $analysis['error'];
                 pdf_accessibility_log_error('preview.php: Python analysis returned invalid JSON', [
                     'filename' => $file->get_filename(),
                     'courseid' => $courseid,
                     'draftid' => $draftid,
-                    'command' => $python_command,
-                    'output' => $output,
+                    'error' => $analysis['error'],
+                    'attempts' => $analysis['attempts'] ?? [],
                 ], 'preview.log');
                 continue;
             }
+
+            $result = $analysis['result'];
             $filehash = sha1($file->get_content());
             $existing = $DB->get_record('block_pdfaccessibility_pdf_files', [
                 'filename' => $file->get_filename(),
@@ -154,10 +232,15 @@ try {
         ]);
         exit;
     }
-    // Quando não há nenhum PDF analisado com sucesso, apenas devolvemos o erro
-    // para o frontend, sem registar no debug (para evitar ruído quando o
-    // utilizador carrega apenas ficheiros não-PDF como docx/imagens).
-    echo json_encode(['status' => 'error', 'message' => 'No PDF found']);
+    if (!empty($analysiserrors)) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'No PDF analyzed successfully. ' . $analysiserrors[0]
+        ]);
+        exit;
+    }
+
+    echo json_encode(['status' => 'error', 'message' => 'No PDF found in uploaded files']);
     exit;
 } catch (Throwable $e) {
     pdf_accessibility_log_error('preview.php: unexpected exception', [

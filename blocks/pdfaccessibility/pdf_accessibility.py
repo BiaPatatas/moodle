@@ -237,9 +237,75 @@ def lists_not_marked_as_lists(pdf_path):
     if not doc or not structTree:
         return "PDF not tagged"
 
-    list_pattern = re.compile(r'^(\d+\.|[a-zA-Z]\. |[-*•])\s')
-    visual_list_items = []
+    marker_pattern = re.compile(
+        r'^(?:[-*•▪▫◦‣⁃➢→]\s+|(?:\(?\d{1,3}[\.)]|[a-zA-Z][\.)])\s+)'
+    )
+    section_pattern = re.compile(r'^\d+(?:\.\d+){1,}\s')
+    reference_pattern = re.compile(r'^\[\d+\]')
+    caption_pattern = re.compile(r'^(?:fig\.|figure|table)\s*\d+', re.IGNORECASE)
+
+    visual_candidates = []
     structured_list_count = 0
+
+    def _normalize_line_text(line):
+        chunks = []
+        for span in line.get("spans", []):
+            text = span.get("text", "").strip()
+            if text:
+                chunks.append(text)
+        return " ".join(chunks).strip()
+
+    def _first_non_empty_span_text(line):
+        for span in line.get("spans", []):
+            text = span.get("text", "").strip()
+            if text:
+                return text
+        return ""
+
+    def _is_visual_list_candidate(line_text, first_span_text):
+        if not line_text:
+            return False
+
+        # Filtrar padrões comuns de falsos positivos em papers.
+        if reference_pattern.match(line_text):
+            return False
+        if section_pattern.match(line_text):
+            return False
+        if caption_pattern.match(line_text):
+            return False
+
+        # Limite para evitar linhas muito longas de parágrafo/referência.
+        if len(line_text) > 180:
+            return False
+
+        # O marcador tem de estar no início visual da linha.
+        if marker_pattern.match(line_text):
+            return True
+
+        # Alternativa: primeiro span é bullet isolado e há texto depois.
+        if first_span_text in ["•", "▪", "▫", "◦", "‣", "⁃", "➢", "→"]:
+            return True
+
+        return False
+
+    def _has_list_context(candidate, page_candidates):
+        """Exige pelo menos um vizinho com y/x próximos na mesma página."""
+        bbox = candidate.get("bbox")
+        if not bbox:
+            return False
+
+        x0, y0 = bbox[0], bbox[1]
+        for other in page_candidates:
+            if other is candidate:
+                continue
+            obox = other.get("bbox")
+            if not obox:
+                continue
+
+            ox0, oy0 = obox[0], obox[1]
+            if abs(y0 - oy0) <= 45 and abs(x0 - ox0) <= 30:
+                return True
+        return False
 
     # Contar todos os itens de lista visuais no texto
     with fitz.open(pdf_path) as fitz_doc:
@@ -247,25 +313,25 @@ def lists_not_marked_as_lists(pdf_path):
             text_dict = page.get_text("dict")
             for block in text_dict.get("blocks", []):
                 for line in block.get("lines", []):
-                    line_text = ""
-                    for span in line.get("spans", []):
-                        text = span.get("text", "").strip()
-                        if text:
-                            line_text += text + " "
+                    line_text = _normalize_line_text(line)
+                    first_span = _first_non_empty_span_text(line)
 
-                    line_text = line_text.strip()
-                    if list_pattern.match(line_text):
-                        visual_list_items.append(line_text)
-                        continue
+                    if _is_visual_list_candidate(line_text, first_span):
+                        visual_candidates.append({
+                            "page": page.number + 1,
+                            "text": line_text,
+                            "bbox": line.get("bbox", None),
+                        })
 
-                    for span in line.get("spans", []):
-                        text = span.get("text", "").strip()
-                        if text in ["•", "▪", "▫", "◦", "‣", "⁃", "➢", "→"] or re.match(r'^\d+\.$', text) or re.match(r'^[a-zA-Z]\.$', text):
-                            full_item = ""
-                            for s in line.get("spans", []):
-                                full_item += s.get("text", "").strip() + " "
-                            visual_list_items.append(full_item.strip())
-                            break
+    visual_list_items = []
+    candidates_by_page = {}
+    for item in visual_candidates:
+        candidates_by_page.setdefault(item["page"], []).append(item)
+
+    for _, page_candidates in candidates_by_page.items():
+        for item in page_candidates:
+            if _has_list_context(item, page_candidates):
+                visual_list_items.append(item)
 
     # Contar elementos de lista estruturados no PDF
     def recursiveBrowse(parent: PdsStructElement):
@@ -427,8 +493,25 @@ def check_headers(pdf_path: str) -> bool:
                 child_elem = structTree.GetStructElementFromObject(child_obj)
                 if not child_elem:
                     continue
-                if child_elem.GetType(True) == "THead":
+                
+                c_type = child_elem.GetType(True)
+                
+                # 1. Verifica se tem o bloco de agrupamento THead (PDFs normais)
+                if c_type == "THead":
                     has_header = True
+                    break
+                
+                # 2. NOVIDADE: Se for uma linha (TR), verifica se tem células TH (PDFs do LaTeX)
+                elif c_type == "TR":
+                    for j in range(child_elem.GetNumChildren()):
+                        cell_obj = child_elem.GetChildObject(j)
+                        cell_elem = structTree.GetStructElementFromObject(cell_obj)
+                        if cell_elem and cell_elem.GetType(True) == "TH":
+                            has_header = True
+                            break
+                
+                # Se encontrou o cabeçalho na verificação da linha, sai do loop principal da Tabela
+                if has_header:
                     break
             
             if has_header:
@@ -436,7 +519,7 @@ def check_headers(pdf_path: str) -> bool:
             else:
                 tables_without_headers += 1
                 
-            # Continuar a recursão para elementos filhos
+            # Continuar a recursão para elementos filhos (caso existam tabelas aninhadas)
             for i in range(parent.GetNumChildren()):
                 child_obj = parent.GetChildObject(i)
                 child_elem = structTree.GetStructElementFromObject(child_obj)
@@ -453,14 +536,10 @@ def check_headers(pdf_path: str) -> bool:
 
     doc.Close()
 
-    # Se não há tabelas, retorna "Non applicable"
     if total_tables == 0:
         return "Non applicable"
     
-    # Para ser considerado correto, TODAS as tabelas devem ter cabeçalhos
     return tables_without_headers == 0
-    
-      
 
 # PDF Accessibility Check -----------------------------------------------------
 

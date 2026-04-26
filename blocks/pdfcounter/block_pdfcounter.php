@@ -52,17 +52,17 @@ class block_pdfcounter extends block_base {
             AND f.filename != '.'";
         $files = $DB->get_records_sql($sql, array('courseid' => $COURSE->id));
 
-        // Apenas listar PDFs e status, nunca avaliar ou processar aqui
+        // Mapa de nomes "amigáveis" (título da atividade) por hash de ficheiro.
+        // Isto permite mostrar o título do recurso Moodle em vez do nome
+        // original do ficheiro do PC.
+        $displaynames = [];
         foreach ($files as $file) {
             if (substr($file->filename, -4) === '.pdf') {
-                // if (is_resource($debuglog)) fwrite($debuglog, "[mod_resource/mod_folder] Found PDF: {$file->filename} | hash: {$file->contenthash}\n");
-                // Buscar status na base de dados
                 $filehash = $file->contenthash;
-                $pdfrecord = $DB->get_record('block_pdfaccessibility_pdf_files', [
-                    'filehash' => $filehash,
-                    'courseid' => $COURSE->id
-                ]);
-                // Exibir status, mas nunca processar ou avaliar aqui
+                $resourcename = isset($file->resource_name) ? trim($file->resource_name) : '';
+                if ($resourcename !== '') {
+                    $displaynames[$filehash] = $resourcename;
+                }
             }
         }
 
@@ -241,7 +241,13 @@ foreach ($urllinks as $ulink) {
         foreach ($allpdfs as $pdfrecord) {
             $pdfid = $pdfrecord->id;
             $counts = pdf_accessibility_config::get_test_counts($DB, $pdfid);
-            $display_name = !empty($pdfrecord->filename) ? $pdfrecord->filename : 'PDF';
+            // Usa o título do recurso Moodle quando o conseguimos mapear;
+            // caso contrário, recorre ao nome de ficheiro gravado.
+            if (!empty($pdfrecord->filehash) && isset($displaynames[$pdfrecord->filehash])) {
+                $display_name = $displaynames[$pdfrecord->filehash];
+            } else {
+                $display_name = !empty($pdfrecord->filename) ? $pdfrecord->filename : 'PDF';
+            }
             $applicable_tests = pdf_accessibility_config::calculate_applicable_tests(
                 $counts['pass_count'],
                 $counts['fail_count'],
@@ -326,6 +332,14 @@ foreach ($urllinks as $ulink) {
             <div style="margin-top: 10px;">
                 <p style="margin: 8px 0 4px 0; font-size: 0.8rem; font-weight: bold;">'.get_string('learnmore_resources','block_pdfcounter').'</p>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.8rem;">
+
+                <li style="margin: 4px 0;">
+                        <a href="https://moodle.ciencias.ulisboa.pt/course/view.php?id=6672" target="_blank"
+                           style="color: #0F6CBF; text-decoration: underline;"
+                           title="'.get_string('learnmore_moodle_info_title','block_pdfcounter').'">
+                            <i class="fa fa-external-link" style="font-size: 0.7rem;"></i> '.get_string('learnmore_moodle_info','block_pdfcounter').'
+                        </a>
+                    </li>
                     <li style="margin: 4px 0;">
                         <a href="/blocks/pdfcounter/docs/guia_doc_acessivel_fcul.pdf" target="_blank" 
                            style="color: #0F6CBF; text-decoration: underline;"
@@ -340,6 +354,7 @@ foreach ($urllinks as $ulink) {
                             <i class="fa fa-external-link" style="font-size: 0.7rem;"></i> '.get_string('learnmore_wcag','block_pdfcounter').' 
                         </a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -520,9 +535,13 @@ foreach ($urllinks as $ulink) {
                 $issue['fail_count'],
                 $issue['not_tagged_count']
             );
+            $display_label = $issue['display_name'];
+            if (!preg_match('/\.pdf$/i', $display_label)) {
+                $display_label .= '.pdf';
+            }
             $pdf_issues_html .= '<tr><td colspan="1" style="padding:0;">';
             $pdf_issues_html .= '<div class="parent" style="display:grid; grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); grid-column-gap:0; grid-row-gap:0;">';
-            $pdf_issues_html .= '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' . htmlspecialchars($issue['display_name']) . '</div>';
+            $pdf_issues_html .= '<div class="div1" style="grid-area:1/1/2/2; align-self:start; font-size:1em;">' . htmlspecialchars($display_label) . '</div>';
             $failinfo = (object) ['failed' => $failed_tests, 'total' => $applicable_tests];
             $pdf_issues_html .= '<div class="div2" style="grid-area:2/1/3/2; align-self:start; text-align:left; font-weight:bold; font-size:1.1em;">' . get_string('tests_failed', 'block_pdfcounter', $failinfo) . '</div>';
             $pdf_issues_html .= '<div class="div3" style="grid-area:3/1/4/2; text-align:left;">';
