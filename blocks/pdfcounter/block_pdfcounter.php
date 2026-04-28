@@ -13,6 +13,12 @@ class block_pdfcounter extends block_base {
 
     public function get_content() {
         global $COURSE, $DB, $CFG, $USER;
+        global $PAGE;
+        if (!isset($PAGE) || empty($COURSE) || $COURSE->id == SITEID ||
+        strpos($PAGE->pagetype ?? '', 'course-view') !== 0) {
+        return null;
+    }
+            
 
         // DEBUG file logging disabled for production installation.
         // $debuglogfile = $CFG->dirroot . '/blocks/pdfcounter/debug/debug_pdfcounter.txt';
@@ -681,15 +687,9 @@ foreach ($urllinks as $ulink) {
      * @return array
      */
     public function applicable_formats() {
-        // Permitir o bloco em todos os tipos de páginas
-        return array(
-            'course-view' => true,
-            'site' => true,
-            'mod' => true,
-            'my' => true,
-            'all' => true
-        );
-    }
+    return array('all' => true);
+}
+
 
     /**
      * Allow multiple instances of this block.
@@ -699,6 +699,16 @@ foreach ($urllinks as $ulink) {
     public function instance_allow_multiple() {
         return false;
     }
+
+    public function instance_create() {
+        global $DB;
+
+        // Define peso -10 (quanto menor o valor, mais acima aparece).
+        $DB->set_field('block_instances', 'defaultweight', -10, ['id' => $this->instance->id]);
+
+        return parent::instance_create();
+    }
+
 
     /**
      * Block has configuration.

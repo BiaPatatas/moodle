@@ -47,7 +47,9 @@ class dashboard {
             $where_conditions[] = 'c.category = ?';
             $params[] = $course_id;
         } elseif ($department_id) {
-            $where_conditions[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where_conditions[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 
@@ -56,8 +58,7 @@ class dashboard {
                   JOIN {course} c ON c.id = pf.courseid";
         
         if ($department_id && !$course_id && !$discipline_id) {
-            $joins .= " JOIN {course_categories} cc ON cc.id = c.category
-                       LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent";
+            $joins .= " LEFT JOIN {course_categories} cc ON cc.id = c.category";
         }
 
         $where_clause = implode(' AND ', $where_conditions);
@@ -124,161 +125,84 @@ class dashboard {
 
         // Check if tables exist
         $dbman = $DB->get_manager();
-        
-        // If trends table exists, use it for current scores (more accurate) - ONLY CURRENT MONTH
+
+        // Use trends if available (current month), averaging disciplines equally.
         if ($dbman->table_exists('block_pdfcounter_trends')) {
-            // Get current month in YYYY-MM format
             $current_month = date('Y-m');
-            
-            // Get the most recent score from trends table - CURRENT MONTH ONLY
+            $params = [$current_month];
+            $where = ['t.month = ?', 't.courseid > 1', 'c.visible = 1'];
+            $joins = "FROM {block_pdfcounter_trends} t
+                      JOIN {course} c ON c.id = t.courseid";
+
             if ($discipline_id) {
-                // Specific discipline - get its exact score
-                $result = $DB->get_record_sql(
-                    "SELECT AVG(progress_value) as avg_score
-                     FROM {block_pdfcounter_trends} t
-                     JOIN {course} c ON c.id = t.courseid
-                     WHERE c.visible = 1 AND c.id = ? AND t.month = ?", [$discipline_id, $current_month]
-                );
-            } elseif ($course_id && $department_id) {
-                // Department + Course selected - average of ALL disciplines in that course
-                $result = $DB->get_record_sql(
-                    "SELECT AVG(progress_value) as avg_score
-                     FROM {block_pdfcounter_trends} t
-                     JOIN {course} c ON c.id = t.courseid
-                     WHERE c.visible = 1 AND c.category = ? AND t.month = ?", [$course_id, $current_month]
-                );
+                $where[] = 'c.id = ?';
+                $params[] = $discipline_id;
             } elseif ($course_id) {
-                // Only course selected - average of ALL disciplines in that course
-                $result = $DB->get_record_sql(
-                    "SELECT AVG(progress_value) as avg_score
-                     FROM {block_pdfcounter_trends} t
-                     JOIN {course} c ON c.id = t.courseid
-                     WHERE c.visible = 1 AND c.category = ? AND t.month = ?", [$course_id, $current_month]
-                );
+                $where[] = 'c.category = ?';
+                $params[] = $course_id;
             } elseif ($department_id) {
-                // Only department selected - average of ALL disciplines in ALL courses of that department
-                $result = $DB->get_record_sql(
-                    "SELECT AVG(progress_value) as avg_score
-                     FROM {block_pdfcounter_trends} t
-                     JOIN {course} c ON c.id = t.courseid
-                     JOIN {course_categories} cc ON cc.id = c.category
-                     LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
-                     WHERE c.visible = 1 AND cc2.id = ? AND t.month = ?", [$department_id, $current_month]
-                );
-            } else {
-                // No filters - global average
-                $result = $DB->get_record_sql(
-                    "SELECT AVG(progress_value) as avg_score
-                     FROM {block_pdfcounter_trends} t
-                     JOIN {course} c ON c.id = t.courseid
-                     WHERE c.visible = 1 AND t.courseid > 1 AND t.month = ?", [$current_month]
-                );
+                // Handle both direct children and nested sub-categories
+                $where[] = '(c.category = ? OR cc.parent = ?)';
+                $params[] = $department_id;
+                $params[] = $department_id;
             }
-            
-            return $result ? round($result->avg_score, 1) : 0;
+
+            $sql = "SELECT AVG(discipline_score) AS avg_score
+                    FROM (
+                        SELECT t.courseid,
+                            AVG(t.progress_value) AS discipline_score
+                        FROM {block_pdfcounter_trends} t
+                        JOIN {course} c ON c.id = t.courseid
+                        LEFT JOIN {course_categories} cc ON cc.id = c.category
+                        WHERE t.month = ? AND c.visible = 1 AND c.id > 1
+                            AND t.courseid IN (SELECT DISTINCT courseid FROM {block_pdfaccessibility_pdf_files})
+                            AND " . implode(' AND ', $where) . "
+                        GROUP BY t.courseid
+                    ) discipline_scores
+                    ";
+
+            $result = $DB->get_record_sql($sql, array_merge([$current_month], $params));
+            return (!empty($result) && $result->avg_score !== null) ? round((float)$result->avg_score, 1) : 0;
         }
 
-        // Fall back to test results calculation
-        if (!$dbman->table_exists('block_pdfaccessibility_test_results') || 
+        // Fallback: compute each discipline score from test results, then average disciplines equally.
+        if (!$dbman->table_exists('block_pdfaccessibility_test_results') ||
             !$dbman->table_exists('block_pdfaccessibility_pdf_files')) {
             return 0;
         }
 
-        // Build filter conditions and queries
         $params = [];
-        $where_conditions = ['pf.courseid > 1', 'c.visible = 1'];
-        
-        // Simple approach: build the WHERE clause based on filters
+        $where = ['pf.courseid > 1', 'c.visible = 1'];
+        $joins = "FROM {block_pdfaccessibility_test_results} tr
+                  JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
+                  JOIN {course} c ON c.id = pf.courseid";
+
         if ($discipline_id) {
-            $where_conditions[] = 'c.id = ?';
+            $where[] = 'c.id = ?';
             $params[] = $discipline_id;
-            
-            $total_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 WHERE " . implode(' AND ', $where_conditions), $params
-            );
-            
         } elseif ($course_id) {
-            $where_conditions[] = 'c.category = ?';
+            $where[] = 'c.category = ?';
             $params[] = $course_id;
-            
-            $total_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 WHERE " . implode(' AND ', $where_conditions), $params
-            );
-            
         } elseif ($department_id) {
-            $total_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 JOIN {course_categories} cc ON cc.id = c.category
-                 LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
-                 WHERE pf.courseid > 1 AND c.visible = 1 AND cc2.id = ?", [$department_id]
-            );
-            
-        } else {
-            // Global - no filters
-            $total_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 WHERE " . implode(' AND ', $where_conditions), $params
-            );
+            // Handle both direct children and nested sub-categories
+            $where[] = '(c.category = ? OR cc.parent = ?)';
+            $joins .= " LEFT JOIN {course_categories} cc ON cc.id = c.category";
+            $params[] = $department_id;
+            $params[] = $department_id;
         }
 
-        if ($total_tests == 0) return 0;
+        $sql = "SELECT AVG(discipline_score) AS avg_score
+                FROM (
+                    SELECT c.id,
+                           (SUM(CASE WHEN tr.result = 'pass' THEN 1 ELSE 0 END) * 100.0 /
+                            NULLIF(SUM(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 ELSE 0 END), 0)) AS discipline_score
+                    $joins
+                    WHERE " . implode(' AND ', $where) . "
+                    GROUP BY c.id
+                ) discipline_scores";
 
-        // Now count passed tests with same logic
-        if ($discipline_id) {
-            $passed_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 WHERE pf.courseid > 1 AND c.visible = 1 AND c.id = ? AND tr.result = 'pass'", [$discipline_id]
-            );
-            
-        } elseif ($course_id) {
-            $passed_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 WHERE pf.courseid > 1 AND c.visible = 1 AND c.category = ? AND tr.result = 'pass'", [$course_id]
-            );
-            
-        } elseif ($department_id) {
-            $passed_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 JOIN {course_categories} cc ON cc.id = c.category
-                 LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
-                 WHERE pf.courseid > 1 AND c.visible = 1 AND cc2.id = ? AND tr.result = 'pass'", [$department_id]
-            );
-            
-        } else {
-            // Global - no filters
-            $passed_tests = $DB->count_records_sql(
-                "SELECT COUNT(tr.id) 
-                 FROM {block_pdfaccessibility_test_results} tr
-                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
-                 JOIN {course} c ON c.id = pf.courseid
-                 WHERE pf.courseid > 1 AND c.visible = 1 AND tr.result = 'pass'", []
-            );
-        }
-        
-        return round(($passed_tests / $total_tests) * 100, 1);
+        $result = $DB->get_record_sql($sql, $params);
+        return (!empty($result) && $result->avg_score !== null) ? round((float)$result->avg_score, 1) : 0;
     }
 
     /**
@@ -429,7 +353,9 @@ class dashboard {
             $where_conditions[] = 'c.category = ?';
             $params[] = $course_id;
         } elseif ($department_id) {
-            $where_conditions[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where_conditions[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 
@@ -438,8 +364,7 @@ class dashboard {
                   JOIN {course} c ON c.id = pf.courseid";
         
         if ($department_id && !$course_id && !$discipline_id) {
-            $joins .= " JOIN {course_categories} cc ON cc.id = c.category
-                       LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent";
+            $joins .= " LEFT JOIN {course_categories} cc ON cc.id = c.category";
         }
 
         $joins .= " LEFT JOIN {block_pdfaccessibility_test_results} tr ON tr.fileid = pf.id";
@@ -807,7 +732,9 @@ class dashboard {
             $where_conditions[] = 'c.category = ?';
             $params[] = $course_id;
         } elseif ($department_id) {
-            $where_conditions[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where_conditions[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 
@@ -816,8 +743,7 @@ class dashboard {
                   JOIN {course} c ON c.id = pf.courseid";
         
         if ($department_id && !$course_id && !$discipline_id) {
-            $joins .= " JOIN {course_categories} cc ON cc.id = c.category
-                       LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent";
+            $joins .= " LEFT JOIN {course_categories} cc ON cc.id = c.category";
         }
 
         $where_clause = implode(' AND ', $where_conditions);
@@ -856,7 +782,9 @@ class dashboard {
             $where[] = 'c.category = ?';
             $params[] = $course_id;
         } elseif ($department_id) {
-            $where[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 
@@ -867,7 +795,6 @@ class dashboard {
                 JOIN {block_pdfaccessibility_pdf_files} pf ON pf.id = tr.fileid
                 JOIN {course} c ON c.id = pf.courseid
                 LEFT JOIN {course_categories} cc ON cc.id = c.category
-                LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
                 WHERE $where_sql";
 
         $total_problems = (int)$DB->count_records_sql($sql, $params);
@@ -906,12 +833,22 @@ class dashboard {
             // Specific discipline - show only its evolution
             $sql = "SELECT 
                         t.month,
-                        AVG(t.progress_value) as avg_score
+                        AVG(t.progress_value) AS avg_score
                     FROM {block_pdfcounter_trends} t
                     JOIN {course} c ON c.id = t.courseid
-                    WHERE t.timecreated >= ? AND c.visible = 1 AND c.id = ?
+                    WHERE t.timecreated >= ?
+                        AND c.visible = 1
+                        AND c.id > 1
+                        AND EXISTS (
+                                SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf
+                                WHERE pf.courseid = t.courseid
+                        )
                     GROUP BY t.month
                     ORDER BY t.month ASC";
+
+
+
+
             $results = $DB->get_records_sql($sql, [$academic_start, $discipline_id]);
             
         } elseif ($course_id && $department_id) {
@@ -922,6 +859,10 @@ class dashboard {
                     FROM {block_pdfcounter_trends} t
                     JOIN {course} c ON c.id = t.courseid
                     WHERE t.timecreated >= ? AND c.visible = 1 AND c.category = ?
+                        AND EXISTS (
+                            SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf
+                            WHERE pf.courseid = t.courseid
+                        )
                     GROUP BY t.month
                     ORDER BY t.month ASC";
             $results = $DB->get_records_sql($sql, [$academic_start, $course_id]);
@@ -934,6 +875,10 @@ class dashboard {
                     FROM {block_pdfcounter_trends} t
                     JOIN {course} c ON c.id = t.courseid
                     WHERE t.timecreated >= ? AND c.visible = 1 AND c.category = ?
+                        AND EXISTS (
+                            SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf
+                            WHERE pf.courseid = t.courseid
+                        )
                     GROUP BY t.month
                     ORDER BY t.month ASC";
             $results = $DB->get_records_sql($sql, [$academic_start, $course_id]);
@@ -945,12 +890,15 @@ class dashboard {
                         AVG(t.progress_value) as avg_score
                     FROM {block_pdfcounter_trends} t
                     JOIN {course} c ON c.id = t.courseid
-                    JOIN {course_categories} cc ON cc.id = c.category
-                    LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
-                    WHERE t.timecreated >= ? AND c.visible = 1 AND cc2.id = ?
+                    LEFT JOIN {course_categories} cc ON cc.id = c.category
+                    WHERE t.timecreated >= ? AND c.visible = 1 AND (c.category = ? OR cc.parent = ?)
+                        AND EXISTS (
+                            SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf
+                            WHERE pf.courseid = t.courseid
+                        )
                     GROUP BY t.month
                     ORDER BY t.month ASC";
-            $results = $DB->get_records_sql($sql, [$academic_start, $department_id]);
+            $results = $DB->get_records_sql($sql, [$academic_start, $department_id, $department_id]);
             
         } else {
             // Global - average of all disciplines
@@ -960,6 +908,10 @@ class dashboard {
                     FROM {block_pdfcounter_trends} t
                     JOIN {course} c ON c.id = t.courseid
                     WHERE t.timecreated >= ? AND c.visible = 1 AND t.courseid > 1
+                        AND EXISTS (
+                            SELECT 1 FROM {block_pdfaccessibility_pdf_files} pf
+                            WHERE pf.courseid = t.courseid
+                        )
                     GROUP BY t.month
                     ORDER BY t.month ASC";
             $results = $DB->get_records_sql($sql, [$academic_start]);
@@ -1050,13 +1002,12 @@ class dashboard {
                         MONTH(FROM_UNIXTIME(pf.timecreated)) as month_num
                     FROM {block_pdfaccessibility_pdf_files} pf
                     JOIN {course} c ON c.id = pf.courseid
-                    JOIN {course_categories} cc ON cc.id = c.category
-                    LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
+                    LEFT JOIN {course_categories} cc ON cc.id = c.category
                     LEFT JOIN {block_pdfaccessibility_test_results} tr ON tr.fileid = pf.id
-                    WHERE pf.courseid > 1 AND c.visible = 1 AND pf.timecreated > ? AND cc2.id = ?
+                    WHERE pf.courseid > 1 AND c.visible = 1 AND pf.timecreated > ? AND (c.category = ? OR cc.parent = ?)
                     GROUP BY YEAR(FROM_UNIXTIME(pf.timecreated)), MONTH(FROM_UNIXTIME(pf.timecreated))
                     ORDER BY year ASC, month_num ASC";
-            $results = $DB->get_records_sql($sql, [$academic_start, $department_id]);
+            $results = $DB->get_records_sql($sql, [$academic_start, $department_id, $department_id]);
             
         } else {
             // Global - no filters
@@ -1279,13 +1230,15 @@ class dashboard {
             $params[] = $course_id;
         } elseif ($department_id) {
             // Only department = all disciplines in all courses of that department
-            $where_conditions[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where_conditions[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 
            $sql = "SELECT 
                     CONCAT('row_', c.id) as unique_id,
-                    COALESCE(cc2.name, cc.name) as department,
+                    COALESCE(cc_parent.name, cc.name) as department,
                     c.fullname as course,
                     c.fullname as discipline,
                     COUNT(DISTINCT pf.id) as pdfs_count,
@@ -1297,7 +1250,7 @@ class dashboard {
                     END as score,
                     CASE 
                         WHEN ROUND((COUNT(CASE WHEN tr.result = 'pass' THEN 1 END) * 100.0) / 
-                            NULLIF(COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 0), 1) >= 70 
+                            NULLIF(COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 0), 1) > 70 
                         THEN 'Good'
                         WHEN ROUND((COUNT(CASE WHEN tr.result = 'pass' THEN 1 END) * 100.0) / 
                             NULLIF(COUNT(CASE WHEN tr.result IN ('pass', 'fail', 'pdf not tagged') THEN 1 END), 0), 1) >= 45 
@@ -1306,11 +1259,11 @@ class dashboard {
                     END as status
                  FROM {course} c
                  JOIN {course_categories} cc ON cc.id = c.category
-                 LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
+                 LEFT JOIN {course_categories} cc_parent ON cc_parent.id = cc.parent
                  JOIN {block_pdfaccessibility_pdf_files} pf ON pf.courseid = c.id
                  LEFT JOIN {block_pdfaccessibility_test_results} tr ON tr.fileid = pf.id
                  WHERE " . implode(' AND ', $where_conditions) . "
-                 GROUP BY cc.id, cc.name, c.id, c.fullname, cc2.id, cc2.name
+                 GROUP BY cc.id, cc.name, c.id, c.fullname
                  ORDER BY score DESC, pdfs_count DESC";
 
         $results = $DB->get_records_sql($sql, $params);
@@ -1399,19 +1352,19 @@ class dashboard {
             // Only department = all disciplines in all courses of that department
             $sql = "SELECT 
                         CONCAT('row_', c.id) as unique_id,
-                        COALESCE(cc2.name, cc.name) as department,
+                        COALESCE(cc_parent.name, cc.name) as department,
                         cc.name as course,
                         c.fullname as discipline,
                         COUNT(DISTINCT pf.id) as pdfs_count,
                         COALESCE(AVG(t.progress_value), 0) as score
                     FROM {course} c
                     JOIN {course_categories} cc ON cc.id = c.category
-                    LEFT JOIN {course_categories} cc2 ON cc2.id = cc.parent
+                    LEFT JOIN {course_categories} cc_parent ON cc_parent.id = cc.parent
                     LEFT JOIN {block_pdfaccessibility_pdf_files} pf ON pf.courseid = c.id
                     LEFT JOIN {block_pdfcounter_trends} t ON t.courseid = c.id AND t.month = ?
-                    WHERE c.visible = 1 AND c.id > 1 AND cc2.id = ?
-                    GROUP BY c.id, c.fullname, cc.id, cc.name, cc2.id, cc2.name";
-            $params = [$current_month, $department_id];
+                    WHERE c.visible = 1 AND c.id > 1 AND (c.category = ? OR cc.parent = ?)
+                    GROUP BY c.id, c.fullname, cc.id, cc.name";
+            $params = [$current_month, $department_id, $department_id];
             
         } else {
             // Global - all disciplines
@@ -1445,7 +1398,7 @@ class dashboard {
                 $score = round($result->score, 1);
                 
                 // Calculate status based on score
-                if ($score >= 70) {
+                if ($score > 70) {
                     $status = 'Good';
                 } elseif ($score >= 45) {
                     $status = 'Warning';
@@ -1508,7 +1461,9 @@ class dashboard {
             $where_conditions[] = 'c.category = ?';
             $params[] = $course_id;
         } elseif ($department_id) {
-            $where_conditions[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where_conditions[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 
@@ -1574,7 +1529,9 @@ class dashboard {
             $where_conditions[] = 'c.category = ?';
             $params[] = $course_id;
         } elseif ($department_id) {
-            $where_conditions[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where_conditions[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 
@@ -1634,7 +1591,9 @@ class dashboard {
             $where_conditions[] = 'c.category = ?';
             $params[] = $course_id;
         } elseif ($department_id) {
-            $where_conditions[] = 'cc2.id = ?';
+            // Handle both direct children and nested sub-categories
+            $where_conditions[] = '(c.category = ? OR cc.parent = ?)';
+            $params[] = $department_id;
             $params[] = $department_id;
         }
 

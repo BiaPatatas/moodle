@@ -20,6 +20,13 @@ class block_pdfaccessibility extends block_base {
 
     public function get_content() {
         global $COURSE, $DB, $CFG, $USER, $PAGE;
+        // Mostrar apenas nas páginas de edição de recurso (mod_resource_view)
+        if (strpos($_SERVER['SCRIPT_NAME'], 'modedit.php') === false) {
+            // Não estamos na página de edição de módulos → não mostrar o bloco
+            return null;
+}
+
+
         $contextid = $COURSE->id;
         $ismodedit = (strpos($_SERVER['SCRIPT_NAME'], 'modedit.php') !== false);
         $this->content = new stdClass();
@@ -124,12 +131,7 @@ class block_pdfaccessibility extends block_base {
                 $this->content->text .= '<div style="margin-bottom:10px;">';
                 $this->content->text .= '<strong>' . htmlspecialchars($filename) . '</strong>';
                 // Buscar resultados dos testes
-                $pdfid = null;
-                if (isset($file->id)) {
-                    $pdfid = $file->id;
-                } else if (isset($file->fileid)) {
-                    $pdfid = $file->fileid;
-                }
+                $pdfid = method_exists($file, 'get_id') ? $file->get_id() : null;
                 if ($pdfid) {
                     $testresults = $DB->get_records('block_pdfaccessibility_test_results', ['fileid' => $pdfid]);
                     if ($testresults) {
@@ -174,6 +176,24 @@ class block_pdfaccessibility extends block_base {
         return $this->content;
     }
 
+    /**
+     * Simple debug logger used inside the block to avoid undefined method errors.
+     * Writes a compact message to PHP error log when Moodle debugging is enabled.
+     *
+     * @param string $message
+     * @param mixed $context
+     * @return void
+     */
+    protected function pdfaccessibility_debug_log($message, $context = null) {
+        if (defined('DEBUG') && DEBUG) {
+            $payload = $message;
+            if (!empty($context)) {
+                $payload .= ' | ' . var_export($context, true);
+            }
+            error_log('[block_pdfaccessibility] ' . $payload);
+        }
+    }
+
 
         
     
@@ -184,18 +204,12 @@ class block_pdfaccessibility extends block_base {
     /**
      * This block can be added to any page.
      *
-     * @return boolean
+     * @return array
      */
     public function applicable_formats() {
-        // Permite o bloco em páginas de curso, módulos e edição de módulos
-        return array(
-            'course-view' => true,
-            'mod' => true,
-            'mod-edit' => true,
-            'site' => false,
-            'my' => false
-        );
-    }
+    return array('all' => true);
+}
+
     
     /**
      * Allow multiple instances of this block.
@@ -205,6 +219,16 @@ class block_pdfaccessibility extends block_base {
     public function instance_allow_multiple() {
         return false;
     }
+
+    public function instance_create() {
+        global $DB;
+
+        // Peso extremamente baixo para garantir visibilidade no topo
+        $DB->set_field('block_instances', 'defaultweight', -20, ['id' => $this->instance->id]);
+
+        return parent::instance_create();
+    }
+
     
     /**
      * Block has configuration.
