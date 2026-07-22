@@ -28,7 +28,7 @@ try {
     $filtered_data = $dashboard->get_filtered_data($department_id, $course_id, $discipline_id);
     $best_courses = $dashboard->get_best_courses(10, $department_id, $course_id, $discipline_id);
     $worst_courses = $dashboard->get_worst_courses(10, $department_id, $course_id, $discipline_id);
-    $common_errors = $dashboard->get_most_common_errors(10, $department_id, $course_id, $discipline_id);
+    $common_errors = $dashboard->get_most_common_errors(0, $department_id, $course_id, $discipline_id);
 
     // Exportar como PDF
     export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found, $filtered_data,
@@ -184,13 +184,40 @@ function export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found,
         $pdf->writeHTML($table, true, false, true, false, '');
         $pdf->Ln(6);
     }
+
+    // Testes mais falhados
+    if (!empty($common_errors)) {
+        $pdf->SetFont('freesans', 'B', 12);
+        $pdf->writeHTML('<h2>Most Failed Tests</h2>', true, false, true, false, '');
+
+        $table = '<table border="1" cellpadding="4" cellspacing="0" width="100%">'
+              . '<thead><tr style="background-color:#e8eef6;font-weight:bold;">'
+              . '<th scope="col" align="left">Test</th>'
+              . '<th scope="col" align="center">Failed PDFs</th>'
+              . '<th scope="col" align="center">Total Tests</th>'
+              . '<th scope="col" align="center">Failure Rate</th>'
+              . '</tr></thead><tbody>';
+
+        foreach ($common_errors as $error) {
+            $testname = htmlspecialchars(substr($error->error_type ?? 'Unknown', 0, 80));
+            $failed = intval($error->failure_count ?? 0);
+            $total = intval($error->total_tests ?? 0);
+            $percentage = number_format((float)($error->percentage ?? 0), 1);
+            $table .= "<tr><td>{$testname}</td><td align=\"center\">{$failed}</td><td align=\"center\">{$total}</td><td align=\"center\">{$percentage}%</td></tr>";
+        }
+
+        $table .= '</tbody></table>';
+        $pdf->SetFont('freesans', '', 9);
+        $pdf->writeHTML($table, true, false, true, false, '');
+        $pdf->Ln(6);
+    }
     
     // Nova página para dados detalhados se necessário
     if (!empty($filtered_data) && count($filtered_data) > 20) {
         $pdf->AddPage();
     }
     
-    // Dados detalhados (limitado)
+    // Dados detalhados completos
     if (!empty($filtered_data)) {
         $pdf->SetFont('helvetica', 'B', 12);
         $pdf->Cell(0, 8, 'Detailed Academic Data', 0, 1, 'L');
@@ -230,7 +257,7 @@ function export_pdf($stats, $evolution_data, $total_pdfs_count, $problems_found,
                . '<th scope="col" align="center">Status</th>'
                . '</tr></thead><tbody>';
 
-        foreach (array_slice($filtered_data, 0, 20) as $row) {
+        foreach ($filtered_data as $row) {
             $dept = htmlspecialchars(substr($row->department ?? 'Unknown', 0, 40));
             $course = htmlspecialchars(substr($row->course ?? 'Direct', 0, 40));
             $disc = htmlspecialchars(substr($row->discipline ?? '', 0, 40));

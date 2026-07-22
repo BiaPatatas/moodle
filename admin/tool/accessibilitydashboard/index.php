@@ -139,7 +139,7 @@ $paginated_data = array_slice($filtered_data, $offset, $items_per_page);
 // Get data for bottom cards (filtered)
 $best_courses = $dashboard->get_best_courses(4, $department_id, $course_id, $discipline_id);
 $worst_courses = $dashboard->get_worst_courses(4, $department_id, $course_id, $discipline_id);
-$common_errors = $dashboard->get_most_common_errors(4, $department_id, $course_id, $discipline_id);
+$common_errors = $dashboard->get_most_common_errors(0, $department_id, $course_id, $discipline_id);
 
 // Calculate evolution change (simple difference, not percentage)
 // Add best/worst/common errors to debug

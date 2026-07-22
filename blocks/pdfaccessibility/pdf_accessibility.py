@@ -1,4 +1,5 @@
 import re
+import os
 import PyPDF2
 from langdetect import detect
 import pdfplumber
@@ -16,6 +17,18 @@ except ImportError:
 
 import sys
 import json
+
+
+def _env_int(name, default):
+    try:
+        return int(os.environ.get(name, default))
+    except (TypeError, ValueError):
+        return int(default)
+
+
+OCR_MAX_PAGES = max(1, _env_int("PDF_ACCESSIBILITY_OCR_MAX_PAGES", 2))
+OCR_RENDER_DPI = max(72, _env_int("PDF_ACCESSIBILITY_OCR_DPI", 120))
+OCR_TIMEOUT_SECONDS = max(1, _env_int("PDF_ACCESSIBILITY_OCR_TIMEOUT_SECONDS", 5))
 
 
 
@@ -206,14 +219,24 @@ def pdf_only_image(pdf_path):
     ocr_char_count = 0
     try:
         with fitz.open(pdf_path) as pdf:
-            for page in pdf:
-                pix = page.get_pixmap()
+            max_pages = max(1, OCR_MAX_PAGES)
+            for page_index, page in enumerate(pdf):
+                if page_index >= max_pages:
+                    break
+
+                pix = page.get_pixmap(matrix=fitz.Matrix(OCR_RENDER_DPI / 72.0, OCR_RENDER_DPI / 72.0))
                 mode = "RGBA" if pix.alpha else "RGB"
                 img = Image.frombytes(mode, [pix.width, pix.height], pix.samples)
-                ocr_text = pytesseract.image_to_string(img)
+                try:
+                    ocr_text = pytesseract.image_to_string(img, timeout=OCR_TIMEOUT_SECONDS)
+                except RuntimeError:
+                    # OCR demorou demasiado nesta página; parar para evitar carga excessiva.
+                    break
                 # Contar apenas caracteres alfanuméricos para reduzir ruído
                 cleaned = "".join(ch for ch in ocr_text if ch.isalnum())
                 ocr_char_count += len(cleaned)
+                if ocr_char_count >= 30:
+                    break
     except Exception:
         # Se OCR falhar por completo, comportar-se como apenas imagens
         return "Only Images"

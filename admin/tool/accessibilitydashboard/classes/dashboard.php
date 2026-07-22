@@ -1574,7 +1574,7 @@ class dashboard {
     /**
      * Get most common accessibility errors/failed tests
      */
-    public function get_most_common_errors($limit = 4, $department_id = null, $course_id = null, $discipline_id = null) {
+    public function get_most_common_errors($limit = 0, $department_id = null, $course_id = null, $discipline_id = null) {
         global $DB;
 
         // Build WHERE conditions based on filters
@@ -1613,8 +1613,11 @@ class dashboard {
                 WHERE $where_clause
                 GROUP BY tr.testname
                 HAVING failure_count > 0
-                ORDER BY failure_count DESC, percentage DESC
-                LIMIT " . intval($limit);
+                ORDER BY failure_count DESC, percentage DESC";
+
+        if ((int)$limit > 0) {
+            $sql .= " LIMIT " . intval($limit);
+        }
 
         $results = $DB->get_records_sql($sql, $params);
         
